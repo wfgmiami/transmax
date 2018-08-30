@@ -1,17 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import {BrowserRouter} from 'react-router-dom';
-import {routes} from './configs/routesConfig';
-
-ReactDOM.render(<App />, document.getElementById('root'));
-
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import { Router } from "react-router-dom";
+import { routes } from "./configs/routesConfig";
+import Theme from "./components/Theme";
+import history from './history';
 
 ReactDOM.render(
-    <BrowserRouter>
-        <App routes={routes}>
-             routes={routes}
-        </App>
-    </BrowserRouter>
-    , document.getElementById('root'));
+  <Router history={history}>
+    <Theme>
+      <App routes={routes}></App>
+    </Theme>
+  </Router>,
+  document.getElementById("root")
+);
