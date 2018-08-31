@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import classNames from 'classnames';
 import validate from "./validate";
@@ -62,12 +60,8 @@ class ContactUs extends Component {
           field => validationObj[field] === "Required"
         );
 
-        validationObj.email === "Invalid email address"
-          ? errorMsg = 'Invalid email address'
-          : null;
-        validationObj.phone === "Invalid phone number"
-          ? errorMsg = 'Invalid phone number'
-          : null;
+        errorMsg = validationObj.email === "Invalid email address" ? "Invalid email address" : null;
+        errorMsg = validationObj.phone === "Invalid phone number" ? "Invalid phone number" : null;
     
         if (requiredViolation !== -1)
             errorMsg = validationArray[requiredViolation] + " is a required field";

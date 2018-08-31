@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import classNames from 'classnames';
 
@@ -48,10 +46,8 @@ class Login extends Component {
         }
       };
             
-      handleSignin = () => {
-        let errorMsg = null;
-        const { login } = this.state;
-    
+    handleSignin = () => {
+        // const { login } = this.state;
     };
 
     handleChange = key => ({target: {value}}) =>{

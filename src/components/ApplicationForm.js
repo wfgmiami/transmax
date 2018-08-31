@@ -49,23 +49,23 @@ class ApplicationForm extends Component {
     let errorMsg = null;
     const { candidate } = this.state;
 
-    // const validationObj = validate(this.state.candidate);
-    // const validationArray = Object.keys(validationObj);
-    // const requiredViolation = validationArray.findIndex(
-    //   field => validationObj[field] === "Required"
-    // );
+    const validationObj = validate(this.state.candidate);
+    const validationArray = Object.keys(validationObj);
+    const requiredViolation = validationArray.findIndex(
+      field => validationObj[field] === "Required"
+    );
 
-    // errorMsg =
-    //   validationObj.email === "Invalid email address"
-    //     ? "Invalid email address"
-    //     : null;
-    // errorMsg =
-    //   validationObj.phone === "Invalid phone number"
-    //     ? "Invalid phone number"
-    //     : null;
+    errorMsg =
+      validationObj.email === "Invalid email address"
+        ? "Invalid email address"
+        : null;
+    errorMsg =
+      validationObj.phone === "Invalid phone number"
+        ? "Invalid phone number"
+        : null;
 
-    // if (requiredViolation !== -1)
-    //   errorMsg = validationArray[requiredViolation] + " is a required field";
+    if (requiredViolation !== -1)
+      errorMsg = validationArray[requiredViolation] + " is a required field";
 
     if (!errorMsg) {
       this.props.onCreate(candidate);

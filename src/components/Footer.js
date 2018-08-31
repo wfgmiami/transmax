@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
-import { Typography } from "@material-ui/core";
 import CopyrightText from './CopyrightText';
 
 const styles = theme => ({
