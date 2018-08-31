@@ -13,16 +13,17 @@ const styles = theme => ({
   root: {
     display: "flex",
     // flexWrap: "wrap",
-    padding: '40px 0 0 0',
+    background: '#eff0f2',
+    padding: '10px 0 0 10px',
     justifyContent: "space-around",
     overflow: "hidden",
-    backgroundColor: theme.palette.background.paper
+    // backgroundColor: theme.palette.background.paper
   },
   gridList: {
-    width: 1200,
+    width: 1600,
     height: 1000,
     // flex: '1 1 auto',
-    overflow: "hidden",
+    // overflow: "hidden",
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     // transform: "translateZ(0)"
   },
@@ -67,8 +68,8 @@ function AdvancedGridList(props) {
   const { classes } = props;
 
   return (
-    <div id="shadow" className={classes.root}>
-      <GridList cellHeight={400} spacing={1} className={classes.gridList}>
+    <div className={classes.root}>
+      <GridList  cellHeight={450} spacing={2} className={classes.gridList}>
         {tileData.map(tile => (
           <GridListTile
             key={tile.img}
