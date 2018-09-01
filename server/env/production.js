@@ -5,7 +5,8 @@
     heroku (or whatever VPS used) configuration to be set in the
     applications environment, along with NODE_ENV=production
  */
-console.log('process.env.POSTGRESQL_URI', process.env.POSTGRESQL_URI)
+console.log('process.env.POSTGRESQL_URI', process.env.DATABASE_URL)
 module.exports = {
-    DATABASE_URI: process.env.POSTGRESQL_URI
+    // DATABASE_URI: process.env.POSTGRESQL_URI
+    DATABASE_URI: process.env.DATABASE_URL
 };
