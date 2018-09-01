@@ -7,6 +7,15 @@ const app = express();
 // function located at server/app/configure/index.js
 require('./configure')(app);
 
+if (process.env.NODE_ENV === 'production') {
+    // Serve any static files
+    app.use(express.static(path.join(__dirname, 'client/build')));
+    // Handle React routing, return all requests to React app
+    app.get('*', function(req, res) {
+      res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+    });
+}
+
 // Routes that will be accessed via AJAX should be prepended with
 // /api so they are isolated from our GET /* wildcard.
 app.use('/api', require('./routes'));
@@ -29,16 +38,6 @@ app.use(function (req, res, next) {
 app.get('/*', function (req, res) {
     res.sendFile(app.get('indexHTMLPath'));
 });
-
-if (process.env.NODE_ENV === 'production') {
-    // Serve any static files
-    console.log('PATH...................', path.join(__dirname, '../../','client/build/static'))
-    app.use(express.static(path.join(__dirname, 'client/build')));
-    // Handle React routing, return all requests to React app
-    app.get('*', function(req, res) {
-      res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-    });
-}
 
 // Error catching endware.
 app.use(function (err, req, res, next) {
