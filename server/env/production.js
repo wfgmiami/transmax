@@ -6,6 +6,6 @@
     applications environment, along with NODE_ENV=production
  */
 
-// module.exports = {
-//     DATABASE_URI: process.env.POSTGRESQL_URI
-// };
+module.exports = {
+    DATABASE_URI: process.env.POSTGRESQL_URI
+};
