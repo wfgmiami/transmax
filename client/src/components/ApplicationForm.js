@@ -40,7 +40,7 @@ class ApplicationForm extends Component {
       state: "",
       email: "",
       phone: "",
-      driverslicense: "",
+      driversLicense: "",
       experience: ""
     }
   };
@@ -152,7 +152,7 @@ class ApplicationForm extends Component {
             label="Driver's License"
             className={classes.textField}
             value={this.state.candidate.driverslicense}
-            onChange={this.handleChange("driverslicense")}
+            onChange={this.handleChange("driversLicense")}
             margin="normal"
           />
           <FormControl className={classes.formControl}>

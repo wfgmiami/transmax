@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {renderRoutes} from 'react-router-config';
 import {withStyles} from '@material-ui/core/styles';
-
+import axios from 'axios';
 import Nav from './components/Nav';
 
 const styles = theme => ({
@@ -11,7 +11,6 @@ const styles = theme => ({
 class Home extends Component {
     state = {
         candidates: [],
-        response: {}
     }
 
     // componentDidMount(){
@@ -29,13 +28,18 @@ class Home extends Component {
     // }
 
     handleCandidateCreate = candidate => {
-       
-        this.setState(({ candidates }) =>({
-            candidates: [
-                ...candidates,
-                candidate
-            ]
-        }))
+
+        axios.post('/api/candidate',{ ...candidate })
+        .then( response => response.data)
+        .then( candidates => this.setState({ candidates })
+
+            // this.setState(({ candidates }) =>({
+            //     candidates: [
+            //         ...candidates,
+            //         candidate
+            //     ]
+            // }))
+        )
 
     }
 
@@ -44,7 +48,7 @@ class Home extends Component {
         return (
                 <div>
                     <Nav/>
-                    {renderRoutes(this.props.routes)}
+                    {renderRoutes(this.props.routes, {onCreate: this.handleCandidateCreate})}
                 </div>
         )
     }

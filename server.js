@@ -10,7 +10,6 @@ const startDb = require('./server/app/db');
 
 // Create a node server instance! cOoL!
 
-
 const createApplication = () => {
     server.on('request', app); // Attach the Express application.
 };
