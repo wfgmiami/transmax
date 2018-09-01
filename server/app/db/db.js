@@ -5,7 +5,7 @@ const Sequelize = require('sequelize');
 const DATABASE_URI = require(path.join(__dirname, '../../env')).DATABASE_URI;
 
 console.log(chalk.yellow('Opening connection to PostgreSQL'));
-
+console.log(chalk.yellow('Opening connection to PostgreSQL:', DATABASE_URI));
 // create the database instance
 module.exports = new Sequelize(DATABASE_URI, {
   logging: false, // set to console.log to see the raw SQL queries
