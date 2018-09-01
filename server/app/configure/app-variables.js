@@ -1,7 +1,7 @@
 'use strict';
 
 const path = require('path');
-// const logMiddleware = require('volleyball');
+const logMiddleware = require('volleyball');
 
 const rootPath = path.join(__dirname, '../../../');
 const indexPath = path.join(rootPath, './client/public/index.html');
@@ -14,5 +14,5 @@ module.exports = function (app) {
   app.setValue('projectRoot', rootPath);
   app.setValue('indexHTMLPath', indexPath);
   app.setValue('faviconPath', faviconPath);
-  // app.setValue('log', logMiddleware);
+  app.setValue('log', logMiddleware);
 };
