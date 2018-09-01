@@ -7,7 +7,8 @@ const styles = theme => ({
   root: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2
+    paddingBottom: theme.spacing.unit * 2,
+    backgroundColor: '#E5FFE5'
   }
 });
 
@@ -16,7 +17,11 @@ function ApplicationSuccess(props) {
 
   return (
     <div>
-      <Paper className={classes.root}>Application is completed</Paper>
+      <Paper className={classes.root}>
+        Your application was submitted.<br/>
+        We will contact you as soon as your application is reviewed.<br/><br/>
+        Thank you for applying!
+      </Paper>
     </div>
   );
 }

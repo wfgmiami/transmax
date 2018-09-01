@@ -22,6 +22,7 @@ const startServer = () => {
     });
 };
 
+
 startDb
 .then(createApplication)
 .then(startServer)

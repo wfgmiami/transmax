@@ -33,7 +33,7 @@ class HomePage extends Component {
   render() {
     const { classes } = this.props;
     const applicationSuccess = this.props.applySuccess;
-
+    // console.log('home page ', this.props)
     return (
       <div>
         <div className={classNames(classes.root, classes.flexContainer)}>

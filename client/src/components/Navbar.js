@@ -29,7 +29,7 @@ const styles = theme => ({
 
 class Navbar extends Component {
   navbarClick = () => {
-    // console.log("clicked");
+    window.location.reload(true)
   };
 
   render() {

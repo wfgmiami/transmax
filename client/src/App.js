@@ -11,27 +11,15 @@ const styles = theme => ({
 class Home extends Component {
     state = {
         candidates: [],
+        applySuccess: false
     }
-
-    // componentDidMount(){
-    //     this.callApi()
-    //         .then(res => console.log(res.express))
-    //         .catch(err => console.log(err));
-    // }
-
-    // callApi = async() => {
-    //     const response = await fetch('api/hello');
-    //     const body = await response.json();
-    //     if(response.status !== 200) throw Error(body.message);
-
-    //     return body;
-    // }
 
     handleCandidateCreate = candidate => {
 
         axios.post('/api/candidate',{ ...candidate })
-        .then( response => response.data)
-        .then( candidates => this.setState({ candidates })
+        .then(response => response.data)
+        .then(candidates => this.setState({ candidates }))
+        .then (() => this.setState({ applySuccess: true }))
 
             // this.setState(({ candidates }) =>({
             //     candidates: [
@@ -39,7 +27,6 @@ class Home extends Component {
             //         candidate
             //     ]
             // }))
-        )
 
     }
 
@@ -48,7 +35,8 @@ class Home extends Component {
         return (
                 <div>
                     <Nav/>
-                    {renderRoutes(this.props.routes, {onCreate: this.handleCandidateCreate})}
+                    {renderRoutes(this.props.routes,
+                        {applySuccess: this.state.applySuccess , onCreate: this.handleCandidateCreate})}
                 </div>
         )
     }

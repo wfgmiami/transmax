@@ -7,6 +7,7 @@ import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
 import { usStates } from "../us-states";
 import { withStyles } from "@material-ui/core/styles";
+import InputMask from 'react-input-mask';
 import validate from "./validate";
 
 const styles = theme => ({
@@ -113,14 +114,31 @@ class ApplicationForm extends Component {
             onChange={this.handleChange("email")}
             margin="normal"
           />
-          <TextField
+
+          {/* <TextField
             id="phone"
             label="Phone"
             className={classes.textField}
             value={this.state.candidate.phone}
             onChange={this.handleChange("phone")}
             margin="normal"
-          />
+          /> */}
+
+          <InputMask
+            mask="999 999 9999"
+            maskChar="-"
+            value={this.state.candidate.phone}
+            onChange={this.handleChange("phone")}
+            className={classes.textField}
+          >
+            {() => <TextField
+              id="phone"
+              label="Phone"
+              className={classes.textField}
+              margin="normal"
+              type="text"
+              />}
+              </InputMask>
           <TextField
             id="city"
             label="City"

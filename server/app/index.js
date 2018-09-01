@@ -30,6 +30,15 @@ app.get('/*', function (req, res) {
     res.sendFile(app.get('indexHTMLPath'));
 });
 
+if (process.env.NODE_ENV === 'production') {
+    // Serve any static files
+    app.use(express.static(path.join(__dirname, '../../client/build')));
+    // Handle React routing, return all requests to React app
+    app.get('*', function(req, res) {
+      res.sendFile(path.join(__dirname, '../../client/build', 'index.html'));
+    });
+}
+
 // Error catching endware.
 app.use(function (err, req, res, next) {
     console.error(err, typeof next);
