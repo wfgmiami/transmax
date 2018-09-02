@@ -34,10 +34,6 @@ const styles = theme => ({
       height: "70px",
       // alignItems: "center"
     },
-    image: {
-      display: "flex!important",
-      maxWidth: "100%",
-    },
     navBar: {
       display: "flex!important",
       marginRight: "30px",
@@ -80,7 +76,8 @@ class Nav extends Component {
           <i className="fa fa-bars" />
         </span>
 
-        <img className={classes.image}
+        <img
+          style={{ maxWidth: '100%'}}
           src="assets/images/logos/transmax.png"
           alt="transmax"
         />
