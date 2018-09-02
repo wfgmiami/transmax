@@ -38,20 +38,20 @@ class HomePage extends Component {
     return (
       <div>
         <div className={classNames(classes.root, classes.flexContainer)}>
-        <div className={classes.flexSection}>
-        <h2 className="py-16">WE PAY UP TO $0.55 CENTS PER MILE</h2><br/>
-            <p className={classes.mainText}>
-                Transmax is a transportation company founded by a truck driver that knows what is takes to be a trucker.<br/>
-                Do not spend days on the road without being adequately compensated for your hard work - contact us today!<br/>
-                We want our drivers to earn the most money in the industry!<br/>
-                You can just call us at 513-680-5334 or fill in the application form and we will be in touch with you.<br/>
-                All you need is a CDL and a minimum of 2 years experience!<br/>
-                We are constantly adding new trucks to our fleet so you can choose the truck you want to drive.<br/>
-                Apply today and start earning one of the highest rates on the market!<br/><br/>
-            </p>
-        </div>
+          <div className={classes.flexSection}>
+            <h2 className="py-16">WE PAY UP TO $0.55 CENTS PER MILE</h2><br/>
+              <p className={classes.mainText}>
+                  Transmax is a transportation company founded by a truck driver that knows what is takes to be a trucker.<br/>
+                  Do not spend days on the road without being adequately compensated for your hard work - contact us today!<br/>
+                  We want our drivers to earn the most money in the industry!<br/>
+                  You can just call us at 513-680-5334 or fill in the application form and we will be in touch with you.<br/>
+                  All you need is a CDL and a minimum of 2 years experience!<br/>
+                  We are constantly adding new trucks to our fleet so you can choose the truck you want to drive.<br/>
+                  Apply today and start earning one of the highest rates on the market!<br/><br/>
+              </p>
+          </div>
 
-        <div className={classes.flexSection}>
+          <div className={classes.flexSection}>
             <h2 className="py-16">DRIVER'S APPLICATION</h2><br/>
             <br />
             {applicationSuccess ? (
