@@ -1,11 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import GridList from "@material-ui/core/GridList";
-import GridListTile from "@material-ui/core/GridListTile";
-import GridListTileBar from "@material-ui/core/GridListTileBar";
-import IconButton from "@material-ui/core/IconButton";
-import StarBorderIcon from "@material-ui/icons/StarBorder";
 import {imagesGroupOne} from './imagesGroupOne';
 import {imagesGroupTwo} from './imagesGroupTwo';
 
@@ -32,7 +27,7 @@ const styles = theme => ({
   imageHeading: {
     backgroundColor: 'rgba(248, 247, 216, 0.5)',
     width: '100%',
-    height: '5%'
+    minHeight: '5%'
   },
   [theme.breakpoints.up("md")]: {
     root: {
@@ -56,7 +51,7 @@ const ImageSection = (props) => {
 
       <div className={classes.imageContainer}>
         {imagesGroupOne.map( (tile,id) => (
-          <div style={{ backgroundImage: tile.img }} className={classes.imageContent}>
+          <div key={id} style={{ backgroundImage: tile.img }} className={classes.imageContent}>
             <div className={classes.imageHeading}>{tile.title}</div>
           </div>
         ))}
@@ -64,7 +59,7 @@ const ImageSection = (props) => {
 
       <div className={classes.imageContainer}>
         {imagesGroupTwo.map((tile,id) => (
-          <div style={{ backgroundImage: tile.img }} className={classes.imageContent}>
+          <div key={id} style={{ backgroundImage: tile.img }} className={classes.imageContent}>
             <div className={classes.imageHeading}>{tile.title}</div>
           </div>
         ))}
