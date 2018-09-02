@@ -9,7 +9,7 @@ import validate from "./validate";
 const styles = theme => ({
  root: {
     [theme.breakpoints.up('md')]: {
-        display:'flex', 
+        display:'flex',
         justifyContent:'space-between'
     },
   },
@@ -17,9 +17,9 @@ const styles = theme => ({
       margin: '20px auto 0 auto'
   },
   flexSection:{
-    padding: '20px', 
-    boxSizing:'border-box', 
-    flexBasis:'50%', 
+    padding: '20px',
+    boxSizing:'border-box',
+    flexBasis:'50%',
     marginBottom: '20px'
   },
   container: {
@@ -39,7 +39,7 @@ const styles = theme => ({
 
 
 class ContactUs extends Component {
-  
+
     state = {
         contact: {
           firstName: "",
@@ -49,11 +49,11 @@ class ContactUs extends Component {
           comment: ""
         }
       };
-            
+
       handleSendMessage = () => {
         let errorMsg = null;
         const { contact } = this.state;
-        
+
         const validationObj = validate(this.state.contact);
         const validationArray = Object.keys(validationObj);
         const requiredViolation = validationArray.findIndex(
@@ -62,22 +62,22 @@ class ContactUs extends Component {
 
         errorMsg = validationObj.email === "Invalid email address" ? "Invalid email address" : null;
         errorMsg = validationObj.phone === "Invalid phone number" ? "Invalid phone number" : null;
-    
+
         if (requiredViolation !== -1)
             errorMsg = validationArray[requiredViolation] + " is a required field";
 
         if(!errorMsg)
-            this.props.onCreate(contact);  
+            this.props.onCreate(contact);
         else
             alert(errorMsg);
     };
 
     handleChange = key => ({target: {value}}) =>{
-        
+
         this.setState({
             contact: {
-                ...this.state.contact, 
-                [key]: value 
+                ...this.state.contact,
+                [key]: value
             }
         })
     }
@@ -88,9 +88,9 @@ class ContactUs extends Component {
         return (
             <div>
                 <div className={classNames(classes.root, classes.flexContainer)}>
-              
+
                     <div className={classes.flexSection}>
-                        <h1 className="py-16">CONTACT FORM</h1><br/>
+                        <h2 className="py-16">CONTACT FORM</h2><br/>
                         <form>
                             <TextField
                                 id="firstName"
@@ -133,8 +133,8 @@ class ContactUs extends Component {
                                 onChange={this.handleChange("comment")}
                                 margin="normal"
                             />
-                 
-                 
+
+
                         </form>
                         <br/><br/>
                         <Button
@@ -146,10 +146,10 @@ class ContactUs extends Component {
                         </Button>
                     </div>
                 </div>
-         
+
             </div>
         );
-        
+
     }
 
 }

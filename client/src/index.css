@@ -7,22 +7,6 @@ body {
   font-family: "Josefin Sans", sans-serif;
 }
 
-#logo {
-  text-decoration: none;
-  color: rgba(255, 255, 255, 0.7);
-}
-#logo:hover,
-.nav-links:hover {
-  color: rgba(255, 255, 255, 1);
-}
-
-#logo {
-  display: inline-block;
-  font-size: 22px;
-  margin-top: 10px;
-  margin-left: 20px;
-}
-
 .text-16 {
   font-size: 1.6rem;
 }

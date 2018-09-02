@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
+
 import Navbar from "./Navbar";
 
 const styles = theme => ({
   root: {
-    fontSize: "18px",
+    fontSize: "16px",
     backgroundColor: theme.palette.primary.dark,
     paddingBottom: "10px",
     minHeight: "75px"
@@ -31,7 +32,11 @@ const styles = theme => ({
       justifyContent: "space-between",
       paddingBottom: 0,
       height: "70px",
-      alignItems: "center"
+      // alignItems: "center"
+    },
+    image: {
+      display: "flex!important",
+      maxWidth: "100%",
     },
     navBar: {
       display: "flex!important",
@@ -46,41 +51,45 @@ const styles = theme => ({
 });
 
 class Nav extends Component {
-  expandMenu = e => {
-    const { classes } = this.props;
 
-    const classNm = e.target.className;
-    if (classNm === "active") {
-      classes.root.display = "none";
-      this.classList.remove("active");
-    } else {
-      console.log(classes);
-      classes.root.display = "flex";
-      this.classList.add("active");
-    }
-  };
+    state = {
+      style: {},
+      active: false
+    };
+
+    mobileMenuClick = e => {
+
+      if (this.state.active) {
+        this.setState({ style: {}, active: false });
+      } else {
+        this.setState({
+          style: { display: "flex", flexDirection: "column" },
+          active: true
+        });
+      }
+
+    };
 
   render() {
     const { classes } = this.props;
+    const mobileDisplay = this.state.style.display;
 
     return (
       <nav className={classes.root}>
-        <span onClick={this.expandMenu} className={classes.navbarToggle}>
+        <span onClick={this.mobileMenuClick} className={classes.navbarToggle}>
           <i className="fa fa-bars" />
         </span>
 
-        <img
-          style={{ maxWidth: "100%" }}
+        <img className={classes.image}
           src="assets/images/logos/transmax.png"
           alt="transmax"
         />
-        <img
-          style={{ maxWidth: "100%" }}
-          src="assets/images/phone.png"
-          alt="phone"
-        />
-        <ul className={classes.navBar}>
-          <Navbar />
+
+        <ul
+          style={{ display: mobileDisplay }}
+          className={classes.navBar}
+        >
+          <Navbar mobileMenu={this.state} />
         </ul>
       </nav>
     );

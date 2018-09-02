@@ -34,7 +34,8 @@ const styles = theme => ({
   },
   icon: {
     color: "white"
-  }
+  },
+
 });
 
 const tileData = [
@@ -42,13 +43,13 @@ const tileData = [
     img:"assets/images/cascadia-evo.jpg",
     title: "Drive Freightliner Cascadia Evolution - electronic log",
     author: "author",
-    featured: false
+    featured: true
   },
   {
     img:"assets/images/cascadia.jpg",
     title: "Drive Freightliner Coronado - paper log",
     author: "author",
-    featured: false
+    featured: true
   },
   {
     img:"assets/images/cascadia-red.jpg",
@@ -67,6 +68,7 @@ const tileData = [
 function AdvancedGridList(props) {
   const { classes } = props;
 
+  window.addEventListener('resize', console.log('resizing'))
   return (
     <div className={classes.root}>
       <GridList  cellHeight={450} spacing={2} className={classes.gridList}>

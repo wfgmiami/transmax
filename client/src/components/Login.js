@@ -8,7 +8,7 @@ import classNames from 'classnames';
 const styles = theme => ({
  root: {
     [theme.breakpoints.up('md')]: {
-        display:'flex', 
+        display:'flex',
         justifyContent:'space-between'
     },
   },
@@ -16,9 +16,9 @@ const styles = theme => ({
       margin: '20px auto 0 auto'
   },
   flexSection:{
-    padding: '20px', 
-    boxSizing:'border-box', 
-    flexBasis:'50%', 
+    padding: '20px',
+    boxSizing:'border-box',
+    flexBasis:'50%',
     marginBottom: '20px'
   },
   container: {
@@ -38,24 +38,24 @@ const styles = theme => ({
 
 
 class Login extends Component {
-  
+
     state = {
         login: {
           userName: "",
           password: "",
         }
       };
-            
+
     handleSignin = () => {
         // const { login } = this.state;
     };
 
     handleChange = key => ({target: {value}}) =>{
-        
+
         this.setState({
             login: {
-                ...this.state.login, 
-                [key]: value 
+                ...this.state.login,
+                [key]: value
             }
         })
     }
@@ -66,9 +66,9 @@ class Login extends Component {
         return (
             <div>
                 <div className={classNames(classes.root, classes.flexContainer)}>
-              
+
                     <div className={classes.flexSection}>
-                        <h1 className="py-16">MEMBER LOGIN</h1><br/>
+                        <h2 className="py-16">MEMBER LOGIN</h2><br/>
                         <form>
                             <TextField
                                 id="userName"
@@ -86,7 +86,7 @@ class Login extends Component {
                                 onChange={this.handleChange('password')}
                                 margin="normal"
                             />
-                 
+
                         </form>
                         <br/><br/>
                         <Button
@@ -98,10 +98,10 @@ class Login extends Component {
                         </Button>
                     </div>
                 </div>
-         
+
             </div>
         );
-        
+
     }
 
 }
