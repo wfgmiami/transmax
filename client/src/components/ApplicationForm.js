@@ -115,15 +115,6 @@ class ApplicationForm extends Component {
             margin="normal"
           />
 
-          {/* <TextField
-            id="phone"
-            label="Phone"
-            className={classes.textField}
-            value={this.state.candidate.phone}
-            onChange={this.handleChange("phone")}
-            margin="normal"
-          /> */}
-
           <InputMask
             mask="999 999 9999"
             maskChar="-"
