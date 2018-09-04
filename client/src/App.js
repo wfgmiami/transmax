@@ -11,22 +11,21 @@ const styles = theme => ({
 class Home extends Component {
     state = {
         candidates: [],
-        applySuccess: false
+        applySuccess: false,
+        contactFormSend: false
     }
 
     handleCandidateCreate = candidate => {
-
         axios.post('/api/candidate',{ ...candidate })
         .then(response => response.data)
         .then(candidates => this.setState({ candidates }))
         .then (() => this.setState({ applySuccess: true }))
-
     }
 
     handleContactFormSend = contactform => {
-
         axios.post('/api/contactus',{ ...contactform })
         .then(response => console.log('contact form response: ', response.data))
+        .then(() => this.setState({ contactFormSend: true }))
     }
 
     render()
@@ -37,7 +36,8 @@ class Home extends Component {
                     {renderRoutes(this.props.routes,
                         { applySuccess: this.state.applySuccess ,
                           onCreate: this.handleCandidateCreate,
-                          onFormSend: this.handleContactFormSend
+                          onFormSend: this.handleContactFormSend,
+                          formSend: this.state.contactFormSend
                         })}
                 </div>
         )
