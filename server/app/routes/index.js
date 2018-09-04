@@ -5,8 +5,9 @@ const router = require('express').Router();
 const Candidate = require('../db/models').Candidate;
 const Sequelize = require('sequelize');
 const nodeMailer = require('nodemailer');
+const path = require('path');
 const transmaxEmail = 'transmaxfleet@gmail.com';
-
+const GMAIL_PASS = require(path.join(__dirname, '../../env')).GMAIL_PASS;
 
 router.post('/candidate', (req,res,next)=>{
 
@@ -31,7 +32,7 @@ router.post('/candidate', (req,res,next)=>{
     secure: true,
     auth: {
       user: 'transmaxfleet@gmail.com',
-      pass: 'bulgaria681'
+      pass: GMAIL_PASS
     }
   })
 
