@@ -4,10 +4,13 @@ import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 
 const styles = theme => ({
-  root: {
+  root: {},
+  paper: {
     ...theme.mixins.gutters(),
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2
+    textAlign: 'center',
+    margin: '20px',
+    paddingTop: theme.spacing.unit * 4,
+    paddingBottom: theme.spacing.unit * 4
   }
 });
 
@@ -16,7 +19,7 @@ function ContactUsSend(props) {
 
   return (
     <div>
-      <Paper className={classes.root}>
+      <Paper className={classes.paper} elevation={3}>
         Thank you for contacting us. We will get back to you as soon as we
         review your comment
       </Paper>
