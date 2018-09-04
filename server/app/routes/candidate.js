@@ -11,7 +11,7 @@ const transmaxEmail = 'transmaxfleet@gmail.com';
 const GMAIL_PASS = require(path.join(__dirname, '../../env')).GMAIL_PASS;
 
 
-router.post('/candidate', (req,res,next)=>{
+router.post('/', (req,res,next)=>{
 
   const createHtmlBody = () => (
     `<html>

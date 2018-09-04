@@ -3,8 +3,8 @@ import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import classNames from 'classnames';
-import validate from "./validate";
-
+import {validateContactForm} from "./validate";
+import InputMask from 'react-input-mask';
 
 const styles = theme => ({
  root: {
@@ -54,7 +54,7 @@ class ContactUs extends Component {
         let errorMsg = null;
         const { contact } = this.state;
 
-        const validationObj = validate(this.state.contact);
+        const validationObj = validateContactForm(this.state.contact);
         const validationArray = Object.keys(validationObj);
         const requiredViolation = validationArray.findIndex(
           field => validationObj[field] === "Required"
@@ -67,7 +67,7 @@ class ContactUs extends Component {
             errorMsg = validationArray[requiredViolation] + " is a required field";
 
         if(!errorMsg)
-            this.props.onCreate(contact);
+            this.props.onFormSend(contact);
         else
             alert(errorMsg);
     };
@@ -116,14 +116,21 @@ class ContactUs extends Component {
                                 onChange={this.handleChange('email')}
                                 margin="normal"
                             />
-                            <TextField
+                            <InputMask
+                                mask="999 999 9999"
+                                maskChar="-"
+                                value={this.state.contact.phone}
+                                onChange={this.handleChange("phone")}
+                                className={classes.textField}
+                            >
+                                {() => <TextField
                                 id="phone"
                                 label="Phone"
                                 className={classes.textField}
-                                value={this.state.contact.phone}
-                                onChange={this.handleChange('phone')}
                                 margin="normal"
-                            />
+                                type="text"
+                                />}
+                                </InputMask>
                             <TextField
                                 multiline
                                 rows="5"

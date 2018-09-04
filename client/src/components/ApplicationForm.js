@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
 import { usStates } from "../us-states";
 import { withStyles } from "@material-ui/core/styles";
 import InputMask from 'react-input-mask';
-import validate from "./validate";
+import {validateCandidate}  from "./validate";
 
 const styles = theme => ({
   root: {},
@@ -50,7 +50,7 @@ class ApplicationForm extends Component {
     let errorMsg = null;
     const { candidate } = this.state;
 
-    const validationObj = validate(this.state.candidate);
+    const validationObj = validateCandidate(this.state.candidate);
     const validationArray = Object.keys(validationObj);
     const requiredViolation = validationArray.findIndex(
       field => validationObj[field] === "Required"

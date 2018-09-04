@@ -21,13 +21,12 @@ class Home extends Component {
         .then(candidates => this.setState({ candidates }))
         .then (() => this.setState({ applySuccess: true }))
 
-            // this.setState(({ candidates }) =>({
-            //     candidates: [
-            //         ...candidates,
-            //         candidate
-            //     ]
-            // }))
+    }
 
+    handleContactFormSend = contactform => {
+
+        axios.post('/api/contactus',{ ...contactform })
+        .then(response => console.log('contact form response: ', response.data))
     }
 
     render()
@@ -36,7 +35,10 @@ class Home extends Component {
                 <div>
                     <Nav/>
                     {renderRoutes(this.props.routes,
-                        {applySuccess: this.state.applySuccess , onCreate: this.handleCandidateCreate})}
+                        { applySuccess: this.state.applySuccess ,
+                          onCreate: this.handleCandidateCreate,
+                          onFormSend: this.handleContactFormSend
+                        })}
                 </div>
         )
     }
