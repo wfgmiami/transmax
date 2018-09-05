@@ -3,7 +3,8 @@ import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import classNames from 'classnames';
-
+import axios from 'axios';
+import Trips from './Trips';
 
 const styles = theme => ({
  root: {
@@ -43,11 +44,24 @@ class Login extends Component {
         login: {
           userName: "",
           password: "",
-        }
+        },
+        authenticated: false
       };
 
     handleSignin = () => {
-        // const { login } = this.state;
+        const { login } = this.state;
+
+        axios.post('/api/signin', { ...login })
+        .then(response => response.data)
+        .then(data => {
+            // console.log('data login: ', data)
+            if(data.authenticated){
+                this.setState({ authenticated: true })
+            }else{
+                alert("Invalid Login! Try Again.")
+            }
+        })
+
     };
 
     handleChange = key => ({target: {value}}) =>{
@@ -62,10 +76,12 @@ class Login extends Component {
 
     render(){
         const {classes} = this.props;
+        const authenticated = this.state.authenticated;
 
         return (
             <div>
-                <div className={classNames(classes.root, classes.flexContainer)}>
+                { !authenticated ?
+                (<div className={classNames(classes.root, classes.flexContainer)}>
 
                     <div className={classes.flexSection}>
                         <h2 className="py-16">MEMBER LOGIN</h2><br/>
@@ -81,6 +97,7 @@ class Login extends Component {
                             <TextField
                                 id="password"
                                 label="Password"
+                                type="password"
                                 className={classes.textField}
                                 value={this.state.login.password}
                                 onChange={this.handleChange('password')}
@@ -97,7 +114,9 @@ class Login extends Component {
                             SIGN IN
                         </Button>
                     </div>
-                </div>
+                </div>)
+                :
+                <Trips/>}
 
             </div>
         );

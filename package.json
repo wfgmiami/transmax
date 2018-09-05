@@ -9,6 +9,7 @@
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "chalk": "^2.4.1",
+    "crypto-md5": "^1.0.0",
     "express": "^4.16.3",
     "nodemailer": "^4.6.8",
     "pg": "^7.4.3",

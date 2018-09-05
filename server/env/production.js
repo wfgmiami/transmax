@@ -7,5 +7,7 @@
 
 module.exports = {
   DATABASE_URI: process.env.DATABASE_URL,
-  GMAIL_PASS: process.env.GMAIL_PASS
+  GMAIL_PASS: process.env.GMAIL_PASS,
+  APENCHEV_PASS: process.env.APENCHEV_PASS,
+  AKARAPEEV_PASS: process.env.AKARAPEEV_PASS
 };

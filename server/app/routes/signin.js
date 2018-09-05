@@ -2,22 +2,23 @@
 /* eslint-disable new-cap */
 const express = require('express');
 const router = new express.Router();
-
+const md5 = require( 'crypto-md5' );
 const Candidate = require('../db/models').User;
 const Sequelize = require('sequelize');
 const nodeMailer = require('nodemailer');
 const path = require('path');
 const transmaxEmail = 'transmaxfleet@gmail.com';
 const GMAIL_PASS = require(path.join(__dirname, '../../env')).GMAIL_PASS;
-
+const User = require('../db/models').User;
 
 router.post('/', (req,res,next)=>{
+  const {userName, password} = req.body;
 
   const createHtmlBody = () => (
     `<html>
       <body>
         <h3>Login by:</h3></br>
-        Name: ${req.body.user}<br/>
+        Name: ${userName}<br/>
       </body>
     </html>`
 
@@ -40,12 +41,23 @@ router.post('/', (req,res,next)=>{
     html: createHtmlBody()
   }
 
-  transporter.sendMail(mailOptions, (error, info) => {
-    if(error){
-      return console.log(error)
-    }
+  // transporter.sendMail(mailOptions, (error, info) => {
+  //   if(error){
+  //     return console.log(error)
+  //   }
 
-  })
+    User.findByPassword({ userName, password })
+    .then( user => {
+      if (!user) return res.sendStatus( 401 );
+      res.send( {
+        // token: jwt.encode( { id: user.id }, res.locals.jwtSecret )
+        authenticated: true
+      } );
+
+    } )
+    .catch( next );
+
+  // })
 
 })
 
