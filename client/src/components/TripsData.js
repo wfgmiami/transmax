@@ -8,33 +8,89 @@ export default class TripsData extends Component {
     this.state = {
       data: [
         {
-          date: "08/31/18",
-          id: "012345",
+          bookDate: "08/31/18",
+          truckNumber: "117",
+          driverName: "Kelvin",
+          loadNumber: "0277377",
           broker: "Transplace",
           amount: 600,
           loadedMiles: 300,
-          emptyMiles: 258
+          emptyMiles: 258,
+          mileage: 0,
+          dollarPeMile: 0,
+          dieselPrice: 0,
+          fuelCost: 0,
+          driverPay: 0,
+          dispatchFee: 0,
+          lumper: 0,
+          detention: 0,
+          detentionDriverPay: 0,
+          lateFee: 0,
+          tollFee: 0,
+          roadMaintenance: 0,
+          otherExpenses: 0,
+          totalExpense: 0,
+          profit: 0
         },
         {
-          date: "09/05/18",
-          id: "0123",
+          bookDate: "09/01/18",
+          truckNumber: "118",
+          driverName: "Kelvin",
+          loadNumber: "0277377",
           broker: "Transplace",
           amount: 1200,
-          loadedMiles: 500,
-          emptyMiles: 118
+          loadedMiles: 600,
+          emptyMiles: 358,
+          mileage: 0,
+          dollarPeMile: 0,
+          dieselPrice: 0,
+          fuelCost: 0,
+          driverPay: 0,
+          dispatchFee: 0,
+          lumper: 0,
+          detention: 0,
+          detentionDriverPay: 0,
+          lateFee: 0,
+          tollFee: 0,
+          roadMaintenance: 0,
+          otherExpenses: 0,
+          totalExpense: 0,
+          profit: 0
         },
         {
-          date: "09/15/18",
-          id: "0123893",
+          bookDate: "09/03/18",
+          truckNumber: "119",
+          driverName: "Kelvin",
+          loadNumber: "0277377",
           broker: "Transplace",
-          amount: 1800,
-          loadedMiles: 600,
-          emptyMiles: 198
+          amount: 850,
+          loadedMiles: 400,
+          emptyMiles: 150,
+          mileage: 0,
+          dollarPeMile: 0,
+          dieselPrice: 0,
+          fuelCost: 0,
+          driverPay: 0,
+          dispatchFee: 0,
+          lumper: 0,
+          detention: 0,
+          detentionDriverPay: 0,
+          lateFee: 0,
+          tollFee: 0,
+          roadMaintenance: 0,
+          otherExpenses: 0,
+          totalExpense: 0,
+          profit: 0
         }
-      ]
+      ],
+      editable: false
     };
 
     this.editTable = this.editTable.bind(this);
+    this.editRow = this.editRow.bind(this);
+    this.saveRows = this.saveRows.bind(this);
+    this.deleteRow = this.deleteRow.bind(this);
+    this.addEmptyRow = this.addEmptyRow.bind(this);
   }
 
   editTable(cellInfo) {
@@ -55,48 +111,84 @@ export default class TripsData extends Component {
     );
   }
 
+  editRow(row) {
+    console.log("edit", row);
+    this.setState({ editable: true });
+  }
+
+  deleteRow(row) {
+    console.log("delete", row);
+  }
+
+  saveRows() {
+    console.log("save");
+  }
+
+  addEmptyRow() {
+    this.setState({
+      data: this.state.data.concat({})
+    });
+  }
+
   render() {
     const { data } = this.state;
+    const editFunc = this.state.editable ? this.editTable : null;
+
     return (
       <div>
+        <div>
+          <button onClick={this.addEmptyRow}>Add</button>&nbsp;
+          <button onClick={this.saveRows}>Save</button>
+        </div>
         <ReactTable
           data={data}
           columns={[
             {
               Header: "Date",
-              accessor: "date",
-              Cell: this.editTable
+              accessor: "bookDate",
+              Cell: editFunc
             },
             {
-              Header: "Id",
-              accessor: "id",
-              Cell: this.editTable
+              Header: "Truck Number",
+              accessor: "Truck",
+              Cell: editFunc
+            },
+            {
+              Header: "Driver",
+              accessor: "driverName",
+              Cell: editFunc
+            },
+            {
+              Header: "Load",
+              accessor: "loadNumber",
+              Cell: editFunc
             },
             {
               Header: "Broker",
               accessor: "broker",
-              Cell: this.editTable
+              Cell: editFunc
             },
             {
               Header: "Amount",
               accessor: "amount",
-              Cell: this.editTable
+              Cell: editFunc
             },
             {
               Header: "Loaded Miles",
               accessor: "loadedMiles",
-              Cell: this.editTable
+              Cell: editFunc
             },
             {
               Header: "Empty Miles",
               accessor: "emptyMiles",
-              Cell: this.editTable
+              Cell: editFunc
             },
             {
-              Header: "Total Miles",
-              id: "totalMiles",
+              Header: "Mileage",
+              id: "mileage",
               accessor: d => {
-                const totalMiles = d.loadedMiles + d.emptyMiles;
+                const totalMiles = Number(d.loadedMiles) + Number(d.emptyMiles);
+
                 return (
                   <div
                     dangerouslySetInnerHTML={{
@@ -105,6 +197,33 @@ export default class TripsData extends Component {
                   />
                 );
               }
+            },
+            {
+              Header: "$/Mile",
+              id: "dollarPerMile",
+              accessor: d => {
+                let dollarPerMile =
+                  Number(d.amount) /
+                  (Number(d.loadedMiles) + Number(d.emptyMiles));
+                dollarPerMile = isNaN(dollarPerMile) ? null : dollarPerMile;
+                return (
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: Number(dollarPerMile).toFixed(2)
+                    }}
+                  />
+                );
+              }
+            },
+            {
+              id: "edit",
+              accessor: "edit",
+              Cell: row => (
+                <div>
+                  <button onClick={() => this.editRow(row)}>Edit</button>&nbsp;
+                  <button onClick={() => this.deleteRow(row)}>Delete</button>
+                </div>
+              )
             }
           ]}
           defaultPageSize={10}
