@@ -22,6 +22,11 @@ export default class TripsData extends Component {
   }
 
   editTable(cellInfo) {
+    console.log('........', cellInfo)
+    let dollarSign = '';
+    if(cellInfo.column.id === 'amount'){
+      dollarSign = '$';
+    }
     return (
       <div
         style={{ backgroundColor: "#fafafa" }}
@@ -33,7 +38,7 @@ export default class TripsData extends Component {
           this.setState({ data });
         }}
         dangerouslySetInnerHTML={{
-          __html: this.state.data[cellInfo.index][cellInfo.column.id]
+          __html: dollarSign + this.state.data[cellInfo.index][cellInfo.column.id]
         }}
       />
     );
