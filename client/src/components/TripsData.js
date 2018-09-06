@@ -1,88 +1,16 @@
 import React, { Component } from "react";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
+import Datatable from './Datatable';
 
 export default class TripsData extends Component {
   constructor() {
     super();
     this.state = {
-      data: [
-        {
-          bookDate: "08/31/18",
-          truckNumber: "117",
-          driverName: "Kelvin",
-          loadNumber: "0277377",
-          broker: "Transplace",
-          amount: 600,
-          loadedMiles: 300,
-          emptyMiles: 258,
-          mileage: 0,
-          dollarPeMile: 0,
-          dieselPrice: 0,
-          fuelCost: 0,
-          driverPay: 0,
-          dispatchFee: 0,
-          lumper: 0,
-          detention: 0,
-          detentionDriverPay: 0,
-          lateFee: 0,
-          tollFee: 0,
-          roadMaintenance: 0,
-          otherExpenses: 0,
-          totalExpense: 0,
-          profit: 0
-        },
-        {
-          bookDate: "09/01/18",
-          truckNumber: "118",
-          driverName: "Kelvin",
-          loadNumber: "0277377",
-          broker: "Transplace",
-          amount: 1200,
-          loadedMiles: 600,
-          emptyMiles: 358,
-          mileage: 0,
-          dollarPeMile: 0,
-          dieselPrice: 0,
-          fuelCost: 0,
-          driverPay: 0,
-          dispatchFee: 0,
-          lumper: 0,
-          detention: 0,
-          detentionDriverPay: 0,
-          lateFee: 0,
-          tollFee: 0,
-          roadMaintenance: 0,
-          otherExpenses: 0,
-          totalExpense: 0,
-          profit: 0
-        },
-        {
-          bookDate: "09/03/18",
-          truckNumber: "119",
-          driverName: "Kelvin",
-          loadNumber: "0277377",
-          broker: "Transplace",
-          amount: 850,
-          loadedMiles: 400,
-          emptyMiles: 150,
-          mileage: 0,
-          dollarPeMile: 0,
-          dieselPrice: 0,
-          fuelCost: 0,
-          driverPay: 0,
-          dispatchFee: 0,
-          lumper: 0,
-          detention: 0,
-          detentionDriverPay: 0,
-          lateFee: 0,
-          tollFee: 0,
-          roadMaintenance: 0,
-          otherExpenses: 0,
-          totalExpense: 0,
-          profit: 0
-        }
-      ],
+      data: Datatable,
+      mpg: 6,
+      driverPay: 0.55,
+      dispatchFee: 0.1,
       editable: false
     };
 
@@ -150,7 +78,7 @@ export default class TripsData extends Component {
             },
             {
               Header: "Truck Number",
-              accessor: "Truck",
+              accessor: "truckNumber",
               Cell: editFunc
             },
             {
@@ -209,7 +137,148 @@ export default class TripsData extends Component {
                 return (
                   <div
                     dangerouslySetInnerHTML={{
-                      __html: Number(dollarPerMile).toFixed(2)
+                      __html: '$' + Number(dollarPerMile).toFixed(2)
+                    }}
+                  />
+                );
+              }
+            },
+
+            {
+              Header: "Diesel Price",
+              accessor: "dieselPrice",
+            },
+            {
+              Header: "Fuel Cost",
+              id: "fuelCost",
+              accessor: d => {
+                let fuelCost =
+                  ((Number(d.loadedMiles) + Number(d.emptyMiles)) / this.state.mpg)
+                  * Number(d.dieselPrice);
+
+                  fuelCost = isNaN(fuelCost) ? null : fuelCost;
+
+                return (
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: '$' + Number(fuelCost).toFixed(2)
+                    }}
+                  />
+                );
+              }
+            },
+            {
+              Header: "Driver Pay",
+              id: "driverPay",
+              accessor: d => {
+                let driverPay =
+                  (Number(d.loadedMiles) + Number(d.emptyMiles)) * this.state.driverPay
+
+                  driverPay = isNaN(driverPay) ? null : driverPay;
+
+                return (
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: '$' + Number(driverPay).toFixed(2)
+                    }}
+                  />
+                );
+              }
+            },
+            {
+              Header: "Dispatch Fee",
+              id: "dispatchFee",
+              accessor: d => {
+                let dispatchFee =
+                  Number(d.amount) * this.state.dispatchFee
+
+                  dispatchFee = isNaN(dispatchFee) ? null : dispatchFee;
+
+                return (
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: '$' + Number(dispatchFee).toFixed(2)
+                    }}
+                  />
+                );
+              }
+            },
+            {
+              Header: "Lumper",
+              accessor: "lumper",
+              Cell: editFunc
+            },
+            {
+              Header: "Detention",
+              accessor: "detention",
+              Cell: editFunc
+            },
+            {
+              Header: "Detention Driver Pay",
+              accessor: "detentionDriverPay",
+              Cell: editFunc
+            },
+            {
+              Header: "Late Fee",
+              accessor: "lateFee",
+              Cell: editFunc
+            },
+            {
+              Header: "Toll",
+              accessor: "toll",
+              Cell: editFunc
+            },
+            {
+              Header: "Road Maintenance",
+              accessor: "roadMaintenance",
+              Cell: editFunc
+            },
+            {
+              Header: "Other Expenses",
+              accessor: "otherExpenses",
+              Cell: editFunc
+            },
+            {
+              Header: "Total Expenses",
+              id: "totalExpenses",
+              accessor: d => {
+
+                let totalExpenses =
+                ((Number(d.loadedMiles) + Number(d.emptyMiles)) / this.state.mpg) * Number(d.dieselPrice) +
+                (Number(d.loadedMiles) + Number(d.emptyMiles)) * this.state.driverPay +
+                  Number(d.amount) * this.state.dispatchFee +
+                  d.lumper + d.detention + d.detentionDriverPay + d.lateFee + d.toll + d.roadMaintenance +
+                  d.otherExpenses
+
+                  totalExpenses = isNaN(totalExpenses) ? null : totalExpenses;
+
+                return (
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: '$' + Number(totalExpenses).toFixed(2)
+                    }}
+                  />
+                );
+              }
+            },
+            {
+              Header: "Profit",
+              id: "profit",
+              accessor: d => {
+                let profit =
+                  Number(d.amount) -
+                  (((Number(d.loadedMiles) + Number(d.emptyMiles)) / this.state.mpg) * Number(d.dieselPrice) +
+                (Number(d.loadedMiles) + Number(d.emptyMiles)) * this.state.driverPay +
+                  Number(d.amount) * this.state.dispatchFee +
+                  d.lumper + d.detention + d.detentionDriverPay + d.lateFee + d.toll + d.roadMaintenance +
+                  d.otherExpenses)
+
+                  profit = isNaN(profit) ? null : profit;
+
+                return (
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: '$' + Number(profit).toFixed(2)
                     }}
                   />
                 );
@@ -224,7 +293,9 @@ export default class TripsData extends Component {
                   <button onClick={() => this.deleteRow(row)}>Delete</button>
                 </div>
               )
-            }
+            },
+
+
           ]}
           defaultPageSize={10}
           style={{

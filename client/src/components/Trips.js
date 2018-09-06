@@ -9,7 +9,7 @@ import TripsData from "./TripsData";
 function TabContainer(props) {
   const { value } = props;
 
-  return value === 117 ? (
+  return value === 119 ? (
     <div style={{ padding: 8 * 2 }}>
       <TripsData val={value} />
     </div>
@@ -21,8 +21,8 @@ const styles = theme => ({
 
 class Trips extends Component {
   state = {
-    value: 0,
-    tabLabel: 117
+    value: 2,
+    tabLabel: 119
   };
 
   handleChange = (event, value) => {
