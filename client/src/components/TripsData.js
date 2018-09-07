@@ -1,20 +1,30 @@
 import React, { Component } from "react";
 import ReactTable from "react-table";
 import Button from "@material-ui/core/Button";
+import { withStyles } from "@material-ui/core/styles";
 import "react-table/react-table.css";
 import { Datatable, EmptyRow } from "./Datatable";
 import ColumnChooser from "./ColumnChooser.js";
 
-export default class TripsData extends Component {
+const copyOfDatable = [].concat(Datatable);
+
+const styles = theme => ({
+  root: {},
+  dollarStyle: {
+    background: "green"
+  }
+});
+
+class TripsData extends Component {
   constructor() {
     super();
     this.state = {
-      data: Datatable,
+      data: copyOfDatable,
       columns: [],
       mpg: 6,
       driverPay: 0.55,
       dispatchFee: 0.1,
-      editable: false
+      editableRowIndex: []
     };
 
     this.editTable = this.editTable.bind(this);
@@ -28,12 +38,39 @@ export default class TripsData extends Component {
   }
 
   editTable(cellInfo) {
-    // console.log("cell info........", cellInfo);
-    let dollarSign = "";
-    if (cellInfo.column.id === "amount") {
-      dollarSign = "$";
+    // console.log(
+    //   "cell info........",
+    //   cellInfo,
+    //   "id: ",
+    //   cellInfo.row[cellInfo.column.id]
+    // );
+    let dollarSign;
+
+    const findEditableRow = this.state.editableRowIndex.find(
+      row => row === cellInfo.index
+    );
+
+    switch (cellInfo.column.id) {
+      case "amount":
+      case "dieselPrice":
+      case "lumper":
+      case "detention":
+      case "detentionDriverPay":
+      case "lateFee":
+      case "toll":
+      case "roadMaintenance":
+      case "otherExpenses":
+        dollarSign = "$";
+        break;
+      default:
+        dollarSign = "";
     }
-    return (
+
+    // if (cellInfo.column.id === "amount") {
+    //   dollarSign = "$";
+    // }
+
+    return findEditableRow || findEditableRow === 0 ? (
       <div
         style={{ backgroundColor: "#fafafa" }}
         contentEditable
@@ -45,19 +82,54 @@ export default class TripsData extends Component {
         }}
         dangerouslySetInnerHTML={{
           __html:
-            dollarSign + this.state.data[cellInfo.index][cellInfo.column.id]
+            // dollarSign +
+            this.state.data[cellInfo.index][cellInfo.column.id].toLocaleString()
+        }}
+      />
+    ) : (
+      <div
+        style={{ backgroundColor: "#fafafa" }}
+        suppressContentEditableWarning
+        onBlur={e => {
+          const data = [...this.state.data];
+          data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
+          this.setState({ data });
+        }}
+        dangerouslySetInnerHTML={{
+          __html:
+            dollarSign +
+            this.state.data[cellInfo.index][cellInfo.column.id].toLocaleString()
         }}
       />
     );
   }
 
   editRow(row) {
-    console.log("edit", row);
-    this.setState({ editable: true });
+    // console.log("edit", row, "row index: ", row.index);
+    const alreadyEditable = this.state.editableRowIndex.find(
+      editableRow => editableRow === row.index
+    );
+    // console.log("edit2", alreadyEditable, "...", this.state.editableRowIndex);
+    if (alreadyEditable || alreadyEditable === 0) {
+      this.setState({
+        editableRowIndex: this.state.editableRowIndex.filter(
+          editableRow => editableRow !== row.index
+        )
+      });
+    } else {
+      this.setState({
+        editableRowIndex: [...this.state.editableRowIndex, row.index]
+      });
+    }
   }
 
   deleteRow(row) {
-    console.log("delete", row);
+    this.setState({
+      data: [
+        ...this.state.data.slice(0, row.index),
+        ...this.state.data.slice(row.index + 1)
+      ]
+    });
   }
 
   saveRows() {
@@ -71,29 +143,35 @@ export default class TripsData extends Component {
     });
   }
 
-  calculateTotal({data, column}) {
-    // console.log("....data",data);
+  calculateTotal({ data, column }) {
+    // console.log("....data",data, "column", column);
     let dollarSign = false;
-
-    const total = data.reduce( (memo, trip) => {
+    let value;
+    const total = data.reduce((memo, trip) => {
       // console.log("....info", trip,column.id, trip[column.id]);
-      if(typeof(trip[column.id]) === 'object'){
-        let value = trip[column.id].props.dangerouslySetInnerHTML.__html;
-        if(typeof(value) === 'string' && value.substring(0,1) === '$'){
+
+      if (typeof trip[column.id] === "object") {
+        value = trip[column.id].props.dangerouslySetInnerHTML.__html;
+        if (typeof value === "string" && value.substring(0, 1) === "$") {
           dollarSign = true;
           value = value.slice(1);
         }
         memo += Number(value);
-      }else{
-        memo += trip[column.id];
+      } else {
+        memo +=
+          typeof trip[column.id] === "string"
+            ? Number(trip[column.id])
+            : trip[column.id];
       }
 
       return memo;
-    }, 0)
-    if(dollarSign){
-      return '$' + Number(total.toFixed(0)).toLocaleString();
+    }, 0);
+
+    if (dollarSign || column.id === "amount") {
+      return "$" + Number(total.toFixed(0)).toLocaleString();
     }
-    return Number(total.toFixed(0)).toLocaleString();
+
+    return Number(Number(total).toFixed(0)).toLocaleString();
   }
 
   onColumnUpdate(index) {
@@ -123,59 +201,57 @@ export default class TripsData extends Component {
 
   createColumns() {
     // console.log('TripsData createColumns: ', this.state)
-    const editFunc = this.state.editable ? this.editTable : null;
-
     return [
       {
         Header: "Date",
         accessor: "bookDate",
         show: true,
-        Cell: editFunc
+        Cell: this.editTable
       },
       {
         Header: "Truck Number",
         accessor: "truckNumber",
         show: false,
-        Cell: editFunc
+        Cell: this.editTable
       },
       {
         Header: "Driver",
         accessor: "driverName",
         show: false,
-        Cell: editFunc
+        Cell: this.editTable
       },
       {
         Header: "Load",
         accessor: "loadNumber",
         show: true,
-        Cell: editFunc
+        Cell: this.editTable
       },
       {
         Header: "Broker",
         accessor: "broker",
         show: true,
-        Cell: editFunc
+        Cell: this.editTable
       },
       {
         Header: "Amount",
         accessor: "amount",
         show: true,
-        Footer:this.calculateTotal,
-        Cell: editFunc
+        Footer: this.calculateTotal,
+        Cell: this.editTable
       },
       {
         Header: "Loaded Miles",
         accessor: "loadedMiles",
         Footer: this.calculateTotal,
         show: true,
-        Cell: editFunc
+        Cell: this.editTable
       },
       {
         Header: "Empty Miles",
         accessor: "emptyMiles",
         Footer: this.calculateTotal,
         show: true,
-        Cell: editFunc
+        Cell: this.editTable
       },
       {
         Header: "Mileage",
@@ -216,7 +292,7 @@ export default class TripsData extends Component {
         Header: "Diesel Price",
         show: true,
         accessor: "dieselPrice",
-        Cell: editFunc
+        Cell: this.editTable
       },
       {
         Header: "Fuel Cost",
@@ -262,7 +338,7 @@ export default class TripsData extends Component {
       },
       {
         Header: "Dispatch Fee",
-        Footer:this.calculateTotal,
+        Footer: this.calculateTotal,
         id: "dispatchFee",
         show: true,
         accessor: d => {
@@ -281,56 +357,56 @@ export default class TripsData extends Component {
       },
       {
         Header: "Lumper",
-        Footer:this.calculateTotal,
+        Footer: this.calculateTotal,
         accessor: "lumper",
         show: false,
-        Cell: editFunc
+        Cell: this.editTable
       },
       {
         Header: "Detention",
-        Footer:this.calculateTotal,
+        Footer: this.calculateTotal,
         accessor: "detention",
         show: false,
-        Cell: editFunc
+        Cell: this.editTable
       },
       {
         Header: "Detention Driver Pay",
-        Footer:this.calculateTotal,
+        Footer: this.calculateTotal,
         accessor: "detentionDriverPay",
         show: false,
-        Cell: editFunc
+        Cell: this.editTable
       },
       {
         Header: "Late Fee",
-        Footer:this.calculateTotal,
+        Footer: this.calculateTotal,
         accessor: "lateFee",
         show: false,
-        Cell: editFunc
+        Cell: this.editTable
       },
       {
         Header: "Toll",
-        Footer:this.calculateTotal,
+        Footer: this.calculateTotal,
         accessor: "toll",
         show: false,
-        Cell: editFunc
+        Cell: this.editTable
       },
       {
         Header: "Road Maintenance",
-        Footer:this.calculateTotal,
+        Footer: this.calculateTotal,
         accessor: "roadMaintenance",
         show: false,
-        Cell: editFunc
+        Cell: this.editTable
       },
       {
         Header: "Other Expenses",
-        Footer:this.calculateTotal,
+        Footer: this.calculateTotal,
         accessor: "otherExpenses",
         show: false,
-        Cell: editFunc
+        Cell: this.editTable
       },
       {
         Header: "Total Expenses",
-        Footer:this.calculateTotal,
+        Footer: this.calculateTotal,
         id: "totalExpenses",
         show: true,
         accessor: d => {
@@ -361,7 +437,7 @@ export default class TripsData extends Component {
       },
       {
         Header: "Profit",
-        Footer:this.calculateTotal,
+        Footer: this.calculateTotal,
         id: "profit",
         show: true,
         accessor: d => {
@@ -421,7 +497,17 @@ export default class TripsData extends Component {
 
   render() {
     const { data } = this.state;
-    // console.log("this.state: ", this.state);
+    console.log("this.state: ", this.state);
+    const { classes } = this.props;
+    const dollarStyle = classes.dollarStyle;
+    console.log(
+      "this.state: ",
+      this.state,
+      "this.props: ",
+      this.props,
+      "$style",
+      dollarStyle
+    );
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();
     return (
@@ -459,3 +545,5 @@ export default class TripsData extends Component {
     );
   }
 }
+
+export default withStyles(styles)(TripsData);
