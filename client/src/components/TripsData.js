@@ -205,7 +205,7 @@ export default class TripsData extends Component {
           return (
             <div
               dangerouslySetInnerHTML={{
-                __html: "$" + Number(dollarPerMile).toFixed(0)
+                __html: "$" + Number(dollarPerMile).toFixed(2)
               }}
             />
           );
@@ -233,7 +233,7 @@ export default class TripsData extends Component {
           return (
             <div
               dangerouslySetInnerHTML={{
-                __html: "$" + Number(fuelCost).toFixed(2)
+                __html: "$" + Number(fuelCost).toFixed(0)
               }}
             />
           );
