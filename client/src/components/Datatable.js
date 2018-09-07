@@ -49,7 +49,60 @@ const Datatable = [
     totalExpense: 0,
     profit: 0
   },
-
+  {
+    bookDate: "09/07/18",
+    truckNumber: "119",
+    driverName: "Kelvin",
+    loadNumber: "99810",
+    broker: "Transportation One",
+    amount: 1200,
+    loadedMiles: 842,
+    emptyMiles: 105,
+    mileage: 0,
+    dollarPerMile: 0,
+    dieselPrice: 3.22,
+    fuelCost: 0,
+    driverPay: 0,
+    dispatchFee: 0,
+    lumper: 0,
+    detention: 0,
+    detentionDriverPay: 0,
+    lateFee: 0,
+    toll: 0,
+    roadMaintenance: 0,
+    otherExpenses: 0,
+    totalExpense: 0,
+    profit: 0
+  },
 ]
 
-export default Datatable;
+const EmptyRow =  {
+  bookDate: "",
+  truckNumber: "",
+  driverName: "",
+  loadNumber: "",
+  broker: "",
+  amount: 0,
+  loadedMiles: 0,
+  emptyMiles: 0,
+  mileage: 0,
+  dollarPerMile: 0,
+  dieselPrice: 0,
+  fuelCost: 0,
+  driverPay: 0,
+  dispatchFee: 0,
+  lumper: 0,
+  detention: 0,
+  detentionDriverPay: 0,
+  lateFee: 0,
+  toll: 0,
+  roadMaintenance: 0,
+  otherExpenses: 0,
+  totalExpense: 0,
+  profit: 0
+}
+
+export {
+  Datatable,
+  EmptyRow
+}

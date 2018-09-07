@@ -43,6 +43,11 @@ const styles = theme => ({
     navbarToggle: {
       display: "none"
     }
+  },
+  [theme.breakpoints.down("xs")]: {
+    imgClass: {
+      width: '85%'
+    }
   }
 });
 
@@ -78,6 +83,7 @@ class Nav extends Component {
 
         <img
           style={{ maxWidth: '100%'}}
+          className={ classes.imgClass }
           src="assets/images/logos/transmax.png"
           alt="transmax"
         />

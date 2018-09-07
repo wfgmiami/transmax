@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
 import Popover, { PopoverAnimationVertical } from "@material-ui/core/Popover";
@@ -9,7 +8,6 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { withStyles } from "@material-ui/core/styles";
 //import 'font-awesome/css/font-awesome.min.css';
 import AlarmIcon from "@material-ui/icons/Reorder";
-import classes from "classnames";
 import Tooltip from "@material-ui/core/Tooltip";
 
 export const popoverStyles = {
@@ -74,7 +72,7 @@ class ColumnChooser extends React.Component {
 
   render() {
     const { classes, columns } = this.props;
-    console.log("columnChooser this props: ", this.props);
+    // console.log("columnChooser this props: ", this.props);
     return (
       <div className={classes.root}>
         <Tooltip id="tooltip-columns" title="Select Columns">

@@ -3,7 +3,7 @@ import ReactTable from "react-table";
 import Button from "@material-ui/core/Button";
 import "react-table/react-table.css";
 import { Datatable, EmptyRow } from "./Datatable";
-import ColumnChooser from "./columnChooser.js";
+import ColumnChooser from "./ColumnChooser.js";
 
 export default class TripsData extends Component {
   constructor() {
@@ -28,7 +28,7 @@ export default class TripsData extends Component {
   }
 
   editTable(cellInfo) {
-    // console.log("........", cellInfo);
+    // console.log("cell info........", cellInfo);
     let dollarSign = "";
     if (cellInfo.column.id === "amount") {
       dollarSign = "$";
@@ -65,19 +65,35 @@ export default class TripsData extends Component {
   }
 
   addEmptyRow() {
+    let newEmptyRow = Object.assign({}, EmptyRow);
     this.setState({
-      data: this.state.data.concat(EmptyRow)
+      data: this.state.data.concat(newEmptyRow)
     });
   }
 
   calculateTotal({data, column}) {
-  
-    console.log("....info", data, column.Header);
+    // console.log("....data",data);
+    let dollarSign = false;
 
-    return data.reduce( (memo, trip) => {
-      memo += trip[column.Header.toLowerCase()];
+    const total = data.reduce( (memo, trip) => {
+      // console.log("....info", trip,column.id, trip[column.id]);
+      if(typeof(trip[column.id]) === 'object'){
+        let value = trip[column.id].props.dangerouslySetInnerHTML.__html;
+        if(typeof(value) === 'string' && value.substring(0,1) === '$'){
+          dollarSign = true;
+          value = value.slice(1);
+        }
+        memo += Number(value);
+      }else{
+        memo += trip[column.id];
+      }
+
       return memo;
-    }, 0) 
+    }, 0)
+    if(dollarSign){
+      return '$' + Number(total.toFixed(0)).toLocaleString();
+    }
+    return Number(total.toFixed(0)).toLocaleString();
   }
 
   onColumnUpdate(index) {
@@ -119,13 +135,13 @@ export default class TripsData extends Component {
       {
         Header: "Truck Number",
         accessor: "truckNumber",
-        show: true,
+        show: false,
         Cell: editFunc
       },
       {
         Header: "Driver",
         accessor: "driverName",
-        show: true,
+        show: false,
         Cell: editFunc
       },
       {
@@ -189,7 +205,7 @@ export default class TripsData extends Component {
           return (
             <div
               dangerouslySetInnerHTML={{
-                __html: "$" + Number(dollarPerMile).toFixed(2)
+                __html: "$" + Number(dollarPerMile).toFixed(0)
               }}
             />
           );
@@ -238,7 +254,7 @@ export default class TripsData extends Component {
           return (
             <div
               dangerouslySetInnerHTML={{
-                __html: "$" + Number(driverPay).toFixed(2)
+                __html: "$" + Number(driverPay).toFixed(0)
               }}
             />
           );
@@ -246,6 +262,7 @@ export default class TripsData extends Component {
       },
       {
         Header: "Dispatch Fee",
+        Footer:this.calculateTotal,
         id: "dispatchFee",
         show: true,
         accessor: d => {
@@ -256,7 +273,7 @@ export default class TripsData extends Component {
           return (
             <div
               dangerouslySetInnerHTML={{
-                __html: "$" + Number(dispatchFee).toFixed(2)
+                __html: "$" + Number(dispatchFee).toFixed(0)
               }}
             />
           );
@@ -264,48 +281,56 @@ export default class TripsData extends Component {
       },
       {
         Header: "Lumper",
+        Footer:this.calculateTotal,
         accessor: "lumper",
         show: false,
         Cell: editFunc
       },
       {
         Header: "Detention",
+        Footer:this.calculateTotal,
         accessor: "detention",
         show: false,
         Cell: editFunc
       },
       {
         Header: "Detention Driver Pay",
+        Footer:this.calculateTotal,
         accessor: "detentionDriverPay",
         show: false,
         Cell: editFunc
       },
       {
         Header: "Late Fee",
+        Footer:this.calculateTotal,
         accessor: "lateFee",
         show: false,
         Cell: editFunc
       },
       {
         Header: "Toll",
+        Footer:this.calculateTotal,
         accessor: "toll",
         show: false,
         Cell: editFunc
       },
       {
         Header: "Road Maintenance",
+        Footer:this.calculateTotal,
         accessor: "roadMaintenance",
         show: false,
         Cell: editFunc
       },
       {
         Header: "Other Expenses",
+        Footer:this.calculateTotal,
         accessor: "otherExpenses",
         show: false,
         Cell: editFunc
       },
       {
         Header: "Total Expenses",
+        Footer:this.calculateTotal,
         id: "totalExpenses",
         show: true,
         accessor: d => {
@@ -328,7 +353,7 @@ export default class TripsData extends Component {
           return (
             <div
               dangerouslySetInnerHTML={{
-                __html: "$" + Number(totalExpenses).toFixed(2)
+                __html: "$" + Number(totalExpenses).toFixed(0)
               }}
             />
           );
@@ -336,6 +361,7 @@ export default class TripsData extends Component {
       },
       {
         Header: "Profit",
+        Footer:this.calculateTotal,
         id: "profit",
         show: true,
         accessor: d => {
@@ -359,7 +385,7 @@ export default class TripsData extends Component {
           return (
             <div
               dangerouslySetInnerHTML={{
-                __html: "$" + Number(profit).toFixed(2)
+                __html: "$" + Number(profit).toFixed(0)
               }}
             />
           );
@@ -395,6 +421,7 @@ export default class TripsData extends Component {
 
   render() {
     const { data } = this.state;
+    // console.log("this.state: ", this.state);
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();
     return (
