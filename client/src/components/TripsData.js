@@ -144,6 +144,7 @@ class TripsData extends Component {
     // console.log("....data",data, "column", column);
     let dollarSign = false;
     let value;
+
     const total = data.reduce((memo, trip) => {
       // console.log("....info", trip,column.id, trip[column.id]);
 
@@ -155,6 +156,7 @@ class TripsData extends Component {
         }
         memo += Number(value);
       } else {
+
         let amount = trip[column.id];
         if(typeof(trip[column.id]) === 'string'){
           amount = parseFloat(trip[column.id].replace(/,/g,''))
@@ -166,8 +168,14 @@ class TripsData extends Component {
       return memo;
     }, 0);
 
+
     if (dollarSign || column.id === "amount") {
+      if(column.id === 'dollarPerMile'){
+        return "$" + Number((total / 3).toFixed(2)).toLocaleString();
+      }
       return "$" + Number(total.toFixed(0)).toLocaleString();
+    }else if(column.id === 'dieselPrice'){
+      return "$" + Number((total / 3).toFixed(2)).toLocaleString();
     }
 
     return Number(Number(total).toFixed(0)).toLocaleString();
@@ -247,16 +255,16 @@ class TripsData extends Component {
       },
       {
         Header: "Empty Miles",
-        accessor: "emptyMiles",
         Footer: this.calculateTotal,
+        accessor: "emptyMiles",
         show: true,
         Cell: this.editTable
       },
       {
         Header: "Mileage",
+        Footer: this.calculateTotal,
         id: "mileage",
         show: true,
-        Footer: this.calculateTotal,
         accessor: d => {
           const totalMiles = Number(d.loadedMiles) + Number(d.emptyMiles);
 
@@ -271,6 +279,7 @@ class TripsData extends Component {
       },
       {
         Header: "$/Mile",
+        Footer: this.calculateTotal,
         id: "dollarPerMile",
         show: true,
         accessor: d => {
@@ -292,6 +301,7 @@ class TripsData extends Component {
 
       {
         Header: "Diesel Price",
+        Footer: this.calculateTotal,
         show: true,
         accessor: "dieselPrice",
         Cell: this.editTable
@@ -485,8 +495,8 @@ class TripsData extends Component {
         Header: "Edit",
         id: "edit",
         accessor: "edit",
-        show: true,
         minWidth: 200,
+        show: true,
         Cell: row => {
 
           const editableRow =
@@ -499,7 +509,7 @@ class TripsData extends Component {
             editBtnColor = 'primary';
           }
 
-          return (<div style={{width: '100%'}}>
+          return (<div>
             <Button
               variant="contained"
               color={editBtnColor}
