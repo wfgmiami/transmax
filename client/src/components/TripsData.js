@@ -10,9 +10,6 @@ const copyOfDatable = [].concat(Datatable);
 
 const styles = theme => ({
   root: {},
-  dollarStyle: {
-    background: "green"
-  }
 });
 
 class TripsData extends Component {
@@ -105,11 +102,11 @@ class TripsData extends Component {
   }
 
   editRow(row) {
-    // console.log("edit", row, "row index: ", row.index);
+    console.log("edit", row, "row index: ", row.index);
     const alreadyEditable = this.state.editableRowIndex.find(
       editableRow => editableRow === row.index
     );
-    // console.log("edit2", alreadyEditable, "...", this.state.editableRowIndex);
+    console.log("edit2", alreadyEditable, "...", this.state.editableRowIndex);
     if (alreadyEditable || alreadyEditable === 0) {
       this.setState({
         editableRowIndex: this.state.editableRowIndex.filter(
@@ -158,10 +155,12 @@ class TripsData extends Component {
         }
         memo += Number(value);
       } else {
-        memo +=
-          typeof trip[column.id] === "string"
-            ? Number(trip[column.id])
-            : trip[column.id];
+        let amount = trip[column.id];
+        if(typeof(trip[column.id]) === 'string'){
+          amount = parseFloat(trip[column.id].replace(/,/g,''))
+        }
+
+        memo += amount;
       }
 
       return memo;
@@ -275,8 +274,11 @@ class TripsData extends Component {
         id: "dollarPerMile",
         show: true,
         accessor: d => {
+          let amount = d.amount;
+          if(typeof(d.amount) === 'string')
+            amount = parseFloat(d.amount.replace(/,/g,''))
           let dollarPerMile =
-            Number(d.amount) / (Number(d.loadedMiles) + Number(d.emptyMiles));
+            Number(amount) / (Number(d.loadedMiles) + Number(d.emptyMiles));
           dollarPerMile = isNaN(dollarPerMile) ? null : dollarPerMile;
           return (
             <div
@@ -342,7 +344,11 @@ class TripsData extends Component {
         id: "dispatchFee",
         show: true,
         accessor: d => {
-          let dispatchFee = Number(d.amount) * this.state.dispatchFee;
+          let amount = d.amount;
+          if(typeof(d.amount) === 'string')
+            amount = parseFloat(d.amount.replace(/,/g,''))
+
+          let dispatchFee = Number(amount) * this.state.dispatchFee;
 
           dispatchFee = isNaN(dispatchFee) ? null : dispatchFee;
 
@@ -410,19 +416,23 @@ class TripsData extends Component {
         id: "totalExpenses",
         show: true,
         accessor: d => {
+          let amount = d.amount;
+          if(typeof(d.amount) === 'string')
+            amount = parseFloat(d.amount.replace(/,/g,''))
+
           let totalExpenses =
             ((Number(d.loadedMiles) + Number(d.emptyMiles)) / this.state.mpg) *
               Number(d.dieselPrice) +
             (Number(d.loadedMiles) + Number(d.emptyMiles)) *
               this.state.driverPay +
-            Number(d.amount) * this.state.dispatchFee +
-            d.lumper +
-            d.detention +
-            d.detentionDriverPay +
-            d.lateFee +
-            d.toll +
-            d.roadMaintenance +
-            d.otherExpenses;
+            Number(amount) * this.state.dispatchFee +
+            Number(d.lumper) +
+            Number(d.detention) +
+            Number(d.detentionDriverPay) +
+            Number(d.lateFee) +
+            Number(d.toll) +
+            Number(d.roadMaintenance) +
+            Number(d.otherExpenses);
 
           totalExpenses = isNaN(totalExpenses) ? null : totalExpenses;
 
@@ -441,20 +451,24 @@ class TripsData extends Component {
         id: "profit",
         show: true,
         accessor: d => {
+          let amount = d.amount;
+          if(typeof(d.amount) === 'string')
+            amount = parseFloat(d.amount.replace(/,/g,''))
+
           let profit =
-            Number(d.amount) -
+            amount -
             (((Number(d.loadedMiles) + Number(d.emptyMiles)) / this.state.mpg) *
               Number(d.dieselPrice) +
               (Number(d.loadedMiles) + Number(d.emptyMiles)) *
                 this.state.driverPay +
-              Number(d.amount) * this.state.dispatchFee +
-              d.lumper +
-              d.detention +
-              d.detentionDriverPay +
-              d.lateFee +
-              d.toll +
-              d.roadMaintenance +
-              d.otherExpenses);
+              Number(amount) * this.state.dispatchFee +
+              Number(d.lumper) +
+              Number(d.detention) +
+              Number(d.detentionDriverPay) +
+              Number(d.lateFee) +
+              Number(d.toll) +
+              Number(d.roadMaintenance) +
+              Number(d.otherExpenses));
 
           profit = isNaN(profit) ? null : profit;
 
@@ -472,25 +486,38 @@ class TripsData extends Component {
         id: "edit",
         accessor: "edit",
         show: true,
-        minWidth: 150,
-        Cell: row => (
-          <div>
+        minWidth: 200,
+        Cell: row => {
+
+          const editableRow =
+            this.state.editableRowIndex.filter(editableRow => editableRow === row.index)
+          let editBtnColor = 'secondary';
+          let editBtnName = 'Edit';
+
+          if(editableRow.length > 0){
+            editBtnName = 'Editing...';
+            editBtnColor = 'primary';
+          }
+
+          return (<div style={{width: '100%'}}>
             <Button
               variant="contained"
-              color="primary"
+              color={editBtnColor}
               onClick={() => this.editRow(row)}
             >
-              Edit
+              {editBtnName}
             </Button>&nbsp;
+
             <Button
               variant="contained"
-              color="primary"
+              color='secondary'
               onClick={() => this.deleteRow(row)}
             >
               Delete
             </Button>
-          </div>
-        )
+          </div>)
+        }
+
       }
     ];
   }
@@ -498,16 +525,7 @@ class TripsData extends Component {
   render() {
     const { data } = this.state;
     console.log("this.state: ", this.state);
-    const { classes } = this.props;
-    const dollarStyle = classes.dollarStyle;
-    console.log(
-      "this.state: ",
-      this.state,
-      "this.props: ",
-      this.props,
-      "$style",
-      dollarStyle
-    );
+
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();
     return (
@@ -515,7 +533,7 @@ class TripsData extends Component {
         <div>
           <Button
             variant="contained"
-            color="primary"
+            color='primary'
             onClick={this.addEmptyRow}
           >
             Add
