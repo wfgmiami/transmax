@@ -48,13 +48,13 @@ router.post('/', (req,res,next)=>{
 
     User.findByPassword({ userName, password })
     .then( user => {
-      if (!user) return res.sendStatus( 401 );
-      res.send( {
-        // token: jwt.encode( { id: user.id }, res.locals.jwtSecret )
-        authenticated: true
-      } );
+      if (!user){
+        res.send({ authenticated: false });
+      } else{
+        res.send({ authenticated: true });
+      }
 
-    } )
+    })
     .catch( next );
 
   // })
