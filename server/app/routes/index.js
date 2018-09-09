@@ -6,6 +6,8 @@ const router = require('express').Router();
 router.use('/candidate', require('./candidate'));
 router.use('/contactus', require('./contactus'));
 router.use('/signin', require('./signin'));
+router.use('/trip', require('./trip'));
+router.use('/pdf', require('./showPdf'));
 
 // Make sure this is after all of
 // the registered routes!

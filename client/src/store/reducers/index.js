@@ -1,12 +1,12 @@
 import {combineReducers} from 'redux';
 import application from './application';
-// import settings from './trips';
+import load from './load';
 // import navbar from './navbar.reducer';
 // import message from './message.reducer';
 
 const appReducers = combineReducers({
     application,
-    // settings,
+    load,
     // navbar,
     // message
 });

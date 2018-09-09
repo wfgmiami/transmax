@@ -1,4 +1,6 @@
-const Datatable = [
+const path = require('path');
+
+const trips = [
   {
     bookDate: "08/31/18",
     truckNumber: "119",
@@ -22,7 +24,8 @@ const Datatable = [
     roadMaintenance: 0,
     otherExpenses: 0,
     totalExpense: 0,
-    profit: 0
+    profit: 0,
+    confirmFilePath: path.join(__dirname,'/brokerConfirmations/083118_Transplace.pdf')
   },
   {
     bookDate: "09/05/18",
@@ -47,7 +50,8 @@ const Datatable = [
     roadMaintenance: 0,
     otherExpenses: 0,
     totalExpense: 0,
-    profit: 0
+    profit: 0,
+    confirmFilePath: path.join(__dirname,'/brokerConfirmations/090518_reliableSourceLogistics.pdf')
   },
   {
     bookDate: "09/07/18",
@@ -72,37 +76,10 @@ const Datatable = [
     roadMaintenance: 0,
     otherExpenses: 0,
     totalExpense: 0,
-    profit: 0
+    profit: 0,
+    confirmFilePath: path.join(__dirname,'/brokerConfirmations/090718_transportationOne.pdf')
   },
 ]
 
-const EmptyRow =  {
-  bookDate: "",
-  truckNumber: "",
-  driverName: "",
-  loadNumber: "",
-  brokerName: "",
-  amount: 0,
-  loadedMiles: 0,
-  emptyMiles: 0,
-  mileage: 0,
-  dollarPerMile: 0,
-  dieselPrice: 0,
-  fuelCost: 0,
-  driverPay: 0,
-  dispatchFee: 0,
-  lumper: 0,
-  detention: 0,
-  detentionDriverPay: 0,
-  lateFee: 0,
-  toll: 0,
-  roadMaintenance: 0,
-  otherExpenses: 0,
-  totalExpense: 0,
-  profit: 0
-}
 
-export {
-  Datatable,
-  EmptyRow
-}
+module.exports = trips;

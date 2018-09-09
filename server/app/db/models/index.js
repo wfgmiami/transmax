@@ -6,25 +6,31 @@
 
 const Candidate = require('./candidate');
 const User = require('./user');
-
+const Trip = require('./trip');
+const Broker = require('./broker');
+const Driver = require('./driver');
+const Shipment = require('./shipment');
 
 // Form the associations
 
-// Song.belongsTo(Album);
-// Album.hasMany(Song);
-// Album.belongsTo(Artist); // "Album Artist" is a thing, even if there are
-//                          // other artists on the album.
+Broker.hasMany(Trip);
+Trip.belongsTo(Broker);
 
+Broker.hasMany(Shipment);
+Shipment.belongsTo(Broker);
 
-// Artist.belongsToMany(Song, { through: 'artistSong' });
-// Song.belongsToMany(Artist, { through: 'artistSong' });
+Driver.hasMany(Trip);
+Trip.belongsTo(Driver);
 
-// Song.belongsToMany(Playlist, { through: 'playlistSong' });
-// Playlist.belongsToMany(Song, { through: 'playlistSong' });
+Trip.belongsToMany(Shipment, { through: 'loadNumber' });
+Shipment.belongsToMany(Trip, { through: 'loadNumber' });
 
-// exported just in case, but can also be fetched via db.model('Album') etc.
 
 module.exports = {
     Candidate: Candidate,
     User: User,
+    Trip: Trip,
+    Broker: Broker,
+    Driver: Driver,
+    Shipment: Shipment
 };

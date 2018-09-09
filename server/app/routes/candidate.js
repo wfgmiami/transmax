@@ -58,7 +58,7 @@ router.post('/', (req,res,next)=>{
 
     res.send(candidates)
   })
-  .catch(next)
+  .catch( err => console.log(err) )
 })
 
 // Make sure this is after all of

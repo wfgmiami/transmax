@@ -2,14 +2,20 @@ import React, { Component } from "react";
 import ReactTable from "react-table";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {withRouter} from 'react-router-dom';
 import "react-table/react-table.css";
 import { Datatable, EmptyRow } from "./Datatable";
 import ColumnChooser from "./ColumnChooser.js";
+import axios from 'axios';
+
+import * as loadActions from '../../store/actions/load';
 
 const copyOfDatable = [].concat(Datatable);
 
 const styles = theme => ({
-  root: {},
+  root: {}
 });
 
 class TripsData extends Component {
@@ -21,7 +27,9 @@ class TripsData extends Component {
       mpg: 6,
       driverPay: 0.55,
       dispatchFee: 0.1,
-      editableRowIndex: []
+      editableRowIndex: [],
+      numPages: null,
+      pageNumber: 1
     };
 
     this.editTable = this.editTable.bind(this);
@@ -32,6 +40,29 @@ class TripsData extends Component {
     this.onColumnUpdate = this.onColumnUpdate.bind(this);
     this.createColumns = this.createColumns.bind(this);
     this.calculateTotal = this.calculateTotal.bind(this);
+  }
+
+  componentDidMount() {
+
+    this.props.getTrip();
+  }
+
+  getConfirmDoc(docLink) {
+
+    axios.post('/api/pdf', {docLink},{
+      method: 'POST',
+      responseType: 'blob'
+    })
+    .then( response => {
+      const file = new Blob(
+        [response.data],
+        {type: 'application/pdf'}
+      )
+      const fileURL = URL.createObjectURL(file);
+      window.open(fileURL);
+    })
+    .catch(error => console.log(error))
+
   }
 
   editTable(cellInfo) {
@@ -235,7 +266,7 @@ class TripsData extends Component {
       },
       {
         Header: "Broker",
-        accessor: "broker",
+        accessor: "brokerName",
         show: true,
         Cell: this.editTable
       },
@@ -492,6 +523,15 @@ class TripsData extends Component {
         }
       },
       {
+        Header: "Confirm Doc",
+        accessor: "confirmFilePath",
+        show: true,
+        Cell: ({ row }) => {
+          // console.log('row',row,row.confirmFilePath)
+          return(<a style={{ textDecoration: 'underline', cursor: 'pointer'}} onClick={()=>this.getConfirmDoc(row.confirmFilePath)}>pdf</a>)
+        }
+      },
+      {
         Header: "Edit",
         id: "edit",
         accessor: "edit",
@@ -533,8 +573,10 @@ class TripsData extends Component {
   }
 
   render() {
-    const { data } = this.state;
-    console.log("this.state: ", this.state);
+    // const { data } = this.state;
+    const { trip } = this.props;
+
+    console.log("this.state: props ", this.props);
 
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();
@@ -558,7 +600,7 @@ class TripsData extends Component {
           <div>&nbsp;</div>
         </div>
         <ReactTable
-          data={data}
+          data={trip}
           showPaginationBottom={true}
           columns={columns}
           defaultPageSize={10}
@@ -574,4 +616,17 @@ class TripsData extends Component {
   }
 }
 
-export default withStyles(styles)(TripsData);
+function mapStateToProps({ load }) {
+  return {
+    trip: load.trip
+  }
+}
+
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({
+    getTrip: loadActions.getTrip,
+    setTrip: loadActions.setTrip
+  }, dispatch)
+}
+
+export default withStyles(styles, {withTheme: true})(withRouter(connect(mapStateToProps, mapDispatchToProps)(TripsData)));
