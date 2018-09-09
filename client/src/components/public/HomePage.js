@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import classNames from "classnames";
+import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 import ApplicationForm from "./ApplicationForm";
 import ApplicationSuccess from "./ApplicationSuccess";
 import Footer from "./Footer";
@@ -31,9 +33,10 @@ const styles = theme => ({
 });
 
 class HomePage extends Component {
+
   render() {
-    const { classes } = this.props;
-    const applicationSuccess = this.props.applySuccess;
+    const { classes, applicationSuccess } = this.props;
+
     // console.log('home page ', this.props)
     return (
       <div>
@@ -67,4 +70,11 @@ class HomePage extends Component {
     );
   }
 }
-export default withStyles(styles)(HomePage);
+
+function mapStateToProps({ application }) {
+  return {
+    applicationSuccess: application.candidate.applicationSuccess
+  }
+}
+
+export default withStyles(styles, {withTheme: true})(withRouter(connect(mapStateToProps, null)(HomePage)));

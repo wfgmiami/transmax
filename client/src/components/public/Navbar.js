@@ -4,7 +4,7 @@ import { List, ListItem, ListItemText, Icon } from "@material-ui/core";
 import { NavLink, withRouter } from "react-router-dom";
 import classNames from 'classnames'
 import PropTypes from "prop-types";
-import { navigationConfig } from "../configs/navigationConfig";
+import { navigationConfig } from "../../configs/navigationConfig";
 import Typography from "@material-ui/core/Typography";
 
 const propTypes = {

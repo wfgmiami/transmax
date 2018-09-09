@@ -1,14 +1,19 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import TextField from "@material-ui/core/TextField";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
-import { usStates } from "../us-states";
-import { withStyles } from "@material-ui/core/styles";
+import {withStyles} from "@material-ui/core/styles";
 import InputMask from 'react-input-mask';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {withRouter} from 'react-router-dom';
 import {validateCandidate}  from "./validate";
+import {usStates} from "./us-states";
+
+import * as applicationActions from '../../store/actions/application';
 
 const styles = theme => ({
   root: {},
@@ -33,24 +38,12 @@ const experienceRange = [
 ];
 
 class ApplicationForm extends Component {
-  state = {
-    candidate: {
-      firstName: "",
-      lastName: "",
-      city: "",
-      state: "",
-      email: "",
-      phone: "",
-      driversLicense: "",
-      experience: ""
-    }
-  };
 
   handleSubmit = () => {
     let errorMsg = null;
-    const { candidate } = this.state;
+    const candidate  = this.props.candidate;
 
-    const validationObj = validateCandidate(this.state.candidate);
+    const validationObj = validateCandidate(candidate);
     const validationArray = Object.keys(validationObj);
     const requiredViolation = validationArray.findIndex(
       field => validationObj[field] === "Required"
@@ -69,23 +62,21 @@ class ApplicationForm extends Component {
       errorMsg = validationArray[requiredViolation] + " is a required field";
 
     if (!errorMsg) {
-      this.props.onCreate(candidate);
+      // this.props.onCreate(candidate);
+      this.props.setCandidate(candidate);
+
     } else {
       alert(errorMsg);
     }
+
   };
 
   handleChange = key => ({ target: { value } }) => {
-    this.setState({
-      candidate: {
-        ...this.state.candidate,
-        [key]: value
-      }
-    });
+    this.props.setCandidateAttributes({[key]:value});
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, candidate } = this.props;
 
     return (
       <React.Fragment>
@@ -94,7 +85,7 @@ class ApplicationForm extends Component {
             id="firstName"
             label="First Name"
             className={classes.textField}
-            value={this.state.candidate.firstName}
+            value={candidate.firstName}
             onChange={this.handleChange("firstName")}
             margin="normal"
           />
@@ -102,7 +93,7 @@ class ApplicationForm extends Component {
             id="lastName"
             label="Last Name"
             className={classes.textField}
-            value={this.state.candidate.lastName}
+            value={candidate.lastName}
             onChange={this.handleChange("lastName")}
             margin="normal"
           />
@@ -110,7 +101,7 @@ class ApplicationForm extends Component {
             id="email"
             label="Email"
             className={classes.textField}
-            value={this.state.candidate.email}
+            value={candidate.email}
             onChange={this.handleChange("email")}
             margin="normal"
           />
@@ -118,7 +109,7 @@ class ApplicationForm extends Component {
           <InputMask
             mask="999 999 9999"
             maskChar="-"
-            value={this.state.candidate.phone}
+            value={candidate.phone}
             onChange={this.handleChange("phone")}
             className={classes.textField}
           >
@@ -134,7 +125,7 @@ class ApplicationForm extends Component {
             id="city"
             label="City"
             className={classes.textField}
-            value={this.state.candidate.city}
+            value={candidate.city}
             onChange={this.handleChange("city")}
             margin="normal"
           />
@@ -142,7 +133,7 @@ class ApplicationForm extends Component {
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="state-simple">State</InputLabel>
             <Select
-              value={this.state.candidate.state}
+              value={candidate.state}
               onChange={this.handleChange("state")}
               inputProps={{
                 name: "state",
@@ -160,14 +151,14 @@ class ApplicationForm extends Component {
             id="dlicense"
             label="Driver's License"
             className={classes.textField}
-            value={this.state.candidate.driverslicense}
+            value={candidate.driverslicense}
             onChange={this.handleChange("driversLicense")}
             margin="normal"
           />
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="experience-simple">Experience</InputLabel>
             <Select
-              value={this.state.candidate.experience}
+              value={candidate.experience}
               onChange={this.handleChange("experience")}
               inputProps={{
                 name: "experience",
@@ -196,4 +187,17 @@ class ApplicationForm extends Component {
   }
 }
 
-export default withStyles(styles)(ApplicationForm);
+function mapStateToProps({ application }) {
+  return {
+    candidate: application.candidate
+  }
+}
+
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({
+    setCandidateAttributes: applicationActions.setCandidateAttributes,
+    setCandidate: applicationActions.setCandidate
+  }, dispatch)
+}
+
+export default withStyles(styles, {withTheme: true})(withRouter(connect(mapStateToProps, mapDispatchToProps)(ApplicationForm)));
