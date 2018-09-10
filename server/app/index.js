@@ -36,9 +36,11 @@ app.use(function (req, res, next) {
     }
 });
 
-app.get('/*', function (req, res) {
-    res.sendFile(app.get('indexHTMLPath'));
-});
+// do not need below because create-react-app serves automatically
+// automatically index.html file on '/'
+// app.get('/*', function (req, res) {
+//     res.sendFile(app.get('indexHTMLPath'));
+// });
 
 // Error catching endware.
 app.use(function (err, req, res, next) {
