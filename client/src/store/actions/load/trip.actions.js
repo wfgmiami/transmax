@@ -7,6 +7,7 @@ export const SET_TRIP = 'SET TRIP';
 export function getTrip(){
 
     const getTrip = axios.get('/api/trip');
+
     return (dispatch) =>
         getTrip.then((response) =>
             dispatch({

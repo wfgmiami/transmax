@@ -6,7 +6,8 @@ const { Trip } = require('../db/models');
 
 router.get('/', (req, res, next) => {
   Trip.findAll({})
-    .then( trips => res.json( trips ))
+    // .then( trips => res.json( trips ))
+   .then( res.send({ authenticated: true }))
     .catch( next )
 })
 
