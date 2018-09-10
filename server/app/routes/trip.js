@@ -2,12 +2,11 @@
 
 const express = require('express');
 const router = new express.Router();
-const { Trip } = require('../db/models');
+const Trip = require('../db/models').Trip;
 
 router.get('/', (req, res, next) => {
   Trip.findAll({})
-    // .then( trips => res.json( trips ))
-   .then( res.send({ authenticated: true }))
+    .then( trips => res.json( trips ))
     .catch( next )
 })
 

@@ -11,7 +11,7 @@ const transmaxEmail = 'transmaxfleet@gmail.com';
 const GMAIL_PASS = require(path.join(__dirname, '../../env')).GMAIL_PASS;
 const User = require('../db/models').User;
 
-router.post('/', (req,res,next)=>{
+router.post('/', (req,res,next) => {
   const {userName, password} = req.body;
 
   const createHtmlBody = () => (
