@@ -2,15 +2,16 @@ import React, { Component } from "react";
 import ReactTable from "react-table";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {withRouter} from 'react-router-dom';
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { withRouter } from "react-router-dom";
 import "react-table/react-table.css";
 import { Datatable, EmptyRow } from "./Datatable";
 import ColumnChooser from "./ColumnChooser.js";
-import axios from 'axios';
+import axios from "axios";
 
-import * as loadActions from '../../store/actions/load';
+import * as loadActions from "../../store/actions/load";
+import InputVariables from "./InputVariables";
 
 const copyOfDatable = [].concat(Datatable);
 
@@ -24,9 +25,7 @@ class TripsData extends Component {
     this.state = {
       data: copyOfDatable,
       columns: [],
-      mpg: 6,
       driverPay: 0.55,
-      dispatchFee: 0.1,
       editableRowIndex: [],
       numPages: null,
       pageNumber: 1
@@ -43,26 +42,25 @@ class TripsData extends Component {
   }
 
   componentDidMount() {
-
     this.props.getTrip();
   }
 
   getConfirmDoc(docLink) {
-
-    axios.post('/api/pdf', {docLink},{
-      method: 'POST',
-      responseType: 'blob'
-    })
-    .then( response => {
-      const file = new Blob(
-        [response.data],
-        {type: 'application/pdf'}
+    axios
+      .post(
+        "/api/pdf",
+        { docLink },
+        {
+          method: "POST",
+          responseType: "blob"
+        }
       )
-      const fileURL = URL.createObjectURL(file);
-      window.open(fileURL);
-    })
-    .catch(error => console.log(error))
-
+      .then(response => {
+        const file = new Blob([response.data], { type: "application/pdf" });
+        const fileURL = URL.createObjectURL(file);
+        window.open(fileURL);
+      })
+      .catch(error => console.log(error));
   }
 
   editTable(cellInfo) {
@@ -73,7 +71,6 @@ class TripsData extends Component {
     //   cellInfo.row[cellInfo.column.id]
     // );
     let dollarSign;
-
     const findEditableRow = this.state.editableRowIndex.find(
       row => row === cellInfo.index
     );
@@ -187,10 +184,9 @@ class TripsData extends Component {
         }
         memo += Number(value);
       } else {
-
         let amount = trip[column.id];
-        if(typeof(trip[column.id]) === 'string'){
-          amount = parseFloat(trip[column.id].replace(/,/g,''))
+        if (typeof trip[column.id] === "string") {
+          amount = parseFloat(trip[column.id].replace(/,/g, ""));
         }
 
         memo += amount;
@@ -199,13 +195,12 @@ class TripsData extends Component {
       return memo;
     }, 0);
 
-
     if (dollarSign || column.id === "amount") {
-      if(column.id === 'dollarPerMile'){
+      if (column.id === "dollarPerMile") {
         return "$" + Number((total / 3).toFixed(2)).toLocaleString();
       }
       return "$" + Number(total.toFixed(0)).toLocaleString();
-    }else if(column.id === 'dieselPrice'){
+    } else if (column.id === "dieselPrice") {
       return "$" + Number((total / 3).toFixed(2)).toLocaleString();
     }
 
@@ -238,7 +233,9 @@ class TripsData extends Component {
   }
 
   createColumns() {
-    // console.log('TripsData createColumns: ', this.state)
+    console.log("TripsData createColumns: ", this.props);
+    const { mpg, dispatchPercent } = this.props;
+
     return [
       {
         Header: "Date",
@@ -315,8 +312,8 @@ class TripsData extends Component {
         show: true,
         accessor: d => {
           let amount = d.amount;
-          if(typeof(d.amount) === 'string')
-            amount = parseFloat(d.amount.replace(/,/g,''))
+          if (typeof d.amount === "string")
+            amount = parseFloat(d.amount.replace(/,/g, ""));
           let dollarPerMile =
             Number(amount) / (Number(d.loadedMiles) + Number(d.emptyMiles));
           dollarPerMile = isNaN(dollarPerMile) ? null : dollarPerMile;
@@ -344,7 +341,7 @@ class TripsData extends Component {
         show: true,
         accessor: d => {
           let fuelCost =
-            ((Number(d.loadedMiles) + Number(d.emptyMiles)) / this.state.mpg) *
+            ((Number(d.loadedMiles) + Number(d.emptyMiles)) / Number(mpg)) *
             Number(d.dieselPrice);
 
           fuelCost = isNaN(fuelCost) ? null : fuelCost;
@@ -386,10 +383,10 @@ class TripsData extends Component {
         show: true,
         accessor: d => {
           let amount = d.amount;
-          if(typeof(d.amount) === 'string')
-            amount = parseFloat(d.amount.replace(/,/g,''))
+          if (typeof d.amount === "string")
+            amount = parseFloat(d.amount.replace(/,/g, ""));
 
-          let dispatchFee = Number(amount) * this.state.dispatchFee;
+          let dispatchFee = Number(amount) * Number(dispatchPercent);
 
           dispatchFee = isNaN(dispatchFee) ? null : dispatchFee;
 
@@ -458,15 +455,15 @@ class TripsData extends Component {
         show: true,
         accessor: d => {
           let amount = d.amount;
-          if(typeof(d.amount) === 'string')
-            amount = parseFloat(d.amount.replace(/,/g,''))
+          if (typeof d.amount === "string")
+            amount = parseFloat(d.amount.replace(/,/g, ""));
 
           let totalExpenses =
-            ((Number(d.loadedMiles) + Number(d.emptyMiles)) / this.state.mpg) *
+            ((Number(d.loadedMiles) + Number(d.emptyMiles)) / Number(mpg)) *
               Number(d.dieselPrice) +
             (Number(d.loadedMiles) + Number(d.emptyMiles)) *
               this.state.driverPay +
-            Number(amount) * this.state.dispatchFee +
+            Number(amount) * Number(dispatchPercent) +
             Number(d.lumper) +
             Number(d.detention) +
             Number(d.detentionDriverPay) +
@@ -493,16 +490,16 @@ class TripsData extends Component {
         show: true,
         accessor: d => {
           let amount = d.amount;
-          if(typeof(d.amount) === 'string')
-            amount = parseFloat(d.amount.replace(/,/g,''))
+          if (typeof d.amount === "string")
+            amount = parseFloat(d.amount.replace(/,/g, ""));
 
           let profit =
             amount -
-            (((Number(d.loadedMiles) + Number(d.emptyMiles)) / this.state.mpg) *
+            (((Number(d.loadedMiles) + Number(d.emptyMiles)) / Number(mpg)) *
               Number(d.dieselPrice) +
               (Number(d.loadedMiles) + Number(d.emptyMiles)) *
                 this.state.driverPay +
-              Number(amount) * this.state.dispatchFee +
+              Number(amount) * Number(dispatchPercent) +
               Number(d.lumper) +
               Number(d.detention) +
               Number(d.detentionDriverPay) +
@@ -528,7 +525,14 @@ class TripsData extends Component {
         show: true,
         Cell: ({ row }) => {
           // console.log('row',row,row.confirmFilePath)
-          return(<a style={{ textDecoration: 'underline', cursor: 'pointer'}} onClick={()=>this.getConfirmDoc(row.confirmFilePath)}>pdf</a>)
+          return (
+            <a
+              style={{ textDecoration: "underline", cursor: "pointer" }}
+              onClick={() => this.getConfirmDoc(row.confirmFilePath)}
+            >
+              pdf
+            </a>
+          );
         }
       },
       {
@@ -538,36 +542,36 @@ class TripsData extends Component {
         minWidth: 200,
         show: true,
         Cell: row => {
+          const editableRow = this.state.editableRowIndex.filter(
+            editableRow => editableRow === row.index
+          );
+          let editBtnColor = "secondary";
+          let editBtnName = "Edit";
 
-          const editableRow =
-            this.state.editableRowIndex.filter(editableRow => editableRow === row.index)
-          let editBtnColor = 'secondary';
-          let editBtnName = 'Edit';
-
-          if(editableRow.length > 0){
-            editBtnName = 'Editing...';
-            editBtnColor = 'primary';
+          if (editableRow.length > 0) {
+            editBtnName = "Editing...";
+            editBtnColor = "primary";
           }
 
-          return (<div>
-            <Button
-              variant="contained"
-              color={editBtnColor}
-              onClick={() => this.editRow(row)}
-            >
-              {editBtnName}
-            </Button>&nbsp;
-
-            <Button
-              variant="contained"
-              color='secondary'
-              onClick={() => this.deleteRow(row)}
-            >
-              Delete
-            </Button>
-          </div>)
+          return (
+            <div>
+              <Button
+                variant="contained"
+                color={editBtnColor}
+                onClick={() => this.editRow(row)}
+              >
+                {editBtnName}
+              </Button>&nbsp;
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => this.deleteRow(row)}
+              >
+                Delete
+              </Button>
+            </div>
+          );
         }
-
       }
     ];
   }
@@ -576,7 +580,7 @@ class TripsData extends Component {
     // const { data } = this.state;
     const { trip } = this.props;
 
-    console.log("this.state: props ", this.props);
+    // console.log("this props ", this.props);
 
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();
@@ -585,7 +589,7 @@ class TripsData extends Component {
         <div>
           <Button
             variant="contained"
-            color='primary'
+            color="primary"
             onClick={this.addEmptyRow}
           >
             Add
@@ -598,6 +602,7 @@ class TripsData extends Component {
             onColumnUpdate={this.onColumnUpdate}
           />
           <div>&nbsp;</div>
+          <InputVariables />
         </div>
         <ReactTable
           data={trip}
@@ -618,15 +623,27 @@ class TripsData extends Component {
 
 function mapStateToProps({ load }) {
   return {
-    trip: load.trip
-  }
+    trip: load.trip,
+    mpg: load.inputVariable.mpg,
+    dispatchPercent: load.inputVariable.dispatchPercent
+  };
 }
 
-function mapDispatchToProps(dispatch){
-  return bindActionCreators({
-    getTrip: loadActions.getTrip,
-    setTrip: loadActions.setTrip
-  }, dispatch)
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    {
+      getTrip: loadActions.getTrip,
+      setTrip: loadActions.setTrip
+    },
+    dispatch
+  );
 }
 
-export default withStyles(styles, {withTheme: true})(withRouter(connect(mapStateToProps, mapDispatchToProps)(TripsData)));
+export default withStyles(styles, { withTheme: true })(
+  withRouter(
+    connect(
+      mapStateToProps,
+      mapDispatchToProps
+    )(TripsData)
+  )
+);
