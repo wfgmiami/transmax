@@ -14,7 +14,11 @@ if (process.env.NODE_ENV === 'production') {
     app.get('*', function(req, res) {
       res.sendFile(path.join(__dirname, '../../','client/build', 'index.html'));
     });
-    app.use('/api', require('./routes'));
+
+    app.get('/api', function(req, res) {
+        res.sendFile(path.join(__dirname, '../../','client/build', 'index.html'));
+    });
+
 }
 
 // Routes that will be accessed via AJAX should be prepended with
@@ -36,9 +40,9 @@ app.use(function (req, res, next) {
     }
 });
 
-// app.get('/*', function (req, res) {
-//     res.sendFile(app.get('indexHTMLPath'));
-// });
+app.get('/*', function (req, res) {
+    res.sendFile(app.get('indexHTMLPath'));
+});
 
 // Error catching endware.
 app.use(function (err, req, res, next) {
