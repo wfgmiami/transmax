@@ -8,7 +8,7 @@ export function getAuthentication() {
 }
 
 export function setAuthentication(auth) {
-  console.log('set auth called ', auth)
+  console.log("auth.actions called ", auth);
   return {
     type: SET_AUTH,
     auth

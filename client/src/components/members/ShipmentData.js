@@ -2,39 +2,26 @@ import React, { Component } from "react";
 import ReactTable from "react-table";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import AlarmIcon from "@material-ui/icons/Reorder";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
-import axios from "axios";
 import "react-table/react-table.css";
 import { Datatable } from "./Datatable";
 import { tripsConfig } from "../../configs/tripsConfig";
 import ColumnChooser from "./ColumnChooser.js";
-import SideMenu from "./SideMenu";
-import MenuButton from "./MenuButton";
-import Inputs from "./Inputs";
-import AddSaveBtn from "./AddSaveBtn";
+import axios from "axios";
 
 import * as loadActions from "../../store/actions/load";
+import InputVariables from "./InputVariables";
+import SideMenu from "./SideMenu";
 
 const copyOfDatable = [].concat(Datatable);
 
 const styles = theme => ({
-  root: {
-    flexGrow: 1
-  },
-  grow: {
-    flexGrow: 1
-  },
-  toolbar: {
-    background: "#7D818C"
-  }
+  root: {}
 });
 
-class TripsData extends Component {
+class ShipmentsData extends Component {
   constructor() {
     super();
     this.state = {
@@ -185,8 +172,7 @@ class TripsData extends Component {
   }
 
   calculateTotal({ data, column }) {
-    // console.log("TripsData calculateTotal data", data, "column", column);
-    const tripsCount = data.length;
+    // console.log("....data",data, "column", column);
     let dollarSign = false;
     let value;
 
@@ -212,15 +198,13 @@ class TripsData extends Component {
       return memo;
     }, 0);
 
-    if (dollarSign || column.id === "amount" || column.id === "toll") {
+    if (dollarSign || column.id === "amount") {
       if (column.id === "dollarPerMile") {
-        return "$" + Number((total / tripsCount).toFixed(2)).toLocaleString();
+        return "$" + Number((total / 3).toFixed(2)).toLocaleString();
       }
       return "$" + Number(total.toFixed(0)).toLocaleString();
     } else if (column.id === "dieselPrice") {
-      return "$" + Number((total / tripsCount).toFixed(2)).toLocaleString();
-    } else if (column.id === "bookDate") {
-      return `Total Trips: ${tripsCount}`;
+      return "$" + Number((total / 3).toFixed(2)).toLocaleString();
     }
 
     return Number(Number(total).toFixed(0)).toLocaleString();
@@ -230,7 +214,7 @@ class TripsData extends Component {
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();
     // console.log("onColumnUpdate index ", index, "...", columns[index]);
-    this.setState(
+    this.props.setTrip(
       prevState => {
         const columns1 = [];
         columns1.push(...columns);
@@ -258,7 +242,6 @@ class TripsData extends Component {
     return [
       {
         Header: "Date",
-        Footer: this.calculateTotal,
         accessor: "bookDate",
         show: true,
         Cell: this.editTable
@@ -597,25 +580,18 @@ class TripsData extends Component {
 
   render() {
     // const { data } = this.state;
-    const { trip, classes } = this.props;
+    const { trip } = this.props;
 
     // console.log("TripsData.js this.props ", this.props);
 
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();
     return (
-      <div className={classes.root}>
-        <Toolbar className={classes.toolbar}>
+      <div>
+        <div>
           <SideMenu />
-          <AddSaveBtn saveRows={this.saveRows} addEmptyRow={this.addEmptyRow} />
-          &nbsp;
-          <ColumnChooser
-            columns={columns}
-            onColumnUpdate={this.onColumnUpdate}
-          />
-          <div>&nbsp;</div>
-          <Inputs />
-        </Toolbar>
+          <InputVariables />
+        </div>
 
         <ReactTable
           data={trip}
@@ -659,6 +635,6 @@ export default withStyles(styles, { withTheme: true })(
     connect(
       mapStateToProps,
       mapDispatchToProps
-    )(TripsData)
+    )(ShipmentsData)
   )
 );

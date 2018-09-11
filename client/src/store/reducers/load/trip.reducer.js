@@ -4,7 +4,7 @@ import { tripsConfig } from '../../../configs/tripsConfig.js';
 const initialState = tripsConfig;
 
 const trips = ( state = initialState, action ) => {
-  console.log('trip reducer actionObj',action,' ', [...state,{...action.trip}])
+  console.log('trip.reducer actionObj',action,' ', [...state,{...action.trip}])
   switch( action.type ){
 
     case Actions.GET_TRIP:

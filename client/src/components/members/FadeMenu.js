@@ -51,6 +51,7 @@ class FadeMenu extends React.Component {
         >
           <MenuItem onClick={this.handleClose}>Trips</MenuItem>
           <MenuItem onClick={this.handleClose}>Shipments</MenuItem>
+          <MenuItem onClick={this.handleClose}>Companies</MenuItem>
           <MenuItem onClick={this.handleClose}>Trucks</MenuItem>
           <MenuItem onClick={this.handleClose}>Brokers</MenuItem>
           <MenuItem onClick={this.handleClose}>Drivers</MenuItem>

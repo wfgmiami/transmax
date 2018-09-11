@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Nav from './components/public/Nav';
 import AppMenuBar from './components/members/AppMenuBar';
-
+import AppHolder from "./components/members/AppHolder";
 
 const styles = theme => ({
     layoutRoot: {}
@@ -30,7 +30,7 @@ class Home extends Component {
 
             <div>
                 { authenticated ?
-                  <AppMenuBar />
+                    <AppHolder />
                 :
                     <div>
                         <Nav/>
