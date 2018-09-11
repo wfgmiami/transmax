@@ -2,7 +2,11 @@ import React, {Component} from 'react';
 import {renderRoutes} from 'react-router-config';
 import {withStyles} from '@material-ui/core/styles';
 import axios from 'axios';
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import Nav from './components/public/Nav';
+import AppMenuBar from './components/members/AppMenuBar';
+
 
 const styles = theme => ({
     layoutRoot: {}
@@ -10,8 +14,6 @@ const styles = theme => ({
 
 class Home extends Component {
     state = {
-        candidates: [],
-        applySuccess: false,
         contactFormSend: false
     }
 
@@ -21,20 +23,38 @@ class Home extends Component {
         .then(() => this.setState({ contactFormSend: true }))
     }
 
-    render()
-    {
+    render() {
+        const { authenticated } = this.props.auth;
+        console.log("props app page", this.props);
         return (
-                <div>
-                    <Nav/>
-                    {renderRoutes(this.props.routes,
-                        { applySuccess: this.state.applySuccess ,
-                          onCreate: this.handleCandidateCreate,
-                          onFormSend: this.handleContactFormSend,
-                          formSend: this.state.contactFormSend
-                        })}
-                </div>
+
+            <div>
+                { authenticated ?
+                  <AppMenuBar />
+                :
+                    <div>
+                        <Nav/>
+                        { renderRoutes(this.props.routes,
+                            { onFormSend: this.handleContactFormSend,
+                                formSend: this.state.contactFormSend }) }
+                    </div>
+                }
+            </div>
         )
     }
 }
 
-export default withStyles(styles, {withTheme: true})(Home);
+function mapStateToProps({ authentication }) {
+    return {
+        auth: authentication.auth
+    };
+}
+
+export default withStyles(styles, { withTheme: true })(
+    withRouter(
+      connect(
+        mapStateToProps,
+        null
+      )(Home)
+    )
+  );

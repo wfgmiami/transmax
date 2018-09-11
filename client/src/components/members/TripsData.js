@@ -6,7 +6,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import "react-table/react-table.css";
-import { Datatable, EmptyRow } from "./Datatable";
+import { Datatable } from "./Datatable";
+import { tripsConfig } from '../../configs/tripsConfig';
 import ColumnChooser from "./ColumnChooser.js";
 import axios from "axios";
 
@@ -25,10 +26,7 @@ class TripsData extends Component {
     this.state = {
       data: copyOfDatable,
       columns: [],
-      driverPay: 0.55,
       editableRowIndex: [],
-      numPages: null,
-      pageNumber: 1
     };
 
     this.editTable = this.editTable.bind(this);
@@ -46,6 +44,7 @@ class TripsData extends Component {
   }
 
   getConfirmDoc(docLink) {
+    console.log('doc link', docLink)
     axios
       .post(
         "/api/pdf",
@@ -64,12 +63,12 @@ class TripsData extends Component {
   }
 
   editTable(cellInfo) {
-    // console.log(
-    //   "cell info........",
-    //   cellInfo,
-    //   "id: ",
-    //   cellInfo.row[cellInfo.column.id]
-    // );
+    console.log(
+      "cell info........",
+      cellInfo,
+      "id: ",
+      cellInfo.row[cellInfo.column.id]
+    );
     let dollarSign;
     const findEditableRow = this.state.editableRowIndex.find(
       row => row === cellInfo.index
@@ -101,14 +100,14 @@ class TripsData extends Component {
         contentEditable
         suppressContentEditableWarning
         onBlur={e => {
-          const data = [...this.state.data];
+          const data = [...this.props.trip];
           data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
-          this.setState({ data });
+          this.props.updateTrip({ data });
         }}
         dangerouslySetInnerHTML={{
           __html:
             // dollarSign +
-            this.state.data[cellInfo.index][cellInfo.column.id].toLocaleString()
+            this.props.trip[cellInfo.index][cellInfo.column.id].toLocaleString()
         }}
       />
     ) : (
@@ -116,14 +115,14 @@ class TripsData extends Component {
         style={{ backgroundColor: "#fafafa" }}
         suppressContentEditableWarning
         onBlur={e => {
-          const data = [...this.state.data];
+          const data = [...this.props.trip];
           data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
-          this.setState({ data });
+          this.props.updateTrip({ data });
         }}
         dangerouslySetInnerHTML={{
           __html:
             dollarSign +
-            this.state.data[cellInfo.index][cellInfo.column.id].toLocaleString()
+            this.props.trip[cellInfo.index][cellInfo.column.id].toLocaleString()
         }}
       />
     );
@@ -149,10 +148,10 @@ class TripsData extends Component {
   }
 
   deleteRow(row) {
-    this.setState({
+    this.props.setTrip({
       data: [
-        ...this.state.data.slice(0, row.index),
-        ...this.state.data.slice(row.index + 1)
+        ...this.props.trip.slice(0, row.index),
+        ...this.props.trip.slice(row.index + 1)
       ]
     });
   }
@@ -162,10 +161,12 @@ class TripsData extends Component {
   }
 
   addEmptyRow() {
-    let newEmptyRow = Object.assign({}, EmptyRow);
-    this.setState({
-      data: this.state.data.concat(newEmptyRow)
-    });
+    let emptyRow = Object.assign({}, ...tripsConfig);
+    console.log('empty row ', emptyRow)
+    this.props.setTrip( emptyRow );
+    // this.props.setTrip({
+    //   data: this.props.trip.concat(emptyRow)
+    // });
   }
 
   calculateTotal({ data, column }) {
@@ -211,7 +212,7 @@ class TripsData extends Component {
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();
     // console.log("onColumnUpdate index ", index, "...", columns[index]);
-    this.setState(
+    this.props.setTrip(
       prevState => {
         const columns1 = [];
         columns1.push(...columns);
@@ -580,7 +581,7 @@ class TripsData extends Component {
     // const { data } = this.state;
     const { trip } = this.props;
 
-    // console.log("this props ", this.props);
+    console.log("this props ", this.props);
 
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();
@@ -633,7 +634,8 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
       getTrip: loadActions.getTrip,
-      setTrip: loadActions.setTrip
+      setTrip: loadActions.setTrip,
+      updateTrip: loadActions.updateTrip
     },
     dispatch
   );

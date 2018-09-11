@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export const GET_TRIP = 'GET TRIP';
 export const SET_TRIP = 'SET TRIP';
+export const UPDATE_TRIP = 'UPDATE TRIP';
 // export const SUCCESS_POST_TRIP = 'SUCCESS POST TRIP';
 
 export function getTrip(){
@@ -18,14 +19,28 @@ export function getTrip(){
 }
 
 export function setTrip(trip){
+console.log('set trip called', trip)
+    return {
+        type: SET_TRIP,
+        trip
+    };
 
-    const postTrip = axios.post('/api/trip',{ ...trip });
-    return (dispatch) =>
-        postTrip.then((response) =>
-            dispatch({
-                type: SET_TRIP,
-                payload: response.data
-            })
-        );
+
+
+    // const postTrip = axios.post('/api/trip',{ ...trip });
+    // return (dispatch) =>
+    //     postTrip.then((response) =>
+    //         dispatch({
+    //             type: SET_TRIP,
+    //             payload: response.data
+    //         })
+    //     );
 }
 
+export function updateTrip(trips){
+    console.log('UPDATE trip called', trips)
+    return {
+        type: UPDATE_TRIP,
+        trips
+    };
+}

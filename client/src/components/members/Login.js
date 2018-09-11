@@ -4,7 +4,12 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import classNames from 'classnames';
 import axios from 'axios';
-import Trips from './Trips';
+import MemberPage from './MemberPage';
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { withRouter } from "react-router-dom";
+
+import * as authActions from "../../store/actions/authentication";
 
 const styles = theme => ({
  root: {
@@ -45,7 +50,6 @@ class Login extends Component {
           userName: "",
           password: "",
         },
-        authenticated: false
       };
 
     handleSignin = () => {
@@ -56,8 +60,10 @@ class Login extends Component {
         .then(data => {
             // console.log('data login: ', data)
             if(data.authenticated){
-                this.setState({ authenticated: true })
+                this.props.setAuth({ authenticated: true})
+
             }else{
+                this.props.setAuth({ authenticated: false})
                 alert("Invalid Login! Try Again.")
             }
         })
@@ -75,13 +81,11 @@ class Login extends Component {
     }
 
     render(){
-        const {classes} = this.props;
-        const authenticated = this.state.authenticated;
+        const { classes } = this.props;
 
         return (
             <div>
-                { !authenticated ?
-                (<div className={classNames(classes.root, classes.flexContainer)}>
+                <div className={classNames(classes.root, classes.flexContainer)}>
 
                     <div className={classes.flexSection}>
                         <h2 className="py-16">MEMBER LOGIN</h2><br/>
@@ -114,10 +118,7 @@ class Login extends Component {
                             SIGN IN
                         </Button>
                     </div>
-                </div>)
-                :
-                <Trips/>}
-
+                </div>
             </div>
         );
 
@@ -125,4 +126,27 @@ class Login extends Component {
 
 }
 
-export default withStyles(styles)(Login);
+// function mapStateToProps({ navigation }) {
+//     return {
+//       nav: navigation.nav
+//     };
+//   }
+
+  function mapDispatchToProps(dispatch) {
+    return bindActionCreators(
+      {
+        getAuth: authActions.getAuthentication,
+        setAuth: authActions.setAuthentication
+      },
+      dispatch
+    );
+  }
+
+  export default withStyles(styles, { withTheme: true })(
+    withRouter(
+      connect(
+        null,
+        mapDispatchToProps
+      )(Login)
+    )
+  )

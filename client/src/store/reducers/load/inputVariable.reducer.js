@@ -1,6 +1,6 @@
 import * as Actions from "../../actions/index";
 
-const initialState = { mpg: "", dispatchPercent: "" };
+const initialState = { mpg: "6", dispatchPercent: "0.1" };
 
 const inputVariable = (state = initialState, action) => {
   switch (action.type) {

@@ -2,13 +2,13 @@ import { combineReducers } from "redux";
 import application from "./application";
 import load from "./load";
 import navigation from "./navigation";
-// import message from './message.reducer';
+import authentication from './authentication';
 
 const appReducers = combineReducers({
   application,
   load,
-  navigation
-  // message
+  navigation,
+  authentication
 });
 
 export default appReducers;

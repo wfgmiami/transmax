@@ -5,7 +5,7 @@ const DataTypes = db.Sequelize;
 
 const Trip = db.define('trip', {
     bookDate: {
-        type: DataTypes.DATE,
+        type: DataTypes.STRING,
         allowNull: false
 
     },
