@@ -7,6 +7,8 @@ const app = express();
 // function located at server/app/configure/index.js
 require('./configure')(app);
 
+app.use('/api', require('./routes'));
+
 if (process.env.NODE_ENV === 'production') {
 
     // Serve any static files
@@ -16,9 +18,9 @@ if (process.env.NODE_ENV === 'production') {
     //     res.sendFile(path.join(__dirname, '../../','client/build'))})
 
     // app.get('/api', require(path.join(__dirname,'routes')));
-    app.get('/api/*',function(req, res) {
-        res.sendFile(path.join(__dirname, '../../','client/build', 'index.html'));
-    });
+    // app.get('/api/*',function(req, res) {
+    //     res.sendFile(path.join(__dirname, '../../','client/build', 'index.html'));
+    // });
     // below works
     // app.get('/api/trip',(req,res,next) => { res.send('hello')})
     // Handle React routing, return all requests to React app
@@ -29,7 +31,7 @@ if (process.env.NODE_ENV === 'production') {
 
 // Routes that will be accessed via AJAX should be prepended with
 // /api so they are isolated from our GET /* wildcard.
-app.use('/api', require('./routes'));
+
 
 /*
  This middleware will catch any URLs resembling a file extension
