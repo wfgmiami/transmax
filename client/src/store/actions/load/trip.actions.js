@@ -7,20 +7,20 @@ export const UPDATE_TRIP = "UPDATE TRIP";
 export const SAVE_TRIPS = "SAVE TRIPS";
 
 export function getTrip() {
-  return dispatch =>
-    dispatch({
-      type: GET_TRIP,
-      payload: Datatable
-    });
-  // const getTrip = axios.get("/api/trip");
-
   // return dispatch =>
-  //   getTrip.then(response =>
-  //     dispatch({
-  //       type: GET_TRIP,
-  //       payload: response.data
-  //     })
-  //   );
+  //   dispatch({
+  //     type: GET_TRIP,
+  //     payload: Datatable
+  //   });
+  const getTrip = axios.get("/api/trip");
+
+  return dispatch =>
+    getTrip.then(response =>
+      dispatch({
+        type: GET_TRIP,
+        payload: response.data
+      })
+    );
 }
 
 export function setTrip(trip) {

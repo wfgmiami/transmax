@@ -542,7 +542,7 @@ class TripsData extends Component {
         accessor: "confirmFilePath",
         show: true,
         Cell: ({ row }) => {
-          // console.log('row',row,row.confirmFilePath)
+          console.log('row',row,row.confirmFilePath)
           return (
             <a
               style={{ textDecoration: "underline", cursor: "pointer" }}
