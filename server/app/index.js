@@ -14,11 +14,11 @@ if (process.env.NODE_ENV === 'production') {
     // app.get('/api', function(req, res) {
     //     res.sendFile(path.join(__dirname, '../../','client/build'))})
 
-    app.get('/api', require(path.join(__dirname,'routes')));
+    // app.get('/api', require(path.join(__dirname,'routes')));
     // app.get('/api',function(req, res) {
     //     res.sendFile(path.join(__dirname, '../../','client/build', 'index.html'));
     // });
-
+    app.get('/api/trip',(req,res,next) => { res.send('hello')})
     // Handle React routing, return all requests to React app
     app.get('*', function(req, res) {
       res.sendFile(path.join(__dirname, '../../','client/build', 'index.html'));
