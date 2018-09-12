@@ -3,12 +3,13 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
-import DraftsIcon from "@material-ui/icons/Drafts";
+import Brokers from "@material-ui/icons/ViewList";
 import StarIcon from "@material-ui/icons/Star";
 import SendIcon from "@material-ui/icons/Send";
-import MailIcon from "@material-ui/icons/Mail";
-import DeleteIcon from "@material-ui/icons/Delete";
-import ReportIcon from "@material-ui/icons/Report";
+import TruckIcon from "@material-ui/icons/LocalShipping";
+import Drivers from "@material-ui/icons/Person";
+import Financials from "@material-ui/icons/AccountBalance";
+import Logout from "@material-ui/icons/NetworkLocked";
 
 export const viewItems = (
   <div>
@@ -32,7 +33,7 @@ export const viewItems = (
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <DraftsIcon />
+        <Brokers />
       </ListItemIcon>
       <ListItemText primary="Brokers" />
     </ListItem>
@@ -43,25 +44,25 @@ export const otherViewItems = (
   <div>
     <ListItem button>
       <ListItemIcon>
-        <MailIcon />
+        <TruckIcon />
       </ListItemIcon>
       <ListItemText primary="Trucks" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <DeleteIcon />
+        <Drivers />
       </ListItemIcon>
       <ListItemText primary="Drivers" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <ReportIcon />
+        <Financials />
       </ListItemIcon>
       <ListItemText primary="Financials" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <ReportIcon />
+        <Logout />
       </ListItemIcon>
       <ListItemText primary="Log Out" />
     </ListItem>

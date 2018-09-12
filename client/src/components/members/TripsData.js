@@ -201,7 +201,8 @@ class TripsData extends Component {
         memo += Number(value);
       } else {
         let amount = trip[column.id];
-        if (typeof trip[column.id] === "string") {
+        if (amount === "") amount = 0;
+        if (typeof amount === "string") {
           amount = parseFloat(trip[column.id].replace(/,/g, ""));
         }
 
@@ -542,7 +543,7 @@ class TripsData extends Component {
         accessor: "confirmFilePath",
         show: true,
         Cell: ({ row }) => {
-          console.log('row',row,row.confirmFilePath)
+          console.log("row", row, row.confirmFilePath);
           return (
             <a
               style={{ textDecoration: "underline", cursor: "pointer" }}

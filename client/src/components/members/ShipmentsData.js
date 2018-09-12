@@ -2,23 +2,27 @@ import React, { Component } from "react";
 import ReactTable from "react-table";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
+import Toolbar from "@material-ui/core/Toolbar";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import "react-table/react-table.css";
 import { Datatable } from "./Datatable";
-import { tripsConfig } from "../../configs/tripsConfig";
+import { shipmentsConfig } from "../../configs/shipmentsConfig";
 import ColumnChooser from "./ColumnChooser.js";
+import SideMenu from "./SideMenu";
+import AddSaveBtn from "./AddSaveBtn";
 import axios from "axios";
 
 import * as loadActions from "../../store/actions/load";
-import InputVariables from "./InputVariables";
-import SideMenu from "./SideMenu";
 
 const copyOfDatable = [].concat(Datatable);
 
 const styles = theme => ({
-  root: {}
+  root: {},
+  toolbar: {
+    background: "#7D818C"
+  }
 });
 
 class ShipmentsData extends Component {
@@ -42,7 +46,7 @@ class ShipmentsData extends Component {
   }
 
   componentDidMount() {
-    this.props.getTrip();
+    this.props.getShipment();
   }
 
   getConfirmDoc(docLink) {
@@ -75,26 +79,7 @@ class ShipmentsData extends Component {
     const findEditableRow = this.state.editableRowIndex.find(
       row => row === cellInfo.index
     );
-
-    switch (cellInfo.column.id) {
-      case "amount":
-      case "dieselPrice":
-      case "lumper":
-      case "detention":
-      case "detentionDriverPay":
-      case "lateFee":
-      case "toll":
-      case "roadMaintenance":
-      case "otherExpenses":
-        dollarSign = "$";
-        break;
-      default:
-        dollarSign = "";
-    }
-
-    // if (cellInfo.column.id === "amount") {
-    //   dollarSign = "$";
-    // }
+    dollarSign = cellInfo.column.id === "payment" ? "$" : "";
 
     return findEditableRow || findEditableRow === 0 ? (
       <div
@@ -102,14 +87,16 @@ class ShipmentsData extends Component {
         contentEditable
         suppressContentEditableWarning
         onBlur={e => {
-          const data = [...this.props.trip];
+          const data = [...this.props.shipment];
           data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
-          this.props.updateTrip({ data });
+          this.props.updateShipment({ data });
         }}
         dangerouslySetInnerHTML={{
           __html:
             // dollarSign +
-            this.props.trip[cellInfo.index][cellInfo.column.id].toLocaleString()
+            this.props.shipment[cellInfo.index][
+              cellInfo.column.id
+            ].toLocaleString()
         }}
       />
     ) : (
@@ -117,14 +104,16 @@ class ShipmentsData extends Component {
         style={{ backgroundColor: "#fafafa" }}
         suppressContentEditableWarning
         onBlur={e => {
-          const data = [...this.props.trip];
+          const data = [...this.props.shipment];
           data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
-          this.props.updateTrip({ data });
+          this.props.updateShipment({ data });
         }}
         dangerouslySetInnerHTML={{
           __html:
             dollarSign +
-            this.props.trip[cellInfo.index][cellInfo.column.id].toLocaleString()
+            this.props.shipment[cellInfo.index][
+              cellInfo.column.id
+            ].toLocaleString()
         }}
       />
     );
@@ -149,23 +138,23 @@ class ShipmentsData extends Component {
   }
 
   deleteRow(row) {
-    this.props.updateTrip({
+    this.props.updateShipment({
       data: [
-        ...this.props.trip.slice(0, row.index),
-        ...this.props.trip.slice(row.index + 1)
+        ...this.props.shipment.slice(0, row.index),
+        ...this.props.shipment.slice(row.index + 1)
       ]
     });
   }
 
   saveRows() {
-    console.log("TripsData.js saveRows this.props", this.props);
-    this.props.saveTrips(this.props.trip);
+    console.log("ShipmentsData.js saveRows this.props", this.props);
+    this.props.saveShipments(this.props.trip);
   }
 
   addEmptyRow() {
-    let emptyRow = Object.assign({}, ...tripsConfig);
+    let emptyRow = Object.assign({}, ...shipmentsConfig);
     // console.log("TripsData.js addEmptyRow ", emptyRow);
-    this.props.setTrip(emptyRow);
+    this.props.setShipment(emptyRow);
     // this.props.setTrip({
     //   data: this.props.trip.concat(emptyRow)
     // });
@@ -174,22 +163,24 @@ class ShipmentsData extends Component {
   calculateTotal({ data, column }) {
     // console.log("....data",data, "column", column);
     let dollarSign = false;
+    const shipmentsCount = data.length;
     let value;
 
-    const total = data.reduce((memo, trip) => {
+    const total = data.reduce((memo, shipment) => {
       // console.log("....info", trip,column.id, trip[column.id]);
 
-      if (typeof trip[column.id] === "object") {
-        value = trip[column.id].props.dangerouslySetInnerHTML.__html;
+      if (typeof shipment[column.id] === "object") {
+        value = shipment[column.id].props.dangerouslySetInnerHTML.__html;
         if (typeof value === "string" && value.substring(0, 1) === "$") {
           dollarSign = true;
           value = value.slice(1);
         }
         memo += Number(value);
       } else {
-        let amount = trip[column.id];
-        if (typeof trip[column.id] === "string") {
-          amount = parseFloat(trip[column.id].replace(/,/g, ""));
+        let amount = shipment[column.id];
+        if (amount === "") amount = 0;
+        if (typeof amount === "string") {
+          amount = parseFloat(shipment[column.id].replace(/,/g, ""));
         }
 
         memo += amount;
@@ -198,13 +189,15 @@ class ShipmentsData extends Component {
       return memo;
     }, 0);
 
-    if (dollarSign || column.id === "amount") {
+    if (dollarSign || column.id === "payment") {
       if (column.id === "dollarPerMile") {
-        return "$" + Number((total / 3).toFixed(2)).toLocaleString();
+        return (
+          "$" + Number((total / shipmentsCount).toFixed(2)).toLocaleString()
+        );
       }
       return "$" + Number(total.toFixed(0)).toLocaleString();
-    } else if (column.id === "dieselPrice") {
-      return "$" + Number((total / 3).toFixed(2)).toLocaleString();
+    } else if (column.id === "bookDate") {
+      return `Total Trips: ${shipmentsCount}`;
     }
 
     return Number(Number(total).toFixed(0)).toLocaleString();
@@ -213,8 +206,8 @@ class ShipmentsData extends Component {
   onColumnUpdate(index) {
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();
-    // console.log("onColumnUpdate index ", index, "...", columns[index]);
-    this.props.setTrip(
+    console.log("onColumnUpdate index ", index, "...", columns[index]);
+    this.setState(
       prevState => {
         const columns1 = [];
         columns1.push(...columns);
@@ -236,26 +229,15 @@ class ShipmentsData extends Component {
   }
 
   createColumns() {
-    console.log("TripsData.js createColumns this.props: ", this.props);
-    const { mpg, dispatchPercent } = this.props;
+    console.log("ShipmentsData.js createColumns this.props: ", this.props);
 
     return [
       {
         Header: "Date",
+        Footer: this.calculateTotal,
         accessor: "bookDate",
         show: true,
-        Cell: this.editTable
-      },
-      {
-        Header: "Truck Number",
-        accessor: "truckNumber",
-        show: false,
-        Cell: this.editTable
-      },
-      {
-        Header: "Driver",
-        accessor: "driverName",
-        show: false,
+        borderRight: "2px solid rgba(0, 0, 0, 0.6)!important",
         Cell: this.editTable
       },
       {
@@ -268,45 +250,50 @@ class ShipmentsData extends Component {
         Header: "Broker",
         accessor: "brokerName",
         show: true,
+        minWidth: 160,
         Cell: this.editTable
       },
       {
-        Header: "Amount",
-        accessor: "amount",
+        Header: "Pick Up",
+        accessor: "pickUpCityState",
         show: true,
-        Footer: this.calculateTotal,
+        minWidth: 130,
         Cell: this.editTable
       },
       {
-        Header: "Loaded Miles",
-        accessor: "loadedMiles",
-        Footer: this.calculateTotal,
+        Header: "Drop Off",
+        accessor: "dropOffCityState",
         show: true,
+        minWidth: 130,
         Cell: this.editTable
       },
       {
-        Header: "Empty Miles",
-        Footer: this.calculateTotal,
-        accessor: "emptyMiles",
-        show: true,
+        Header: "PickUp",
+        accessor: "pickUpAddress",
+        show: false,
+        minWidth: 240,
         Cell: this.editTable
       },
       {
-        Header: "Mileage",
+        Header: "Destination",
+        accessor: "dropOffAddress",
+        show: false,
+        minWidth: 240,
+        Cell: this.editTable
+      },
+      {
+        Header: "Payment",
         Footer: this.calculateTotal,
-        id: "mileage",
         show: true,
-        accessor: d => {
-          const totalMiles = Number(d.loadedMiles) + Number(d.emptyMiles);
-
-          return (
-            <div
-              dangerouslySetInnerHTML={{
-                __html: totalMiles
-              }}
-            />
-          );
-        }
+        accessor: "payment",
+        Cell: this.editTable
+      },
+      {
+        Header: "Miles",
+        Footer: this.calculateTotal,
+        accessor: "miles",
+        show: true,
+        Cell: this.editTable
       },
       {
         Header: "$/Mile",
@@ -314,11 +301,10 @@ class ShipmentsData extends Component {
         id: "dollarPerMile",
         show: true,
         accessor: d => {
-          let amount = d.amount;
-          if (typeof d.amount === "string")
-            amount = parseFloat(d.amount.replace(/,/g, ""));
-          let dollarPerMile =
-            Number(amount) / (Number(d.loadedMiles) + Number(d.emptyMiles));
+          let payment = d.payment;
+          if (typeof d.payment === "string")
+            payment = parseFloat(d.payment.replace(/,/g, ""));
+          let dollarPerMile = Number(payment) / Number(d.miles);
           dollarPerMile = isNaN(dollarPerMile) ? null : dollarPerMile;
           return (
             <div
@@ -329,202 +315,29 @@ class ShipmentsData extends Component {
           );
         }
       },
-
       {
-        Header: "Diesel Price",
-        Footer: this.calculateTotal,
-        show: true,
-        accessor: "dieselPrice",
-        Cell: this.editTable
-      },
-      {
-        Header: "Fuel Cost",
-        Footer: this.calculateTotal,
-        id: "fuelCost",
-        show: true,
-        accessor: d => {
-          let fuelCost =
-            ((Number(d.loadedMiles) + Number(d.emptyMiles)) / Number(mpg)) *
-            Number(d.dieselPrice);
-
-          fuelCost = isNaN(fuelCost) ? null : fuelCost;
-
-          return (
-            <div
-              dangerouslySetInnerHTML={{
-                __html: "$" + Number(fuelCost).toFixed(0)
-              }}
-            />
-          );
-        }
-      },
-      {
-        Header: "Driver Pay",
-        Footer: this.calculateTotal,
-        id: "driverPay",
-        show: true,
-        accessor: d => {
-          let driverPay =
-            (Number(d.loadedMiles) + Number(d.emptyMiles)) *
-            this.state.driverPay;
-          driverPay = isNaN(driverPay) ? null : driverPay;
-
-          return (
-            <div
-              dangerouslySetInnerHTML={{
-                __html: "$" + Number(driverPay).toFixed(0)
-              }}
-            />
-          );
-        }
-      },
-      {
-        Header: "Dispatch Fee",
-        Footer: this.calculateTotal,
-        id: "dispatchFee",
-        show: true,
-        accessor: d => {
-          let amount = d.amount;
-          if (typeof d.amount === "string")
-            amount = parseFloat(d.amount.replace(/,/g, ""));
-
-          let dispatchFee = Number(amount) * Number(dispatchPercent);
-
-          dispatchFee = isNaN(dispatchFee) ? null : dispatchFee;
-
-          return (
-            <div
-              dangerouslySetInnerHTML={{
-                __html: "$" + Number(dispatchFee).toFixed(0)
-              }}
-            />
-          );
-        }
-      },
-      {
-        Header: "Lumper",
-        Footer: this.calculateTotal,
-        accessor: "lumper",
+        Header: "Commodity",
+        accessor: "commodity",
         show: false,
         Cell: this.editTable
       },
       {
-        Header: "Detention",
-        Footer: this.calculateTotal,
-        accessor: "detention",
+        Header: "Weight",
+        accessor: "weight",
         show: false,
         Cell: this.editTable
       },
       {
-        Header: "Detention Driver Pay",
-        Footer: this.calculateTotal,
-        accessor: "detentionDriverPay",
+        Header: "Trailer",
+        accessor: "trailer",
         show: false,
         Cell: this.editTable
-      },
-      {
-        Header: "Late Fee",
-        Footer: this.calculateTotal,
-        accessor: "lateFee",
-        show: false,
-        Cell: this.editTable
-      },
-      {
-        Header: "Toll",
-        Footer: this.calculateTotal,
-        accessor: "toll",
-        show: false,
-        Cell: this.editTable
-      },
-      {
-        Header: "Road Maintenance",
-        Footer: this.calculateTotal,
-        accessor: "roadMaintenance",
-        show: false,
-        Cell: this.editTable
-      },
-      {
-        Header: "Other Expenses",
-        Footer: this.calculateTotal,
-        accessor: "otherExpenses",
-        show: false,
-        Cell: this.editTable
-      },
-      {
-        Header: "Total Expenses",
-        Footer: this.calculateTotal,
-        id: "totalExpenses",
-        show: true,
-        accessor: d => {
-          let amount = d.amount;
-          if (typeof d.amount === "string")
-            amount = parseFloat(d.amount.replace(/,/g, ""));
-
-          let totalExpenses =
-            ((Number(d.loadedMiles) + Number(d.emptyMiles)) / Number(mpg)) *
-              Number(d.dieselPrice) +
-            (Number(d.loadedMiles) + Number(d.emptyMiles)) *
-              this.state.driverPay +
-            Number(amount) * Number(dispatchPercent) +
-            Number(d.lumper) +
-            Number(d.detention) +
-            Number(d.detentionDriverPay) +
-            Number(d.lateFee) +
-            Number(d.toll) +
-            Number(d.roadMaintenance) +
-            Number(d.otherExpenses);
-
-          totalExpenses = isNaN(totalExpenses) ? null : totalExpenses;
-
-          return (
-            <div
-              dangerouslySetInnerHTML={{
-                __html: "$" + Number(totalExpenses).toFixed(0)
-              }}
-            />
-          );
-        }
-      },
-      {
-        Header: "Profit",
-        Footer: this.calculateTotal,
-        id: "profit",
-        show: true,
-        accessor: d => {
-          let amount = d.amount;
-          if (typeof d.amount === "string")
-            amount = parseFloat(d.amount.replace(/,/g, ""));
-
-          let profit =
-            amount -
-            (((Number(d.loadedMiles) + Number(d.emptyMiles)) / Number(mpg)) *
-              Number(d.dieselPrice) +
-              (Number(d.loadedMiles) + Number(d.emptyMiles)) *
-                this.state.driverPay +
-              Number(amount) * Number(dispatchPercent) +
-              Number(d.lumper) +
-              Number(d.detention) +
-              Number(d.detentionDriverPay) +
-              Number(d.lateFee) +
-              Number(d.toll) +
-              Number(d.roadMaintenance) +
-              Number(d.otherExpenses));
-
-          profit = isNaN(profit) ? null : profit;
-
-          return (
-            <div
-              dangerouslySetInnerHTML={{
-                __html: "$" + Number(profit).toFixed(0)
-              }}
-            />
-          );
-        }
       },
       {
         Header: "Confirm Doc",
         accessor: "confirmFilePath",
         show: true,
+        minWidth: 80,
         Cell: ({ row }) => {
           // console.log('row',row,row.confirmFilePath)
           return (
@@ -580,21 +393,26 @@ class ShipmentsData extends Component {
 
   render() {
     // const { data } = this.state;
-    const { trip } = this.props;
+    const { shipment, classes } = this.props;
 
-    // console.log("TripsData.js this.props ", this.props);
+    // console.log("TripsData.js this.state ", this.state);
 
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();
     return (
-      <div>
-        <div>
+      <div className={classes.root}>
+        <Toolbar className={classes.toolbar}>
           <SideMenu />
-          <InputVariables />
-        </div>
+          <AddSaveBtn saveRows={this.saveRows} addEmptyRow={this.addEmptyRow} />
+          &nbsp;
+          <ColumnChooser
+            columns={columns}
+            onColumnUpdate={this.onColumnUpdate}
+          />
+        </Toolbar>
 
         <ReactTable
-          data={trip}
+          data={shipment}
           showPaginationBottom={true}
           columns={columns}
           defaultPageSize={10}
@@ -612,19 +430,17 @@ class ShipmentsData extends Component {
 
 function mapStateToProps({ load }) {
   return {
-    trip: load.trip,
-    mpg: load.inputVariable.mpg,
-    dispatchPercent: load.inputVariable.dispatchPercent
+    shipment: load.shipment
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
-      getTrip: loadActions.getTrip,
-      setTrip: loadActions.setTrip,
-      updateTrip: loadActions.updateTrip,
-      saveTrips: loadActions.saveTrips
+      getShipment: loadActions.getShipment,
+      setShipment: loadActions.setShipment,
+      updateShipment: loadActions.updateShipment,
+      saveShipment: loadActions.saveShipment
     },
     dispatch
   );

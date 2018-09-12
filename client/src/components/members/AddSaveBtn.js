@@ -6,12 +6,6 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import InputLabel from "@material-ui/core/InputLabel";
-import Input from "@material-ui/core/Input";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import TextField from "@material-ui/core/TextField";
 import AlarmIcon from "@material-ui/icons/Reorder";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
@@ -35,8 +29,14 @@ class AddSaveBtn extends React.Component {
     open: false
   };
 
-  handleChange = key => ({ target: { value } }) => {
-    this.props.setInputVariableValue({ [key]: value });
+  handleAddEmptyRow = () => {
+    this.props.addEmptyRow();
+    this.handleClose();
+  };
+
+  handleSaveRows = () => {
+    this.props.saveRows();
+    this.handleClose();
   };
 
   handleClickOpen = () => {
@@ -48,7 +48,7 @@ class AddSaveBtn extends React.Component {
   };
 
   render() {
-    const { classes, inputVariable } = this.props;
+    const { classes } = this.props;
 
     return (
       <div>
@@ -78,14 +78,14 @@ class AddSaveBtn extends React.Component {
               <Button
                 variant="contained"
                 color="primary"
-                onClick={this.props.addEmptyRow}
+                onClick={this.handleAddEmptyRow}
               >
                 Add
               </Button>&nbsp;
               <Button
                 variant="contained"
                 color="primary"
-                onClick={this.props.saveRows}
+                onClick={this.handleSaveRows}
               >
                 Save
               </Button>
@@ -94,9 +94,6 @@ class AddSaveBtn extends React.Component {
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">
               Cancel
-            </Button>
-            <Button onClick={this.handleClose} color="primary">
-              Ok
             </Button>
           </DialogActions>
         </Dialog>
