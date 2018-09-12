@@ -8,7 +8,7 @@ const app = express();
 require('./configure')(app);
 
 if (process.env.NODE_ENV === 'production') {
-    app.get('/api', require(path.join(__dirname, 'routes')));
+
     // Serve any static files
     app.use(express.static(path.join(__dirname, '../../','client/build')));
 
@@ -16,9 +16,9 @@ if (process.env.NODE_ENV === 'production') {
     //     res.sendFile(path.join(__dirname, '../../','client/build'))})
 
     // app.get('/api', require(path.join(__dirname,'routes')));
-    // app.get('/api',function(req, res) {
-    //     res.sendFile(path.join(__dirname, '../../','client/build', 'index.html'));
-    // });
+    app.get('/api/*',function(req, res) {
+        res.sendFile(path.join(__dirname, '../../','client/build', 'index.html'));
+    });
     // below works
     // app.get('/api/trip',(req,res,next) => { res.send('hello')})
     // Handle React routing, return all requests to React app
@@ -31,7 +31,6 @@ if (process.env.NODE_ENV === 'production') {
 // /api so they are isolated from our GET /* wildcard.
 app.use('/api', require('./routes'));
 
-console.log('.................', path.join(__dirname,'routes'))
 /*
  This middleware will catch any URLs resembling a file extension
  for example: .js, .html, .css
