@@ -14,7 +14,6 @@ import { Datatable } from "./Datatable";
 import { tripsConfig } from "../../configs/tripsConfig";
 import ColumnChooser from "./ColumnChooser.js";
 import SideMenu from "./SideMenu";
-import MenuButton from "./MenuButton";
 import Inputs from "./Inputs";
 import AddSaveBtn from "./AddSaveBtn";
 

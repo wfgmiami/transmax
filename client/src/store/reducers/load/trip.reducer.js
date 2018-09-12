@@ -21,7 +21,7 @@ const trips = (state = initialState, action) => {
       return [...action.trips.data];
     }
 
-    case Actions.SAVE_TRIP: {
+    case Actions.SAVE_TRIPS: {
       return [...state];
     }
 
