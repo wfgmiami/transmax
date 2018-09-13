@@ -27,8 +27,13 @@ const styles = theme => ({
 
 class Inputs extends React.Component {
   state = {
-    open: false
+    open: false,
+    originalInputs: {}
   };
+
+  componentDidMount(){
+    this.setState({ originalInputs: this.props.inputVariable })
+  }
 
   handleChange = key => ({ target: { value } }) => {
     this.props.setInputVariableValue({ [key]: value });
@@ -39,7 +44,9 @@ class Inputs extends React.Component {
   };
 
   handleClose = () => {
+    console.log('close', this.state)
     this.setState({ open: false });
+    this.props.setInputVariableValue(this.state.originalInputs)
   };
 
   render() {
