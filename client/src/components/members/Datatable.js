@@ -317,4 +317,29 @@ const ShipmentsData = [
 
 ];
 
-export { Datatable, EmptyRow, ShipmentsData };
+const Driver = [
+  {
+    firstName: "Kelvin",
+    lastName: "Morris",
+    ssn: "666-66-6666",
+    driversLicense: "123456",
+    hireDate: "05/01/18",
+    phone: "568-456-7983",
+    email: "kelvin@gmail.com",
+    currentRate: "0.55",
+    earnings: "20000"
+  },
+  {
+    firstName: "Eric",
+    lastName: "Shmidt",
+    ssn: "666-66-1111",
+    driversLicense: "654321",
+    hireDate: "07/15/18",
+    phone: "568-358-1110",
+    email: "eric@gmail.com",
+    currentRate: "0.55",
+    earnings: "12500"
+  }
+];
+
+export { Datatable, EmptyRow, ShipmentsData, Driver };

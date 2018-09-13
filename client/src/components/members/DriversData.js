@@ -8,14 +8,13 @@ import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import "react-table/react-table.css";
 import { Datatable } from "./Datatable";
-import { shipmentsConfig } from "../../configs/shipmentsConfig";
+import { driverConfig } from "../../configs/driverConfig";
 import ColumnChooser from "./ColumnChooser.js";
 import SideMenu from "./SideMenu";
 import AddSaveBtn from "./AddSaveBtn";
 import axios from "axios";
 
-
-import * as loadActions from "../../store/actions/load";
+import * as companyActions from "../../store/actions/company";
 
 const copyOfDatable = [].concat(Datatable);
 
@@ -26,14 +25,13 @@ const styles = theme => ({
   }
 });
 
-class ShipmentsData extends Component {
+class DriversData extends Component {
   constructor() {
     super();
     this.state = {
       data: copyOfDatable,
       columns: [],
-      editableRowIndex: [],
-      driverPay: 0.55
+      editableRowIndex: []
     };
 
     this.editTable = this.editTable.bind(this);
@@ -47,11 +45,11 @@ class ShipmentsData extends Component {
   }
 
   componentDidMount() {
-    this.props.getShipment();
+    this.props.getDriver();
   }
 
   getConfirmDoc(docLink) {
-    // console.log("ShipmentsData docLink ", docLink);
+    // console.log("TripsData docLink ", docLink);
     axios
       .post(
         "/api/pdf",
@@ -64,21 +62,18 @@ class ShipmentsData extends Component {
       .then(response => {
         const file = new Blob([response.data], { type: "application/pdf" });
         const fileURL = URL.createObjectURL(file);
-        // console.log("ShipmentsData docLink ", {fileURL});
         window.open(fileURL);
       })
       .catch(error => console.log(error));
   }
 
   editTable(cellInfo) {
-    console.log(
-      "cell info: ",
-      cellInfo,
-      "column.id",
-      cellInfo.column.id,
-      "cellInfo.row[cellInfo.column.id]: ",
-      cellInfo.row[cellInfo.column.id]
-    );
+    // console.log(
+    //   "cell info........",
+    //   cellInfo,
+    //   "id: ",
+    //   cellInfo.row[cellInfo.column.id]
+    // );
     let dollarSign;
     const findEditableRow = this.state.editableRowIndex.find(
       row => row === cellInfo.index
@@ -93,12 +88,12 @@ class ShipmentsData extends Component {
         onBlur={e => {
           const data = [...this.props.shipment];
           data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
-          this.props.updateShipment({ data });
+          this.props.updateDriver({ data });
         }}
         dangerouslySetInnerHTML={{
           __html:
             // dollarSign +
-            this.props.shipment[cellInfo.index][
+            this.props.driver[cellInfo.index][
               cellInfo.column.id
             ].toLocaleString()
         }}
@@ -108,14 +103,14 @@ class ShipmentsData extends Component {
         style={{ backgroundColor: "#fafafa" }}
         suppressContentEditableWarning
         onBlur={e => {
-          const data = [...this.props.shipment];
+          const data = [...this.props.driver];
           data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
-          this.props.updateShipment({ data });
+          this.props.updateDriver({ data });
         }}
         dangerouslySetInnerHTML={{
           __html:
             dollarSign +
-            this.props.shipment[cellInfo.index][
+            this.props.driver[cellInfo.index][
               cellInfo.column.id
             ].toLocaleString()
         }}
@@ -142,23 +137,23 @@ class ShipmentsData extends Component {
   }
 
   deleteRow(row) {
-    this.props.updateShipment({
+    this.props.updateDriver({
       data: [
-        ...this.props.shipment.slice(0, row.index),
-        ...this.props.shipment.slice(row.index + 1)
+        ...this.props.driver.slice(0, row.index),
+        ...this.props.driver.slice(row.index + 1)
       ]
     });
   }
 
   saveRows() {
-    console.log("ShipmentsData.js saveRows this.props", this.props);
-    this.props.saveShipments(this.props.trip);
+    console.log("DriversData.js saveRows this.props", this.props);
+    this.props.saveDriver(this.props.driver);
   }
 
   addEmptyRow() {
-    let emptyRow = Object.assign({}, ...shipmentsConfig);
-    // console.log("TripsData.js addEmptyRow ", emptyRow);
-    this.props.setShipment(emptyRow);
+    let emptyRow = Object.assign({}, ...driverConfig);
+    // console.log("DriversData.js addEmptyRow ", emptyRow);
+    this.props.setDriver(emptyRow);
     // this.props.setTrip({
     //   data: this.props.trip.concat(emptyRow)
     // });
@@ -167,41 +162,33 @@ class ShipmentsData extends Component {
   calculateTotal({ data, column }) {
     // console.log("....data",data, "column", column);
     let dollarSign = false;
-    const shipmentsCount = data.length;
+    const driverCount = data.length;
     let value;
 
-    const total = data.reduce((memo, shipment) => {
-      // console.log("....info", trip,column.id, trip[column.id]);
-
-      if (typeof shipment[column.id] === "object") {
-        value = shipment[column.id].props.dangerouslySetInnerHTML.__html;
+    const total = data.reduce((memo, driver) => {
+      // console.log("....info", driver,column.id, driver[column.id]);
+      if (typeof driver[column.id] === "object") {
+        value = driver[column.id].props.dangerouslySetInnerHTML.__html;
         if (typeof value === "string" && value.substring(0, 1) === "$") {
           dollarSign = true;
           value = value.slice(1);
         }
         memo += Number(value);
       } else {
-        let amount = shipment[column.id];
+        let amount = driver[column.id];
         if (amount === "") amount = 0;
         if (typeof amount === "string") {
-          amount = parseFloat(shipment[column.id].replace(/,/g, ""));
+          amount = parseFloat(driver[column.id].replace(/,/g, ""));
         }
-
         memo += amount;
       }
-
       return memo;
     }, 0);
 
-    if (dollarSign || column.id === "payment") {
-      if (column.id === "dollarPerMile") {
-        return (
-          "$" + Number((total / shipmentsCount).toFixed(2)).toLocaleString()
-        );
-      }
+    if (dollarSign || column.id === "earnings") {
       return "$" + Number(total.toFixed(0)).toLocaleString();
-    } else if (column.id === "bookDate") {
-      return `Total Trips: ${shipmentsCount}`;
+    } else if (column.id === "firstName") {
+      return `Total Drivers: ${driverCount}`;
     }
 
     return Number(Number(total).toFixed(0)).toLocaleString();
@@ -210,7 +197,7 @@ class ShipmentsData extends Component {
   onColumnUpdate(index) {
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();
-    // console.log("onColumnUpdate index ", index, "...", columns[index]);
+    console.log("onColumnUpdate index ", index, "...", columns[index]);
     this.setState(
       prevState => {
         const columns1 = [];
@@ -237,135 +224,69 @@ class ShipmentsData extends Component {
 
     return [
       {
-        Header: "Date",
+        Header: "First Name",
         Footer: this.calculateTotal,
-        accessor: "bookDate",
-        show: true,
-        className: "columnBorder",
-        borderRight: "2px solid rgba(0, 0, 0, 0.6)!important",
-        Cell: this.editTable
-      },
-      {
-        Header: "Load",
-        accessor: "loadNumber",
+        accessor: "firstName",
         show: true,
         className: "columnBorder",
         Cell: this.editTable
       },
       {
-        Header: "Broker",
-        accessor: "brokerName",
+        Header: "Last Name",
+        accessor: "lastName",
         show: true,
         className: "columnBorder",
-        minWidth: 160,
         Cell: this.editTable
       },
       {
-        Header: "Pick Up",
-        accessor: "pickUpCityState",
+        Header: "SSN",
+        accessor: "ssn",
         show: true,
         className: "columnBorder",
-        minWidth: 130,
         Cell: this.editTable
       },
       {
-        Header: "Drop Off",
-        accessor: "dropOffCityState",
+        Header: "Drivers License",
+        accessor: "driversLicense",
         show: true,
         className: "columnBorder",
-        minWidth: 130,
         Cell: this.editTable
       },
       {
-        Header: "PickUp",
-        accessor: "pickUpAddress",
+        Header: "Hire Date",
+        accessor: "hireDate",
+        show: true,
+        className: "columnBorder",
+        Cell: this.editTable
+      },
+      {
+        Header: "Phone",
+        accessor: "phone",
         show: false,
         className: "columnBorder",
-        minWidth: 240,
         Cell: this.editTable
       },
       {
-        Header: "Destination",
-        accessor: "dropOffAddress",
+        Header: "Email",
+        accessor: "email",
         show: false,
         className: "columnBorder",
-        minWidth: 240,
         Cell: this.editTable
       },
       {
-        Header: "Payment",
+        Header: "Current Rate",
+        accessor: "currentRate",
+        show: false,
+        className: "columnBorder",
+        Cell: this.editTable
+      },
+      {
+        Header: "Earnings",
         Footer: this.calculateTotal,
         show: true,
         className: "columnBorder",
-        accessor: "payment",
+        accessor: "earnings",
         Cell: this.editTable
-      },
-      {
-        Header: "Miles",
-        Footer: this.calculateTotal,
-        accessor: "miles",
-        show: true,
-        className: "columnBorder",
-        Cell: this.editTable
-      },
-      {
-        Header: "$/Mile",
-        Footer: this.calculateTotal,
-        id: "dollarPerMile",
-        show: true,
-        className: "columnBorder",
-        accessor: d => {
-          let payment = d.payment;
-          if (typeof d.payment === "string")
-            payment = parseFloat(d.payment.replace(/,/g, ""));
-          let dollarPerMile = Number(payment) / Number(d.miles);
-          dollarPerMile = isNaN(dollarPerMile) ? null : dollarPerMile;
-          return (
-            <div
-              dangerouslySetInnerHTML={{
-                __html: "$" + Number(dollarPerMile).toFixed(2)
-              }}
-            />
-          );
-        }
-      },
-      {
-        Header: "Commodity",
-        accessor: "commodity",
-        show: false,
-        Cell: this.editTable
-      },
-      {
-        Header: "Weight",
-        accessor: "weight",
-        show: false,
-        className: "columnBorder",
-        Cell: this.editTable
-      },
-      {
-        Header: "Trailer",
-        accessor: "trailer",
-        show: false,
-        className: "columnBorder",
-        Cell: this.editTable
-      },
-      {
-        Header: "Confirm Doc",
-        accessor: "confirmFilePath",
-        show: true,
-        className: "columnBorder",
-        minWidth: 80,
-        Cell: ({ row }) => {
-          // console.log('row',row,row.confirmFilePath)
-          return (
-            <a
-              style={{ textDecoration: "underline", cursor: "pointer" }}
-              onClick={() => this.getConfirmDoc(row.confirmFilePath)}
-            >
-              pdf
-            </a>
-          );
-        }
       },
       {
         Header: "Edit",
@@ -373,7 +294,6 @@ class ShipmentsData extends Component {
         accessor: "edit",
         minWidth: 200,
         show: true,
-        className: "columnBorder",
         Cell: row => {
           const editableRow = this.state.editableRowIndex.filter(
             editableRow => editableRow === row.index
@@ -411,7 +331,7 @@ class ShipmentsData extends Component {
 
   render() {
     // const { data } = this.state;
-    const { shipment, classes } = this.props;
+    const { driver, classes } = this.props;
 
     // console.log("TripsData.js this.state ", this.state);
 
@@ -430,7 +350,7 @@ class ShipmentsData extends Component {
         </Toolbar>
 
         <ReactTable
-          data={shipment}
+          data={driver}
           showPaginationBottom={true}
           columns={columns}
           defaultPageSize={10}
@@ -446,19 +366,19 @@ class ShipmentsData extends Component {
   }
 }
 
-function mapStateToProps({ load }) {
+function mapStateToProps({ company }) {
   return {
-    shipment: load.shipment
+    driver: company.driver
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
-      getShipment: loadActions.getShipment,
-      setShipment: loadActions.setShipment,
-      updateShipment: loadActions.updateShipment,
-      saveShipment: loadActions.saveShipment
+      getDriver: companyActions.getDriver,
+      setDriver: companyActions.setDriver,
+      updateDriver: companyActions.updateDriver,
+      saveDriver: companyActions.saveDriver
     },
     dispatch
   );
@@ -469,6 +389,6 @@ export default withStyles(styles, { withTheme: true })(
     connect(
       mapStateToProps,
       mapDispatchToProps
-    )(ShipmentsData)
+    )(DriversData)
   )
 );

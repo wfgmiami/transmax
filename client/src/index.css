@@ -17,3 +17,8 @@ body {
 .text-white {
   color: #fff !important;
 }
+
+.columnBorder {
+  border-right: 0.5px solid rgba(0, 0, 0, 0.6) !important;
+  border-left: 0.5px solid rgba(0, 0, 0, 0.6) !important;
+}
