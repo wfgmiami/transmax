@@ -5,7 +5,6 @@ import axios from 'axios';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Nav from './components/public/Nav';
-import AppMenuBar from './components/members/AppMenuBar';
 import AppHolder from "./components/members/AppHolder";
 
 const styles = theme => ({
@@ -25,7 +24,7 @@ class Home extends Component {
 
     render() {
         const { authenticated } = this.props.auth;
-        console.log("props app page", this.props);
+        // console.log("App.js this.props", this.props);
         return (
 
             <div>

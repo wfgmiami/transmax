@@ -14,6 +14,7 @@ import SideMenu from "./SideMenu";
 import AddSaveBtn from "./AddSaveBtn";
 import axios from "axios";
 
+
 import * as loadActions from "../../store/actions/load";
 
 const copyOfDatable = [].concat(Datatable);
@@ -50,7 +51,7 @@ class ShipmentsData extends Component {
   }
 
   getConfirmDoc(docLink) {
-    // console.log("TripsData docLink ", docLink);
+    // console.log("ShipmentsData docLink ", docLink);
     axios
       .post(
         "/api/pdf",
@@ -63,18 +64,21 @@ class ShipmentsData extends Component {
       .then(response => {
         const file = new Blob([response.data], { type: "application/pdf" });
         const fileURL = URL.createObjectURL(file);
+        // console.log("ShipmentsData docLink ", {fileURL});
         window.open(fileURL);
       })
       .catch(error => console.log(error));
   }
 
   editTable(cellInfo) {
-    // console.log(
-    //   "cell info........",
-    //   cellInfo,
-    //   "id: ",
-    //   cellInfo.row[cellInfo.column.id]
-    // );
+    console.log(
+      "cell info: ",
+      cellInfo,
+      "column.id",
+      cellInfo.column.id,
+      "cellInfo.row[cellInfo.column.id]: ",
+      cellInfo.row[cellInfo.column.id]
+    );
     let dollarSign;
     const findEditableRow = this.state.editableRowIndex.find(
       row => row === cellInfo.index
@@ -206,7 +210,7 @@ class ShipmentsData extends Component {
   onColumnUpdate(index) {
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();
-    console.log("onColumnUpdate index ", index, "...", columns[index]);
+    // console.log("onColumnUpdate index ", index, "...", columns[index]);
     this.setState(
       prevState => {
         const columns1 = [];

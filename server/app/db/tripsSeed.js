@@ -145,6 +145,35 @@ const trips = [
       __dirname,
       "/brokerConfirmations/090718_transportationOne.pdf"
     )
+  },
+  {
+    bookDate: "09/12/18",
+    truckNumber: "119",
+    driverName: "Kelvin",
+    loadNumber: "10069",
+    brokerName: "Rotana Logistics",
+    amount: 1100,
+    loadedMiles: 678,
+    emptyMiles: 125,
+    mileage: 0,
+    dollarPerMile: 0,
+    dieselPrice: 3.22,
+    fuelCost: 0,
+    driverPay: 0,
+    dispatchFee: 0,
+    lumper: 0,
+    detention: 0,
+    detentionDriverPay: 0,
+    lateFee: 0,
+    toll: 0,
+    roadMaintenance: 0,
+    otherExpenses: 0,
+    totalExpense: 0,
+    profit: 0,
+    confirmFilePath: path.join(
+      __dirname,
+      "/brokerConfirmations/090718_transportationOne.pdf"
+    )
   }
 ]
 

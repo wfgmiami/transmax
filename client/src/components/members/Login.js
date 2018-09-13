@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import classNames from 'classnames';
 import axios from 'axios';
-import MemberPage from './MemberPage';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";

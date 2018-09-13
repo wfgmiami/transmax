@@ -2,14 +2,14 @@
 
 const express = require('express');
 const router = new express.Router();
-const Trip = require('../db/models').Trip;
+const Shipment = require('../db/models').Shipment;
 
 router.get('/', (req, res, next) => {
-  Trip.findAll({
+  Shipment.findAll({
     order:
-      [['bookDate', 'ASC']]
+    [['bookDate', 'ASC']]
   })
-    .then( trips => res.json( trips ))
+    .then( shipments => res.json( shipments ))
     .catch( next )
 })
 
