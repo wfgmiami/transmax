@@ -58,7 +58,22 @@ class TripsData extends Component {
   }
 
   getConfirmDoc(docLink) {
-    // console.log("TripsData docLink ", docLink);
+    // console.log("TripsData docLink ", Modal, SideMenu);
+    var debug = { hello: "world" };
+    var blob = new Blob([JSON.stringify(debug, null, 2)], {
+      type: "application/json"
+    });
+    var url = URL.createObjectURL(blob);
+    let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
+                  width=0,height=0,left=0,top=300`;
+    let newWindow = window.open(url, "", params);
+    newWindow.focus();
+
+    newWindow.onload = function() {
+      let html = `<div style="font-size:30px">Welcome!</div>`;
+      newWindow.document.body.insertAdjacentHTML("afterbegin", html);
+    };
+
     axios
       .post(
         "/api/pdf",
@@ -71,7 +86,11 @@ class TripsData extends Component {
       .then(response => {
         const file = new Blob([response.data], { type: "application/pdf" });
         const fileURL = URL.createObjectURL(file);
-        window.open(fileURL);
+        // console.log("getConfirmDoc ", fileURL);
+        let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
+                  width=0,height=0,left=0,top=300`;
+        window.open(fileURL, "", params);
+        // window.open(fileURL);
       })
       .catch(error => console.log(error));
   }
@@ -261,43 +280,50 @@ class TripsData extends Component {
         Footer: this.calculateTotal,
         accessor: "bookDate",
         show: true,
+        className: "columnBorder",
         Cell: this.editTable
       },
       {
         Header: "Truck Number",
         accessor: "truckNumber",
         show: false,
+        className: "columnBorder",
         Cell: this.editTable
       },
       {
         Header: "Driver",
         accessor: "driverName",
         show: false,
+        className: "columnBorder",
         Cell: this.editTable
       },
       {
         Header: "Load",
         accessor: "loadNumber",
         show: true,
+        className: "columnBorder",
         Cell: this.editTable
       },
       {
         Header: "Broker",
         accessor: "brokerName",
         show: true,
+        className: "columnBorder",
         Cell: this.editTable
       },
       {
         Header: "Amount",
+        Footer: this.calculateTotal,
         accessor: "amount",
         show: true,
-        Footer: this.calculateTotal,
+        className: "columnBorder",
         Cell: this.editTable
       },
       {
         Header: "Loaded Miles",
-        accessor: "loadedMiles",
         Footer: this.calculateTotal,
+        accessor: "loadedMiles",
+        className: "columnBorder",
         show: true,
         Cell: this.editTable
       },
@@ -306,6 +332,7 @@ class TripsData extends Component {
         Footer: this.calculateTotal,
         accessor: "emptyMiles",
         show: true,
+        className: "columnBorder",
         Cell: this.editTable
       },
       {
@@ -313,6 +340,7 @@ class TripsData extends Component {
         Footer: this.calculateTotal,
         id: "mileage",
         show: true,
+        className: "columnBorder",
         accessor: d => {
           const totalMiles = Number(d.loadedMiles) + Number(d.emptyMiles);
 
@@ -330,6 +358,7 @@ class TripsData extends Component {
         Footer: this.calculateTotal,
         id: "dollarPerMile",
         show: true,
+        className: "columnBorder",
         accessor: d => {
           let amount = d.amount;
           if (typeof d.amount === "string")
@@ -352,6 +381,7 @@ class TripsData extends Component {
         Footer: this.calculateTotal,
         show: true,
         accessor: "dieselPrice",
+        className: "columnBorder",
         Cell: this.editTable
       },
       {
@@ -359,6 +389,7 @@ class TripsData extends Component {
         Footer: this.calculateTotal,
         id: "fuelCost",
         show: true,
+        className: "columnBorder",
         accessor: d => {
           let fuelCost =
             ((Number(d.loadedMiles) + Number(d.emptyMiles)) / Number(mpg)) *
@@ -380,6 +411,7 @@ class TripsData extends Component {
         Footer: this.calculateTotal,
         id: "driverPay",
         show: true,
+        className: "columnBorder",
         accessor: d => {
           let driverPay =
             (Number(d.loadedMiles) + Number(d.emptyMiles)) *
@@ -400,6 +432,7 @@ class TripsData extends Component {
         Footer: this.calculateTotal,
         id: "dispatchFee",
         show: true,
+        className: "columnBorder",
         accessor: d => {
           let amount = d.amount;
           if (typeof d.amount === "string")
@@ -423,6 +456,7 @@ class TripsData extends Component {
         Footer: this.calculateTotal,
         accessor: "lumper",
         show: false,
+        className: "columnBorder",
         Cell: this.editTable
       },
       {
@@ -430,6 +464,7 @@ class TripsData extends Component {
         Footer: this.calculateTotal,
         accessor: "detention",
         show: false,
+        className: "columnBorder",
         Cell: this.editTable
       },
       {
@@ -437,6 +472,7 @@ class TripsData extends Component {
         Footer: this.calculateTotal,
         accessor: "detentionDriverPay",
         show: false,
+        className: "columnBorder",
         Cell: this.editTable
       },
       {
@@ -444,6 +480,7 @@ class TripsData extends Component {
         Footer: this.calculateTotal,
         accessor: "lateFee",
         show: false,
+        className: "columnBorder",
         Cell: this.editTable
       },
       {
@@ -451,6 +488,7 @@ class TripsData extends Component {
         Footer: this.calculateTotal,
         accessor: "toll",
         show: false,
+        className: "columnBorder",
         Cell: this.editTable
       },
       {
@@ -458,6 +496,7 @@ class TripsData extends Component {
         Footer: this.calculateTotal,
         accessor: "roadMaintenance",
         show: false,
+        className: "columnBorder",
         Cell: this.editTable
       },
       {
@@ -465,6 +504,7 @@ class TripsData extends Component {
         Footer: this.calculateTotal,
         accessor: "otherExpenses",
         show: false,
+        className: "columnBorder",
         Cell: this.editTable
       },
       {
@@ -472,6 +512,7 @@ class TripsData extends Component {
         Footer: this.calculateTotal,
         id: "totalExpenses",
         show: true,
+        className: "columnBorder",
         accessor: d => {
           let amount = d.amount;
           if (typeof d.amount === "string")
@@ -507,6 +548,7 @@ class TripsData extends Component {
         Footer: this.calculateTotal,
         id: "profit",
         show: true,
+        className: "columnBorder",
         accessor: d => {
           let amount = d.amount;
           if (typeof d.amount === "string")
@@ -542,8 +584,8 @@ class TripsData extends Component {
         Header: "Confirm Doc",
         accessor: "confirmFilePath",
         show: true,
+        className: "columnBorder",
         Cell: ({ row }) => {
-          console.log("row", row, row.confirmFilePath);
           return (
             <a
               style={{ textDecoration: "underline", cursor: "pointer" }}
@@ -560,6 +602,7 @@ class TripsData extends Component {
         accessor: "edit",
         minWidth: 200,
         show: true,
+        className: "columnBorder",
         Cell: row => {
           const editableRow = this.state.editableRowIndex.filter(
             editableRow => editableRow === row.index
