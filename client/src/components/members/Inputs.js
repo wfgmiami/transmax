@@ -43,10 +43,13 @@ class Inputs extends React.Component {
     this.setState({ open: true });
   };
 
-  handleClose = () => {
-    console.log('close', this.state)
+  handleCloseCancel = () => {
     this.setState({ open: false });
     this.props.setInputVariableValue(this.state.originalInputs)
+  }
+
+  handleCloseOK = () => {
+    this.setState({ open: false });
   };
 
   render() {
@@ -96,10 +99,10 @@ class Inputs extends React.Component {
             </form>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.handleCloseCancel} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.handleCloseOK} color="primary">
               Ok
             </Button>
           </DialogActions>
