@@ -8,7 +8,6 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { withStyles } from "@material-ui/core/styles";
 //import 'font-awesome/css/font-awesome.min.css';
 import AlarmIcon from "@material-ui/icons/Reorder";
-import Tooltip from "@material-ui/core/Tooltip";
 
 export const popoverStyles = {
   root: {
@@ -75,22 +74,21 @@ class ColumnChooser extends React.Component {
     // console.log("columnChooser this props: ", this.props);
     return (
       <div className={classes.root}>
-        <Tooltip id="tooltip-columns" title="Select Columns">
-          <Button
-            size="small"
-            variant="outlined"
-            onClick={this.handleClick}
-            style={{
-              backgroundColor: "white",
-              height: "32px",
-              padding: "2px",
-              marginLeft: "5px"
-            }}
-          >
-            Select Columns
-            <AlarmIcon className={classes.icon} />
-          </Button>
-        </Tooltip>
+        <Button
+          size="small"
+          variant="outlined"
+          onClick={this.handleClick}
+          style={{
+            backgroundColor: "white",
+            height: "32px",
+            padding: "2px",
+            marginLeft: "5px"
+          }}
+        >
+          Select Columns
+          <AlarmIcon className={classes.icon} />
+        </Button>
+
         <Popover
           open={this.state.open}
           anchorEl={this.state.anchorEl}

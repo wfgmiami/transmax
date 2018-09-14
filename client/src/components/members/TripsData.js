@@ -57,20 +57,6 @@ class TripsData extends Component {
 
   getConfirmDoc(docLink) {
     // console.log("TripsData docLink ", Modal, SideMenu);
-    var debug = { hello: "world" };
-    var blob = new Blob([JSON.stringify(debug, null, 2)], {
-      type: "application/json"
-    });
-    var url = URL.createObjectURL(blob);
-    let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
-                  width=0,height=0,left=0,top=300`;
-    let newWindow = window.open(url, "", params);
-    newWindow.focus();
-
-    newWindow.onload = function() {
-      let html = `<div style="font-size:30px">Welcome!</div>`;
-      newWindow.document.body.insertAdjacentHTML("afterbegin", html);
-    };
 
     axios
       .post(
@@ -86,7 +72,7 @@ class TripsData extends Component {
         const fileURL = URL.createObjectURL(file);
         // console.log("getConfirmDoc ", fileURL);
         let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
-                  width=0,height=0,left=0,top=300`;
+                  width=500,height=500,left=300,top=300`;
         window.open(fileURL, "", params);
         // window.open(fileURL);
       })

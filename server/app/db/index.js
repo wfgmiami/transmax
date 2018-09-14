@@ -9,10 +9,11 @@ const chalk = require('chalk');
 const User = require('./models').User;
 const Trip = require('./models').Trip
 const Shipment = require('./models').Shipment;
+const Driver = require('./models').Driver;
 const trips = require('./tripsSeed');
 const users = require('./usersSeed');
 const shipments = require('./shipmentsSeed');
-
+const drivers = require('./driversSeed');
 
 // Syncing all the models at once. This promise is used by main.js.
 module.exports = db.sync({ force: true })
@@ -20,6 +21,7 @@ module.exports = db.sync({ force: true })
   .then( () => Promise.all(users.map( user => User.create( user ))))
   .then( () => Promise.all(trips.map( trip => Trip.create( trip ))))
   .then( () => Promise.all(shipments.map( shipment => Shipment.create( shipment ))))
+  .then( () => Promise.all(drivers.map( driver => Driver.create( driver ))))
   .then( () => console.log(chalk.green('Sequelize models synced to PostgreSQL')))
 
 

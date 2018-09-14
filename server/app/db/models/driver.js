@@ -22,17 +22,24 @@ const Driver = db.define('driver', {
         type: DataTypes.STRING
     },
     hireDate: {
-      type: DataTypes.DATE,
+      type: DataTypes.STRING,
       allowNull: false
     },
     address: {
       type: DataTypes.TEXT
     },
+    currentRate: {
+      type: DataTypes.DECIMAL
+    },
     earnings: {
       type: DataTypes.DECIMAL
+    },
+    employedBy: {
+        type: DataTypes.STRING
     }
 
 
 })
 
 module.exports = Driver;
+

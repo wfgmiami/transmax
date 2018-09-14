@@ -78,7 +78,7 @@ class DriversData extends Component {
     const findEditableRow = this.state.editableRowIndex.find(
       row => row === cellInfo.index
     );
-    dollarSign = cellInfo.column.id === "payment" ? "$" : "";
+    dollarSign = cellInfo.column.id === "earnings" ? "$" : "";
 
     return findEditableRow || findEditableRow === 0 ? (
       <div
@@ -154,9 +154,6 @@ class DriversData extends Component {
     let emptyRow = Object.assign({}, ...driverConfig);
     // console.log("DriversData.js addEmptyRow ", emptyRow);
     this.props.setDriver(emptyRow);
-    // this.props.setTrip({
-    //   data: this.props.trip.concat(emptyRow)
-    // });
   }
 
   calculateTotal({ data, column }) {
@@ -239,6 +236,13 @@ class DriversData extends Component {
         Cell: this.editTable
       },
       {
+        Header: "Hire Date",
+        accessor: "hireDate",
+        show: true,
+        className: "columnBorder",
+        Cell: this.editTable
+      },
+      {
         Header: "SSN",
         accessor: "ssn",
         show: true,
@@ -253,16 +257,16 @@ class DriversData extends Component {
         Cell: this.editTable
       },
       {
-        Header: "Hire Date",
-        accessor: "hireDate",
-        show: true,
+        Header: "Address",
+        accessor: "address",
+        show: false,
         className: "columnBorder",
         Cell: this.editTable
       },
       {
         Header: "Phone",
         accessor: "phone",
-        show: false,
+        show: true,
         className: "columnBorder",
         Cell: this.editTable
       },
@@ -286,6 +290,13 @@ class DriversData extends Component {
         show: true,
         className: "columnBorder",
         accessor: "earnings",
+        Cell: this.editTable
+      },
+      {
+        Header: "Employed By",
+        show: false,
+        className: "columnBorder",
+        accessor: "employedBy",
         Cell: this.editTable
       },
       {

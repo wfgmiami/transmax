@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Datatable } from "../../../components/members/Datatable";
+import { Driver } from "../../../components/members/Datatable";
 
 export const GET_DRIVER = "GET DRIVER";
 export const SET_DRIVER = "SET DRIVER";
@@ -10,7 +10,7 @@ export function getDriver() {
   // return dispatch =>
   //   dispatch({
   //     type: GET_DRIVER,
-  //     payload: Datatable
+  //     payload: Driver
   //   });
   const getDriver = axios.get("/api/driver");
 
