@@ -8,7 +8,7 @@ import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import "react-table/react-table.css";
 import { Datatable } from "./Datatable";
-import { driverConfig } from "../../configs/driverConfig";
+import { firmConfig } from "../../configs/firmConfig";
 import ColumnChooser from "./ColumnChooser.js";
 import SideMenu from "./SideMenu";
 import AddSaveBtn from "./AddSaveBtn";
@@ -25,7 +25,7 @@ const styles = theme => ({
   }
 });
 
-class DriversData extends Component {
+class CompaniesData extends Component {
   constructor() {
     super();
     this.state = {
@@ -45,11 +45,11 @@ class DriversData extends Component {
   }
 
   componentDidMount() {
-    this.props.getDriver();
+    this.props.getFirm();
   }
 
   getConfirmDoc(docLink) {
-    // console.log("TripsData docLink ", docLink);
+    // console.log("CompaniesData docLink ", docLink);
     axios
       .post(
         "/api/pdf",
@@ -78,7 +78,7 @@ class DriversData extends Component {
     const findEditableRow = this.state.editableRowIndex.find(
       row => row === cellInfo.index
     );
-    dollarSign = cellInfo.column.id === "earnings" ? "$" : "";
+    dollarSign = cellInfo.column.id === "purchasePrice" ? "$" : "";
 
     return findEditableRow || findEditableRow === 0 ? (
       <div
@@ -86,16 +86,14 @@ class DriversData extends Component {
         contentEditable
         suppressContentEditableWarning
         onBlur={e => {
-          const data = [...this.props.driver];
+          const data = [...this.props.firm];
           data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
-          this.props.updateDriver({ data });
+          this.props.updateFirm({ data });
         }}
         dangerouslySetInnerHTML={{
           __html:
             // dollarSign +
-            this.props.driver[cellInfo.index][
-              cellInfo.column.id
-            ].toLocaleString()
+            this.props.firm[cellInfo.index][cellInfo.column.id].toLocaleString()
         }}
       />
     ) : (
@@ -103,16 +101,14 @@ class DriversData extends Component {
         style={{ backgroundColor: "#fafafa" }}
         suppressContentEditableWarning
         onBlur={e => {
-          const data = [...this.props.driver];
+          const data = [...this.props.firm];
           data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
-          this.props.updateDriver({ data });
+          this.props.updateFirm({ data });
         }}
         dangerouslySetInnerHTML={{
           __html:
             dollarSign +
-            this.props.driver[cellInfo.index][
-              cellInfo.column.id
-            ].toLocaleString()
+            this.props.firm[cellInfo.index][cellInfo.column.id].toLocaleString()
         }}
       />
     );
@@ -137,55 +133,58 @@ class DriversData extends Component {
   }
 
   deleteRow(row) {
-    this.props.updateDriver({
+    this.props.updateFirm({
       data: [
-        ...this.props.driver.slice(0, row.index),
-        ...this.props.driver.slice(row.index + 1)
+        ...this.props.firm.slice(0, row.index),
+        ...this.props.firm.slice(row.index + 1)
       ]
     });
   }
 
   saveRows() {
-    console.log("DriversData.js saveRows this.props", this.props);
-    this.props.saveDriver(this.props.driver);
+    console.log("CompaniesData.js saveRows this.props", this.props);
+    this.props.saveFirm(this.props.firm);
   }
 
   addEmptyRow() {
-    let emptyRow = Object.assign({}, ...driverConfig);
-    // console.log("DriversData.js addEmptyRow ", emptyRow);
-    this.props.setDriver(emptyRow);
+    let emptyRow = Object.assign({}, ...firmConfig);
+    // console.log("CompaniesData.js addEmptyRow ", emptyRow);
+    this.props.setFirm(emptyRow);
+    // this.props.setTrip({
+    //   data: this.props.trip.concat(emptyRow)
+    // });
   }
 
   calculateTotal({ data, column }) {
     // console.log("....data",data, "column", column);
     let dollarSign = false;
-    const driverCount = data.length;
+    const firmCount = data.length;
     let value;
 
-    const total = data.reduce((memo, driver) => {
-      // console.log("....info", driver,column.id, driver[column.id]);
-      if (typeof driver[column.id] === "object") {
-        value = driver[column.id].props.dangerouslySetInnerHTML.__html;
+    const total = data.reduce((memo, firm) => {
+      // console.log("....info", firm,column.id, firm[column.id]);
+      if (typeof firm[column.id] === "object") {
+        value = firm[column.id].props.dangerouslySetInnerHTML.__html;
         if (typeof value === "string" && value.substring(0, 1) === "$") {
           dollarSign = true;
           value = value.slice(1);
         }
         memo += Number(value);
       } else {
-        let amount = driver[column.id];
+        let amount = firm[column.id];
         if (amount === "") amount = 0;
         if (typeof amount === "string") {
-          amount = parseFloat(driver[column.id].replace(/,/g, ""));
+          amount = parseFloat(firm[column.id].replace(/,/g, ""));
         }
         memo += amount;
       }
       return memo;
     }, 0);
 
-    if (dollarSign || column.id === "earnings") {
+    if (dollarSign || column.id === "purchasePrice") {
       return "$" + Number(total.toFixed(0)).toLocaleString();
-    } else if (column.id === "firstName") {
-      return `Total Drivers: ${driverCount}`;
+    } else if (column.id === "model") {
+      return `Total Companies: ${firmCount}`;
     }
 
     return Number(Number(total).toFixed(0)).toLocaleString();
@@ -217,86 +216,62 @@ class DriversData extends Component {
   }
 
   createColumns() {
-    console.log("ShipmentsData.js createColumns this.props: ", this.props);
+    console.log("CompaniesData.js createColumns this.props: ", this.props);
 
     return [
       {
-        Header: "First Name",
+        Header: "Name",
+        accessor: "name",
+        show: true,
+        className: "columnBorder",
+        Cell: this.editTable
+      },
+      {
+        Header: "Tax Id",
         Footer: this.calculateTotal,
-        accessor: "firstName",
+        accessor: "taxId",
         show: true,
         className: "columnBorder",
         Cell: this.editTable
       },
       {
-        Header: "Last Name",
-        accessor: "lastName",
+        Header: "Founded Date",
+        accessor: "foundedDate",
         show: true,
         className: "columnBorder",
         Cell: this.editTable
       },
       {
-        Header: "Hire Date",
-        accessor: "hireDate",
-        show: true,
-        className: "columnBorder",
-        Cell: this.editTable
-      },
-      {
-        Header: "SSN",
-        accessor: "ssn",
-        show: true,
-        className: "columnBorder",
-        Cell: this.editTable
-      },
-      {
-        Header: "Drivers License",
-        accessor: "driversLicense",
-        show: true,
-        className: "columnBorder",
-        Cell: this.editTable
-      },
-      {
-        Header: "Address",
-        accessor: "address",
-        show: false,
-        className: "columnBorder",
-        Cell: this.editTable
-      },
-      {
-        Header: "Phone",
-        accessor: "phone",
-        show: true,
-        className: "columnBorder",
-        Cell: this.editTable
-      },
-      {
-        Header: "Email",
-        accessor: "email",
-        show: false,
-        className: "columnBorder",
-        Cell: this.editTable
-      },
-      {
-        Header: "Current Rate",
-        accessor: "currentRate",
-        show: false,
-        className: "columnBorder",
-        Cell: this.editTable
-      },
-      {
-        Header: "Earnings",
+        Header: "Incorporated State",
         Footer: this.calculateTotal,
+        accessor: "incorporatedState",
         show: true,
         className: "columnBorder",
-        accessor: "earnings",
         Cell: this.editTable
       },
       {
-        Header: "Employed By",
-        show: false,
+        Header: "Number Of Employees",
+        Footer: this.calculateTotal,
+        accessor: "numberOfEmployees",
+        show: true,
         className: "columnBorder",
-        accessor: "employedBy",
+        Cell: this.editTable
+      },
+      {
+        Header: "Number Of Trucks",
+        Footer: this.calculateTotal,
+        accessor: "numberOfTrucks",
+        show: true,
+        className: "columnBorder",
+        Cell: this.editTable
+      },
+      {
+        Header: "Number Of Trailers",
+        Footer: this.calculateTotal,
+        accessor: "numberOfTrailers",
+        show: false,
+        minWidth: 120,
+        className: "columnBorder",
         Cell: this.editTable
       },
       {
@@ -342,7 +317,7 @@ class DriversData extends Component {
 
   render() {
     // const { data } = this.state;
-    const { driver, classes } = this.props;
+    const { firm, classes } = this.props;
 
     // console.log("TripsData.js this.state ", this.state);
 
@@ -361,7 +336,7 @@ class DriversData extends Component {
         </Toolbar>
 
         <ReactTable
-          data={driver}
+          data={firm}
           showPaginationBottom={true}
           columns={columns}
           defaultPageSize={10}
@@ -379,17 +354,17 @@ class DriversData extends Component {
 
 function mapStateToProps({ company }) {
   return {
-    driver: company.driver
+    firm: company.firm
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
-      getDriver: companyActions.getDriver,
-      setDriver: companyActions.setDriver,
-      updateDriver: companyActions.updateDriver,
-      saveDriver: companyActions.saveDriver
+      getFirm: companyActions.getFirm,
+      setFirm: companyActions.setFirm,
+      updateFirm: companyActions.updateFirm,
+      saveFirm: companyActions.saveFirm
     },
     dispatch
   );
@@ -400,6 +375,6 @@ export default withStyles(styles, { withTheme: true })(
     connect(
       mapStateToProps,
       mapDispatchToProps
-    )(DriversData)
+    )(CompaniesData)
   )
 );

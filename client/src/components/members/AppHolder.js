@@ -7,6 +7,8 @@ import { bindActionCreators } from "redux";
 import TripsData from "./TripsData";
 import ShipmentsData from "./ShipmentsData";
 import DriversData from "./DriversData";
+import TrucksData from "./TrucksData";
+import BrokersData from "./BrokersData";
 
 import * as authActions from "../../store/actions/authentication";
 
@@ -35,6 +37,15 @@ function AppHolder(props) {
       break;
     case "Shipments":
       showComponent = <ShipmentsData />;
+      break;
+    case "Companies":
+      showComponent = <CompaniesData />;
+      break;
+    case "Brokers":
+      showComponent = <BrokersData />;
+      break;
+    case "Trucks":
+      showComponent = <TrucksData />;
       break;
     case "Drivers":
       showComponent = <DriversData />;

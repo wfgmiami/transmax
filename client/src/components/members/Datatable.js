@@ -342,4 +342,107 @@ const Driver = [
   }
 ];
 
-export { Datatable, EmptyRow, ShipmentsData, Driver };
+const Truck = [
+  {
+    model: "Volvo VNL670",
+    year: "2007",
+    purchaseDate: "06/01/2013",
+    purchasePrice: 40000,
+    originalMiles: 405000,
+    maintenanceDate: "",
+    maintenanceType: "",
+    maintenanceCost: "",
+    repairDate: "",
+    repairType: "",
+    repairCost: "",
+    company: "AIK Transport"
+  },
+  {
+    model: "Fraightliner Coronado",
+    year: "2014",
+    purchaseDate: "11/1/2017",
+    purchasePrice: 0,
+    originalMiles: "",
+    maintenanceDate: "",
+    maintenanceType: "",
+    maintenanceCost: "",
+    repairDate: "",
+    repairType: "",
+    repairCost: "",
+    company: "AIK Transport"
+  },
+  {
+    model: "Fraightliner Cascadia",
+    year: "2015",
+    purchaseDate: "8/30/2018",
+    purchasePrice: 67500,
+    originalMiles: 350000,
+    maintenanceDate: "",
+    maintenanceType: "",
+    maintenanceCost: "",
+    repairDate: "",
+    repairType: "",
+    repairCost: "",
+    company: "Transmax"
+  }
+
+]
+
+const Firm = [
+  {
+    taxId: "123",
+    name: "AIK Transport LLC",
+    foundedDate: "06/01/2013",
+    incorporatedState: "OH",
+    numberOfEmployees: "3",
+    numberOfTrucks: "2",
+    numberOfTrailers: "2"
+  },
+  {
+    taxId: "345",
+    name: "Transmax LLC",
+    foundedDate: "7/31/2018",
+    incorporatedState: "OH",
+    numberOfEmployees: "0",
+    numberOfTrucks: "1",
+    numberOfTrailers: "1"
+  }
+];
+
+const Broker = [
+  {
+    brokerId: "1",
+    name: "Transplace",
+    address: "",
+    phone: "",
+    email: "",
+    bookedLoads: 1,
+    totalBooked: 600,
+    totalMiles: 85,
+    avgDollarPerMile: 0
+  },
+  {
+    brokerId: "2",
+    name: "TransportationOne",
+    address: "",
+    phone: "",
+    email: "",
+    bookedLoads: 1,
+    totalBooked: 1200,
+    totalMiles: 842,
+    avgDollarPerMile: 0
+  },
+  {
+    brokerId: "3",
+    name: "Reliable Source Logistics",
+    address: "",
+    phone: "",
+    email: "",
+    bookedLoads: 1,
+    totalBooked: 2700,
+    totalMiles: 970,
+    avgDollarPerMile: 0
+  },
+];
+
+export { Datatable, EmptyRow, ShipmentsData, Driver, Truck, Firm, Broker };
