@@ -78,7 +78,7 @@ class BrokersData extends Component {
     const findEditableRow = this.state.editableRowIndex.find(
       row => row === cellInfo.index
     );
-    dollarSign = cellInfo.column.id === "purchasePrice" ? "$" : "";
+    dollarSign = cellInfo.column.id === "totalBooked" ? "$" : "";
 
     return findEditableRow || findEditableRow === 0 ? (
       <div
@@ -185,7 +185,7 @@ class BrokersData extends Component {
       return memo;
     }, 0);
 
-    if (dollarSign || column.id === "purchasePrice") {
+    if (dollarSign || column.id === "totalBooked") {
       if (column.id === "avgDollarPerMile") {
         return "$" + Number((total / brokersCount).toFixed(2)).toLocaleString();
       }
@@ -268,7 +268,6 @@ class BrokersData extends Component {
         Footer: this.calculateTotal,
         accessor: "bookedLoads",
         show: true,
-        minWidth: 130,
         className: "columnBorder",
         Cell: this.editTable
       },

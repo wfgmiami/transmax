@@ -183,7 +183,7 @@ class CompaniesData extends Component {
 
     if (dollarSign || column.id === "purchasePrice") {
       return "$" + Number(total.toFixed(0)).toLocaleString();
-    } else if (column.id === "model") {
+    } else if (column.id === "name") {
       return `Total Companies: ${firmCount}`;
     }
 
@@ -221,6 +221,7 @@ class CompaniesData extends Component {
     return [
       {
         Header: "Name",
+        Footer: this.calculateTotal,
         accessor: "name",
         show: true,
         className: "columnBorder",
@@ -228,7 +229,6 @@ class CompaniesData extends Component {
       },
       {
         Header: "Tax Id",
-        Footer: this.calculateTotal,
         accessor: "taxId",
         show: true,
         className: "columnBorder",
@@ -243,7 +243,6 @@ class CompaniesData extends Component {
       },
       {
         Header: "Incorporated State",
-        Footer: this.calculateTotal,
         accessor: "incorporatedState",
         show: true,
         className: "columnBorder",
