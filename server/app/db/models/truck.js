@@ -4,19 +4,23 @@ const db = require('../db');
 const DataTypes = db.Sequelize;
 
 const Truck = db.define('truck', {
+    truckId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
     model: DataTypes.STRING,
     year: DataTypes.STRING,
-    dateAquired: DataTypes.STRING,
-    pricePaid: DataTypes.INTEGER,
-    milesAquired: DataTypes.INTEGER,
+    purchaseDate: DataTypes.STRING,
+    purchasePrice: DataTypes.INTEGER,
+    originalMiles: DataTypes.INTEGER,
     maintenanceDate: DataTypes.STRING,
     maintenanceType: DataTypes.TEXT,
     maintenanceCost: DataTypes.INTEGER,
     repairDate: DataTypes.STRING,
     repairType: DataTypes.TEXT,
     repairCost: DataTypes.INTEGER,
+    company: DataTypes.STRING
 
 })
 
 module.exports = Truck;
-

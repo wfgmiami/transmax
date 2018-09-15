@@ -12,7 +12,7 @@ export function getFirm() {
   //     type: GET_FIRM,
   //     payload: Firm
   //   });
-  const getFirm = axios.get("/api/firm");
+  const getFirm = axios.get("/api/company");
 
   return dispatch =>
     getFirm.then(response =>
@@ -33,7 +33,7 @@ export function setFirm(firm) {
 
 export function saveFirm(firm) {
   console.log("firm.actions.js saveFirm ", firm);
-  const postFirm = axios.post("/api/firm", { ...firm });
+  const postFirm = axios.post("/api/company", { ...firm });
   return dispatch =>
     postFirm.then(response =>
       dispatch({

@@ -4,10 +4,14 @@ const db = require('../db');
 const DataTypes = db.Sequelize;
 
 const Broker = db.define('broker', {
-    brokerName: DataTypes.STRING,
+    brokerId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    name: DataTypes.STRING,
     email: {
         type: DataTypes.STRING,
-        unique: true,
+        // unique: true,
     },
     phone: {
         type: DataTypes.STRING
@@ -15,11 +19,22 @@ const Broker = db.define('broker', {
     address: {
       type: DataTypes.TEXT
     },
-    totalOrder: {
+    bookedLoads: {
+        type: DataTypes.INTEGER
+    },
+    totalBooked: {
       type: DataTypes.DECIMAL
-    }
+    },
+    totalMiles: {
+      type: DataTypes.INTEGER
+    },
+    avgDollarPerMile: {
+      type: DataTypes.DECIMAL
+    },
 
 
 })
 
 module.exports = Broker;
+
+

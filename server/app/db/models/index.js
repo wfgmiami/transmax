@@ -7,9 +7,11 @@
 const Candidate = require('./candidate');
 const User = require('./user');
 const Trip = require('./trip');
-const Broker = require('./broker');
-const Driver = require('./driver');
 const Shipment = require('./shipment');
+const Driver = require('./driver');
+const Truck = require('./truck');
+const Broker = require('./broker');
+const Company = require('./company');
 
 // Form the associations
 
@@ -32,5 +34,8 @@ module.exports = {
     Trip: Trip,
     Broker: Broker,
     Driver: Driver,
-    Shipment: Shipment
+    Shipment: Shipment,
+    Company: Company,
+    Truck: Truck,
+    Broker: Broker
 };

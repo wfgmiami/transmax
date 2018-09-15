@@ -7,20 +7,20 @@ export const UPDATE_BROKER = "UPDATE BROKER";
 export const SAVE_BROKER = "SAVE BROKER";
 
 export function getBroker() {
-  return dispatch =>
-    dispatch({
-      type: GET_BROKER,
-      payload: Broker
-    });
-  // const getBroker = axios.get("/api/broker");
-
   // return dispatch =>
-  //   getBroker.then(response =>
-  //     dispatch({
-  //       type: GET_BROKER,
-  //       payload: response.data
-  //     })
-  //   );
+  //   dispatch({
+  //     type: GET_BROKER,
+  //     payload: Broker
+  //   });
+  const getBroker = axios.get("/api/broker");
+
+  return dispatch =>
+    getBroker.then(response =>
+      dispatch({
+        type: GET_BROKER,
+        payload: response.data
+      })
+    );
 }
 
 export function setBroker(broker) {

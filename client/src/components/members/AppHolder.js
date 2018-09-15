@@ -7,6 +7,7 @@ import { bindActionCreators } from "redux";
 import TripsData from "./TripsData";
 import ShipmentsData from "./ShipmentsData";
 import DriversData from "./DriversData";
+import CompaniesData from "./CompaniesData";
 import TrucksData from "./TrucksData";
 import BrokersData from "./BrokersData";
 
