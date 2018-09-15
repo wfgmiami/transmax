@@ -25,7 +25,7 @@ const styles = theme => ({
   gridList: {
     // width: 1600,
     // height: 1000,
-    // flex: '1 1 auto',
+    flex: '1 1 auto',
     // overflow: "hidden",
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     // transform: "translateZ(0)"
@@ -61,7 +61,6 @@ class AdvancedGridList extends React.Component {
   }
 
   componentDidMount(){
-    console.log('mount')
     this.addListener()
   }
 
@@ -72,10 +71,7 @@ class AdvancedGridList extends React.Component {
   updatePictureColumns = () => {
     let width = window.innerWidth
 
-    console.log('width', width)
-
     if( width < 960 ){
-      console.log('width setting', width,)
       this.setState({ featured: true })
     }
     else{
@@ -89,12 +85,12 @@ class AdvancedGridList extends React.Component {
     console.log('featured: ', this.state)
     return (
       <div className={classes.root}>
-        <GridList  cellHeight={480} spacing={2} className={classes.gridList}>
+        <GridList  cellHeight={450} spacing={4} className={classes.gridList}>
 
           {tileData.map(tile => (
             <GridListTile
               key={tile.img}
-              style={{width: '100%'}}
+
               cols={this.state.featured ? 2 : 1}
               rows={this.state.featured ? 2 : 1}
             >
