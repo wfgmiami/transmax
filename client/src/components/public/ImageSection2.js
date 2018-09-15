@@ -16,12 +16,16 @@ const styles = theme => ({
     padding: '10px 0 0 10px',
     // justifyContent: "space-around",
     overflow: "hidden",
-    // backgroundColor: theme.palette.background.paper
+    // backgroundColor: theme.palette.background.paper,
+    '& img': {
+      width: '100%'
+    }
+
   },
   gridList: {
     // width: 1600,
     // height: 1000,
-    flex: '1 1 auto',
+    // flex: '1 1 auto',
     // overflow: "hidden",
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     // transform: "translateZ(0)"
@@ -90,6 +94,7 @@ class AdvancedGridList extends React.Component {
           {tileData.map(tile => (
             <GridListTile
               key={tile.img}
+              style={{width: '100%'}}
               cols={this.state.featured ? 2 : 1}
               rows={this.state.featured ? 2 : 1}
             >
