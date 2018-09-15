@@ -13,6 +13,12 @@ const styles = theme => ({
     padding: "15px",
     textAlign: 'center'
   },
+  social: {
+    paddingBottom: "20px",
+    '& img': {
+      width: "30px"
+    }
+  }
 
 });
 
@@ -26,7 +32,18 @@ class Footer extends Component {
           <CopyrightText/>
           &nbsp;&bull;&nbsp;3527 Riverwood Ln, Loveland, OH 45140 &bull; (Main)
           513-680-5334 &nbsp;(Support) 302-723-3275
+          &nbsp;&bull; &nbsp;
+          <span className={classes.social}>
+           <a href="https://www.facebook.com/Transmaxfleet/" target="_blank">
+           <img src="assets/images/logos/facebook.png" alt="My Facebook page"></img></a>
+          </span>
+          &nbsp;
+          <span className={classes.social}>
+           <a href="https://www.instagram.com/transmaxfleet/" target="_blank">
+           <img src="assets/images/logos/instagram.png" alt="My Instagram"></img></a>
+          </span>
       </div>
+
     );
   }
 }

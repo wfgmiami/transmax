@@ -7,6 +7,7 @@ import ApplicationForm from "./ApplicationForm";
 import ApplicationSuccess from "./ApplicationSuccess";
 import Footer from "./Footer";
 import ImageSection from "./ImageSection";
+import ImageSection2 from "./ImageSection2";
 
 const styles = theme => ({
   root: {
@@ -42,9 +43,17 @@ class HomePage extends Component {
       <div>
         <div className={classNames(classes.root, classes.flexContainer)}>
           <div className={classes.flexSection}>
+            <h2 className="py-16">TRUSTED HIGH QUALITY TRANSPORTATION SERVICE</h2><br/>
+              <p className={classes.mainText}>
+                Transmax is a commerical truck fleet operation company based in Cincinnati Ohio.
+                We provide dependable transportation equipment to motor carriers. We partner with AIK Transport LLC to form integrated trucking services that help our customers deliver their cargo safely and on time every day.
+                Our team of drivers and support staff work hard to make sure the company is ready to provide round-the-clock service.
+                The company goal is to provide superior transportation solutions to wide range of customers. We are looking to add new trucks to our fleet and hire more safe and reliable drivers.
+              </p>
+            <br/><br/>
             <h2 className="py-16">WE PAY UP TO $0.55 CENTS PER MILE</h2><br/>
               <p className={classes.mainText}>
-                  Transmax is a transportation company founded by a truck driver that knows what is takes to be a trucker.<br/>
+                  The company is co-founded by a truck driver that knows what is takes to be a trucker.<br/>
                   Do not spend days on the road without being adequately compensated for your hard work - contact us today!<br/>
                   We want our drivers to earn the most money in the industry!<br/>
                   You can just call us at 513-680-5334 or fill in the application form and we will be in touch with you.<br/>
@@ -64,7 +73,7 @@ class HomePage extends Component {
             )}
           </div>
         </div>
-        <ImageSection />
+        <ImageSection2 />
         <Footer />
       </div>
     );
