@@ -24,6 +24,12 @@ Shipment.belongsTo(Broker);
 Driver.hasMany(Trip);
 Trip.belongsTo(Driver);
 
+Truck.hasMany(Trip);
+Trip.belongsTo(Truck);
+
+Company.hasMany(Truck);
+Truck.belongsTo(Company);
+
 Trip.belongsToMany(Shipment, { through: 'loadNumber' });
 Shipment.belongsToMany(Trip, { through: 'loadNumber' });
 

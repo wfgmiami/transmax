@@ -12,7 +12,7 @@ const TrucksData = [
     repairDate: "",
     repairType: "",
     repairCost: 0,
-    company: "AIK Transport"
+    companyId: 1
   },
   {
     truckId: 118,
@@ -27,7 +27,7 @@ const TrucksData = [
     repairDate: "",
     repairType: "",
     repairCost: 0,
-    company: "AIK Transport"
+    companyId: 1
   },
   {
     truckId: 119,
@@ -42,7 +42,7 @@ const TrucksData = [
     repairDate: "",
     repairType: "",
     repairCost: 0,
-    company: "Transmax"
+    companyId: 2
   }
 
 ]

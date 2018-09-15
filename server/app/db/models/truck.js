@@ -19,7 +19,7 @@ const Truck = db.define('truck', {
     repairDate: DataTypes.STRING,
     repairType: DataTypes.TEXT,
     repairCost: DataTypes.INTEGER,
-    company: DataTypes.STRING
+    companyId: DataTypes.INTEGER
 
 })
 
