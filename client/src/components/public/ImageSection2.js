@@ -13,7 +13,7 @@ const styles = theme => ({
     // display: "flex",
     // flexWrap: "wrap",
     background: '#eff0f2',
-    padding: '10px 0 0 10px',
+    padding: '10px 0 0 0',
     // justifyContent: "space-around",
     overflow: "hidden",
     // backgroundColor: theme.palette.background.paper,
@@ -33,7 +33,8 @@ const styles = theme => ({
   titleBar: {
     background:
       "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, " +
-      "rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)"
+      "rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
+
   },
   icon: {
     color: "white"
@@ -43,7 +44,7 @@ const styles = theme => ({
       display: "flex",
       flexWrap: "wrap",
       background: '#eff0f2',
-      padding: '10px 0 0 10px',
+      padding: '10px 0 0 0',
       justifyContent: "space-around",
       // overflow: "hidden",
       // backgroundColor: theme.palette.background.paper,
@@ -85,7 +86,7 @@ class AdvancedGridList extends React.Component {
     console.log('featured: ', this.state)
     return (
       <div className={classes.root}>
-        <GridList  cellHeight={450} spacing={4} className={classes.gridList}>
+        <GridList  cellHeight={this.state.featured ? 250 : 450} spacing={4} className={classes.gridList}>
 
           {tileData.map(tile => (
             <GridListTile
