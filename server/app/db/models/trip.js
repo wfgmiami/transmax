@@ -28,7 +28,7 @@ const Trip = db.define('trip', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    amount: {
+    payment: {
         type: DataTypes.DECIMAL,
         allowNull: false
     },

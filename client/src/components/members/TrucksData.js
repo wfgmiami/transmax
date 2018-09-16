@@ -71,14 +71,30 @@ class TrucksData extends Component {
     console.log(
       "cell info........",
       cellInfo,
-      "id: ",
+      "cellInfo.column.id: ",
+      cellInfo.column.id,
+      'cellInfo.row[cellInfo.column.id]:',
       cellInfo.row[cellInfo.column.id]
     );
     let dollarSign;
+    let fieldValue;
+
     const findEditableRow = this.state.editableRowIndex.find(
       row => row === cellInfo.index
     );
     dollarSign = cellInfo.column.id === "purchasePrice" ? "$" : "";
+
+    if( cellInfo.column.id === 'company.name'){
+      console.log('field: ', this.props.truck[cellInfo.index])
+      fieldValue = this.props.truck[cellInfo.index][
+       'company'] ? this.props.truck[cellInfo.index][
+        'company'].name : '';
+
+    } else {
+      fieldValue = this.props.truck[cellInfo.index][
+        cellInfo.column.id
+      ]
+    }
 
     return findEditableRow || findEditableRow === 0 ? (
       <div
@@ -93,9 +109,7 @@ class TrucksData extends Component {
         dangerouslySetInnerHTML={{
           __html:
             // dollarSign +
-            this.props.truck[cellInfo.index][
-              cellInfo.column.id
-            ].toLocaleString()
+            fieldValue.toLocaleString()
         }}
       />
     ) : (
@@ -110,9 +124,7 @@ class TrucksData extends Component {
         dangerouslySetInnerHTML={{
           __html:
             dollarSign +
-            this.props.truck[cellInfo.index][
-              cellInfo.column.id
-            ].toLocaleString()
+            fieldValue.toLocaleString()
         }}
       />
     );
@@ -313,7 +325,7 @@ class TrucksData extends Component {
       },
       {
         Header: "Company",
-        accessor: "companyId",
+        accessor: "company.name",
         show: false,
         className: "columnBorder",
         Cell: this.editTable
@@ -363,7 +375,7 @@ class TrucksData extends Component {
     // const { data } = this.state;
     const { truck, classes } = this.props;
 
-    // console.log("TripsData.js this.state ", this.state);
+    console.log("TrucksData.js this.props", this.props);
 
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();

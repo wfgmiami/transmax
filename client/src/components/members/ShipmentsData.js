@@ -64,8 +64,10 @@ class ShipmentsData extends Component {
       .then(response => {
         const file = new Blob([response.data], { type: "application/pdf" });
         const fileURL = URL.createObjectURL(file);
-        // console.log("ShipmentsData docLink ", {fileURL});
-        window.open(fileURL);
+        // console.log("getConfirmDoc ", fileURL);
+        let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
+                  width=500,height=500,left=300,top=300`;
+        window.open(fileURL, "", params);
       })
       .catch(error => console.log(error));
   }
@@ -301,9 +303,9 @@ class ShipmentsData extends Component {
         Cell: this.editTable
       },
       {
-        Header: "Miles",
+        Header: "Loaded Miles",
         Footer: this.calculateTotal,
-        accessor: "miles",
+        accessor: "loadedMiles",
         show: true,
         className: "columnBorder",
         Cell: this.editTable
@@ -318,7 +320,7 @@ class ShipmentsData extends Component {
           let payment = d.payment;
           if (typeof d.payment === "string")
             payment = parseFloat(d.payment.replace(/,/g, ""));
-          let dollarPerMile = Number(payment) / Number(d.miles);
+          let dollarPerMile = Number(payment) / Number(d.loadedMiles);
           dollarPerMile = isNaN(dollarPerMile) ? null : dollarPerMile;
           return (
             <div

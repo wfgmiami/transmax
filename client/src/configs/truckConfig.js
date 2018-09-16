@@ -11,7 +11,6 @@ export const truckConfig = [
       repairDate: "",
       repairType: "",
       repairCost: "",
-      company: ""
+      companyId: "",
     }
   ];
-  

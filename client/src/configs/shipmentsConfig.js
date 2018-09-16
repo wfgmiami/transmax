@@ -8,7 +8,7 @@ export const shipmentsConfig = [
       pickUpAddress: "",
       dropOffAddress: "",
       payment: 0,
-      miles: 0,
+      loadedMiles: 0,
       dollarPerMile: 0,
       commodity: "",
       weight: 0,
@@ -16,4 +16,3 @@ export const shipmentsConfig = [
       confirmFilePath: ""
     }
   ];
-  

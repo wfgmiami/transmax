@@ -21,6 +21,9 @@ Trip.belongsTo(Broker);
 Broker.hasMany(Shipment);
 Shipment.belongsTo(Broker);
 
+// Broker.hasMany(Load);
+// Load.belongsTo(Broker);
+
 Driver.hasMany(Trip);
 Trip.belongsTo(Driver);
 

@@ -34,6 +34,7 @@ const styles = theme => ({
     background:
       "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, " +
       "rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
+      wordWrap: 'break-word'
 
   },
   icon: {
@@ -99,6 +100,7 @@ class AdvancedGridList extends React.Component {
 
               <GridListTileBar
                 title={tile.title}
+                subtitle={tile.subtitle}
                 titlePosition="top"
                 actionIcon={
                   <IconButton className={classes.icon}>

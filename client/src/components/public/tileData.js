@@ -1,9 +1,8 @@
 export const tileData = [
   {
     img:"assets/images/cascadia-parkinglot-960x1280.jpg",
-
-    // sizes:"(min-width: 1024px) 1024px, 100vw",
-    title: "Drive Freightliner Cascadia Evolution - electronic log",
+    title: "Drive Freightliner Cascadia Evolution",
+    subtitle: "ELD, dry van loads",
     author: "author",
     // featured: false
   },
@@ -11,9 +10,8 @@ export const tileData = [
 
   {
     img:"assets/images/green-coronado-driver-side-960x1280.jpg",
-
-    // sizes:"(min-width: 1024px) 1024px, 100vw",
-    title: "Drive Freightliner Coronado - paper log",
+    title: "Drive Freightliner Coronado ",
+    subtitle: "paper log, dry van loads",
     author: "author",
     // featured: false
   },
@@ -21,9 +19,8 @@ export const tileData = [
 
   {
     img:"assets/images/cascadia-evo_800x1066.jpg",
-    // srcset:"assets/images/freighliner-cascadia_500x375.jpg 500w, assets/images/freighliner-cascadia_800x600.jpg 800w, assets/images/freighliner-cascadia_1024x768.jpg 1024w",
-    // sizes:"(min-width: 1024px) 1024px, 100vw",
     title: "Drive Freightliner Cascadia",
+    subtitle: "paper log, dry van loads",
     author: "author",
     // featured: false
   },
@@ -33,7 +30,8 @@ export const tileData = [
     img:"assets/images/three-truck-parkinglot-750x1000.jpg",
 
     // sizes:"(min-width: 1024px) 1024px, 100vw",
-    title: "Choose your truck from any currently available",
+    title: "Drive any truck currently available",
+    subtitle: "choose your truck from our fleet",
     author: "author",
     // featured: false
   }

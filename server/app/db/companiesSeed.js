@@ -14,9 +14,9 @@ const CompanyData = [
     numberOfTrailers: "2"
   },
   {
-    taxId: "345",
+    taxId: "83-1446378",
     name: "Transmax LLC",
-    foundedDate: "7/31/2018",
+    foundedDate: "08/01/2018",
     email: "transmaxfleet@gmail.com",
     phone: "513-680-5334",
     address: "3527 Riverwood Ln, Loveland, OH 45140",

@@ -32,7 +32,7 @@ const Shipment = db.define('shipment', {
     payment: {
       type: DataTypes.DECIMAL
     },
-    miles: {
+    loadedMiles: {
       type: DataTypes.INTEGER
     },
     commodity: {

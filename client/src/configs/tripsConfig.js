@@ -4,7 +4,7 @@ export const tripsConfig =  [{
   driverName: "",
   loadNumber: "",
   brokerName: "",
-  amount: 0,
+  payment: 0,
   loadedMiles: 0,
   emptyMiles: 0,
   mileage: 0,

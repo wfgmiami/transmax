@@ -92,7 +92,7 @@ class TripsData extends Component {
     );
 
     switch (cellInfo.column.id) {
-      case "amount":
+      case "payment":
       case "dieselPrice":
       case "lumper":
       case "detention":
@@ -107,7 +107,7 @@ class TripsData extends Component {
         dollarSign = "";
     }
 
-    // if (cellInfo.column.id === "amount") {
+    // if (cellInfo.column.id === "payment") {
     //   dollarSign = "$";
     // }
 
@@ -203,19 +203,19 @@ class TripsData extends Component {
         }
         memo += Number(value);
       } else {
-        let amount = trip[column.id];
-        if (amount === "") amount = 0;
-        if (typeof amount === "string") {
-          amount = parseFloat(trip[column.id].replace(/,/g, ""));
+        let payment = trip[column.id];
+        if (payment === "") payment = 0;
+        if (typeof payment === "string") {
+          payment = parseFloat(trip[column.id].replace(/,/g, ""));
         }
 
-        memo += amount;
+        memo += payment;
       }
 
       return memo;
     }, 0);
 
-    if (dollarSign || column.id === "amount" || column.id === "toll") {
+    if (dollarSign || column.id === "payment" || column.id === "toll") {
       if (column.id === "dollarPerMile") {
         return "$" + Number((total / tripsCount).toFixed(2)).toLocaleString();
       }
@@ -296,9 +296,9 @@ class TripsData extends Component {
         Cell: this.editTable
       },
       {
-        Header: "Amount",
+        Header: "Payment",
         Footer: this.calculateTotal,
-        accessor: "amount",
+        accessor: "payment",
         show: true,
         className: "columnBorder",
         Cell: this.editTable
@@ -344,11 +344,11 @@ class TripsData extends Component {
         show: true,
         className: "columnBorder",
         accessor: d => {
-          let amount = d.amount;
-          if (typeof d.amount === "string")
-            amount = parseFloat(d.amount.replace(/,/g, ""));
+          let payment = d.payment;
+          if (typeof d.payment === "string")
+            payment = parseFloat(d.payment.replace(/,/g, ""));
           let dollarPerMile =
-            Number(amount) / (Number(d.loadedMiles) + Number(d.emptyMiles));
+            Number(payment) / (Number(d.loadedMiles) + Number(d.emptyMiles));
           dollarPerMile = isNaN(dollarPerMile) ? null : dollarPerMile;
           return (
             <div
@@ -418,11 +418,11 @@ class TripsData extends Component {
         show: true,
         className: "columnBorder",
         accessor: d => {
-          let amount = d.amount;
-          if (typeof d.amount === "string")
-            amount = parseFloat(d.amount.replace(/,/g, ""));
+          let payment = d.payment;
+          if (typeof d.payment === "string")
+            payment = parseFloat(d.payment.replace(/,/g, ""));
 
-          let dispatchFee = Number(amount) * Number(dispatchPercent);
+          let dispatchFee = Number(payment) * Number(dispatchPercent);
 
           dispatchFee = isNaN(dispatchFee) ? null : dispatchFee;
 
@@ -498,16 +498,16 @@ class TripsData extends Component {
         show: true,
         className: "columnBorder",
         accessor: d => {
-          let amount = d.amount;
-          if (typeof d.amount === "string")
-            amount = parseFloat(d.amount.replace(/,/g, ""));
+          let payment = d.payment;
+          if (typeof d.payment === "string")
+            payment = parseFloat(d.payment.replace(/,/g, ""));
 
           let totalExpenses =
             ((Number(d.loadedMiles) + Number(d.emptyMiles)) / Number(mpg)) *
               Number(d.dieselPrice) +
             (Number(d.loadedMiles) + Number(d.emptyMiles)) *
               this.state.driverPay +
-            Number(amount) * Number(dispatchPercent) +
+            Number(payment) * Number(dispatchPercent) +
             Number(d.lumper) +
             Number(d.detention) +
             Number(d.detentionDriverPay) +
@@ -534,17 +534,17 @@ class TripsData extends Component {
         show: true,
         className: "columnBorder",
         accessor: d => {
-          let amount = d.amount;
-          if (typeof d.amount === "string")
-            amount = parseFloat(d.amount.replace(/,/g, ""));
+          let payment = d.payment;
+          if (typeof d.payment === "string")
+            payment = parseFloat(d.payment.replace(/,/g, ""));
 
           let profit =
-            amount -
+            payment -
             (((Number(d.loadedMiles) + Number(d.emptyMiles)) / Number(mpg)) *
               Number(d.dieselPrice) +
               (Number(d.loadedMiles) + Number(d.emptyMiles)) *
                 this.state.driverPay +
-              Number(amount) * Number(dispatchPercent) +
+              Number(payment) * Number(dispatchPercent) +
               Number(d.lumper) +
               Number(d.detention) +
               Number(d.detentionDriverPay) +
