@@ -6,8 +6,8 @@ const BrokersData = [
     phone: "",
     email: "",
     bookedLoads: 1,
-    totalBooked: 600,
-    totalMiles: 85,
+    totalPayment: 600,
+    totalLoadedMiles: 85,
     avgDollarPerMile: 0
   },
   {
@@ -17,8 +17,8 @@ const BrokersData = [
     phone: "",
     email: "",
     bookedLoads: 1,
-    totalBooked: 1200,
-    totalMiles: 842,
+    totalPayment: 1200,
+    totalLoadedMiles: 842,
     avgDollarPerMile: 0
   },
   {
@@ -28,8 +28,30 @@ const BrokersData = [
     phone: "",
     email: "",
     bookedLoads: 1,
-    totalBooked: 2700,
-    totalMiles: 970,
+    totalPayment: 2700,
+    totalLoadedMiles: 970,
+    avgDollarPerMile: 0
+  },
+  {
+    brokerId: 4,
+    name: "Amstan Logistics",
+    address: "",
+    phone: "",
+    email: "",
+    bookedLoads: 1,
+    totalPayment: 750,
+    totalLoadedMiles: 357,
+    avgDollarPerMile: 0
+  },
+  {
+    brokerId: 5,
+    name: "Axle Logistics",
+    address: "",
+    phone: "",
+    email: "",
+    bookedLoads: 1,
+    totalPayment: 2050,
+    totalLoadedMiles: 737,
     avgDollarPerMile: 0
   },
 ];

@@ -272,17 +272,17 @@ class BrokersData extends Component {
         Cell: this.editTable
       },
       {
-        Header: "Total Booked",
+        Header: "Total Payment",
         Footer: this.calculateTotal,
-        accessor: "totalBooked",
+        accessor: "totalPayment",
         show: true,
         className: "columnBorder",
         Cell: this.editTable
       },
       {
-        Header: "Total Miles",
+        Header: "Total Loaded Miles",
         Footer: this.calculateTotal,
-        accessor: "totalMiles",
+        accessor: "totalLoadedMiles",
         show: true,
         className: "columnBorder",
         Cell: this.editTable

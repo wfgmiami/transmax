@@ -1,7 +1,7 @@
 import * as Actions from "../../actions/index";
-import { shipmentsConfig } from "../../../configs/shipmentsConfig.js";
+// import { shipmentsConfig } from "../../../configs/shipmentsConfig.js";
 
-const initialState = shipmentsConfig;
+const initialState = {}//shipmentsConfig;
 
 const shipments = (state = initialState, action) => {
   // console.log("shipment reducer actionObj", action, " ", [

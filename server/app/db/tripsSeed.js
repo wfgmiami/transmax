@@ -3,7 +3,8 @@ const path = require('path');
 const trips = [
   {
     bookDate: "08/31/18",
-    truckNumber: "119",
+    truckId: 119,
+    driverId: 1,
     driverName: "Kelvin",
     loadNumber: "0277377",
     brokerName: "Transplace",
@@ -32,7 +33,8 @@ const trips = [
   },
   {
     bookDate: "09/05/18",
-    truckNumber: "119",
+    truckId: 119,
+    driverId: 1,
     driverName: "Kelvin",
     loadNumber: "0012104",
     brokerName: "Reliable Source Logistics",
@@ -61,7 +63,8 @@ const trips = [
   },
   {
     bookDate: "09/07/18",
-    truckNumber: "119",
+    truckId: 119,
+    driverId: 1,
     driverName: "Kelvin",
     loadNumber: "99810",
     brokerName: "Transportation One",
@@ -90,7 +93,8 @@ const trips = [
   },
   {
     bookDate: "09/10/18",
-    truckNumber: "119",
+    truckId: 119,
+    driverId: 1,
     driverName: "Kelvin",
     loadNumber: "AMLO260554LN",
     brokerName: "Amstan Logistics",
@@ -119,7 +123,8 @@ const trips = [
   },
   {
     bookDate: "09/11/18",
-    truckNumber: "119",
+    truckId: 119,
+    driverId: 1,
     driverName: "Kelvin",
     loadNumber: "0123724",
     brokerName: "Axle Logistics",

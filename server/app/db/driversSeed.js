@@ -2,6 +2,7 @@ const path = require('path');
 
 const DriversData = [
   {
+    driverId: 1,
     firstName: "Kelvin",
     lastName: "Miller",
     ssn: "666-66-6666",
@@ -15,6 +16,7 @@ const DriversData = [
     employedBy: "AIK Transport LLC"
   },
   {
+    driverId: 2,
     firstName: "Eric",
     lastName: "Strugaria",
     ssn: "666-66-1111",

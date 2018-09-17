@@ -6,7 +6,8 @@ const DataTypes = db.Sequelize;
 const Broker = db.define('broker', {
     brokerId: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     name: DataTypes.STRING,
     email: {
@@ -22,10 +23,10 @@ const Broker = db.define('broker', {
     bookedLoads: {
         type: DataTypes.INTEGER
     },
-    totalBooked: {
+    totalPayment: {
       type: DataTypes.DECIMAL
     },
-    totalMiles: {
+    totalLoadedMiles: {
       type: DataTypes.INTEGER
     },
     avgDollarPerMile: {

@@ -34,12 +34,12 @@ class Footer extends Component {
           513-680-5334 &nbsp;(Support) 302-723-3275
           &nbsp;&bull; &nbsp;
           <span className={classes.social}>
-           <a href="https://www.facebook.com/Transmaxfleet/" target="_blank">
+           <a href="https://www.facebook.com/Transmaxfleet/" target="_blank" rel="noopener noreferrer">
            <img src="assets/images/logos/facebook.png" alt="My Facebook page"></img></a>
           </span>
           &nbsp;
           <span className={classes.social}>
-           <a href="https://www.instagram.com/transmaxfleet/" target="_blank">
+           <a href="https://www.instagram.com/transmaxfleet/" target="_blank" rel="noopener noreferrer">
            <img src="assets/images/logos/instagram.png" alt="My Instagram"></img></a>
           </span>
       </div>

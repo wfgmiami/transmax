@@ -19,12 +19,7 @@ export const viewItems = (
       </ListItemIcon>
       <ListItemText primary="Trips" />
     </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <StarIcon />
-      </ListItemIcon>
-      <ListItemText primary="Shipments" />
-    </ListItem>
+
     <ListItem button>
       <ListItemIcon>
         <SendIcon />
@@ -37,11 +32,6 @@ export const viewItems = (
       </ListItemIcon>
       <ListItemText primary="Brokers" />
     </ListItem>
-  </div>
-);
-
-export const otherViewItems = (
-  <div>
     <ListItem button>
       <ListItemIcon>
         <TruckIcon />
@@ -54,6 +44,11 @@ export const otherViewItems = (
       </ListItemIcon>
       <ListItemText primary="Drivers" />
     </ListItem>
+  </div>
+);
+
+export const otherViewItems = (
+  <div>
     <ListItem button>
       <ListItemIcon>
         <Financials />

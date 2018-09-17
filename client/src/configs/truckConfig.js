@@ -1,5 +1,6 @@
 export const truckConfig = [
     {
+      id: 0,
       model: "",
       year: "",
       purchaseDate: "",

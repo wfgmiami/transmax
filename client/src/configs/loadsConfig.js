@@ -1,9 +1,13 @@
-export const tripsConfig =  [{
+export const loadsConfig =  [{
   bookDate: "",
-  truckNumber: "",
+  truckId: "",
   driverName: "",
   loadNumber: "",
   brokerName: "",
+  pickUpCityState: "",
+  dropOffCityState: "",
+  pickUpAddress: "",
+  dropOffAddress: "",
   payment: 0,
   loadedMiles: 0,
   emptyMiles: 0,
@@ -22,5 +26,8 @@ export const tripsConfig =  [{
   otherExpenses: 0,
   totalExpense: 0,
   profit: 0,
+  commodity: "",
+  weight: 0,
+  trailer: "",
   confirmFilePath: ""
 }]

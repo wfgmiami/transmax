@@ -2,14 +2,24 @@
 
 const express = require('express');
 const router = new express.Router();
-const Trip = require('../db/models').Trip;
+const Load = require('../db/models').Load;
+const Truck = require('../db/models').Truck;
+const Company = require('../db/models').Company;
+const Driver = require('../db/models').Driver;
 
 router.get('/', (req, res, next) => {
-  Trip.findAll({
-    order:
+  Load.findAll({
+    include: [{
+      model: Truck,
+      include: [{
+        model: Company
+      }],
+      order:
       [['bookDate', 'ASC']]
+    }],
+
   })
-    .then( trips => res.json( trips ))
+    .then( loads => res.json( loads ))
     .catch( next )
 })
 

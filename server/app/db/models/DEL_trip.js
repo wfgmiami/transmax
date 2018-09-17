@@ -9,24 +9,31 @@ const Trip = db.define('trip', {
         allowNull: false
 
     },
-    truckNumber: {
+    truckId: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    driverName: {
-        type: DataTypes.STRING,
+    driverId: {
+        type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
             notEmpty: true
         }
     },
+    driverName: {
+        type: DataTypes.STRING,
+    },
     loadNumber: {
         type: DataTypes.STRING,
         allowNull: false
     },
+    brokeId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
     brokerName: {
         type: DataTypes.STRING,
-        allowNull: false
+
     },
     payment: {
         type: DataTypes.DECIMAL,

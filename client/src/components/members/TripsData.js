@@ -9,7 +9,7 @@ import { withRouter } from "react-router-dom";
 import axios from "axios";
 import "react-table/react-table.css";
 import { Datatable } from "./Datatable";
-import { tripsConfig } from "../../configs/tripsConfig";
+import { loadsConfig } from "../../configs/loadsConfig";
 import ColumnChooser from "./ColumnChooser.js";
 import SideMenu from "./SideMenu";
 import Inputs from "./Inputs";
@@ -17,7 +17,7 @@ import AddSaveBtn from "./AddSaveBtn";
 
 import * as loadActions from "../../store/actions/load";
 
-const copyOfDatable = [].concat(Datatable);
+// const copyOfDatable = [].concat(Datatable);
 
 const styles = theme => ({
   root: {
@@ -35,7 +35,7 @@ class TripsData extends Component {
   constructor() {
     super();
     this.state = {
-      data: copyOfDatable,
+      // data: copyOfDatable,
       columns: [],
       editableRowIndex: [],
       driverPay: 0.55
@@ -52,6 +52,7 @@ class TripsData extends Component {
   }
 
   componentDidMount() {
+    console.log("TripsData componentDidMount ");
     this.props.getTrip();
   }
 
@@ -83,13 +84,30 @@ class TripsData extends Component {
     // console.log(
     //   "cell info........",
     //   cellInfo,
-    //   "id: ",
+    //   "cellInfo.column.id ",
+    //   cellInfo.column.id,
+    //   'cellInfo.row[cellInfo.column.id]:',
     //   cellInfo.row[cellInfo.column.id]
     // );
+
     let dollarSign;
+    let fieldValue;
     const findEditableRow = this.state.editableRowIndex.find(
       row => row === cellInfo.index
     );
+
+    if( cellInfo.column.id === 'truck.company.name'){
+      console.log('field: ', this.props.trip[cellInfo.index])
+      fieldValue = this.props.trip[cellInfo.index][
+       'truck'] ? this.props.trip[cellInfo.index][
+        'truck']['company'].name : '';
+
+    } else {
+      fieldValue = this.props.trip[cellInfo.index][
+        cellInfo.column.id
+      ]
+    }
+
 
     switch (cellInfo.column.id) {
       case "payment":
@@ -124,7 +142,7 @@ class TripsData extends Component {
         dangerouslySetInnerHTML={{
           __html:
             // dollarSign +
-            this.props.trip[cellInfo.index][cellInfo.column.id].toLocaleString()
+            fieldValue.toLocaleString()
         }}
       />
     ) : (
@@ -139,7 +157,7 @@ class TripsData extends Component {
         dangerouslySetInnerHTML={{
           __html:
             dollarSign +
-            this.props.trip[cellInfo.index][cellInfo.column.id].toLocaleString()
+            fieldValue.toLocaleString()
         }}
       />
     );
@@ -178,7 +196,7 @@ class TripsData extends Component {
   }
 
   addEmptyRow() {
-    let emptyRow = Object.assign({}, ...tripsConfig);
+    let emptyRow = Object.assign({}, ...loadsConfig);
     // console.log("TripsData.js addEmptyRow ", emptyRow);
     this.props.setTrip(emptyRow);
     // this.props.setTrip({
@@ -268,8 +286,8 @@ class TripsData extends Component {
         Cell: this.editTable
       },
       {
-        Header: "Truck Number",
-        accessor: "truckNumber",
+        Header: "Truck Id",
+        accessor: "truckId",
         show: false,
         className: "columnBorder",
         Cell: this.editTable
@@ -277,6 +295,13 @@ class TripsData extends Component {
       {
         Header: "Driver",
         accessor: "driverName",
+        show: false,
+        className: "columnBorder",
+        Cell: this.editTable
+      },
+      {
+        Header: "Company",
+        accessor: "truck.company.name",
         show: false,
         className: "columnBorder",
         Cell: this.editTable
@@ -292,6 +317,58 @@ class TripsData extends Component {
         Header: "Broker",
         accessor: "brokerName",
         show: true,
+        className: "columnBorder",
+        Cell: this.editTable
+      },
+      {
+        Header: "Pick Up",
+        accessor: "pickUpCityState",
+        show: true,
+        className: "columnBorder",
+        minWidth: 130,
+        Cell: this.editTable
+      },
+      {
+        Header: "Drop Off",
+        accessor: "dropOffCityState",
+        show: true,
+        className: "columnBorder",
+        minWidth: 130,
+        Cell: this.editTable
+      },
+      {
+        Header: "Origin",
+        accessor: "pickUpAddress",
+        show: false,
+        className: "columnBorder",
+        minWidth: 240,
+        Cell: this.editTable
+      },
+      {
+        Header: "Destination",
+        accessor: "dropOffAddress",
+        show: false,
+        className: "columnBorder",
+        minWidth: 240,
+        Cell: this.editTable
+      },
+      {
+        Header: "Commodity",
+        accessor: "commodity",
+        show: false,
+        Cell: this.editTable
+      },
+      {
+        Header: "Weight",
+        accessor: "weight",
+        show: false,
+        className: "columnBorder",
+        Cell: this.editTable
+      },
+      {
+        Header: "Trailer",
+        accessor: "trailer",
+        show: false,
         className: "columnBorder",
         Cell: this.editTable
       },
@@ -626,7 +703,7 @@ class TripsData extends Component {
     // const { data } = this.state;
     const { trip, classes } = this.props;
 
-    // console.log("TripsData.js this.props ", this.props);
+    console.log("TripsData.js this.props ", this.props);
 
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();

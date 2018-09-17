@@ -4,9 +4,10 @@ const db = require('../db');
 const DataTypes = db.Sequelize;
 
 const Truck = db.define('truck', {
-    truckId: {
+    id: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        primaryKey: true
     },
     model: DataTypes.STRING,
     year: DataTypes.STRING,

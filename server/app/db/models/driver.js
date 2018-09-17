@@ -4,6 +4,11 @@ const db = require('../db');
 const DataTypes = db.Sequelize;
 
 const Driver = db.define('driver', {
+    driverId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      unique: true
+    },
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
     ssn: {

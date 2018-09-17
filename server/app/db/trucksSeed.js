@@ -1,6 +1,6 @@
 const TrucksData = [
   {
-    truckId: 117,
+    id: 117,
     model: "Volvo VNL670",
     year: "2007",
     purchaseDate: "06/01/2013",
@@ -15,7 +15,7 @@ const TrucksData = [
     companyId: 1
   },
   {
-    truckId: 118,
+    id: 118,
     model: "Fraightliner Coronado",
     year: "2014",
     purchaseDate: "11/1/2017",
@@ -30,7 +30,7 @@ const TrucksData = [
     companyId: 1
   },
   {
-    truckId: 119,
+    id: 119,
     model: "Fraightliner Cascadia",
     year: "2015",
     purchaseDate: "8/30/2018",

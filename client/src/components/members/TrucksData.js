@@ -236,6 +236,14 @@ class TrucksData extends Component {
 
     return [
       {
+        Header: "Truck Id",
+        Footer: this.calculateTotal,
+        accessor: "id",
+        show: true,
+        className: "columnBorder",
+        Cell: this.editTable
+      },
+      {
         Header: "Model",
         Footer: this.calculateTotal,
         accessor: "model",

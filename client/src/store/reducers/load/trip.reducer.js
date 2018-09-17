@@ -1,13 +1,13 @@
 import * as Actions from "../../actions/index";
-import { tripsConfig } from "../../../configs/tripsConfig.js";
+import { loadsConfig } from "../../../configs/loadsConfig.js";
 
-const initialState = tripsConfig;
+const initialState = loadsConfig;
 
 const trips = (state = initialState, action) => {
-  // console.log("trip reducer actionObj", action, " ", [
-  //   ...state,
-  //   { ...action.trip }
-  // ]);
+  console.log("trip reducer actionObj", action, " ", [
+    ...state,
+    { ...action.trip }
+  ]);
   switch (action.type) {
     case Actions.GET_TRIP: {
       return [...action.payload];

@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import TripsData from "./TripsData";
-import ShipmentsData from "./ShipmentsData";
 import DriversData from "./DriversData";
 import CompaniesData from "./CompaniesData";
 import TrucksData from "./TrucksData";
@@ -35,9 +34,6 @@ function AppHolder(props) {
   switch (menuItem) {
     case "Trips":
       showComponent = <TripsData />;
-      break;
-    case "Shipments":
-      showComponent = <ShipmentsData />;
       break;
     case "Companies":
       showComponent = <CompaniesData />;

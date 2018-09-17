@@ -6,45 +6,37 @@
 
 const Candidate = require('./candidate');
 const User = require('./user');
-const Trip = require('./trip');
-const Shipment = require('./shipment');
 const Driver = require('./driver');
 const Truck = require('./truck');
 const Broker = require('./broker');
 const Company = require('./company');
+const Load = require('./load');
 
 // Form the associations
 
-Broker.hasMany(Trip);
-Trip.belongsTo(Broker);
+Broker.hasMany(Load);
+Load.belongsTo(Broker);
 
-Broker.hasMany(Shipment);
-Shipment.belongsTo(Broker);
+Driver.hasMany(Load);
+Load.belongsTo(Driver);
 
-// Broker.hasMany(Load);
-// Load.belongsTo(Broker);
-
-Driver.hasMany(Trip);
-Trip.belongsTo(Driver);
-
-Truck.hasMany(Trip);
-Trip.belongsTo(Truck);
+Truck.hasMany(Load);
+Load.belongsTo(Truck);
 
 Company.hasMany(Truck);
 Truck.belongsTo(Company);
 
-Trip.belongsToMany(Shipment, { through: 'loadNumber' });
-Shipment.belongsToMany(Trip, { through: 'loadNumber' });
+// Trip.belongsToMany(Shipment, { through: 'loadNumber' });
+// Shipment.belongsToMany(Trip, { through: 'loadNumber' });
 
 
 module.exports = {
     Candidate: Candidate,
     User: User,
-    Trip: Trip,
     Broker: Broker,
     Driver: Driver,
-    Shipment: Shipment,
     Company: Company,
     Truck: Truck,
-    Broker: Broker
+    Broker: Broker,
+    Load: Load
 };

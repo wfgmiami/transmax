@@ -8,14 +8,11 @@ const chalk = require('chalk');
 // to get access to the User model.
 
 const User = require('./models').User;
-const Trip = require('./models').Trip
-const Shipment = require('./models').Shipment;
+const Load = require('./models').Load
 const Driver = require('./models').Driver;
 const Company = require('./models').Company;
 const Broker = require('./models').Broker;
 const Truck = require('./models').Truck;
-// const trips = require('./tripsSeed');
-// const shipments = require('./shipmentsSeed');
 const users = require('./usersSeed');
 const drivers = require('./driversSeed');
 const companies = require('./companiesSeed');
@@ -27,17 +24,13 @@ const loads = require('./loadsSeed');
 module.exports = db.sync({ force: true })
   .then( () => console.log(chalk.yellow('Beginning seed ')))
   .then( () => Promise.all(users.map( user => User.create( user ))))
-
-  // .then( () => Promise.all(trips.map( trip => Trip.create( trip ))))
-  // .then( () => Promise.all(shipments.map( shipment => Shipment.create( shipment ))))
-
-  .then( () => Promise.all(loads.map( trip => Trip.create( trip ))))
-  .then( () => Promise.all(loads.map( shipment => Shipment.create( shipment ))))
-
+  .then( () => Promise.all(brokers.map( broker => Broker.create( broker ))))
   .then( () => Promise.all(drivers.map( driver => Driver.create( driver ))))
   .then( () => Promise.all(companies.map( company => Company.create( company ))))
-  .then( () => Promise.all(brokers.map( broker => Broker.create( broker ))))
   .then( () => Promise.all(trucks.map( truck => Truck.create( truck ))))
+  .then( () => console.log(chalk.green('Sequelize models synced before LOADS')))
+
+  .then( () => Promise.all(loads.map( load => Load.create( load ))))
   .then( () => console.log(chalk.green('Sequelize models synced to PostgreSQL')))
 
 
