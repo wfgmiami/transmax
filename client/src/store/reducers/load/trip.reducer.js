@@ -13,6 +13,24 @@ const trips = (state = initialState, action) => {
       return [...action.payload];
     }
 
+    case Actions.GET_TRIP_DATE_RANGE: {
+      console.log("trip reducer action.payload ", ...action.payload);
+      const startDate = action.payload.startDate;
+      const endDate = action.payload.endDate;
+
+      const filteredDateRange = Datatable.filter((item, index) => {
+        let dt = new Date(item.bookDate);
+        // console.log('dt', dt, 'start date', new Date(startDate), dt > new Date(startDate))
+        return dt >= new Date(startDate) && dt <= new Date(endDate);
+      });
+
+      console.log("filteredDateRange", filteredDateRange);
+
+      return [...filteredDateRange];
+
+      // return [...action.payload];
+    }
+
     case Actions.SET_TRIP: {
       return [...state, { ...action.trip }];
     }

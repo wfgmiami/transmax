@@ -49,10 +49,11 @@ class DateFilter extends React.Component {
 
   handleCloseCancel = () => {
     this.setState({ open: false });
-    this.props.setInputVariableValue(this.state.originalInputs);
+    this.props.setDateRangeValue(this.state.originalInputs);
   };
 
   handleCloseOK = () => {
+    this.props.getTripDateRange(this.props.dateRange);
     this.setState({ open: false });
   };
 
@@ -82,9 +83,9 @@ class DateFilter extends React.Component {
           onClose={this.handleClose}
         >
           <DialogContent>
-            <form className={classes.container}>
+            <div className={classes.container}>
               <DatePicker />
-            </form>
+            </div>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleCloseCancel} color="primary">
@@ -106,15 +107,15 @@ DateFilter.propTypes = {
 
 function mapStateToProps({ load }) {
   return {
-    inputVariable: load.inputVariable
+    dateRange: load.dateRange
   };
 }
-
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
-      setInputVariableValue: loadActions.setInputVariableValue,
-      setInputVariable: loadActions.setInputVariable
+      setDateRangeValue: loadActions.setDateRangeValue,
+      setDateRange: loadActions.setDateRange,
+      getTripDateRange: loadActions.getTripDateRange
     },
     dispatch
   );

@@ -5,6 +5,7 @@ export const GET_TRIP = "GET TRIP";
 export const SET_TRIP = "SET TRIP";
 export const UPDATE_TRIP = "UPDATE TRIP";
 export const SAVE_TRIPS = "SAVE TRIPS";
+export const GET_TRIP_DATE_RANGE = "GET TRIP DATE RANGE";
 
 export function getTrip() {
   // return dispatch =>
@@ -50,3 +51,22 @@ export function updateTrip(trips) {
     trips
   };
 }
+
+export function getTripDateRange(dateRange) {
+  return dispatch =>
+    dispatch({
+      type: GET_TRIP_DATE_RANGE,
+      payload: dateRange
+    });
+
+  // const getTripDateRange = axios.get("/api/trip/:dateRange");
+
+  // return dispatch =>
+  //   getTripDateRange.then(response =>
+  //     dispatch({
+  //       type: GET_TRIP_DATE_RANGE,
+  //       payload: response.data
+  //     })
+  //   );
+}
+

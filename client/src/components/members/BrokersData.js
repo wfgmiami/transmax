@@ -11,7 +11,7 @@ import { Datatable } from "./Datatable";
 import { brokerConfig } from "../../configs/brokerConfig";
 import ColumnChooser from "./ColumnChooser.js";
 import SideMenu from "./SideMenu";
-import AddSaveBtn from "./AddSaveBtn";
+import ActionBtn from "./ActionBtn";
 import axios from "axios";
 
 import * as companyActions from "../../store/actions/company";
@@ -361,7 +361,7 @@ class BrokersData extends Component {
       <div className={classes.root}>
         <Toolbar className={classes.toolbar}>
           <SideMenu />
-          <AddSaveBtn saveRows={this.saveRows} addEmptyRow={this.addEmptyRow} />
+          <ActionBtn saveRows={this.saveRows} addEmptyRow={this.addEmptyRow} />
           &nbsp;
           <ColumnChooser
             columns={columns}
