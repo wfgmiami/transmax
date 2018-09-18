@@ -15,7 +15,7 @@ const createApplication = () => {
 };
 
 const startServer = () => {
-    var PORT = process.env.PORT || 5000;
+    var PORT = process.env.PORT || 3000;
 
     server.listen(PORT, () => {
         console.log(chalk.blue('Server started on port', chalk.magenta(PORT)));

@@ -1,0 +1,921 @@
+Opening connection to PostgreSQL: transmaxdb.csrfjhpv3e3t.us-east-1.rds.amazonaws.com pass transmax transmaxuser transmax
+Mon, 17 Sep 2018 21:27:41 GMT sequelize deprecated String based operators are now deprecated. Please use Symbol based operators for better security, read more at http://docs.sequelizejs.com/manual/tutorial/querying.html#operators at node_modules/sequelize/lib/sequelize.js:242:13
+Executing (default): DROP TABLE IF EXISTS "loads" CASCADE;
+Executing (default): DROP TABLE IF EXISTS "brokers" CASCADE;
+Executing (default): DROP TABLE IF EXISTS "trucks" CASCADE;
+Executing (default): DROP TABLE IF EXISTS "companies" CASCADE;
+Executing (default): DROP TABLE IF EXISTS "drivers" CASCADE;
+Executing (default): DROP TABLE IF EXISTS "users" CASCADE;
+Executing (default): DROP TABLE IF EXISTS "candidates" CASCADE;
+Executing (default): DROP TABLE IF EXISTS "candidates" CASCADE;
+Executing (default): CREATE TABLE IF NOT EXISTS "candidates" ("id"   SERIAL , "firstName" VARCHAR(255), "lastName" VARCHAR(255), "email" VARCHAR(255) UNIQUE, "phone" VARCHAR(255), "driversLicense" VARCHAR(255), "experience" VARCHAR(255), "city" VARCHAR(255), "state" VARCHAR(255), "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("id"));
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'candidates' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+Executing (default): DROP TABLE IF EXISTS "users" CASCADE;
+Executing (default): CREATE TABLE IF NOT EXISTS "users" ("id"   SERIAL , "userName" VARCHAR(255) UNIQUE, "password" VARCHAR(255) NOT NULL, "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("id"));
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'users' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+Executing (default): DROP TABLE IF EXISTS "drivers" CASCADE;
+Executing (default): CREATE TABLE IF NOT EXISTS "drivers" ("id"   SERIAL , "driverId" INTEGER NOT NULL UNIQUE, "firstName" VARCHAR(255), "lastName" VARCHAR(255), "ssn" VARCHAR(255) NOT NULL, "driversLicense" VARCHAR(255) NOT NULL, "email" VARCHAR(255) UNIQUE, "phone" VARCHAR(255), "hireDate" VARCHAR(255) NOT NULL, "address" TEXT, "currentRate" DECIMAL, "earnings" DECIMAL, "employedBy" VARCHAR(255), "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("id"));
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'drivers' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+Executing (default): DROP TABLE IF EXISTS "companies" CASCADE;
+Executing (default): CREATE TABLE IF NOT EXISTS "companies" ("id"   SERIAL , "taxId" VARCHAR(255) NOT NULL, "name" VARCHAR(255), "foundedDate" VARCHAR(255), "incorporatedState" VARCHAR(255), "email" VARCHAR(255) UNIQUE, "phone" VARCHAR(255), "address" TEXT, "numberOfTrucks" INTEGER, "numberOfTrailers" INTEGER, "numberOfEmployees" INTEGER, "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("id"));
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'companies' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+Executing (default): DROP TABLE IF EXISTS "trucks" CASCADE;
+Executing (default): CREATE TABLE IF NOT EXISTS "trucks" ("id" INTEGER NOT NULL , "model" VARCHAR(255), "year" VARCHAR(255), "purchaseDate" VARCHAR(255), "purchasePrice" INTEGER, "originalMiles" INTEGER, "maintenanceDate" VARCHAR(255), "maintenanceType" TEXT, "maintenanceCost" INTEGER, "repairDate" VARCHAR(255), "repairType" TEXT, "repairCost" INTEGER, "companyId" INTEGER REFERENCES "companies" ("id") ON DELETE CASCADE ON UPDATE CASCADE, "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("id"));
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'trucks' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+Executing (default): DROP TABLE IF EXISTS "brokers" CASCADE;
+Executing (default): CREATE TABLE IF NOT EXISTS "brokers" ("id"   SERIAL , "brokerId" INTEGER NOT NULL UNIQUE, "name" VARCHAR(255), "email" VARCHAR(255), "phone" VARCHAR(255), "address" TEXT, "bookedLoads" INTEGER, "totalPayment" DECIMAL, "totalLoadedMiles" INTEGER, "avgDollarPerMile" DECIMAL, "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("id"));
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'brokers' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+Executing (default): DROP TABLE IF EXISTS "loads" CASCADE;
+Executing (default): CREATE TABLE IF NOT EXISTS "loads" ("id"   SERIAL , "bookDate" VARCHAR(255) NOT NULL, "driverName" VARCHAR(255), "loadNumber" VARCHAR(255) NOT NULL, "brokerName" VARCHAR(255), "pickUpCityState" TEXT NOT NULL, "dropOffCityState" TEXT NOT NULL, "pickUpAddress" TEXT NOT NULL, "dropOffAddress" TEXT NOT NULL, "payment" DECIMAL NOT NULL, "loadedMiles" INTEGER NOT NULL, "emptyMiles" INTEGER NOT NULL, "mileage" INTEGER, "dollarPerMile" DECIMAL, "dieselPrice" DECIMAL, "fuelCost" DECIMAL, "driverPay" DECIMAL, "dispatchFee" DECIMAL, "lumper" DECIMAL, "detention" DECIMAL, "detentionDriverPay" DECIMAL, "lateFee" DECIMAL, "toll" DECIMAL, "roadMaintenance" DECIMAL, "otherExpenses" DECIMAL, "totalExpenses" DECIMAL, "profit" DECIMAL, "commodity" TEXT, "weight" INTEGER, "trailer" TEXT, "confirmFilePath" VARCHAR(255), "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, "brokerId" INTEGER REFERENCES "brokers" ("id") ON DELETE SET NULL ON UPDATE CASCADE, "driverId" INTEGER REFERENCES "drivers" ("id") ON DELETE SET NULL ON UPDATE CASCADE, "truckId" INTEGER REFERENCES "trucks" ("id") ON DELETE SET NULL ON UPDATE CASCADE, PRIMARY KEY ("id"));
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'loads' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+Beginning seed 
+Executing (default): INSERT INTO "users" ("id","userName","password","createdAt","updatedAt") VALUES (DEFAULT,'apenchev','fa36300440ca7e0baffa3689cc8b6a93','2018-09-17 21:27:41.448 +00:00','2018-09-17 21:27:41.448 +00:00') RETURNING *;
+Executing (default): INSERT INTO "users" ("id","userName","password","createdAt","updatedAt") VALUES (DEFAULT,'akarapeev','9bc7ae9eae3b17ee68eeb1bfb126853f','2018-09-17 21:27:41.449 +00:00','2018-09-17 21:27:41.449 +00:00') RETURNING *;
+Executing (default): INSERT INTO "brokers" ("id","brokerId","name","email","phone","address","bookedLoads","totalPayment","totalLoadedMiles","avgDollarPerMile","createdAt","updatedAt") VALUES (DEFAULT,1,'Transplace','','','',1,600,85,0,'2018-09-17 21:27:41.464 +00:00','2018-09-17 21:27:41.464 +00:00') RETURNING *;
+Executing (default): INSERT INTO "brokers" ("id","brokerId","name","email","phone","address","bookedLoads","totalPayment","totalLoadedMiles","avgDollarPerMile","createdAt","updatedAt") VALUES (DEFAULT,2,'TransportationOne','','','',1,1200,842,0,'2018-09-17 21:27:41.464 +00:00','2018-09-17 21:27:41.464 +00:00') RETURNING *;
+Executing (default): INSERT INTO "brokers" ("id","brokerId","name","email","phone","address","bookedLoads","totalPayment","totalLoadedMiles","avgDollarPerMile","createdAt","updatedAt") VALUES (DEFAULT,3,'Reliable Source Logistics','','','',1,2700,970,0,'2018-09-17 21:27:41.465 +00:00','2018-09-17 21:27:41.465 +00:00') RETURNING *;
+Executing (default): INSERT INTO "brokers" ("id","brokerId","name","email","phone","address","bookedLoads","totalPayment","totalLoadedMiles","avgDollarPerMile","createdAt","updatedAt") VALUES (DEFAULT,4,'Amstan Logistics','','','',1,750,357,0,'2018-09-17 21:27:41.465 +00:00','2018-09-17 21:27:41.465 +00:00') RETURNING *;
+Executing (default): INSERT INTO "brokers" ("id","brokerId","name","email","phone","address","bookedLoads","totalPayment","totalLoadedMiles","avgDollarPerMile","createdAt","updatedAt") VALUES (DEFAULT,5,'Axle Logistics','','','',1,2050,737,0,'2018-09-17 21:27:41.465 +00:00','2018-09-17 21:27:41.465 +00:00') RETURNING *;
+Executing (default): INSERT INTO "drivers" ("id","driverId","firstName","lastName","ssn","driversLicense","email","phone","hireDate","address","currentRate","earnings","employedBy","createdAt","updatedAt") VALUES (DEFAULT,1,'Kelvin','Miller','666-66-6666','123456','kelvin@gmail.com','568-456-7983','05/01/18','','0.55','20000','AIK Transport LLC','2018-09-17 21:27:41.486 +00:00','2018-09-17 21:27:41.486 +00:00') RETURNING *;
+Executing (default): INSERT INTO "drivers" ("id","driverId","firstName","lastName","ssn","driversLicense","email","phone","hireDate","address","currentRate","earnings","employedBy","createdAt","updatedAt") VALUES (DEFAULT,2,'Eric','Strugaria','666-66-1111','654321','eric@gmail.com','568-358-1110','07/15/18','','0.55','12500','AIK Transport LLC','2018-09-17 21:27:41.487 +00:00','2018-09-17 21:27:41.487 +00:00') RETURNING *;
+Executing (default): INSERT INTO "companies" ("id","taxId","name","foundedDate","incorporatedState","email","phone","address","numberOfTrucks","numberOfTrailers","numberOfEmployees","createdAt","updatedAt") VALUES (DEFAULT,'123','AIK Transport LLC','06/01/2013','OH','aiktransport@gmail.com','513-680-5334','3527 Riverwood Ln, Loveland, OH 45140','2','2','3','2018-09-17 21:27:41.494 +00:00','2018-09-17 21:27:41.494 +00:00') RETURNING *;
+Executing (default): INSERT INTO "companies" ("id","taxId","name","foundedDate","incorporatedState","email","phone","address","numberOfTrucks","numberOfTrailers","numberOfEmployees","createdAt","updatedAt") VALUES (DEFAULT,'83-1446378','Transmax LLC','08/01/2018','OH','transmaxfleet@gmail.com','513-680-5334','3527 Riverwood Ln, Loveland, OH 45140','1','1','0','2018-09-17 21:27:41.495 +00:00','2018-09-17 21:27:41.495 +00:00') RETURNING *;
+Executing (default): INSERT INTO "trucks" ("id","model","year","purchaseDate","purchasePrice","originalMiles","maintenanceDate","maintenanceType","maintenanceCost","repairDate","repairType","repairCost","companyId","createdAt","updatedAt") VALUES (117,'Volvo VNL670','2007','06/01/2013',40000,405000,'','',0,'','',0,1,'2018-09-17 21:27:41.504 +00:00','2018-09-17 21:27:41.504 +00:00') RETURNING *;
+Executing (default): INSERT INTO "trucks" ("id","model","year","purchaseDate","purchasePrice","originalMiles","maintenanceDate","maintenanceType","maintenanceCost","repairDate","repairType","repairCost","companyId","createdAt","updatedAt") VALUES (118,'Fraightliner Coronado','2014','11/1/2017',0,0,'','',0,'','',0,1,'2018-09-17 21:27:41.504 +00:00','2018-09-17 21:27:41.504 +00:00') RETURNING *;
+Executing (default): INSERT INTO "trucks" ("id","model","year","purchaseDate","purchasePrice","originalMiles","maintenanceDate","maintenanceType","maintenanceCost","repairDate","repairType","repairCost","companyId","createdAt","updatedAt") VALUES (119,'Fraightliner Cascadia','2015','8/30/2018',67500,350000,'','',0,'','',0,2,'2018-09-17 21:27:41.504 +00:00','2018-09-17 21:27:41.504 +00:00') RETURNING *;
+Sequelize models synced before LOADS
+Executing (default): INSERT INTO "loads" ("id","bookDate","driverName","loadNumber","brokerName","pickUpCityState","dropOffCityState","pickUpAddress","dropOffAddress","payment","loadedMiles","emptyMiles","mileage","dollarPerMile","dieselPrice","fuelCost","driverPay","dispatchFee","lumper","detention","detentionDriverPay","lateFee","toll","roadMaintenance","otherExpenses","profit","commodity","weight","trailer","confirmFilePath","createdAt","updatedAt","brokerId","driverId","truckId") VALUES (DEFAULT,'08/31/18','Kelvin','0277377','Transplace','Columbus, IN','Louisville, KY','4411 N Long Rd, Columbus, IN 47203','2000 Nelson Miller Pkwy, Louisville, KY 40223',600,85,207,0,0,3.22,0,160.6,0,0,0,0,0,0,0,0,0,'NA',38738,'Dry Van','/home/ubuntu/transmax/server/app/db/brokerConfirmations/083118_Transplace.pdf','2018-09-17 21:27:41.513 +00:00','2018-09-17 21:27:41.513 +00:00',1,1,119) RETURNING *;
+Executing (default): INSERT INTO "loads" ("id","bookDate","driverName","loadNumber","brokerName","pickUpCityState","dropOffCityState","pickUpAddress","dropOffAddress","payment","loadedMiles","emptyMiles","mileage","dollarPerMile","dieselPrice","fuelCost","driverPay","dispatchFee","lumper","detention","detentionDriverPay","lateFee","toll","roadMaintenance","otherExpenses","profit","commodity","weight","trailer","confirmFilePath","createdAt","updatedAt","brokerId","driverId","truckId") VALUES (DEFAULT,'09/05/18','Kelvin','0012104','Reliable Source Logistics','Orestes, IN','Concord, NH','120 W Oak St, Orestes, IN 46063','Concord, NH 03301',2700,970,136,0,0,3.22,0,0,0,0,0,0,0,0,0,0,0,'Canned Foods',42120,'Van or Reefer','/home/ubuntu/transmax/server/app/db/brokerConfirmations/090518_reliableSourceLogistics.pdf','2018-09-17 21:27:41.513 +00:00','2018-09-17 21:27:41.513 +00:00',2,1,119) RETURNING *;
+Executing (default): INSERT INTO "loads" ("id","bookDate","driverName","loadNumber","brokerName","pickUpCityState","dropOffCityState","pickUpAddress","dropOffAddress","payment","loadedMiles","emptyMiles","mileage","dollarPerMile","dieselPrice","fuelCost","driverPay","dispatchFee","lumper","detention","detentionDriverPay","lateFee","toll","roadMaintenance","otherExpenses","profit","commodity","weight","trailer","confirmFilePath","createdAt","updatedAt","brokerId","driverId","truckId") VALUES (DEFAULT,'09/07/18','Kelvin','99810','Transportation One','Rutland, VT','Cincinnati, OH','92 Park Street, Rutland, VT 05701','535 Shepherd Ave, Cincinnati, OH 45215',1200,842,105,0,0,3.22,0,0,0,0,0,0,0,0,0,0,0,'Crackers FSC',12680,'53V','/home/ubuntu/transmax/server/app/db/brokerConfirmations/090718_transportationOne.pdf','2018-09-17 21:27:41.514 +00:00','2018-09-17 21:27:41.514 +00:00',3,1,119) RETURNING *;
+Executing (default): INSERT INTO "loads" ("id","bookDate","driverName","loadNumber","brokerName","pickUpCityState","dropOffCityState","pickUpAddress","dropOffAddress","payment","loadedMiles","emptyMiles","mileage","dollarPerMile","dieselPrice","fuelCost","driverPay","dispatchFee","lumper","detention","detentionDriverPay","lateFee","toll","roadMaintenance","otherExpenses","profit","commodity","weight","trailer","confirmFilePath","createdAt","updatedAt","brokerId","driverId","truckId") VALUES (DEFAULT,'09/10/18','Kelvin','AMLO260554LN','Amstan Logistics','Fairfield, OH','Pleasant Prairie, WI','4255 Thunderbird Lane, Fairfield, OH 45014','13305 104th St, Pleasant Prairie, WI 53158',750,357,5,0,0,3.22,0,0,0,0,0,0,0,0,0,0,0,'NA',30687,'53V/R','/home/ubuntu/transmax/server/app/db/brokerConfirmations/090718_transportationOne.pdf','2018-09-17 21:27:41.514 +00:00','2018-09-17 21:27:41.514 +00:00',4,1,119) RETURNING *;
+Executing (default): INSERT INTO "loads" ("id","bookDate","driverName","loadNumber","brokerName","pickUpCityState","dropOffCityState","pickUpAddress","dropOffAddress","payment","loadedMiles","emptyMiles","mileage","dollarPerMile","dieselPrice","fuelCost","driverPay","dispatchFee","lumper","detention","detentionDriverPay","lateFee","toll","roadMaintenance","otherExpenses","profit","commodity","weight","trailer","confirmFilePath","createdAt","updatedAt","brokerId","driverId","truckId") VALUES (DEFAULT,'09/11/18','Kelvin','0123724','Axle Logistics','Aurora, IL','Taylor, PA','800 Bilter Rd, Aurora, IL 60502','22 Stauffer Industrial Park, Taylor, PA 18517',2050,737,72,0,0,3.22,0,0,0,0,0,0,0,0,0,0,0,'Packaging Materials',20000,'Van or Reefer','/home/ubuntu/transmax/server/app/db/brokerConfirmations/090718_transportationOne.pdf','2018-09-17 21:27:41.514 +00:00','2018-09-17 21:27:41.514 +00:00',5,1,119) RETURNING *;
+Sequelize models synced to PostgreSQL
+Server started on port 3000
+9Um4 ——> GET / 
+9Um4 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 9.7 ms)
+fJTa ——> GET / 
+fJTa <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.5 ms)
+yGst ——> GET /static/css/main.a0de00f5.css 
+yGst <—— 200 OK 9.21 KB text/css; charset=UTF-8 (<—> 1.6 ms)
+gfwX ——> GET /static/js/main.bcb14087.js 
+gfwX <—— 200 OK 755.93 KB application/javascript; charset=UTF-8 (<—> 89.4 ms)
+RsO4 ——> GET /assets/images/cascadia-parkinglot-960x1280.jpg 
+RsO4 <—— 200 OK 110.38 KB image/jpeg (<—> 1.7 ms)
+uK1s ——> GET /assets/images/logos/transmax.png 
+uK1s <—— 200 OK 28.34 KB image/png (<—> 1.0 ms)
+knYa ——> GET /assets/images/cascadia-evo_800x1066.jpg 
+X30H ——> GET /assets/images/green-coronado-driver-side-960x1280.jpg 
+u9Zf ——> GET /assets/images/three-truck-parkinglot-750x1000.jpg 
+SK3b ——> GET /assets/images/logos/facebook.png 
+SK3b <—— 200 OK 656 B image/png (<—> 0.9 ms)
+knYa <—— 200 OK 223.3 KB image/jpeg (<—> 10.3 ms)
+u9Zf <—— 200 OK 135.8 KB image/jpeg (<—> 18.0 ms)
+X30H <—— 200 OK 218.05 KB image/jpeg (<—> 24.7 ms)
+I250 ——> GET /assets/images/logos/instagram.png 
+I250 <—— 200 OK 4.73 KB image/png (<—> 1.9 ms)
+UCUE ——> GET / 
+UCUE <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+C06Q ——> GET /static/css/main.a0de00f5.css 
+C06Q <—— 200 OK 9.21 KB text/css; charset=UTF-8 (<—> 1.2 ms)
+O964 ——> GET /static/js/main.bcb14087.js 
+O964 <—— 200 OK 755.93 KB application/javascript; charset=UTF-8 (<—> 112.8 ms)
+P5ZE ——> GET /assets/images/logos/transmax.png 
+vPwT ——> GET /assets/images/cascadia-parkinglot-960x1280.jpg 
+P5ZE <—— 200 OK 28.34 KB image/png (<—> 1.9 ms)
+s93k ——> GET /assets/images/cascadia-evo_800x1066.jpg 
+rM5i ——> GET /assets/images/green-coronado-driver-side-960x1280.jpg 
+s93k <—— 200 OK 223.3 KB image/jpeg (<—> 2.1 ms)
+W44z ——> GET /assets/images/three-truck-parkinglot-750x1000.jpg 
+vPwT <—— 200 OK 110.38 KB image/jpeg (<—> 18.2 ms)
+Br1F ——> GET /assets/images/logos/facebook.png 
+Br1F <—— 200 OK 656 B image/png (<—> 1.1 ms)
+W44z <—— 200 OK 135.8 KB image/jpeg (<—> 16.6 ms)
+rM5i <—— 200 OK 218.05 KB image/jpeg (<—> 25.0 ms)
+tSzq ——> GET /assets/images/logos/instagram.png 
+tSzq <—— 200 OK 4.73 KB image/png (<—> 1.1 ms)
+JCjr ——> GET /favicon.ico 
+JCjr <—— 200 OK 31.29 KB image/x-icon (<—> 2.1 ms)
+Sqhe ——> GET / 
+Sqhe <—— 304 Not Modified (<—> 2.1 ms)
+BaeY ——> GET /static/css/main.a0de00f5.css 
+BaeY <—— 304 Not Modified (<—> 1.1 ms)
+Kg3p ——> GET /static/js/main.bcb14087.js 
+Kg3p <—— 304 Not Modified (<—> 0.7 ms)
+6iXg ——> GET /assets/images/logos/transmax.png 
+6iXg <—— 304 Not Modified (<—> 1.0 ms)
+Clc5 ——> GET /assets/images/cascadia-parkinglot-960x1280.jpg 
+Ht8D ——> GET /assets/images/green-coronado-driver-side-960x1280.jpg 
+Clc5 <—— 304 Not Modified (<—> 1.3 ms)
+aMxq ——> GET /assets/images/cascadia-evo_800x1066.jpg 
+JvMH ——> GET /assets/images/three-truck-parkinglot-750x1000.jpg 
+6BYs ——> GET /assets/images/logos/facebook.png 
+Ht8D <—— 304 Not Modified (<—> 2.5 ms)
+aMxq <—— 304 Not Modified (<—> 2.0 ms)
+JvMH <—— 304 Not Modified (<—> 2.0 ms)
+6BYs <—— 304 Not Modified (<—> 1.8 ms)
+5uid ——> GET /assets/images/logos/instagram.png 
+5uid <—— 304 Not Modified (<—> 0.6 ms)
+KuDF ——> GET / 
+KuDF <—— 304 Not Modified (<—> 0.9 ms)
+2avu ——> GET /static/css/main.a0de00f5.css 
+2avu <—— 304 Not Modified (<—> 0.8 ms)
+7ZLv ——> GET /static/js/main.bcb14087.js 
+7ZLv <—— 304 Not Modified (<—> 0.6 ms)
+HqPw ——> GET /assets/images/logos/transmax.png 
+vokR ——> GET /assets/images/cascadia-parkinglot-960x1280.jpg 
+X7xi ——> GET /assets/images/green-coronado-driver-side-960x1280.jpg 
+lKOP ——> GET /assets/images/cascadia-evo_800x1066.jpg 
+t9MS ——> GET /assets/images/three-truck-parkinglot-750x1000.jpg 
+C4Io ——> GET /assets/images/logos/facebook.png 
+HqPw <—— 304 Not Modified (<—> 4.0 ms)
+vokR <—— 304 Not Modified (<—> 3.8 ms)
+X7xi <—— 304 Not Modified (<—> 3.7 ms)
+lKOP <—— 304 Not Modified (<—> 3.6 ms)
+t9MS <—— 304 Not Modified (<—> 2.5 ms)
+C4Io <—— 304 Not Modified (<—> 2.4 ms)
+xCI1 ——> GET /assets/images/logos/instagram.png 
+xCI1 <—— 304 Not Modified (<—> 0.7 ms)
+AOXg ——> GET / 
+AOXg <—— 304 Not Modified (<—> 0.8 ms)
+xRI9 ——> GET /static/css/main.a0de00f5.css 
+xRI9 <—— 304 Not Modified (<—> 0.8 ms)
+zCMO ——> GET /static/js/main.bcb14087.js 
+zCMO <—— 304 Not Modified (<—> 0.8 ms)
+WqGd ——> GET /static/js/main.bcb14087.js 
+WqGd <—— 304 Not Modified (<—> 0.9 ms)
+sCpT ——> GET /assets/images/logos/transmax.png 
+sCpT <—— 304 Not Modified (<—> 0.9 ms)
+AZvm ——> GET /assets/images/cascadia-parkinglot-960x1280.jpg 
+AZvm <—— 304 Not Modified (<—> 0.9 ms)
+GZAx ——> GET /assets/images/three-truck-parkinglot-750x1000.jpg 
+GZAx <—— 304 Not Modified (<—> 0.6 ms)
+G0S1 ——> GET /assets/images/green-coronado-driver-side-960x1280.jpg 
+G0S1 <—— 304 Not Modified (<—> 0.7 ms)
+n3DP ——> GET /assets/images/cascadia-evo_800x1066.jpg 
+n3DP <—— 304 Not Modified (<—> 1.5 ms)
+eBBr ——> GET /assets/images/logos/facebook.png 
+dP4y ——> GET /assets/images/logos/instagram.png 
+eBBr <—— 304 Not Modified (<—> 1.2 ms)
+dP4y <—— 304 Not Modified (<—> 1.1 ms)
+bb0z ——> HEAD / 
+bb0z <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+wQe7 ——> GET / 
+wQe7 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.5 ms)
+U1zd ——> GET / 
+U1zd <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.3 ms)
+Y23D ——> GET /static/css/main.a0de00f5.css 
+Y23D <—— 200 OK 9.21 KB text/css; charset=UTF-8 (<—> 1.3 ms)
+3c6A ——> GET /static/js/main.bcb14087.js 
+3c6A <—— 200 OK 755.93 KB application/javascript; charset=UTF-8 (<—> 70.1 ms)
+S7WC ——> GET /assets/images/logos/transmax.png 
+S7WC <—— 200 OK 28.34 KB image/png (<—> 1.3 ms)
+MMIY ——> GET /assets/images/cascadia-parkinglot-960x1280.jpg 
+MMIY <—— 200 OK 110.38 KB image/jpeg (<—> 1.5 ms)
+IVYT ——> GET /assets/images/green-coronado-driver-side-960x1280.jpg 
+T3a6 ——> GET /assets/images/cascadia-evo_800x1066.jpg 
+AU6q ——> GET /assets/images/three-truck-parkinglot-750x1000.jpg 
+AU6q <—— 200 OK 135.8 KB image/jpeg (<—> 22.4 ms)
+IVYT <—— 200 OK 218.05 KB image/jpeg (<—> 47.7 ms)
+T3a6 <—— 200 OK 223.3 KB image/jpeg (<—> 47.2 ms)
+FNhP ——> GET /assets/images/logos/facebook.png 
+FNhP <—— 200 OK 656 B image/png (<—> 1.0 ms)
+SHIS ——> GET /assets/images/logos/instagram.png 
+SHIS <—— 200 OK 4.73 KB image/png (<—> 1.1 ms)
+OKrM ——> GET / 
+OKrM <—— 304 Not Modified (<—> 0.8 ms)
+zOLV ——> GET /static/css/main.a0de00f5.css 
+zOLV <—— 304 Not Modified (<—> 0.8 ms)
+Lu4r ——> GET /static/js/main.bcb14087.js 
+Lu4r <—— 304 Not Modified (<—> 0.6 ms)
+U4IN ——> GET /assets/images/logos/transmax.png 
+7dJr ——> GET /assets/images/cascadia-parkinglot-960x1280.jpg 
+U4IN <—— 304 Not Modified (<—> 1.5 ms)
+7dJr <—— 304 Not Modified (<—> 1.4 ms)
+KEFH ——> GET /assets/images/green-coronado-driver-side-960x1280.jpg 
+A1S6 ——> GET /assets/images/cascadia-evo_800x1066.jpg 
+KEFH <—— 304 Not Modified (<—> 1.4 ms)
+MByD ——> GET /assets/images/logos/facebook.png 
+pRk3 ——> GET /assets/images/three-truck-parkinglot-750x1000.jpg 
+A1S6 <—— 304 Not Modified (<—> 2.1 ms)
+MByD <—— 304 Not Modified (<—> 2.5 ms)
+pRk3 <—— 304 Not Modified (<—> 2.4 ms)
+Fbjk ——> GET /assets/images/logos/instagram.png 
+Fbjk <—— 304 Not Modified (<—> 0.6 ms)
+aGcn ——> GET / 
+aGcn <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+mB0d ——> GET /static/css/main.a0de00f5.css 
+mB0d <—— 200 OK 9.21 KB text/css; charset=UTF-8 (<—> 1.2 ms)
+DsiW ——> GET /static/js/main.bcb14087.js 
+DsiW <—— 200 OK 755.93 KB application/javascript; charset=UTF-8 (<—> 521.3 ms)
+XjT4 ——> GET /assets/images/logos/transmax.png 
+XjT4 <—— 200 OK 28.34 KB image/png (<—> 1.4 ms)
+UVmE ——> GET /assets/images/cascadia-parkinglot-960x1280.jpg 
+SANF ——> GET /assets/images/green-coronado-driver-side-960x1280.jpg 
+UVmE <—— 200 OK 110.38 KB image/jpeg (<—> 45.2 ms)
+wlYb ——> GET /assets/images/cascadia-evo_800x1066.jpg 
+vB7M ——> GET /assets/images/three-truck-parkinglot-750x1000.jpg 
+FqVK ——> GET /assets/images/logos/facebook.png 
+FqVK <—— 200 OK 656 B image/png (<—> 1.5 ms)
+vB7M <—— 200 OK 135.8 KB image/jpeg (<—> 60.9 ms)
+t4Qk ——> GET /assets/images/logos/instagram.png 
+t4Qk <—— 200 OK 4.73 KB image/png (<—> 2.2 ms)
+wlYb <—— 200 OK 223.3 KB image/jpeg (<—> 146.4 ms)
+SANF <—— 200 OK 218.05 KB image/jpeg (<—> 205.5 ms)
+1f1m ——> GET /favicon.ico 
+1f1m <—— 200 OK 31.29 KB image/x-icon (<—> 0.8 ms)
+tfmB ——> GET /manifest.json 
+tfmB <—— 200 OK 317 B application/json; charset=UTF-8 (<—> 1.7 ms)
+04RV ——> GET / 
+04RV <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.9 ms)
+0OKe ——> GET /static/css/main.a0de00f5.css 
+LpRe ——> GET /static/js/main.bcb14087.js 
+0OKe <—— 200 OK 9.21 KB text/css; charset=UTF-8 (<—> 2.6 ms)
+LpRe <—— 200 OK 755.93 KB application/javascript; charset=UTF-8 (<—> 669.6 ms)
+CVst ——> GET /assets/images/cascadia-parkinglot-960x1280.jpg 
+j5IK ——> GET /assets/images/logos/transmax.png 
+j5IK <—— 200 OK 28.34 KB image/png (<—> 1.7 ms)
+JURm ——> GET /assets/images/cascadia-evo_800x1066.jpg 
+DXY2 ——> GET /assets/images/green-coronado-driver-side-960x1280.jpg 
+gZvu ——> GET /assets/images/three-truck-parkinglot-750x1000.jpg 
+RS5o ——> GET /assets/images/logos/facebook.png 
+RS5o <—— 200 OK 656 B image/png (<—> 1.0 ms)
+CVst <—— 200 OK 110.38 KB image/jpeg (<—> 74.6 ms)
+UjBy ——> GET /assets/images/logos/instagram.png 
+UjBy <—— 200 OK 4.73 KB image/png (<—> 0.9 ms)
+gZvu <—— 200 OK 135.8 KB image/jpeg (<—> 139.4 ms)
+JURm <—— 200 OK 223.3 KB image/jpeg (<—> 145.3 ms)
+DXY2 <—— 200 OK 218.05 KB image/jpeg (<—> 215.1 ms)
+3d5g ——> GET /favicon.ico 
+3d5g <—— 200 OK 31.29 KB image/x-icon (<—> 0.7 ms)
+o62V ——> GET / 
+o62V <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.9 ms)
+cJYO ——> GET / 
+cJYO <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.4 ms)
+fAC0 ——> GET / 
+fAC0 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+J36u ——> GET / 
+J36u <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+7gSW ——> GET /home 
+7gSW <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 2.6 ms)
+SbuQ ——> GET / 
+SbuQ <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+FLLA ——> GET / 
+FLLA <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+j2IP ——> GET / 
+j2IP <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 2.4 ms)
+3iQe ——> GET / 
+3iQe <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 3.1 ms)
+VH84 ——> GET /wp-admin/install.php 
+VH84 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.4 ms)
+RApZ ——> PROPFIND / 
+RApZ —X— connection closed before res end/flush
+CoLy ——> GET /webdav/ 
+CoLy <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.3 ms)
+sJzs ——> GET /java.php 
+sJzs <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+JxfY ——> GET /_query.php 
+JxfY <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+pP4v ——> GET /test.php 
+pP4v <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.3 ms)
+9WN0 ——> GET /db_cts.php 
+9WN0 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.3 ms)
+t4lz ——> GET /db_pma.php 
+t4lz <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 2.1 ms)
+Iyqd ——> GET /logon.php 
+Iyqd <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.3 ms)
+bES4 ——> GET /help-e.php 
+bES4 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+sTrG ——> GET /license.php 
+sTrG <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 4.5 ms)
+zgVC ——> GET /log.php 
+zgVC <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.3 ms)
+5hth ——> GET /hell.php 
+5hth <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+R9Om ——> GET /pmd_online.php 
+R9Om <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+h15u ——> GET /x.php 
+h15u <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+00J7 ——> GET /shell.php 
+00J7 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+ihRr ——> GET /desktop.ini.php 
+ihRr <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+w5rJ ——> GET /z.php 
+w5rJ <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+q5nA ——> GET /lala.php 
+q5nA <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+pRED ——> GET /lala-dpr.php 
+pRED <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 2.1 ms)
+9kUJ ——> GET /wpo.php 
+9kUJ <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+uhhf ——> GET /text.php 
+uhhf <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.3 ms)
+4DD6 ——> GET /wp-config.php 
+4DD6 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+s7Qh ——> GET /muhstik.php 
+s7Qh <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+uBVp ——> GET /muhstik2.php 
+uBVp <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.3 ms)
+VUvO ——> GET /muhstiks.php 
+VUvO <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+dKg3 ——> GET /muhstik-dpr.php 
+dKg3 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+vLJs ——> GET /lol.php 
+vLJs <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+h5Jz ——> GET /uploader.php 
+h5Jz <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.3 ms)
+hYYZ ——> GET /cmd.php 
+hYYZ <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+ek8A ——> GET /cmx.php 
+ek8A <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 2.0 ms)
+IS98 ——> GET /cmv.php 
+IS98 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.3 ms)
+vPKU ——> GET /cmdd.php 
+vPKU <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+Mps3 ——> GET /knal.php 
+Mps3 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+EmzL ——> GET /cmd.php 
+EmzL <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+XIxx ——> GET /shell.php 
+XIxx <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+G9ed ——> GET /appserv.php 
+G9ed <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+RD0D ——> GET /scripts/setup.php 
+RD0D <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.3 ms)
+6oHJ ——> GET /phpmyadmin/scripts/setup.php 
+6oHJ <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.3 ms)
+fREs ——> GET /phpMyAdmin/scripts/setup.php 
+fREs <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+xSM1 ——> GET /phpmyadmin/scripts/db___.init.php 
+xSM1 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+l5aH ——> GET /phpMyAdmin/scripts/db___.init.php 
+l5aH <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+ByMl ——> POST /wuwu11.php 21 B application/x-www-form-urlencoded
+ByMl <—— 404 Not Found (<—> 11.5 ms)
+RR81 ——> POST /xw.php 21 B application/x-www-form-urlencoded
+RR81 <—— 404 Not Found (<—> 0.9 ms)
+xTyg ——> POST /xw1.php 21 B application/x-www-form-urlencoded
+xTyg <—— 404 Not Found (<—> 0.7 ms)
+qAHV ——> POST /9678.php 21 B application/x-www-form-urlencoded
+qAHV <—— 404 Not Found (<—> 0.6 ms)
+ydNn ——> POST /wc.php 21 B application/x-www-form-urlencoded
+ydNn <—— 404 Not Found (<—> 0.6 ms)
+mWwh ——> POST /xx.php 23 B application/x-www-form-urlencoded
+mWwh <—— 404 Not Found (<—> 0.6 ms)
+Wi3z ——> POST /s.php 24 B application/x-www-form-urlencoded
+Wi3z <—— 404 Not Found (<—> 0.6 ms)
+FgIU ——> POST /w.php 24 B application/x-www-form-urlencoded
+FgIU <—— 404 Not Found (<—> 0.6 ms)
+1Q9a ——> POST /sheep.php 20 B application/x-www-form-urlencoded
+1Q9a <—— 404 Not Found (<—> 1.7 ms)
+gCuM ——> POST /qaq.php 20 B application/x-www-form-urlencoded
+gCuM <—— 404 Not Found (<—> 0.6 ms)
+MaA8 ——> POST /db.init.php 24 B application/x-www-form-urlencoded
+MaA8 <—— 404 Not Found (<—> 0.6 ms)
+vCBE ——> POST /db_session.init.php 24 B application/x-www-form-urlencoded
+vCBE <—— 404 Not Found (<—> 0.6 ms)
+lB2B ——> POST /db__.init.php 24 B application/x-www-form-urlencoded
+lB2B <—— 404 Not Found (<—> 0.6 ms)
+6jWj ——> POST /wp-admins.php 38 B application/x-www-form-urlencoded
+6jWj <—— 404 Not Found (<—> 0.7 ms)
+a1AX ——> POST /m.php?pbid=open 38 B application/x-www-form-urlencoded
+a1AX <—— 404 Not Found (<—> 0.6 ms)
+iPem ——> POST /db_dataml.php 20 B application/x-www-form-urlencoded
+iPem <—— 404 Not Found (<—> 0.6 ms)
+cjio ——> POST /db_desql.php 20 B application/x-www-form-urlencoded
+cjio <—— 404 Not Found (<—> 0.7 ms)
+njda ——> POST /mx.php 21 B application/x-www-form-urlencoded
+njda <—— 404 Not Found (<—> 0.7 ms)
+jgVI ——> POST /wshell.php 23 B application/x-www-form-urlencoded
+jgVI <—— 404 Not Found (<—> 0.6 ms)
+UKHA ——> POST /xshell.php 22 B application/x-www-form-urlencoded
+UKHA <—— 404 Not Found (<—> 0.7 ms)
+bzK1 ——> POST /qq.php 21 B application/x-www-form-urlencoded
+bzK1 <—— 404 Not Found (<—> 0.7 ms)
+eIju ——> POST /conflg.php 26 B application/x-www-form-urlencoded
+eIju <—— 404 Not Found (<—> 0.6 ms)
+f6ch ——> POST /lindex.php 26 B application/x-www-form-urlencoded
+f6ch <—— 404 Not Found (<—> 0.6 ms)
+qZsw ——> POST /phpstudy.php 21 B application/x-www-form-urlencoded
+qZsw <—— 404 Not Found (<—> 0.6 ms)
+XYhh ——> POST /phpStudy.php 21 B application/x-www-form-urlencoded
+XYhh <—— 404 Not Found (<—> 1.9 ms)
+vIN0 ——> POST /weixiao.php 27 B application/x-www-form-urlencoded
+vIN0 <—— 404 Not Found (<—> 0.7 ms)
+YMf5 ——> POST /feixiang.php 28 B application/x-www-form-urlencoded
+YMf5 <—— 404 Not Found (<—> 0.7 ms)
+ViMZ ——> POST /ak47.php 29 B application/x-www-form-urlencoded
+ViMZ <—— 404 Not Found (<—> 0.7 ms)
+ev7l ——> POST /ak48.php 29 B application/x-www-form-urlencoded
+ev7l <—— 404 Not Found (<—> 0.7 ms)
+niQ5 ——> POST /xiao.php 24 B application/x-www-form-urlencoded
+niQ5 <—— 404 Not Found (<—> 0.6 ms)
+7q0e ——> POST /yao.php 26 B application/x-www-form-urlencoded
+7q0e <—— 404 Not Found (<—> 0.6 ms)
+3wfY ——> POST /defect.php 26 B application/x-www-form-urlencoded
+3wfY <—— 404 Not Found (<—> 0.7 ms)
+CC3F ——> POST /webslee.php 24 B application/x-www-form-urlencoded
+CC3F <—— 404 Not Found (<—> 0.6 ms)
+AbhO ——> POST /q.php 25 B application/x-www-form-urlencoded
+AbhO <—— 404 Not Found (<—> 4.2 ms)
+KRMC ——> POST /pe.php 24 B application/x-www-form-urlencoded
+KRMC <—— 404 Not Found (<—> 0.6 ms)
+6syQ ——> POST /hm.php 22 B application/x-www-form-urlencoded
+6syQ <—— 404 Not Found (<—> 0.7 ms)
+gzQ8 ——> POST /cainiao.php 28 B application/x-www-form-urlencoded
+gzQ8 <—— 404 Not Found (<—> 0.7 ms)
+Mvcb ——> POST /zuoshou.php 23 B application/x-www-form-urlencoded
+Mvcb <—— 404 Not Found (<—> 0.6 ms)
+T9bJ ——> POST /zuo.php 23 B application/x-www-form-urlencoded
+T9bJ <—— 404 Not Found (<—> 0.7 ms)
+x2KL ——> POST /aotu.php 27 B application/x-www-form-urlencoded
+x2KL <—— 404 Not Found (<—> 0.6 ms)
+TTmx ——> POST /cmd.php 23 B application/x-www-form-urlencoded
+TTmx <—— 404 Not Found (<—> 0.6 ms)
+Y9Go ——> POST /bak.php 23 B application/x-www-form-urlencoded
+Y9Go <—— 404 Not Found (<—> 0.6 ms)
+A2Yx ——> POST /system.php 23 B application/x-www-form-urlencoded
+A2Yx <—— 404 Not Found (<—> 0.6 ms)
+eI85 ——> POST /l6.php 22 B application/x-www-form-urlencoded
+eI85 <—— 404 Not Found (<—> 0.6 ms)
+Y5i8 ——> POST /l7.php 22 B application/x-www-form-urlencoded
+Y5i8 <—— 404 Not Found (<—> 1.7 ms)
+eiqQ ——> POST /l8.php 20 B application/x-www-form-urlencoded
+eiqQ <—— 404 Not Found (<—> 0.6 ms)
+E1FM ——> POST /q.php 21 B application/x-www-form-urlencoded
+E1FM <—— 404 Not Found (<—> 0.7 ms)
+O9Yv ——> POST /56.php 21 B application/x-www-form-urlencoded
+O9Yv <—— 404 Not Found (<—> 0.6 ms)
+7z2G ——> POST /mz.php 22 B application/x-www-form-urlencoded
+7z2G <—— 404 Not Found (<—> 0.6 ms)
+ByUJ ——> POST /xx.php 22 B application/x-www-form-urlencoded
+ByUJ <—— 404 Not Found (<—> 0.6 ms)
+6Oko ——> POST /yumo.php 24 B application/x-www-form-urlencoded
+6Oko <—— 404 Not Found (<—> 0.7 ms)
+fGCT ——> POST /min.php 25 B application/x-www-form-urlencoded
+fGCT <—— 404 Not Found (<—> 0.6 ms)
+iDjS ——> POST /wan.php 25 B application/x-www-form-urlencoded
+iDjS <—— 404 Not Found (<—> 0.6 ms)
+tP1F ——> POST /wanan.php 25 B application/x-www-form-urlencoded
+tP1F <—— 404 Not Found (<—> 0.6 ms)
+Xrs7 ——> POST /ssaa.php 21 B application/x-www-form-urlencoded
+Xrs7 <—— 404 Not Found (<—> 0.6 ms)
+GKkJ ——> POST /qq.php 22 B application/x-www-form-urlencoded
+GKkJ <—— 404 Not Found (<—> 0.6 ms)
+u11r ——> POST /aw.php 22 B application/x-www-form-urlencoded
+u11r <—— 404 Not Found (<—> 0.6 ms)
+ivYc ——> POST /12.php 27 B application/x-www-form-urlencoded
+ivYc <—— 404 Not Found (<—> 0.7 ms)
+sIhD ——> POST /hh.php 24 B application/x-www-form-urlencoded
+sIhD <—— 404 Not Found (<—> 0.6 ms)
+KsKr ——> POST /ak.php 24 B application/x-www-form-urlencoded
+KsKr <—— 404 Not Found (<—> 0.6 ms)
+BvzA ——> POST /ip.php 24 B application/x-www-form-urlencoded
+BvzA <—— 404 Not Found (<—> 0.6 ms)
+XByL ——> POST /infoo.php 21 B application/x-www-form-urlencoded
+XByL <—— 404 Not Found (<—> 0.6 ms)
+Orc8 ——> POST /qq.php 20 B application/x-www-form-urlencoded
+Orc8 <—— 404 Not Found (<—> 0.6 ms)
+dJ9n ——> POST /qwe.php 20 B application/x-www-form-urlencoded
+dJ9n <—— 404 Not Found (<—> 0.6 ms)
+vf3M ——> POST /1213.php 20 B application/x-www-form-urlencoded
+vf3M <—— 404 Not Found (<—> 1.7 ms)
+HFZJ ——> POST /post.php 22 B application/x-www-form-urlencoded
+HFZJ <—— 404 Not Found (<—> 0.6 ms)
+8iSh ——> POST /h1.php 21 B application/x-www-form-urlencoded
+8iSh <—— 404 Not Found (<—> 0.7 ms)
+XpKY ——> POST /test.php 25 B application/x-www-form-urlencoded
+XpKY <—— 404 Not Found (<—> 0.7 ms)
+yxdM ——> POST /3.php 23 B application/x-www-form-urlencoded
+yxdM <—— 404 Not Found (<—> 0.6 ms)
+pdxO ——> POST /phpinfi.php 24 B application/x-www-form-urlencoded
+pdxO <—— 404 Not Found (<—> 0.6 ms)
+tEOR ——> POST /aaaa.php 24 B application/x-www-form-urlencoded
+tEOR <—— 404 Not Found (<—> 1.5 ms)
+tBGj ——> POST /9510.php 21 B application/x-www-form-urlencoded
+tBGj <—— 404 Not Found (<—> 0.6 ms)
+ZG4e ——> POST /python.php 20 B application/x-www-form-urlencoded
+ZG4e <—— 404 Not Found (<—> 0.6 ms)
+SH76 ——> POST /default.php 20 B application/x-www-form-urlencoded
+SH76 <—— 404 Not Found (<—> 0.7 ms)
+n9Yf ——> POST /sean.php 24 B application/x-www-form-urlencoded
+n9Yf <—— 404 Not Found (<—> 0.7 ms)
+SVEK ——> POST /app.php 23 B application/x-www-form-urlencoded
+SVEK <—— 404 Not Found (<—> 0.7 ms)
+15wD ——> POST /help.php 23 B application/x-www-form-urlencoded
+15wD <—— 404 Not Found (<—> 0.6 ms)
+gQwh ——> POST /tiandi.php 20 B application/x-www-form-urlencoded
+gQwh <—— 404 Not Found (<—> 0.6 ms)
+oBX1 ——> POST /miao.php 24 B application/x-www-form-urlencoded
+oBX1 <—— 404 Not Found (<—> 0.6 ms)
+GnOu ——> POST /xz.php 29 B application/x-www-form-urlencoded
+GnOu <—— 404 Not Found (<—> 0.6 ms)
+1WIm ——> POST /linuxse.php 23 B application/x-www-form-urlencoded
+1WIm <—— 404 Not Found (<—> 0.6 ms)
+seQ7 ——> POST /zuoindex.php 23 B application/x-www-form-urlencoded
+seQ7 <—— 404 Not Found (<—> 0.6 ms)
+gWkh ——> POST /zshmindex.php 23 B application/x-www-form-urlencoded
+gWkh <—— 404 Not Found (<—> 0.6 ms)
+KA2I ——> POST /tomcat.php 23 B application/x-www-form-urlencoded
+KA2I <—— 404 Not Found (<—> 1.8 ms)
+6t0I ——> POST /ceshi.php 23 B application/x-www-form-urlencoded
+6t0I <—— 404 Not Found (<—> 0.6 ms)
+jm0d ——> POST /1hou.php 23 B application/x-www-form-urlencoded
+jm0d <—— 404 Not Found (<—> 2.5 ms)
+bcGl ——> POST /boots.php 24 B application/x-www-form-urlencoded
+bcGl <—— 404 Not Found (<—> 0.6 ms)
+ENdw ——> POST /she.php 24 B application/x-www-form-urlencoded
+ENdw <—— 404 Not Found (<—> 0.6 ms)
+z0WG ——> POST /s.php 20 B application/x-www-form-urlencoded
+z0WG <—— 404 Not Found (<—> 0.6 ms)
+o8Vx ——> POST /qw.php 22 B application/x-www-form-urlencoded
+o8Vx <—— 404 Not Found (<—> 0.6 ms)
+oqPd ——> POST /test.php 24 B application/x-www-form-urlencoded
+oqPd <—— 404 Not Found (<—> 0.6 ms)
+qX0i ——> POST /caonma.php 26 B application/x-www-form-urlencoded
+qX0i <—— 404 Not Found (<—> 0.7 ms)
+AZUj ——> POST /ss.php 25 B application/x-www-form-urlencoded
+AZUj <—— 404 Not Found (<—> 0.6 ms)
+IHpY ——> POST /wcp.php 23 B application/x-www-form-urlencoded
+IHpY <—— 404 Not Found (<—> 0.7 ms)
+vLUT ——> POST /uuu.php 23 B application/x-www-form-urlencoded
+vLUT <—— 404 Not Found (<—> 0.7 ms)
+9aDV ——> POST /1.php 24 B application/x-www-form-urlencoded
+9aDV <—— 404 Not Found (<—> 0.6 ms)
+vaSF ——> POST /2.php 24 B application/x-www-form-urlencoded
+vaSF <—— 404 Not Found (<—> 0.6 ms)
+qtli ——> POST /qaz.php 25 B application/x-www-form-urlencoded
+qtli <—— 404 Not Found (<—> 0.6 ms)
+aKHD ——> POST /xiaoma.php 23 B application/x-www-form-urlencoded
+aKHD <—— 404 Not Found (<—> 1.6 ms)
+xRfH ——> POST /xiaomae.php 23 B application/x-www-form-urlencoded
+xRfH <—— 404 Not Found (<—> 0.6 ms)
+GuYC ——> POST /xiaomar.php 23 B application/x-www-form-urlencoded
+GuYC <—— 404 Not Found (<—> 0.6 ms)
+8rRy ——> POST /qq.php 23 B application/x-www-form-urlencoded
+8rRy <—— 404 Not Found (<—> 0.6 ms)
+Kky1 ——> POST /data.php 23 B application/x-www-form-urlencoded
+Kky1 <—— 404 Not Found (<—> 0.7 ms)
+s63d ——> POST /log.php 21 B application/x-www-form-urlencoded
+s63d <—— 404 Not Found (<—> 0.6 ms)
+Jg6v ——> POST /fack.php 22 B application/x-www-form-urlencoded
+Jg6v <—— 404 Not Found (<—> 0.6 ms)
+XwqW ——> POST /angge.php 25 B application/x-www-form-urlencoded
+XwqW <—— 404 Not Found (<—> 0.6 ms)
+Yim3 ——> GET /index.php 
+Yim3 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.3 ms)
+hFpw ——> GET /phpmyadmin/index.php 
+hFpw <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+y0xj ——> GET /phpMyAdmin/index.php 
+y0xj <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+cEIp ——> GET /pmd/index.php 
+cEIp <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 4.2 ms)
+sQHI ——> GET /pma/index.php 
+sQHI <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+86zu ——> GET /PMA/index.php 
+86zu <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 6.7 ms)
+AYan ——> GET /PMA2/index.php 
+AYan <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+WFin ——> GET /pmamy/index.php 
+WFin <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+nOyU ——> GET /pmamy2/index.php 
+nOyU <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.3 ms)
+JScA ——> GET /mysql/index.php 
+JScA <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+QMmk ——> GET /admin/index.php 
+QMmk <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+4afN ——> GET /db/index.php 
+4afN <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+2qPQ ——> GET /dbadmin/index.php 
+2qPQ <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+Oxmb ——> GET /web/phpMyAdmin/index.php 
+Oxmb <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+PQCm ——> GET /admin/pma/index.php 
+PQCm <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+IbPU ——> GET /admin/PMA/index.php 
+IbPU <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+Zo12 ——> GET /admin/mysql/index.php 
+Zo12 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+tb41 ——> GET /admin/mysql2/index.php 
+tb41 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+ef3U ——> GET /admin/phpmyadmin/index.php 
+ef3U <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+t0Oi ——> GET /admin/phpMyAdmin/index.php 
+t0Oi <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+7C90 ——> GET /admin/phpmyadmin2/index.php 
+7C90 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 2.0 ms)
+ExPe ——> GET /mysqladmin/index.php 
+ExPe <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+X83K ——> GET /mysql-admin/index.php 
+X83K <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+2Pwk ——> GET /phpadmin/index.php 
+2Pwk <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+qy1h ——> GET /phpAdmin/index.php 
+qy1h <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+Ahm5 ——> GET /phpmyadmin0/index.php 
+Ahm5 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+OsQR ——> GET /phpmyadmin1/index.php 
+OsQR <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+24Ts ——> GET /phpmyadmin2/index.php 
+24Ts <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+U9Z5 ——> GET /myadmin/index.php 
+U9Z5 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+71Qa ——> GET /myadmin2/index.php 
+71Qa <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+GUcU ——> GET /xampp/phpmyadmin/index.php 
+GUcU <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+8auF ——> GET /phpMyadmin_bak/index.php 
+8auF <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.8 ms)
+ddS1 ——> GET /www/phpMyAdmin/index.php 
+ddS1 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+aHzn ——> GET /tools/phpMyAdmin/index.php 
+aHzn <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+S0Av ——> GET /phpmyadmin-old/index.php 
+S0Av <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+LV1H ——> GET /phpMyAdminold/index.php 
+LV1H <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+WFpZ ——> GET /phpMyAdmin.old/index.php 
+WFpZ <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+5nsF ——> GET /pma-old/index.php 
+5nsF <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+hxYJ ——> GET /claroline/phpMyAdmin/index.php 
+hxYJ <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+qbOY ——> GET /typo3/phpmyadmin/index.php 
+qbOY <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+TwjU ——> GET /phpma/index.php 
+TwjU <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+dsb6 ——> GET /phpmyadmin/phpmyadmin/index.php 
+dsb6 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+sJsi ——> GET /phpMyAdmin/phpMyAdmin/index.php 
+sJsi <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+u7qz ——> GET /v/index.php 
+u7qz <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+tcWQ ——> GET /phpmyadm1n/index.php 
+tcWQ <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+akRC ——> GET / 
+akRC <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+f1xM ——> GET / 
+f1xM <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+pcfi ——> GET /static/css/main.a0de00f5.css 
+pcfi <—— 200 OK 9.21 KB text/css; charset=UTF-8 (<—> 1.1 ms)
+d9kG ——> GET /static/js/main.bcb14087.js 
+d9kG <—— 200 OK 755.93 KB application/javascript; charset=UTF-8 (<—> 106.0 ms)
+aAqd ——> GET /assets/images/logos/transmax.png 
+aAqd <—— 200 OK 28.34 KB image/png (<—> 1.1 ms)
+mqiw ——> GET /assets/images/cascadia-parkinglot-960x1280.jpg 
+WaJh ——> GET /assets/images/green-coronado-driver-side-960x1280.jpg 
+WaJh <—— 200 OK 218.05 KB image/jpeg (<—> 1.6 ms)
+LY5n ——> GET /assets/images/cascadia-evo_800x1066.jpg 
+L0HC ——> GET /assets/images/three-truck-parkinglot-750x1000.jpg 
+mqiw <—— 200 OK 110.38 KB image/jpeg (<—> 25.9 ms)
+l33M ——> GET /assets/images/logos/facebook.png 
+l33M <—— 200 OK 656 B image/png (<—> 2.8 ms)
+eoqY ——> GET /assets/images/logos/instagram.png 
+eoqY <—— 200 OK 4.73 KB image/png (<—> 0.9 ms)
+LY5n <—— 200 OK 223.3 KB image/jpeg (<—> 31.2 ms)
+L0HC <—— 200 OK 135.8 KB image/jpeg (<—> 36.7 ms)
+N0sh ——> GET /favicon.ico 
+N0sh <—— 200 OK 31.29 KB image/x-icon (<—> 0.6 ms)
+Br7g ——> GET / 
+Br7g <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.8 ms)
+4hKp ——> GET /static/css/main.a0de00f5.css 
+njgG ——> GET /static/js/main.bcb14087.js 
+4hKp <—— 200 OK 9.21 KB text/css; charset=UTF-8 (<—> 2.1 ms)
+njgG <—— 200 OK 755.93 KB application/javascript; charset=UTF-8 (<—> 99.3 ms)
+m1X9 ——> GET /assets/images/logos/transmax.png 
+HB08 ——> GET /assets/images/cascadia-parkinglot-960x1280.jpg 
+m1X9 <—— 200 OK 28.34 KB image/png (<—> 2.1 ms)
+fGSp ——> GET /assets/images/green-coronado-driver-side-960x1280.jpg 
+9pt8 ——> GET /assets/images/cascadia-evo_800x1066.jpg 
+K2nv ——> GET /assets/images/logos/facebook.png 
+vSQS ——> GET /assets/images/three-truck-parkinglot-750x1000.jpg 
+K2nv <—— 200 OK 656 B image/png (<—> 1.5 ms)
+HB08 <—— 200 OK 110.38 KB image/jpeg (<—> 36.4 ms)
+2SCS ——> GET /assets/images/logos/instagram.png 
+vSQS <—— 200 OK 135.8 KB image/jpeg (<—> 28.3 ms)
+2SCS <—— 200 OK 4.73 KB image/png (<—> 1.2 ms)
+fGSp <—— 200 OK 218.05 KB image/jpeg (<—> 52.9 ms)
+9pt8 <—— 200 OK 223.3 KB image/jpeg (<—> 52.9 ms)
+MfTj ——> GET / 
+MfTj <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.9 ms)
+sXm0 ——> GET /static/css/main.a0de00f5.css 
+sXm0 <—— 200 OK 9.21 KB text/css; charset=UTF-8 (<—> 1.5 ms)
+jFWO ——> GET /static/js/main.bcb14087.js 
+jFWO <—— 200 OK 755.93 KB application/javascript; charset=UTF-8 (<—> 184.1 ms)
+k8BM ——> GET /static/css/main.a0de00f5.css.map 
+k8BM <—— 200 OK 12.38 KB application/json; charset=UTF-8 (<—> 1.9 ms)
+oBBZ ——> GET /static/js/main.bcb14087.js.map 
+nbBi ——> GET /assets/images/logos/transmax.png 
+nbBi <—— 200 OK 28.34 KB image/png (<—> 1.3 ms)
+DBx1 ——> GET /assets/images/cascadia-parkinglot-960x1280.jpg 
+Ge3R ——> GET /assets/images/three-truck-parkinglot-750x1000.jpg 
+CPUL ——> GET /assets/images/cascadia-evo_800x1066.jpg 
+Z5i8 ——> GET /assets/images/green-coronado-driver-side-960x1280.jpg 
+FV5x ——> GET /assets/images/logos/facebook.png 
+FV5x <—— 200 OK 656 B image/png (<—> 1.6 ms)
+DBx1 <—— 200 OK 110.38 KB image/jpeg (<—> 35.4 ms)
+Ge3R <—— 200 OK 135.8 KB image/jpeg (<—> 34.8 ms)
+ZwUJ ——> GET /assets/images/logos/instagram.png 
+ZwUJ <—— 200 OK 4.73 KB image/png (<—> 2.0 ms)
+CPUL <—— 200 OK 223.3 KB image/jpeg (<—> 90.1 ms)
+Z5i8 <—— 200 OK 218.05 KB image/jpeg (<—> 90.1 ms)
+4iVR ——> GET /favicon.ico 
+4iVR <—— 200 OK 31.29 KB image/x-icon (<—> 0.7 ms)
+oBBZ <—— 200 OK 5.34 MB application/json; charset=UTF-8 (<—> 912.2 ms)
+SALa ——> GET / 
+SALa <—— 304 Not Modified (<—> 1.3 ms)
+ZpJ8 ——> GET /static/css/main.a0de00f5.css 
+ZpJ8 <—— 304 Not Modified (<—> 0.9 ms)
+JCZF ——> GET /static/js/main.bcb14087.js 
+JCZF <—— 304 Not Modified (<—> 0.7 ms)
+ztPP ——> GET /assets/images/cascadia-parkinglot-960x1280.jpg 
+brZZ ——> GET /assets/images/logos/transmax.png 
+ztPP <—— 304 Not Modified (<—> 1.2 ms)
+brZZ <—— 304 Not Modified (<—> 1.1 ms)
+ekhb ——> GET /assets/images/cascadia-evo_800x1066.jpg 
+rDIt ——> GET /assets/images/three-truck-parkinglot-750x1000.jpg 
+K6rz ——> GET /assets/images/green-coronado-driver-side-960x1280.jpg 
+zwNZ ——> GET /assets/images/logos/facebook.png 
+ekhb <—— 304 Not Modified (<—> 2.0 ms)
+rDIt <—— 304 Not Modified (<—> 2.0 ms)
+K6rz <—— 304 Not Modified (<—> 1.9 ms)
+zwNZ <—— 304 Not Modified (<—> 1.9 ms)
+CEyj ——> GET /assets/images/logos/instagram.png 
+CEyj <—— 304 Not Modified (<—> 0.6 ms)
+5bZ9 ——> GET / 
+5bZ9 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.5 ms)
+bGOP ——> GET /static/css/main.a0de00f5.css 
+bGOP <—— 200 OK 9.21 KB text/css; charset=UTF-8 (<—> 1.5 ms)
+OFaL ——> GET /static/js/main.bcb14087.js 
+OFaL <—— 200 OK 755.93 KB application/javascript; charset=UTF-8 (<—> 69.6 ms)
+uGdy ——> GET /assets/images/logos/transmax.png 
+uGdy <—— 200 OK 28.34 KB image/png (<—> 2.0 ms)
+sJzF ——> GET / 
+sJzF <—— 304 Not Modified (<—> 2.4 ms)
+Epae ——> GET /static/css/main.a0de00f5.css 
+Epae <—— 304 Not Modified (<—> 0.8 ms)
+4nnb ——> GET /static/js/main.bcb14087.js 
+4nnb <—— 304 Not Modified (<—> 0.6 ms)
+5x5i ——> GET /static/css/main.a0de00f5.css.map 
+5x5i <—— 304 Not Modified (<—> 0.9 ms)
+LyRN ——> GET /static/js/main.bcb14087.js.map 
+LyRN <—— 304 Not Modified (<—> 0.9 ms)
+bEJo ——> GET /assets/images/logos/transmax.png 
+h5rx ——> GET /assets/images/cascadia-parkinglot-960x1280.jpg 
+bEJo <—— 304 Not Modified (<—> 1.4 ms)
+h5rx <—— 304 Not Modified (<—> 1.2 ms)
+WnZU ——> GET /assets/images/green-coronado-driver-side-960x1280.jpg 
+WnZU <—— 304 Not Modified (<—> 0.7 ms)
+N1FX ——> GET /assets/images/cascadia-evo_800x1066.jpg 
+N1FX <—— 304 Not Modified (<—> 0.7 ms)
+ytol ——> GET /assets/images/three-truck-parkinglot-750x1000.jpg 
+iJSu ——> GET /assets/images/logos/facebook.png 
+ytol <—— 304 Not Modified (<—> 1.3 ms)
+iJSu <—— 304 Not Modified (<—> 1.1 ms)
+GMs5 ——> GET /assets/images/logos/instagram.png 
+GMs5 <—— 304 Not Modified (<—> 0.6 ms)
+cChD ——> GET /home 
+cChD <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 2.3 ms)
+C8q1 ——> GET /static/css/main.a0de00f5.css.map 
+C8q1 <—— 304 Not Modified (<—> 0.9 ms)
+0yas ——> GET /static/js/main.bcb14087.js.map 
+0yas <—— 304 Not Modified (<—> 0.8 ms)
+qv5N ——> GET / 
+qv5N <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 2.2 ms)
+J9To ——> GET /home 
+J9To <—— 304 Not Modified (<—> 1.0 ms)
+yG5O ——> GET /static/js/main.bcb14087.js 
+EKGW ——> GET /static/css/main.a0de00f5.css 
+yG5O <—— 304 Not Modified (<—> 1.3 ms)
+EKGW <—— 304 Not Modified (<—> 1.2 ms)
+8KSu ——> GET /static/js/main.bcb14087.js.map 
+8KSu <—— 304 Not Modified (<—> 0.8 ms)
+hI2R ——> GET /assets/images/logos/transmax.png 
+hI2R <—— 304 Not Modified (<—> 0.8 ms)
+Q7qb ——> GET /assets/images/cascadia-parkinglot-960x1280.jpg 
+Q7qb <—— 304 Not Modified (<—> 0.8 ms)
+4HVD ——> GET /assets/images/green-coronado-driver-side-960x1280.jpg 
+4HVD <—— 304 Not Modified (<—> 0.6 ms)
+kUBs ——> GET /assets/images/cascadia-evo_800x1066.jpg 
+kUBs <—— 304 Not Modified (<—> 0.7 ms)
+ELfv ——> GET /assets/images/three-truck-parkinglot-750x1000.jpg 
+ELfv <—— 304 Not Modified (<—> 0.8 ms)
+yR2W ——> GET /assets/images/logos/facebook.png 
+I103 ——> GET /assets/images/logos/instagram.png 
+yR2W <—— 304 Not Modified (<—> 1.0 ms)
+I103 <—— 304 Not Modified (<—> 1.8 ms)
+EgHE ——> GET /static/css/main.a0de00f5.css.map 
+EgHE <—— 304 Not Modified (<—> 0.9 ms)
+Fh8d ——> GET / 
+Fh8d <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+cJ2s ——> GET / 
+cJ2s <—— 304 Not Modified (<—> 0.9 ms)
+1hQW ——> GET /static/css/main.a0de00f5.css 
+1hQW <—— 304 Not Modified (<—> 0.7 ms)
+L67Z ——> GET /static/js/main.bcb14087.js 
+L67Z <—— 304 Not Modified (<—> 0.6 ms)
+CkjE ——> GET /assets/images/logos/transmax.png 
+8goZ ——> GET /assets/images/cascadia-parkinglot-960x1280.jpg 
+CkjE <—— 304 Not Modified (<—> 3.6 ms)
+8goZ <—— 304 Not Modified (<—> 1.1 ms)
+rlwj ——> GET /assets/images/green-coronado-driver-side-960x1280.jpg 
+8qgX ——> GET /assets/images/cascadia-evo_800x1066.jpg 
+rlwj <—— 304 Not Modified (<—> 1.0 ms)
+8qgX <—— 304 Not Modified (<—> 0.9 ms)
+JUs9 ——> GET /assets/images/three-truck-parkinglot-750x1000.jpg 
+ReyG ——> GET /assets/images/logos/instagram.png 
+gMNr ——> GET /assets/images/logos/facebook.png 
+JUs9 <—— 304 Not Modified (<—> 1.4 ms)
+ReyG <—— 304 Not Modified (<—> 1.5 ms)
+gMNr <—— 304 Not Modified (<—> 1.5 ms)
+XYq0 ——> GET / 
+XYq0 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 5.2 ms)
+lJfc ——> GET / 
+lJfc <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+zVKx ——> GET /static/css/main.a0de00f5.css 
+zVKx <—— 200 OK 9.21 KB text/css; charset=UTF-8 (<—> 1.1 ms)
+EeKh ——> GET /static/js/main.bcb14087.js 
+EeKh <—— 200 OK 755.93 KB application/javascript; charset=UTF-8 (<—> 54.6 ms)
+Rww1 ——> GET /assets/images/logos/instagram.png 
+J5gB ——> GET /assets/images/logos/facebook.png 
+Rww1 <—— 200 OK 4.73 KB image/png (<—> 1.5 ms)
+J5gB <—— 200 OK 656 B image/png (<—> 1.3 ms)
+DvcF ——> GET /assets/images/three-truck-parkinglot-750x1000.jpg 
+g0TN ——> GET /assets/images/cascadia-parkinglot-960x1280.jpg 
+DvcF <—— 200 OK 135.8 KB image/jpeg (<—> 14.0 ms)
+g0TN <—— 200 OK 110.38 KB image/jpeg (<—> 14.1 ms)
+lwb3 ——> GET /assets/images/green-coronado-driver-side-960x1280.jpg 
+e4X7 ——> GET /assets/images/cascadia-evo_800x1066.jpg 
+lwb3 <—— 200 OK 218.05 KB image/jpeg (<—> 2.6 ms)
+W5tF ——> GET /assets/images/logos/transmax.png 
+W5tF <—— 200 OK 28.34 KB image/png (<—> 1.0 ms)
+e4X7 <—— 200 OK 223.3 KB image/jpeg (<—> 30.9 ms)
+ImKW ——> GET / 
+ImKW <—— 304 Not Modified (<—> 1.3 ms)
+tPGD ——> GET /static/css/main.a0de00f5.css 
+tPGD <—— 304 Not Modified (<—> 1.0 ms)
+98AM ——> GET /static/js/main.bcb14087.js 
+98AM <—— 304 Not Modified (<—> 0.6 ms)
+TIeY ——> GET /assets/images/logos/transmax.png 
+TIeY <—— 304 Not Modified (<—> 0.8 ms)
+uaEC ——> GET /assets/images/cascadia-parkinglot-960x1280.jpg 
+uaEC <—— 304 Not Modified (<—> 0.6 ms)
+pcUA ——> GET /assets/images/green-coronado-driver-side-960x1280.jpg 
+pcUA <—— 304 Not Modified (<—> 0.7 ms)
+CzFW ——> GET /assets/images/cascadia-evo_800x1066.jpg 
+rndP ——> GET /assets/images/logos/facebook.png 
+a9Kv ——> GET /assets/images/three-truck-parkinglot-750x1000.jpg 
+u2Or ——> GET /assets/images/logos/instagram.png 
+CzFW <—— 304 Not Modified (<—> 2.0 ms)
+rndP <—— 304 Not Modified (<—> 1.9 ms)
+a9Kv <—— 304 Not Modified (<—> 1.9 ms)
+u2Or <—— 304 Not Modified (<—> 1.9 ms)
+yXvV ——> GET /favicon.ico 
+yXvV <—— 200 OK 31.29 KB image/x-icon (<—> 0.6 ms)
+0Y3v ——> GET / 
+0Y3v <—— 304 Not Modified (<—> 0.8 ms)
+SH6B ——> GET /static/css/main.a0de00f5.css 
+SH6B <—— 304 Not Modified (<—> 0.8 ms)
+VttI ——> GET /static/js/main.bcb14087.js 
+VttI <—— 304 Not Modified (<—> 0.6 ms)
+mZeq ——> GET /assets/images/logos/transmax.png 
+mZeq <—— 304 Not Modified (<—> 0.8 ms)
+fd72 ——> GET /assets/images/cascadia-parkinglot-960x1280.jpg 
+fd72 <—— 304 Not Modified (<—> 0.7 ms)
+E6LB ——> GET /assets/images/green-coronado-driver-side-960x1280.jpg 
+E6LB <—— 304 Not Modified (<—> 1.4 ms)
+iT7B ——> GET /assets/images/logos/facebook.png 
+4xn3 ——> GET /assets/images/cascadia-evo_800x1066.jpg 
+U3yh ——> GET /assets/images/three-truck-parkinglot-750x1000.jpg 
+bPI7 ——> GET /assets/images/logos/instagram.png 
+iT7B <—— 304 Not Modified (<—> 1.8 ms)
+4xn3 <—— 304 Not Modified (<—> 1.9 ms)
+U3yh <—— 304 Not Modified (<—> 1.9 ms)
+bPI7 <—— 304 Not Modified (<—> 1.9 ms)
+yqTj ——> GET /login 
+yqTj <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.6 ms)
+vNGF ——> GET /static/css/main.a0de00f5.css 
+vNGF <—— 304 Not Modified (<—> 0.7 ms)
+sAzq ——> GET /static/js/main.bcb14087.js 
+sAzq <—— 304 Not Modified (<—> 0.6 ms)
+SRhh ——> GET /assets/images/logos/transmax.png 
+SRhh <—— 304 Not Modified (<—> 0.8 ms)
+SNcU ——> POST /api/signin 47 B application/json;charset=UTF-8
+Executing (default): SELECT "id", "userName", "password", "createdAt", "updatedAt" FROM "users" AS "user" WHERE "user"."userName" = 'apenchev' AND "user"."password" = 'fa36300440ca7e0baffa3689cc8b6a93';
+SNcU <—— 200 OK 22 B application/json; charset=utf-8 (<—> 91.4 ms)
+xgeN ——> GET /api/trip 
+Executing (default): SELECT "load"."id", "load"."bookDate", "load"."driverName", "load"."loadNumber", "load"."brokerName", "load"."pickUpCityState", "load"."dropOffCityState", "load"."pickUpAddress", "load"."dropOffAddress", "load"."payment", "load"."loadedMiles", "load"."emptyMiles", "load"."mileage", "load"."dollarPerMile", "load"."dieselPrice", "load"."fuelCost", "load"."driverPay", "load"."dispatchFee", "load"."lumper", "load"."detention", "load"."detentionDriverPay", "load"."lateFee", "load"."toll", "load"."roadMaintenance", "load"."otherExpenses", "load"."totalExpenses", "load"."profit", "load"."commodity", "load"."weight", "load"."trailer", "load"."confirmFilePath", "load"."createdAt", "load"."updatedAt", "load"."brokerId", "load"."driverId", "load"."truckId", "truck"."id" AS "truck.id", "truck"."model" AS "truck.model", "truck"."year" AS "truck.year", "truck"."purchaseDate" AS "truck.purchaseDate", "truck"."purchasePrice" AS "truck.purchasePrice", "truck"."originalMiles" AS "truck.originalMiles", "truck"."maintenanceDate" AS "truck.maintenanceDate", "truck"."maintenanceType" AS "truck.maintenanceType", "truck"."maintenanceCost" AS "truck.maintenanceCost", "truck"."repairDate" AS "truck.repairDate", "truck"."repairType" AS "truck.repairType", "truck"."repairCost" AS "truck.repairCost", "truck"."companyId" AS "truck.companyId", "truck"."createdAt" AS "truck.createdAt", "truck"."updatedAt" AS "truck.updatedAt", "truck->company"."id" AS "truck.company.id", "truck->company"."taxId" AS "truck.company.taxId", "truck->company"."name" AS "truck.company.name", "truck->company"."foundedDate" AS "truck.company.foundedDate", "truck->company"."incorporatedState" AS "truck.company.incorporatedState", "truck->company"."email" AS "truck.company.email", "truck->company"."phone" AS "truck.company.phone", "truck->company"."address" AS "truck.company.address", "truck->company"."numberOfTrucks" AS "truck.company.numberOfTrucks", "truck->company"."numberOfTrailers" AS "truck.company.numberOfTrailers", "truck->company"."numberOfEmployees" AS "truck.company.numberOfEmployees", "truck->company"."createdAt" AS "truck.company.createdAt", "truck->company"."updatedAt" AS "truck.company.updatedAt" FROM "loads" AS "load" LEFT OUTER JOIN "trucks" AS "truck" ON "load"."truckId" = "truck"."id" LEFT OUTER JOIN "companies" AS "truck->company" ON "truck"."companyId" = "truck->company"."id";
+xgeN <—— 200 OK 7.71 KB application/json; charset=utf-8 (<—> 16.3 ms)
+hhHa ——> GET /api/company 
+Executing (default): SELECT "id", "taxId", "name", "foundedDate", "incorporatedState", "email", "phone", "address", "numberOfTrucks", "numberOfTrailers", "numberOfEmployees", "createdAt", "updatedAt" FROM "companies" AS "company" ORDER BY "company"."name" ASC;
+hhHa <—— 200 OK 700 B application/json; charset=utf-8 (<—> 6.9 ms)
+YSeP ——> GET /api/broker 
+Executing (default): SELECT "id", "brokerId", "name", "email", "phone", "address", "bookedLoads", "totalPayment", "totalLoadedMiles", "avgDollarPerMile", "createdAt", "updatedAt" FROM "brokers" AS "broker" ORDER BY "broker"."name" ASC;
+YSeP <—— 200 OK 1.2 KB application/json; charset=utf-8 (<—> 4.5 ms)
+JyRF ——> GET /api/driver 
+Executing (default): SELECT "id", "driverId", "firstName", "lastName", "ssn", "driversLicense", "email", "phone", "hireDate", "address", "currentRate", "earnings", "employedBy", "createdAt", "updatedAt" FROM "drivers" AS "driver" ORDER BY "driver"."firstName" ASC;
+JyRF <—— 200 OK 690 B application/json; charset=utf-8 (<—> 23.1 ms)
+RSNF ——> GET /api/trip 
+Executing (default): SELECT "load"."id", "load"."bookDate", "load"."driverName", "load"."loadNumber", "load"."brokerName", "load"."pickUpCityState", "load"."dropOffCityState", "load"."pickUpAddress", "load"."dropOffAddress", "load"."payment", "load"."loadedMiles", "load"."emptyMiles", "load"."mileage", "load"."dollarPerMile", "load"."dieselPrice", "load"."fuelCost", "load"."driverPay", "load"."dispatchFee", "load"."lumper", "load"."detention", "load"."detentionDriverPay", "load"."lateFee", "load"."toll", "load"."roadMaintenance", "load"."otherExpenses", "load"."totalExpenses", "load"."profit", "load"."commodity", "load"."weight", "load"."trailer", "load"."confirmFilePath", "load"."createdAt", "load"."updatedAt", "load"."brokerId", "load"."driverId", "load"."truckId", "truck"."id" AS "truck.id", "truck"."model" AS "truck.model", "truck"."year" AS "truck.year", "truck"."purchaseDate" AS "truck.purchaseDate", "truck"."purchasePrice" AS "truck.purchasePrice", "truck"."originalMiles" AS "truck.originalMiles", "truck"."maintenanceDate" AS "truck.maintenanceDate", "truck"."maintenanceType" AS "truck.maintenanceType", "truck"."maintenanceCost" AS "truck.maintenanceCost", "truck"."repairDate" AS "truck.repairDate", "truck"."repairType" AS "truck.repairType", "truck"."repairCost" AS "truck.repairCost", "truck"."companyId" AS "truck.companyId", "truck"."createdAt" AS "truck.createdAt", "truck"."updatedAt" AS "truck.updatedAt", "truck->company"."id" AS "truck.company.id", "truck->company"."taxId" AS "truck.company.taxId", "truck->company"."name" AS "truck.company.name", "truck->company"."foundedDate" AS "truck.company.foundedDate", "truck->company"."incorporatedState" AS "truck.company.incorporatedState", "truck->company"."email" AS "truck.company.email", "truck->company"."phone" AS "truck.company.phone", "truck->company"."address" AS "truck.company.address", "truck->company"."numberOfTrucks" AS "truck.company.numberOfTrucks", "truck->company"."numberOfTrailers" AS "truck.company.numberOfTrailers", "truck->company"."numberOfEmployees" AS "truck.company.numberOfEmployees", "truck->company"."createdAt" AS "truck.company.createdAt", "truck->company"."updatedAt" AS "truck.company.updatedAt" FROM "loads" AS "load" LEFT OUTER JOIN "trucks" AS "truck" ON "load"."truckId" = "truck"."id" LEFT OUTER JOIN "companies" AS "truck->company" ON "truck"."companyId" = "truck->company"."id";
+RSNF <—— 304 Not Modified (<—> 9.4 ms)
+I7Ik ——> GET / 
+I7Ik <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.4 ms)

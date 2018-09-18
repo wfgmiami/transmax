@@ -5,8 +5,19 @@
     applications environment, along with NODE_ENV=production
  */
 
+/*
 module.exports = {
   DATABASE_URI: process.env.DATABASE_URL,
+  GMAIL_PASS: process.env.GMAIL_PASS,
+  APENCHEV_PASS: process.env.APENCHEV_PASS,
+  AKARAPEEV_PASS: process.env.AKARAPEEV_PASS
+};
+*/
+module.exports = {
+  DATABASE_HOST: process.env.DATABASE_HOST,
+  DATABASE_NAME: process.env.DATABASE_NAME,
+  DATABASE_USERNAME: process.env.DATABASE_USERNAME,
+  DATABASE_PASSWORD: process.env.DATABASE_PASSWORD,
   GMAIL_PASS: process.env.GMAIL_PASS,
   APENCHEV_PASS: process.env.APENCHEV_PASS,
   AKARAPEEV_PASS: process.env.AKARAPEEV_PASS
