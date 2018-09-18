@@ -5,7 +5,7 @@ const DataTypes = db.Sequelize;
 
 const Load = db.define('load', {
     bookDate: {
-        type: DataTypes.DATE,
+        type: DataTypes.STRING,
         allowNull: false
 
     },
