@@ -81,14 +81,14 @@ class TripsData extends Component {
   }
 
   editTable(cellInfo) {
-    // console.log(
-    //   "cell info........",
-    //   cellInfo,
-    //   "cellInfo.column.id ",
-    //   cellInfo.column.id,
-    //   'cellInfo.row[cellInfo.column.id]:',
-    //   cellInfo.row[cellInfo.column.id]
-    // );
+    console.log(
+      "cell info........",
+      cellInfo,
+      "cellInfo.column.id ",
+      cellInfo.column.id,
+      'cellInfo.row[cellInfo.column.id]:',
+      cellInfo.row[cellInfo.column.id]
+    );
 
     let dollarSign;
     let fieldValue;
@@ -108,6 +108,13 @@ class TripsData extends Component {
       ]
     }
 
+    if( cellInfo.column.id === 'bookDate' && this.props.trip[cellInfo.index][
+      cellInfo.column.id
+    ] !== ''){
+      fieldValue = new Date(this.props.trip[cellInfo.index][
+        cellInfo.column.id
+      ]).toLocaleDateString();
+    }
 
     switch (cellInfo.column.id) {
       case "payment":
