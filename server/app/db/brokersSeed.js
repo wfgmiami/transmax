@@ -54,6 +54,17 @@ const BrokersData = [
     totalLoadedMiles: 737,
     avgDollarPerMile: 0
   },
+  {
+    brokerId: 6,
+    name: "American Logistics Inc.",
+    address: "",
+    phone: "",
+    email: "",
+    bookedLoads: 1,
+    totalPayment: 775,
+    totalLoadedMiles: 391,
+    avgDollarPerMile: 0
+  },
 ];
 
 module.exports = BrokersData;

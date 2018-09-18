@@ -10,7 +10,7 @@ export const tileData = [
 
   {
     img:"assets/images/green-coronado-driver-side-960x1280.jpg",
-    title: "Drive Freightliner Coronado ",
+    title: "Drive Freightliner Coronado Glider Kit",
     subtitle: "paper log, dry van loads",
     author: "author",
     // featured: false
@@ -20,7 +20,7 @@ export const tileData = [
   {
     img:"assets/images/cascadia-evo_800x1066.jpg",
     title: "Drive Freightliner Cascadia",
-    subtitle: "paper log, dry van loads",
+    subtitle: "ELD, dry van loads",
     author: "author",
     // featured: false
   },

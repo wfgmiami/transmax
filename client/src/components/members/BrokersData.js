@@ -230,7 +230,7 @@ class BrokersData extends Component {
         Header: "Broker Id",
         Footer: this.calculateTotal,
         accessor: "brokerId",
-        show: true,
+        show: false,
         className: "columnBorder",
         Cell: this.editTable
       },
