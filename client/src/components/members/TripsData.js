@@ -81,14 +81,14 @@ class TripsData extends Component {
   }
 
   editTable(cellInfo) {
-    console.log(
-      "cell info........",
-      cellInfo,
-      "cellInfo.column.id ",
-      cellInfo.column.id,
-      'cellInfo.row[cellInfo.column.id]:',
-      cellInfo.row[cellInfo.column.id]
-    );
+    // console.log(
+    //   "cell info........",
+    //   cellInfo,
+    //   "cellInfo.column.id ",
+    //   cellInfo.column.id,
+    //   'cellInfo.row[cellInfo.column.id]:',
+    //   cellInfo.row[cellInfo.column.id]
+    // );
 
     let dollarSign;
     let fieldValue;
