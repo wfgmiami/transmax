@@ -63,7 +63,7 @@ class AddSaveBtn extends React.Component {
             marginLeft: "5px"
           }}
         >
-          ADD/SAVE
+          ACTION
           <AlarmIcon className={classes.icon} />
         </Button>
         <Dialog
@@ -72,7 +72,7 @@ class AddSaveBtn extends React.Component {
           open={this.state.open}
           onClose={this.handleClose}
         >
-          <DialogTitle>ADD / SAVE</DialogTitle>
+
           <DialogContent>
             <form className={classes.container}>
               <Button
@@ -80,7 +80,7 @@ class AddSaveBtn extends React.Component {
                 color="primary"
                 onClick={this.handleAddEmptyRow}
               >
-                Add
+                Add Row
               </Button>&nbsp;
               <Button
                 variant="contained"
