@@ -230,6 +230,44 @@ const LoadsData = [
       "/brokerConfirmations/090518_reliableSourceLogistics.pdf"
     )
   },
+  {
+    bookDate: "09/18/18",
+    truckId: 119,
+    driverId: 1,
+    driverName: "Kelvin",
+    loadNumber: "41612",
+    brokerId: 7,
+    brokerName: "Gateway Logistics Inc.",
+    pickUpCityState: "Racine, WI",
+    dropOffCityState: "Cincinnati, OH",
+    pickUpAddress: "9201 Washington Ave, Racine, WI 53406",
+    dropOffAddress: "11755 Lebanon Rd, Cincinnati, OH 45241",
+    payment: 1050,
+    loadedMiles: 375,
+    emptyMiles: 11,
+    mileage: 0,
+    dollarPerMile: 0,
+    dieselPrice: 3.22,
+    fuelCost: 0,
+    driverPay: 0,
+    dispatchFee: 0,
+    lumper: 0,
+    detention: 0,
+    detentionDriverPay: 0,
+    lateFee: 0,
+    toll: 0,
+    roadMaintenance: 0,
+    otherExpenses: 0,
+    totalExpense: 0,
+    profit: 0,
+    commodity: "Light poles & fixtures",
+    weight: 35000,
+    trailer: "Dry Van",
+    confirmFilePath: path.join(
+      __dirname,
+      "/brokerConfirmations/090518_reliableSourceLogistics.pdf"
+    )
+  },
 
 ];
 

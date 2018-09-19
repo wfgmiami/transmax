@@ -22,7 +22,8 @@ const candidate = db.define('candidate', {
     },
     experience: DataTypes.STRING,
     city: DataTypes.STRING,
-    state: DataTypes.STRING
+    state: DataTypes.STRING,
+    dob: DataTypes.DATE
 
 })
 

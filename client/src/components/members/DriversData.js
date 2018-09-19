@@ -11,7 +11,7 @@ import { Datatable } from "./Datatable";
 import { driverConfig } from "../../configs/driverConfig";
 import ColumnChooser from "./ColumnChooser.js";
 import SideMenu from "./SideMenu";
-import AddSaveBtn from "./AddSaveBtn";
+import ActionBtn from "./ActionBtn";
 import axios from "axios";
 
 import * as companyActions from "../../store/actions/company";
@@ -352,7 +352,7 @@ class DriversData extends Component {
       <div className={classes.root}>
         <Toolbar className={classes.toolbar}>
           <SideMenu />
-          <AddSaveBtn saveRows={this.saveRows} addEmptyRow={this.addEmptyRow} />
+          <ActionBtn saveRows={this.saveRows} addEmptyRow={this.addEmptyRow} />
           &nbsp;
           <ColumnChooser
             columns={columns}

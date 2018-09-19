@@ -1,15 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogActions from "@material-ui/core/DialogActions";
 import AlarmIcon from "@material-ui/icons/Reorder";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import DatePicker from "./DatePicker";
 
 import * as loadActions from "../../store/actions/load";
 
@@ -24,26 +25,35 @@ const styles = theme => ({
   }
 });
 
-class AddSaveBtn extends React.Component {
+class DateFilter extends React.Component {
   state = {
-    open: false
+    open: false,
+    originalInputs: {}
   };
 
-  handleAddEmptyRow = () => {
-    this.props.addEmptyRow();
-    this.handleClose();
-  };
-
-  handleSaveRows = () => {
-    this.props.saveRows();
-    this.handleClose();
-  };
+  componentDidMount() {
+    this.setState({ originalInputs: this.props.dateRange });
+  }
 
   handleClickOpen = () => {
     this.setState({ open: true });
   };
 
   handleClose = () => {
+    this.setState({ open: false });
+  };
+
+  handleChange = key => ({ target: { value } }) => {
+    this.props.setDateRangeValue({ [key]: value });
+  };
+
+  handleCloseCancel = () => {
+    this.setState({ open: false });
+    this.props.setDateRangeValue(this.state.originalInputs);
+  };
+
+  handleCloseOK = () => {
+    this.props.getTripDateRange(this.props.dateRange);
     this.setState({ open: false });
   };
 
@@ -63,7 +73,7 @@ class AddSaveBtn extends React.Component {
             marginLeft: "5px"
           }}
         >
-          ADD/SAVE
+          DATE RANGE
           <AlarmIcon className={classes.icon} />
         </Button>
         <Dialog
@@ -72,28 +82,17 @@ class AddSaveBtn extends React.Component {
           open={this.state.open}
           onClose={this.handleClose}
         >
-          <DialogTitle>ADD / SAVE</DialogTitle>
           <DialogContent>
-            <form className={classes.container}>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={this.handleAddEmptyRow}
-              >
-                Add
-              </Button>&nbsp;
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={this.handleSaveRows}
-              >
-                Save
-              </Button>
-            </form>
+            <div className={classes.container}>
+              <DatePicker />
+            </div>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.handleCloseCancel} color="primary">
               Cancel
+            </Button>
+            <Button onClick={this.handleCloseOK} color="primary">
+              Ok
             </Button>
           </DialogActions>
         </Dialog>
@@ -102,21 +101,21 @@ class AddSaveBtn extends React.Component {
   }
 }
 
-AddSaveBtn.propTypes = {
+DateFilter.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
 function mapStateToProps({ load }) {
   return {
-    inputVariable: load.inputVariable
+    dateRange: load.dateRange
   };
 }
-
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
-      setInputVariableValue: loadActions.setInputVariableValue,
-      setInputVariable: loadActions.setInputVariable
+      setDateRangeValue: loadActions.setDateRangeValue,
+      setDateRange: loadActions.setDateRange,
+      getTripDateRange: loadActions.getTripDateRange
     },
     dispatch
   );
@@ -127,6 +126,6 @@ export default withStyles(styles, { withTheme: true })(
     connect(
       mapStateToProps,
       mapDispatchToProps
-    )(AddSaveBtn)
+    )(DateFilter)
   )
 );

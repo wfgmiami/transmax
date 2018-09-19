@@ -13,7 +13,8 @@ import { loadsConfig } from "../../configs/loadsConfig";
 import ColumnChooser from "./ColumnChooser.js";
 import SideMenu from "./SideMenu";
 import Inputs from "./Inputs";
-import AddSaveBtn from "./AddSaveBtn";
+import ActionBtn from "./ActionBtn";
+import DateFilter from "./DateFilter";
 
 import * as loadActions from "../../store/actions/load";
 
@@ -108,13 +109,13 @@ class TripsData extends Component {
       ]
     }
 
-    // if( cellInfo.column.id === 'bookDate' && this.props.trip[cellInfo.index][
-    //   cellInfo.column.id
-    // ] !== ''){
-    //   fieldValue = new Date(this.props.trip[cellInfo.index][
-    //     cellInfo.column.id
-    //   ]).toLocaleDateString();
-    // }
+    if( cellInfo.column.id === 'bookDate' && this.props.trip[cellInfo.index][
+      cellInfo.column.id
+    ] !== ''){
+      fieldValue = new Date(this.props.trip[cellInfo.index][
+        cellInfo.column.id
+      ]).toLocaleDateString();
+    }
 
     switch (cellInfo.column.id) {
       case "payment":
@@ -718,12 +719,14 @@ class TripsData extends Component {
       <div className={classes.root}>
         <Toolbar className={classes.toolbar}>
           <SideMenu />
-          <AddSaveBtn saveRows={this.saveRows} addEmptyRow={this.addEmptyRow} />
+          <DateFilter />
           &nbsp;
           <ColumnChooser
             columns={columns}
             onColumnUpdate={this.onColumnUpdate}
           />
+          &nbsp;
+          <ActionBtn saveRows={this.saveRows} addEmptyRow={this.addEmptyRow} />
           <div>&nbsp;</div>
           <Inputs />
         </Toolbar>

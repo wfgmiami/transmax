@@ -11,7 +11,7 @@ import { Datatable } from "./Datatable";
 import { truckConfig } from "../../configs/truckConfig";
 import ColumnChooser from "./ColumnChooser.js";
 import SideMenu from "./SideMenu";
-import AddSaveBtn from "./AddSaveBtn";
+import ActionBtn from "./ActionBtn";
 import axios from "axios";
 
 import * as companyActions from "../../store/actions/company";
@@ -391,7 +391,7 @@ class TrucksData extends Component {
       <div className={classes.root}>
         <Toolbar className={classes.toolbar}>
           <SideMenu />
-          <AddSaveBtn saveRows={this.saveRows} addEmptyRow={this.addEmptyRow} />
+          <ActionBtn saveRows={this.saveRows} addEmptyRow={this.addEmptyRow} />
           &nbsp;
           <ColumnChooser
             columns={columns}
