@@ -29,7 +29,7 @@ const trips = (state = initialState, action) => {
       // console.log("filteredDateRange", filteredDateRange);
 
       // return [...filteredDateRange];
-      console.log("trip reducer GET_TRIP_DATE_RANGE", action);
+      // console.log("trip reducer GET_TRIP_DATE_RANGE", action);
       return [...action.payload];
     }
 

@@ -25,7 +25,7 @@ export function getTrip() {
 }
 
 export function setTrip(trip) {
-  console.log("set trip called", trip);
+  // console.log("set trip called", trip);
   return {
     type: SET_TRIP,
     trip
@@ -33,7 +33,7 @@ export function setTrip(trip) {
 }
 
 export function saveTrips(trips) {
-  console.log("trip.actions.js saveTrip trips ", trips);
+  // console.log("trip.actions.js saveTrip trips ", trips);
   const postTrip = axios.post("/api/trip", { ...trips });
   return dispatch =>
     postTrip.then(response =>

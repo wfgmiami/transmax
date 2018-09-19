@@ -43,7 +43,7 @@ class SideMenu extends React.Component {
     const chosenNav = e.target.textContent;
     this.setState({ left: false }, () => {
       if (chosenNav === "Log Out") {
-        console.log(".............", this.props);
+        // console.log(".............", this.props);
         this.props.setAuth({ authenticated: false });
       } else {
         this.props.setNavigation(chosenNav);

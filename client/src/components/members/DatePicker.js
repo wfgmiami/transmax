@@ -27,7 +27,7 @@ class DatePicker extends React.Component {
 
   render() {
     const { classes } = this.props;
-    console.log("DatePicker ", this.props);
+    // console.log("DatePicker ", this.props);
 
     return (
       <form className={classes.container} noValidate>

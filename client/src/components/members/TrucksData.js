@@ -68,14 +68,14 @@ class TrucksData extends Component {
   }
 
   editTable(cellInfo) {
-    console.log(
-      "cell info........",
-      cellInfo,
-      "cellInfo.column.id: ",
-      cellInfo.column.id,
-      'cellInfo.row[cellInfo.column.id]:',
-      cellInfo.row[cellInfo.column.id]
-    );
+    // console.log(
+    //   "cell info........",
+    //   cellInfo,
+    //   "cellInfo.column.id: ",
+    //   cellInfo.column.id,
+    //   'cellInfo.row[cellInfo.column.id]:',
+    //   cellInfo.row[cellInfo.column.id]
+    // );
     let dollarSign;
     let fieldValue;
 
@@ -85,7 +85,7 @@ class TrucksData extends Component {
     dollarSign = cellInfo.column.id === "purchasePrice" ? "$" : "";
 
     if( cellInfo.column.id === 'company.name'){
-      console.log('field: ', this.props.truck[cellInfo.index])
+      // console.log('field: ', this.props.truck[cellInfo.index])
       fieldValue = this.props.truck[cellInfo.index][
        'company'] ? this.props.truck[cellInfo.index][
         'company'].name : '';
@@ -158,7 +158,7 @@ class TrucksData extends Component {
   }
 
   saveRows() {
-    console.log("TrucksData.js saveRows this.props", this.props);
+    // console.log("TrucksData.js saveRows this.props", this.props);
     this.props.saveTruck(this.props.truck);
   }
 
@@ -209,7 +209,7 @@ class TrucksData extends Component {
   onColumnUpdate(index) {
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();
-    console.log("onColumnUpdate index ", index, "...", columns[index]);
+    // console.log("onColumnUpdate index ", index, "...", columns[index]);
     this.setState(
       prevState => {
         const columns1 = [];
@@ -232,7 +232,7 @@ class TrucksData extends Component {
   }
 
   createColumns() {
-    console.log("TrucksData.js createColumns this.props: ", this.props);
+    // console.log("TrucksData.js createColumns this.props: ", this.props);
 
     return [
       {
@@ -383,7 +383,7 @@ class TrucksData extends Component {
     // const { data } = this.state;
     const { truck, classes } = this.props;
 
-    console.log("TrucksData.js this.props", this.props);
+    // console.log("TrucksData.js this.props", this.props);
 
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();
