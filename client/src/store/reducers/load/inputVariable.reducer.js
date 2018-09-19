@@ -14,7 +14,7 @@ const inputVariable = (state = initialState, action) => {
       };
     }
     case Actions.SET_INPUT_VARIABLE_VALUE: {
-      console.log("input var reducer action ", action);
+      // console.log("input var reducer action ", action);
       return {
         ...state,
         ...action.value

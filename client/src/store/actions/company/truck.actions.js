@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Truck } from "../../../components/members/Datatable";
+// import { Truck } from "../../../components/members/Datatable";
 
 export const GET_TRUCK = "GET TRUCK";
 export const SET_TRUCK = "SET TRUCK";
@@ -24,7 +24,7 @@ export function getTruck() {
 }
 
 export function setTruck(truck) {
-  console.log("set truck called", truck);
+  // console.log("set truck called", truck);
   return {
     type: SET_TRUCK,
     truck
@@ -32,7 +32,7 @@ export function setTruck(truck) {
 }
 
 export function saveTruck(truck) {
-  console.log("truck.actions.js saveTruck ", truck);
+  // console.log("truck.actions.js saveTruck ", truck);
   const postTruck = axios.post("/api/truck", { ...truck });
   return dispatch =>
     postTruck.then(response =>

@@ -4,7 +4,7 @@ import { driverConfig } from "../../../configs/driverConfig.js";
 const initialState = driverConfig;
 
 const driver = (state = initialState, action) => {
-  console.log("driver reducer actionObj", action)
+  // console.log("driver reducer actionObj", action)
 
   switch (action.type) {
     case Actions.GET_DRIVER: {

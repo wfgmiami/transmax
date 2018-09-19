@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Driver } from "../../../components/members/Datatable";
+// import { Driver } from "../../../components/members/Datatable";
 
 export const GET_DRIVER = "GET DRIVER";
 export const SET_DRIVER = "SET DRIVER";
@@ -24,7 +24,7 @@ export function getDriver() {
 }
 
 export function setDriver(driver) {
-  console.log("set driver called", driver);
+  // console.log("set driver called", driver);
   return {
     type: SET_DRIVER,
     driver
@@ -32,7 +32,7 @@ export function setDriver(driver) {
 }
 
 export function saveDriver(driver) {
-  console.log("driver.actions.js saveDriver ", driver);
+  // console.log("driver.actions.js saveDriver ", driver);
   const postDriver = axios.post("/api/driver", { ...driver });
   return dispatch =>
     postDriver.then(response =>

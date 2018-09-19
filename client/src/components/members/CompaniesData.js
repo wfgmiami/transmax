@@ -193,7 +193,7 @@ class CompaniesData extends Component {
   onColumnUpdate(index) {
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();
-    console.log("onColumnUpdate index ", index, "...", columns[index]);
+    // console.log("onColumnUpdate index ", index, "...", columns[index]);
     this.setState(
       prevState => {
         const columns1 = [];
@@ -216,7 +216,7 @@ class CompaniesData extends Component {
   }
 
   createColumns() {
-    console.log("CompaniesData.js createColumns this.props: ", this.props);
+    // console.log("CompaniesData.js createColumns this.props: ", this.props);
 
     return [
       {

@@ -32,7 +32,7 @@ class FadeMenu extends React.Component {
   render() {
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
-    console.log('menu props', this.props)
+    // console.log('menu props', this.props)
     return (
       <div>
         <Button

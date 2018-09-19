@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Broker } from "../../../components/members/Datatable";
+// import { Broker } from "../../../components/members/Datatable";
 
 export const GET_BROKER = "GET BROKER";
 export const SET_BROKER = "SET BROKER";
@@ -24,7 +24,7 @@ export function getBroker() {
 }
 
 export function setBroker(broker) {
-  console.log("set broker called", broker);
+  // console.log("set broker called", broker);
   return {
     type: SET_BROKER,
     broker
@@ -32,7 +32,7 @@ export function setBroker(broker) {
 }
 
 export function saveBroker(broker) {
-  console.log("broker.actions.js saveBroker ", broker);
+  // console.log("broker.actions.js saveBroker ", broker);
   const postBroker = axios.post("/api/broker", { ...broker });
   return dispatch =>
     postBroker.then(response =>

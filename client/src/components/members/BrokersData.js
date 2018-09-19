@@ -146,7 +146,7 @@ class BrokersData extends Component {
   }
 
   saveRows() {
-    console.log("CompaniesData.js saveRows this.props", this.props);
+    // console.log("CompaniesData.js saveRows this.props", this.props);
     this.props.saveBroker(this.props.broker);
   }
 
@@ -200,7 +200,7 @@ class BrokersData extends Component {
   onColumnUpdate(index) {
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();
-    console.log("onColumnUpdate index ", index, "...", columns[index]);
+    // console.log("onColumnUpdate index ", index, "...", columns[index]);
     this.setState(
       prevState => {
         const columns1 = [];
@@ -223,7 +223,7 @@ class BrokersData extends Component {
   }
 
   createColumns() {
-    console.log("BrokersData.js createColumns this.props: ", this.props);
+    // console.log("BrokersData.js createColumns this.props: ", this.props);
 
     return [
       {

@@ -4,7 +4,7 @@ import { truckConfig } from "../../../configs/truckConfig.js";
 const initialState = truckConfig;
 
 const truck = (state = initialState, action) => {
-  console.log("truck reducer actionObj", action)
+  // console.log("truck reducer actionObj", action)
 
   switch (action.type) {
     case Actions.GET_TRUCK: {

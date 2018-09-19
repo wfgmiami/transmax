@@ -27,7 +27,7 @@ router.get( '/daterange', ( req, res, next ) => {
   const startDate = new Date(req.query.startDate);
   const endDate = new Date(req.query.endDate);
 
-  console.log( 'daterange: ', startDate, endDate);
+  // console.log( 'daterange: ', startDate, endDate);
   Load.findAll({
     where: {
       bookDate: {

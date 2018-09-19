@@ -8,7 +8,7 @@ import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 import "react-table/react-table.css";
-import { Datatable } from "./Datatable";
+// import { Datatable } from "./Datatable";
 import { loadsConfig } from "../../configs/loadsConfig";
 import ColumnChooser from "./ColumnChooser.js";
 import SideMenu from "./SideMenu";
@@ -53,7 +53,7 @@ class TripsData extends Component {
   }
 
   componentDidMount() {
-    console.log("TripsData componentDidMount ");
+    // console.log("TripsData componentDidMount ");
     this.props.getTrip();
   }
 
@@ -199,7 +199,7 @@ class TripsData extends Component {
   }
 
   saveRows() {
-    console.log("TripsData.js saveRows this.props", this.props);
+    // console.log("TripsData.js saveRows this.props", this.props);
     this.props.saveTrips(this.props.trip);
   }
 
@@ -281,7 +281,7 @@ class TripsData extends Component {
   }
 
   createColumns() {
-    console.log("TripsData.js createColumns this.props: ", this.props);
+    // console.log("TripsData.js createColumns this.props: ", this.props);
     const { mpg, dispatchPercent } = this.props;
 
     return [
@@ -711,7 +711,7 @@ class TripsData extends Component {
     // const { data } = this.state;
     const { trip, classes } = this.props;
 
-    console.log("TripsData.js this.props ", this.props);
+    // console.log("TripsData.js this.props ", this.props);
 
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();

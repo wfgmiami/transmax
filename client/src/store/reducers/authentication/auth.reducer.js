@@ -3,7 +3,7 @@ import * as Actions from "../../actions/index";
 const initialState = { authenticated: "" };
 
 const auth = (state = initialState, action) => {
-console.log('auth reducer ', action)
+// console.log('auth reducer ', action)
   switch (action.type) {
     case Actions.GET_AUTH: {
       return {

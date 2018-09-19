@@ -1,6 +1,6 @@
 import * as Actions from "../../actions/index";
 import { loadsConfig } from "../../../configs/loadsConfig.js";
-import { Datatable } from "../../../components/members/Datatable";
+// import { Datatable } from "../../../components/members/Datatable";
 
 const initialState = loadsConfig;
 
@@ -29,7 +29,7 @@ const trips = (state = initialState, action) => {
       // console.log("filteredDateRange", filteredDateRange);
 
       // return [...filteredDateRange];
-      console.log("trip reducer GET_TRIP_DATE_RANGE", action);
+      // console.log("trip reducer GET_TRIP_DATE_RANGE", action);
       return [...action.payload];
     }
 
