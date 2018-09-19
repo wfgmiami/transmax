@@ -8,7 +8,7 @@ import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 import "react-table/react-table.css";
-import { Datatable } from "./Datatable";
+// import { Datatable } from "./Datatable";
 import { loadsConfig } from "../../configs/loadsConfig";
 import ColumnChooser from "./ColumnChooser.js";
 import SideMenu from "./SideMenu";

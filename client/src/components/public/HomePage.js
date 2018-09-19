@@ -6,7 +6,7 @@ import {withRouter} from 'react-router-dom';
 import ApplicationForm from "./ApplicationForm";
 import ApplicationSuccess from "./ApplicationSuccess";
 import Footer from "./Footer";
-import ImageSection from "./ImageSection";
+// import ImageSection from "./ImageSection";
 import ImageSection2 from "./ImageSection2";
 
 const styles = theme => ({

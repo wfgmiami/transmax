@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Firm } from "../../../components/members/Datatable";
+// import { Firm } from "../../../components/members/Datatable";
 
 export const GET_FIRM = "GET FIRM";
 export const SET_FIRM = "SET FIRM";
@@ -24,7 +24,7 @@ export function getFirm() {
 }
 
 export function setFirm(firm) {
-  console.log("set firm called", firm);
+  // console.log("set firm called", firm);
   return {
     type: SET_FIRM,
     firm
@@ -32,7 +32,7 @@ export function setFirm(firm) {
 }
 
 export function saveFirm(firm) {
-  console.log("firm.actions.js saveFirm ", firm);
+  // console.log("firm.actions.js saveFirm ", firm);
   const postFirm = axios.post("/api/company", { ...firm });
   return dispatch =>
     postFirm.then(response =>

@@ -1,6 +1,6 @@
 import * as Actions from "../../actions/index";
 import { loadsConfig } from "../../../configs/loadsConfig.js";
-import { Datatable } from "../../../components/members/Datatable";
+// import { Datatable } from "../../../components/members/Datatable";
 
 const initialState = loadsConfig;
 

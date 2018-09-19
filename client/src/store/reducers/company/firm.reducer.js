@@ -4,7 +4,7 @@ import { firmConfig } from "../../../configs/firmConfig.js";
 const initialState = firmConfig;
 
 const firm = (state = initialState, action) => {
-  console.log("firm reducer actionObj", action)
+  // console.log("firm reducer actionObj", action)
 
   switch (action.type) {
     case Actions.GET_FIRM: {

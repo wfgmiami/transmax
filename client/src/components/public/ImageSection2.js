@@ -84,7 +84,7 @@ class AdvancedGridList extends React.Component {
 
   render(){
     const { classes } = this.props;
-    console.log('featured: ', this.state)
+    // console.log('featured: ', this.state)
     return (
       <div className={classes.root}>
         <GridList  cellHeight={this.state.featured ? 250 : 450} spacing={4} className={classes.gridList}>

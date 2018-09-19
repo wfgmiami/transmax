@@ -4,7 +4,7 @@ import { brokerConfig } from "../../../configs/brokerConfig.js";
 const initialState = brokerConfig;
 
 const broker = (state = initialState, action) => {
-  console.log("broker reducer actionObj", action);
+  // console.log("broker reducer actionObj", action);
 
   switch (action.type) {
     case Actions.GET_BROKER: {
