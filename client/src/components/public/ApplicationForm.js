@@ -147,6 +147,7 @@ class ApplicationForm extends Component {
               ))}
             </Select>
           </FormControl>
+
           <TextField
             id="dlicense"
             label="Driver's License"
@@ -172,6 +173,19 @@ class ApplicationForm extends Component {
               ))}
             </Select>
           </FormControl>
+          <div>&nbsp;</div>
+          <TextField
+            id="date"
+            label="Birthday"
+            type="date"
+            defaultValue=""
+            className={classes.textField}
+            onChange={this.handleChange("dob")}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+
         </form>
         <br />
         <br />

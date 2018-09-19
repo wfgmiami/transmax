@@ -109,13 +109,13 @@ class TripsData extends Component {
       ]
     }
 
-    // if( cellInfo.column.id === 'bookDate' && this.props.trip[cellInfo.index][
-    //   cellInfo.column.id
-    // ] !== ''){
-    //   fieldValue = new Date(this.props.trip[cellInfo.index][
-    //     cellInfo.column.id
-    //   ]).toLocaleDateString();
-    // }
+    if( cellInfo.column.id === 'bookDate' && this.props.trip[cellInfo.index][
+      cellInfo.column.id
+    ] !== ''){
+      fieldValue = new Date(this.props.trip[cellInfo.index][
+        cellInfo.column.id
+      ]).toLocaleDateString();
+    }
 
     switch (cellInfo.column.id) {
       case "payment":

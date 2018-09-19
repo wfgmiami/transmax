@@ -23,6 +23,7 @@ router.post('/', (req,res,next)=>{
         City: ${req.body.city}<br/>
         State: ${req.body.state}<br/>
         Experience: ${req.body.experience}<br/>
+        DOB: ${req.body.dob}<br/>
       </body>
     </html>`
 

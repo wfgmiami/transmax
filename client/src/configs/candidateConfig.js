@@ -8,6 +8,7 @@ export const candidateConfig =
     phone: "",
     driversLicense: "",
     experience: "",
+    dob: "",
     applicationSuccess: ""
   }
 

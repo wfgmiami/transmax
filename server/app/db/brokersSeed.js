@@ -65,6 +65,17 @@ const BrokersData = [
     totalLoadedMiles: 391,
     avgDollarPerMile: 0
   },
+  {
+    brokerId: 7,
+    name: "Gateway Logistics Inc.",
+    address: "",
+    phone: "",
+    email: "",
+    bookedLoads: 1,
+    totalPayment: 1050,
+    totalLoadedMiles: 375,
+    avgDollarPerMile: 0
+  },
 ];
 
 module.exports = BrokersData;

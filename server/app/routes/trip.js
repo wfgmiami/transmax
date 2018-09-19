@@ -23,4 +23,29 @@ router.get('/', (req, res, next) => {
     .catch( next )
 })
 
+router.get( '/daterange', ( req, res, next ) => {
+  const startDate = new Date(req.query.startDate);
+  const endDate = new Date(req.query.endDate);
+
+  console.log( 'daterange: ', startDate, endDate);
+  Load.findAll({
+    where: {
+      bookDate: {
+        "$between": [startDate, endDate]
+      }
+    },
+    include: [{
+      model: Truck,
+      include: [{
+        model: Company
+      }],
+      order:
+      [['bookDate', 'ASC']]
+    }],
+
+  })
+    .then( loads => res.json( loads ))
+    .catch( next )
+})
+
 module.exports = router;

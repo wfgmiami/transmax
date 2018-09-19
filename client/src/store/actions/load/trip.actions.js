@@ -53,20 +53,23 @@ export function updateTrip(trips) {
 }
 
 export function getTripDateRange(dateRange) {
-  return dispatch =>
-    dispatch({
-      type: GET_TRIP_DATE_RANGE,
-      payload: dateRange
-    });
-
-  // const getTripDateRange = axios.get("/api/trip/:dateRange");
-
   // return dispatch =>
-  //   getTripDateRange.then(response =>
-  //     dispatch({
-  //       type: GET_TRIP_DATE_RANGE,
-  //       payload: response.data
-  //     })
-  //   );
+  //   dispatch({
+  //     type: GET_TRIP_DATE_RANGE,
+  //     payload: dateRange
+  //   });
+
+  const getTripDateRange = axios.get('/api/trip/daterange',
+   { params:
+    { startDate: dateRange.startDate,
+     endDate: dateRange.endDate } });
+
+  return dispatch =>
+    getTripDateRange.then(response =>
+      dispatch({
+        type: GET_TRIP_DATE_RANGE,
+        payload: response.data
+      })
+    );
 }
 
