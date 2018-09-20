@@ -9,6 +9,7 @@ import DriversData from "./DriversData";
 import CompaniesData from "./CompaniesData";
 import TrucksData from "./TrucksData";
 import BrokersData from "./BrokersData";
+import Earnings from "./Earnings";
 
 import * as authActions from "../../store/actions/authentication";
 
@@ -34,6 +35,9 @@ function AppHolder(props) {
   switch (menuItem) {
     case "Trips":
       showComponent = <TripsData />;
+      break;
+    case "Earnings":
+      showComponent = <Earnings />;
       break;
     case "Companies":
       showComponent = <CompaniesData />;

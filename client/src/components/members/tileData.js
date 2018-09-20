@@ -10,6 +10,7 @@ import TruckIcon from "@material-ui/icons/LocalShipping";
 import Drivers from "@material-ui/icons/Person";
 import Financials from "@material-ui/icons/AccountBalance";
 import Logout from "@material-ui/icons/NetworkLocked";
+import Functions from "@material-ui/icons/Functions";
 
 export const viewItems = (
   <div>
@@ -19,7 +20,12 @@ export const viewItems = (
       </ListItemIcon>
       <ListItemText primary="Trips" />
     </ListItem>
-
+    <ListItem button>
+      <ListItemIcon>
+        <Functions />
+      </ListItemIcon>
+      <ListItemText primary="Earnings" />
+    </ListItem>
     <ListItem button>
       <ListItemIcon>
         <SendIcon />

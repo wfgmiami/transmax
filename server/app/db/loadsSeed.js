@@ -306,6 +306,46 @@ const LoadsData = [
       "/brokerConfirmations/090518_reliableSourceLogistics.pdf"
     )
   },
+  {
+    bookDate: "09/20/18",
+    truckId: 119,
+    driverId: 1,
+    driverName: "Kelvin",
+    loadNumber: "5058259",
+    brokerId: 9,
+    brokerName: "Grane Logistics Express",
+    pickUpCityState: "Racine, WI",
+    dropOffCityState: "Huber Heights, OH",
+    pickUpAddress: "1312 North Memorial Drive, Racine, WI 53404",
+    dropOffAddress: "6265 Executive Blvd, Huber Heights, OH 45424",
+    payment: 1150,
+    loadedMiles: 375,
+    emptyMiles: 106,
+    mileage: 0,
+    dollarPerMile: 0,
+    dieselPrice: 3.22,
+    fuelCost: 0,
+    driverPay: 0,
+    dispatchFee: 0,
+    lumper: 0,
+    detention: 0,
+    detentionDriverPay: 0,
+    lateFee: 0,
+    toll: 0,
+    roadMaintenance: 0,
+    otherExpenses: 0,
+    totalExpense: 0,
+    profit: 0,
+    commodity: "NA",
+    weight: 4813,
+    trailer: "Dry Van",
+    confirmFilePath: path.join(
+      __dirname,
+      "/brokerConfirmations/090518_reliableSourceLogistics.pdf"
+    )
+  },
 ];
+
+
 
 module.exports = LoadsData;

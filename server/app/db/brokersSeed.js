@@ -87,6 +87,20 @@ const BrokersData = [
     totalLoadedMiles: 468,
     avgDollarPerMile: 0
   },
+  {
+    brokerId: 9,
+    name: "Grane Logistics Express",
+    address: "",
+    phone: "",
+    email: "",
+    bookedLoads: 1,
+    totalPayment: 1150,
+    totalLoadedMiles: 375,
+    avgDollarPerMile: 0
+  },
 ];
+
+
+
 
 module.exports = BrokersData;

@@ -445,4 +445,27 @@ const Broker = [
   },
 ];
 
-export { Datatable, EmptyRow, ShipmentsData, Driver, Truck, Firm, Broker };
+const EarningsData = [
+  {
+    begWeekDate: "08/27/18",
+    endWeekDate: "09/02/18",
+    week: "08/27/18-09/02/18",
+    revenue: 600,
+    dispatch: 60,
+    driverPay: 0,
+    fuel: 370.46,
+    toll: 0
+  },
+  {
+    begWeekDate: "09/10/18",
+    endWeekDate: "09/16/18",
+    week: "09/10/18-09/16/18",
+    revenue: 2800,
+    dispatch: 280,
+    driverPay: 170.7,
+    fuel: 809.35,
+    toll: 142.8
+  }
+];
+
+export { Datatable, EmptyRow, ShipmentsData, Driver, Truck, Firm, Broker, EarningsData };
