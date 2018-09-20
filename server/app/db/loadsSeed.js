@@ -268,7 +268,44 @@ const LoadsData = [
       "/brokerConfirmations/090518_reliableSourceLogistics.pdf"
     )
   },
-
+  {
+    bookDate: "09/19/18",
+    truckId: 119,
+    driverId: 1,
+    driverName: "Kelvin",
+    loadNumber: "0198170",
+    brokerId: 8,
+    brokerName: "Time Definite Services, Inc.",
+    pickUpCityState: "Cincinnati, OH",
+    dropOffCityState: "Manitowoc, WI",
+    pickUpAddress: "1625 Central Pkwy Cincinnati, OH 45214",
+    dropOffAddress: "4402 Custer St, Manitowoc, WI 54220",
+    payment: 940,
+    loadedMiles: 468,
+    emptyMiles: 12,
+    mileage: 0,
+    dollarPerMile: 0,
+    dieselPrice: 3.22,
+    fuelCost: 0,
+    driverPay: 0,
+    dispatchFee: 0,
+    lumper: 0,
+    detention: 0,
+    detentionDriverPay: 0,
+    lateFee: 0,
+    toll: 0,
+    roadMaintenance: 0,
+    otherExpenses: 0,
+    totalExpense: 0,
+    profit: 0,
+    commodity: "NA",
+    weight: 29673,
+    trailer: "Dry Van",
+    confirmFilePath: path.join(
+      __dirname,
+      "/brokerConfirmations/090518_reliableSourceLogistics.pdf"
+    )
+  },
 ];
 
 module.exports = LoadsData;
