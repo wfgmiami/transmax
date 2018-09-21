@@ -12,6 +12,7 @@ router.use('/driver', require('./driver'));
 router.use('/company', require('./company'));
 router.use('/broker', require('./broker'));
 router.use('/truck', require('./truck'));
+router.use('/earnings', require('./earnings'));
 router.use('/pdf', require('./showPdf'));
 
 // Make sure this is after all of

@@ -13,12 +13,14 @@ const Driver = require('./models').Driver;
 const Company = require('./models').Company;
 const Broker = require('./models').Broker;
 const Truck = require('./models').Truck;
+const Earning = require('./models').Earning;
 const users = require('./usersSeed');
 const drivers = require('./driversSeed');
 const companies = require('./companiesSeed');
 const brokers = require('./brokersSeed');
 const trucks = require('./trucksSeed');
 const loads = require('./loadsSeed');
+const earnings = require('./earningsSeed');
 
 // Syncing all the models at once. This promise is used by main.js.
 module.exports = db.sync({ force: true })
@@ -31,6 +33,7 @@ module.exports = db.sync({ force: true })
   .then( () => console.log(chalk.green('Sequelize models synced before LOADS')))
 
   .then( () => Promise.all(loads.map( load => Load.create( load ))))
+  .then( () => Promise.all(earnings.map( earning => Earning.create( earning ))))
   .then( () => console.log(chalk.green('Sequelize models synced to PostgreSQL')))
 
 
