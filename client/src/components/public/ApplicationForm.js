@@ -1,19 +1,19 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
-import {withStyles} from "@material-ui/core/styles";
-import InputMask from 'react-input-mask';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {withRouter} from 'react-router-dom';
-import {validateCandidate}  from "./validate";
-import {usStates} from "./us-states";
+import { withStyles } from "@material-ui/core/styles";
+import InputMask from "react-input-mask";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { withRouter } from "react-router-dom";
+import { validateCandidate } from "./validate";
+import { usStates } from "./us-states";
 
-import * as applicationActions from '../../store/actions/application';
+import * as applicationActions from "../../store/actions/application";
 
 const styles = theme => ({
   root: {},
@@ -38,10 +38,9 @@ const experienceRange = [
 ];
 
 class ApplicationForm extends Component {
-
   handleSubmit = () => {
     let errorMsg = null;
-    const candidate  = this.props.candidate;
+    const candidate = this.props.candidate;
 
     const validationObj = validateCandidate(candidate);
     const validationArray = Object.keys(validationObj);
@@ -58,21 +57,22 @@ class ApplicationForm extends Component {
         ? "Invalid phone number"
         : null;
 
+    errorMsg =
+      validationObj.dob === "Invalid birthdate" ? "Invalid birthdate" : null;
+
     if (requiredViolation !== -1)
       errorMsg = validationArray[requiredViolation] + " is a required field";
 
     if (!errorMsg) {
       // this.props.onCreate(candidate);
       this.props.setCandidate(candidate);
-
     } else {
       alert(errorMsg);
     }
-
   };
 
   handleChange = key => ({ target: { value } }) => {
-    this.props.setCandidateAttributes({[key]:value});
+    this.props.setCandidateAttributes({ [key]: value });
   };
 
   render() {
@@ -107,20 +107,31 @@ class ApplicationForm extends Component {
           />
 
           <InputMask
-            mask="999 999 9999"
+            mask="(999) 999 9999"
             maskChar="-"
+            alwaysShowMask
             value={candidate.phone}
             onChange={this.handleChange("phone")}
-            className={classes.textField}
           >
-            {() => <TextField
-              id="phone"
-              label="Phone"
-              className={classes.textField}
-              margin="normal"
-              type="text"
-              />}
-              </InputMask>
+            {() => (
+              <TextField
+                id="phone"
+                label="Phone"
+                className={classes.textField}
+                margin="normal"
+                type="text"
+              />
+            )}
+          </InputMask>
+          <TextField
+            id="streetAddress"
+            lavel="Street Address"
+            className={classes.textField}
+            value={candidate.streetAddress}
+            placeholder={"Street Address"}
+            onChange={this.handleChange("streetAddress")}
+            margin="normal"
+          />
           <TextField
             id="city"
             label="City"
@@ -147,7 +158,15 @@ class ApplicationForm extends Component {
               ))}
             </Select>
           </FormControl>
-
+          <TextField
+            id="zipCode"
+            label="Zip Code"
+            inputProps={{ maxLength: 5 }}
+            className={classes.textField}
+            value={candidate.zipCode}
+            onChange={this.handleChange("zipCode")}
+            margin="normal"
+          />
           <TextField
             id="dlicense"
             label="Driver's License"
@@ -156,6 +175,24 @@ class ApplicationForm extends Component {
             onChange={this.handleChange("driversLicense")}
             margin="normal"
           />
+          <InputMask
+            mask="99/99/9999"
+            maskChar="_"
+            alwaysShowMask
+            value={candidate.dob}
+            onChange={this.handleChange("dob")}
+          >
+            {() => (
+              <TextField
+                id="birthdate"
+                label="Birthdate (mm/dd/yyyy)"
+                className={classes.textField}
+                margin="normal"
+                type="text"
+              />
+            )}
+          </InputMask>
+
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="experience-simple">Experience</InputLabel>
             <Select
@@ -174,18 +211,6 @@ class ApplicationForm extends Component {
             </Select>
           </FormControl>
           <div>&nbsp;</div>
-          <TextField
-            id="date"
-            label="Birthday"
-            type="date"
-            defaultValue=""
-            className={classes.textField}
-            onChange={this.handleChange("dob")}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-
         </form>
         <br />
         <br />
@@ -204,14 +229,24 @@ class ApplicationForm extends Component {
 function mapStateToProps({ application }) {
   return {
     candidate: application.candidate
-  }
+  };
 }
 
-function mapDispatchToProps(dispatch){
-  return bindActionCreators({
-    setCandidateAttributes: applicationActions.setCandidateAttributes,
-    setCandidate: applicationActions.setCandidate
-  }, dispatch)
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    {
+      setCandidateAttributes: applicationActions.setCandidateAttributes,
+      setCandidate: applicationActions.setCandidate
+    },
+    dispatch
+  );
 }
 
-export default withStyles(styles, {withTheme: true})(withRouter(connect(mapStateToProps, mapDispatchToProps)(ApplicationForm)));
+export default withStyles(styles, { withTheme: true })(
+  withRouter(
+    connect(
+      mapStateToProps,
+      mapDispatchToProps
+    )(ApplicationForm)
+  )
+);

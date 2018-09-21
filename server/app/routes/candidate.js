@@ -20,10 +20,13 @@ router.post('/', (req,res,next)=>{
         Name: ${req.body.firstName} ${req.body.lastName}<br/>
         Email: ${req.body.email}<br/>
         Phone: ${req.body.phone}<br/>
+        Street Address: ${req.body.streetAddress}<br/>
         City: ${req.body.city}<br/>
         State: ${req.body.state}<br/>
-        Experience: ${req.body.experience}<br/>
+        Zip Code: ${req.body.zipCode}<br/>
+        Driver's License: ${req.body.driverslicense}<br/>
         DOB: ${req.body.dob}<br/>
+        Experience: ${req.body.experience}<br/>
       </body>
     </html>`
 
