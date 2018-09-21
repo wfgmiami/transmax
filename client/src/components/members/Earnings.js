@@ -146,7 +146,7 @@ class Earnings extends Component {
   }
 
   saveRows() {
-    console.log("SarningssData.js saveRows this.props", this.props);
+    // console.log("SarningssData.js saveRows this.props", this.props);
     this.props.saveEarnings(this.props.earnings);
   }
 
@@ -197,7 +197,7 @@ class Earnings extends Component {
   onColumnUpdate(index) {
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();
-    console.log("onColumnUpdate index ", index, "...", columns[index]);
+    // console.log("onColumnUpdate index ", index, "...", columns[index]);
     this.setState(
       prevState => {
         const columns1 = [];
@@ -220,12 +220,19 @@ class Earnings extends Component {
   }
 
   createColumns() {
-    console.log("EarningsData.js createColumns this.props: ", this.props);
+    // console.log("EarningsData.js createColumns this.props: ", this.props);
 
     return [
       {
         Header: "Week",
-        accessor: "week",
+        accessor: "weekNumber",
+        show: true,
+        className: "columnBorder",
+        Cell: this.editTable
+      },
+      {
+        Header: "Week Dates",
+        accessor: "weekRange",
         show: true,
         className: "columnBorder",
         Cell: this.editTable
@@ -241,14 +248,23 @@ class Earnings extends Component {
       {
         Header: "Dispatch",
         Footer: this.calculateTotal,
-        accessor: "dispatch",
+        accessor: "dispatchFee",
         show: true,
         className: "columnBorder",
         Cell: this.editTable
       },
       {
         Header: "Driver Pay",
+        Footer: this.calculateTotal,
         accessor: "driverPay",
+        show: true,
+        className: "columnBorder",
+        Cell: this.editTable
+      },
+      {
+        Header: "Miles Paid",
+        Footer: this.calculateTotal,
+        accessor: "milesPaid",
         show: true,
         className: "columnBorder",
         Cell: this.editTable
@@ -256,7 +272,7 @@ class Earnings extends Component {
       {
         Header: "Fuel",
         Footer: this.calculateTotal,
-        accessor: "fuel",
+        accessor: "fuelCost",
         show: true,
         className: "columnBorder",
         Cell: this.editTable
@@ -270,6 +286,84 @@ class Earnings extends Component {
         Cell: this.editTable
       },
       {
+        Header: "Lumper",
+        Footer: this.calculateTotal,
+        accessor: "lumper",
+        show: false,
+        className: "columnBorder",
+        Cell: this.editTable
+      },
+      {
+        Header: "Detention",
+        Footer: this.calculateTotal,
+        accessor: "detention",
+        show: false,
+        className: "columnBorder",
+        Cell: this.editTable
+      },
+      {
+        Header: "Detention Driver Pay",
+        Footer: this.calculateTotal,
+        accessor: "detentionDriverPay",
+        show: false,
+        className: "columnBorder",
+        Cell: this.editTable
+      },
+      {
+        Header: "Late Fee",
+        Footer: this.calculateTotal,
+        accessor: "lateFee",
+        show: false,
+        className: "columnBorder",
+        Cell: this.editTable
+      },
+      {
+        Header: "Road Maintenance",
+        Footer: this.calculateTotal,
+        accessor: "roadMaintenance",
+        show: false,
+        className: "columnBorder",
+        Cell: this.editTable
+      },
+      {
+        Header: "Other Expenses",
+        Footer: this.calculateTotal,
+        accessor: "otherExpenses",
+        show: false,
+        className: "columnBorder",
+        Cell: this.editTable
+      },
+      {
+        Header: "Total Expenses",
+        Footer: this.calculateTotal,
+        id: "totalExpenses",
+        show: true,
+        className: "columnBorder",
+        accessor: d => {
+
+          let totalExpenses =
+            Number(d.fuelCost) +
+            Number(d.driverPay) +
+            Number(d.dispatchFee) +
+            Number(d.lumper) +
+            Number(d.detention) +
+            Number(d.detentionDriverPay) +
+            Number(d.lateFee) +
+            Number(d.toll) +
+            Number(d.roadMaintenance);
+
+          totalExpenses = isNaN(totalExpenses) ? null : totalExpenses;
+
+          return (
+            <div
+              dangerouslySetInnerHTML={{
+                __html: "$" + Number(totalExpenses).toFixed(0)
+              }}
+            />
+          );
+        }
+      },
+      {
         Header: "Profit",
         Footer: this.calculateTotal,
         id: "profit",
@@ -280,12 +374,19 @@ class Earnings extends Component {
           if (typeof d.revenue === "string")
             revenue = parseFloat(revenue.replace(/,/g, ""));
 
-          let profit =
-            revenue -
-            (Number(d.driverPay) +
-              Number(d.fuel) +
-              Number(d.dispatch) +
-              Number(d.toll));
+          let totalExpenses =
+              Number(d.fuelCost) +
+              Number(d.driverPay) +
+              Number(d.dispatchFee) +
+              Number(d.lumper) +
+              Number(d.detention) +
+              Number(d.detentionDriverPay) +
+              Number(d.lateFee) +
+              Number(d.toll) +
+              Number(d.roadMaintenance) +
+              Number(d.otherExpense);
+
+          let profit = revenue - totalExpenses;
 
           profit = isNaN(profit) ? null : profit;
 
@@ -308,12 +409,20 @@ class Earnings extends Component {
           let revenue = d.revenue;
           if (typeof d.revenue === "string")
             revenue = parseFloat(revenue.replace(/,/g, ""));
-          let profit =
-            revenue -
-            (Number(d.driverPay) +
-              Number(d.fuel) +
-              Number(d.dispatch) +
-              Number(d.toll));
+
+          let totalExpenses =
+            Number(d.fuelCost) +
+            Number(d.driverPay) +
+            Number(d.dispatchFee) +
+            Number(d.lumper) +
+            Number(d.detention) +
+            Number(d.detentionDriverPay) +
+            Number(d.lateFee) +
+            Number(d.toll) +
+            Number(d.roadMaintenance) +
+            Number(d.otherExpense);
+
+          let profit = revenue - totalExpenses;
 
           profit = isNaN(profit) ? null : profit;
           let margin = (profit / revenue) * 100;
@@ -371,7 +480,7 @@ class Earnings extends Component {
     // const { data } = this.state;
     const { earnings, classes } = this.props;
 
-    console.log("Earnings.js this.props ", this.props);
+    // console.log("Earnings.js this.props ", this.props);
 
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();

@@ -7,20 +7,20 @@ export const UPDATE_EARNINGS = "UPDATE EARNINGS";
 export const SAVE_EARNINGS = "SAVE EARNINGS";
 
 export function getEarnings() {
-  return dispatch =>
-    dispatch({
-      type: GET_EARNINGS,
-      payload: EarningsData
-    });
-  // const getEarnings = axios.get("/api/earnings");
-
   // return dispatch =>
-  //   getEarnings.then(response =>
-  //     dispatch({
-  //       type: GET_EARNINGS,
-  //       payload: response.data
-  //     })
-  //   );
+  //   dispatch({
+  //     type: GET_EARNINGS,
+  //     payload: EarningsData
+  //   });
+  const getEarnings = axios.get("/api/earnings");
+
+  return dispatch =>
+    getEarnings.then(response =>
+      dispatch({
+        type: GET_EARNINGS,
+        payload: response.data
+      })
+    );
 }
 
 export function setEarnings(earnings) {
