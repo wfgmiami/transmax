@@ -3,7 +3,7 @@ const validateCandidate = values => {
   const requiredFields = [
     "firstName",
     "lastName",
-    "email",
+    // "email",
     "phone",
     "streetAddress",
     "city",

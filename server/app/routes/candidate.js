@@ -24,7 +24,7 @@ router.post('/', (req,res,next)=>{
         City: ${req.body.city}<br/>
         State: ${req.body.state}<br/>
         Zip Code: ${req.body.zipCode}<br/>
-        Driver's License: ${req.body.driverslicense}<br/>
+        Driver's License: ${req.body.driversLicense}<br/>
         DOB: ${req.body.dob}<br/>
         Experience: ${req.body.experience}<br/>
       </body>
