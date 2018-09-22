@@ -109,7 +109,6 @@ class ApplicationForm extends Component {
           <InputMask
             mask="(999) 999 9999"
             maskChar="-"
-            alwaysShowMask
             value={candidate.phone}
             onChange={this.handleChange("phone")}
           >
@@ -178,7 +177,6 @@ class ApplicationForm extends Component {
           <InputMask
             mask="99/99/9999"
             maskChar="_"
-            alwaysShowMask
             value={candidate.dob}
             onChange={this.handleChange("dob")}
           >
