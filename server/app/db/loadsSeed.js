@@ -320,7 +320,7 @@ const LoadsData = [
     dropOffAddress: "6265 Executive Blvd, Huber Heights, OH 45424",
     payment: 1150,
     loadedMiles: 375,
-    emptyMiles: 106,
+    emptyMiles: 160,
     mileage: 0,
     dollarPerMile: 0,
     dieselPrice: 3.22,

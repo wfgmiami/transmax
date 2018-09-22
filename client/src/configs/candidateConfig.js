@@ -2,8 +2,10 @@ export const candidateConfig =
   {
     firstName: "",
     lastName: "",
+    streetAddress: "",
     city: "",
     state: "",
+    zipCode: "",
     email: "",
     phone: "",
     driversLicense: "",
@@ -11,4 +13,3 @@ export const candidateConfig =
     dob: "",
     applicationSuccess: ""
   }
-

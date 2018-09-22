@@ -11,7 +11,6 @@ const candidate = db.define('candidate', {
         unique: true,
         validate: {
             isEmail: true,
-            notEmpty: true
         }
     },
     phone: {
@@ -21,10 +20,13 @@ const candidate = db.define('candidate', {
         type: DataTypes.STRING
     },
     experience: DataTypes.STRING,
+    streetAddress: DataTypes.STRING,
     city: DataTypes.STRING,
     state: DataTypes.STRING,
+    zipCode: DataTypes.STRING,
     dob: DataTypes.DATE
 
 })
 
 module.exports = candidate;
+
