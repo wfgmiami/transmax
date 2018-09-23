@@ -21,5 +21,8 @@ module.exports = {
   GMAIL_PASS: process.env.GMAIL_PASS,
   APENCHEV_PASS: process.env.APENCHEV_PASS,
   AKARAPEEV_PASS: process.env.AKARAPEEV_PASS,
-  NODE_ENV: process.env.NODE_ENV
+  NODE_ENV: process.env.NODE_ENV,
+  CERT_KEY: process.env.CERT_KEY,
+  CERT_CERT: process.env.CERT_CERT,
+  CERT_CA: process.env.CERT_CA
 };
