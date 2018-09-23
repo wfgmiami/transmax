@@ -20,5 +20,6 @@ module.exports = {
   DATABASE_PASSWORD: process.env.DATABASE_PASSWORD,
   GMAIL_PASS: process.env.GMAIL_PASS,
   APENCHEV_PASS: process.env.APENCHEV_PASS,
-  AKARAPEEV_PASS: process.env.AKARAPEEV_PASS
+  AKARAPEEV_PASS: process.env.AKARAPEEV_PASS,
+  NODE_ENV: process.env.NODE_ENV
 };

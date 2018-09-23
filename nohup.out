@@ -4863,3 +4863,1092 @@ Y84c ——> GET /
 Y84c <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 2.4 ms)
 1NHc ——> GET / 
 1NHc <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+hDcI ——> GET /home 
+hDcI <—— 304 Not Modified (<—> 1.0 ms)
+6qFv ——> GET /static/css/main.a0de00f5.css 
+6qFv <—— 304 Not Modified (<—> 0.8 ms)
+O4xj ——> GET /static/js/main.ab6b130c.js 
+O4xj <—— 304 Not Modified (<—> 0.7 ms)
+kjVu ——> GET /assets/images/logos/transmax.png 
+kjVu <—— 304 Not Modified (<—> 0.8 ms)
+iL7i ——> GET /assets/images/cascadia-parkinglot-960x1280.jpg 
+iL7i <—— 304 Not Modified (<—> 0.9 ms)
+rI4y ——> GET /assets/images/green-coronado-driver-side-960x1280.jpg 
+rI4y <—— 304 Not Modified (<—> 0.8 ms)
+q7tw ——> GET /assets/images/cascadia-evo_800x1066.jpg 
+q7tw <—— 304 Not Modified (<—> 0.8 ms)
+OBDI ——> GET /assets/images/three-truck-parkinglot-750x1000.jpg 
+OBDI <—— 304 Not Modified (<—> 0.7 ms)
+5sw0 ——> GET /assets/images/logos/facebook.png 
+gLKr ——> GET /assets/images/logos/instagram.png 
+5sw0 <—— 304 Not Modified (<—> 1.1 ms)
+gLKr <—— 304 Not Modified (<—> 1.1 ms)
+K0Gj ——> GET /static/js/main.ab6b130c.js.map 
+K0Gj <—— 304 Not Modified (<—> 0.7 ms)
+Tre8 ——> GET /static/css/main.a0de00f5.css.map 
+Tre8 <—— 304 Not Modified (<—> 0.8 ms)
+KmEP ——> GET /home 
+KmEP <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 2.6 ms)
+wF4O ——> GET /static/css/main.a0de00f5.css 
+wF4O <—— 200 OK 9.21 KB text/css; charset=UTF-8 (<—> 1.0 ms)
+BvBO ——> GET /static/js/main.8e70d07e.js 
+eoDA ——> GET /static/css/main.a0de00f5.css.map 
+eoDA <—— 200 OK 12.38 KB application/json; charset=UTF-8 (<—> 1.3 ms)
+BvBO <—— 200 OK 769.46 KB application/javascript; charset=UTF-8 (<—> 501.6 ms)
+eTOi ——> GET /assets/images/logos/transmax.png 
+eTOi <—— 200 OK 28.34 KB image/png (<—> 1.3 ms)
+0jVA ——> GET /assets/images/cascadia-parkinglot-960x1280.jpg 
+0jVA <—— 200 OK 110.38 KB image/jpeg (<—> 1.7 ms)
+LFAn ——> GET /assets/images/green-coronado-driver-side-960x1280.jpg 
+OH57 ——> GET /assets/images/three-truck-parkinglot-750x1000.jpg 
+XLId ——> GET /assets/images/cascadia-evo_800x1066.jpg 
+f4LT ——> GET /assets/images/logos/facebook.png 
+aKBL ——> GET /assets/images/logos/instagram.png 
+f4LT <—— 200 OK 656 B image/png (<—> 1.7 ms)
+aKBL <—— 200 OK 4.73 KB image/png (<—> 1.6 ms)
+DXOl ——> GET /static/js/main.8e70d07e.js.map 
+LFAn <—— 200 OK 218.05 KB image/jpeg (<—> 101.5 ms)
+OH57 <—— 200 OK 135.8 KB image/jpeg (<—> 94.3 ms)
+XLId <—— 200 OK 223.3 KB image/jpeg (<—> 131.3 ms)
+DXOl <—— 200 OK 5.42 MB application/json; charset=UTF-8 (<—> 1350.5 ms)
+Q3Y1 ——> HEAD / 
+Q3Y1 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.3 ms)
+vofO ——> GET / 
+vofO <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.7 ms)
+v7nS ——> GET / 
+v7nS <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.4 ms)
+j6oL ——> GET /manager/html text/html
+j6oL <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.5 ms)
+vxLl ——> GET / 
+vxLl <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.3 ms)
+nPl6 ——> GET / 
+nPl6 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+PazQ ——> GET / 
+PazQ <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 2.0 ms)
+Xpus ——> GET /static/js/main.8e70d07e.js 
+X2uq ——> GET /static/css/main.a0de00f5.css 
+X2uq <—— 200 OK 9.21 KB text/css; charset=UTF-8 (<—> 1.8 ms)
+Xpus <—— 200 OK 769.46 KB application/javascript; charset=UTF-8 (<—> 109.6 ms)
+JBVV ——> GET /assets/images/logos/transmax.png 
+JBVV <—— 200 OK 28.34 KB image/png (<—> 1.4 ms)
+FDAx ——> GET /assets/images/cascadia-parkinglot-960x1280.jpg 
+c4Wt ——> GET /assets/images/green-coronado-driver-side-960x1280.jpg 
+S4xu ——> GET /assets/images/cascadia-evo_800x1066.jpg 
+c4Wt <—— 200 OK 218.05 KB image/jpeg (<—> 2.8 ms)
+fmaD ——> GET /assets/images/three-truck-parkinglot-750x1000.jpg 
+y8XF ——> GET /assets/images/logos/facebook.png 
+FDAx <—— 200 OK 110.38 KB image/jpeg (<—> 25.8 ms)
+Nf27 ——> GET /assets/images/logos/instagram.png 
+y8XF <—— 200 OK 656 B image/png (<—> 2.6 ms)
+Nf27 <—— 200 OK 4.73 KB image/png (<—> 2.2 ms)
+fmaD <—— 200 OK 135.8 KB image/jpeg (<—> 36.0 ms)
+S4xu <—— 200 OK 223.3 KB image/jpeg (<—> 98.1 ms)
+dKx4 ——> GET /login 
+dKx4 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.3 ms)
+Mgaj ——> GET /static/css/main.a0de00f5.css 
+Mgaj <—— 304 Not Modified (<—> 1.0 ms)
+XQbO ——> GET /static/js/main.8e70d07e.js 
+XQbO <—— 304 Not Modified (<—> 0.7 ms)
+q7AQ ——> GET /assets/images/logos/transmax.png 
+q7AQ <—— 304 Not Modified (<—> 0.8 ms)
+DESP ——> GET /login 
+DESP <—— 304 Not Modified (<—> 1.5 ms)
+6pRH ——> GET /static/css/main.a0de00f5.css 
+6pRH <—— 304 Not Modified (<—> 0.9 ms)
+HBIl ——> GET /static/js/main.8e70d07e.js 
+HBIl <—— 304 Not Modified (<—> 0.7 ms)
+g3Dh ——> GET /assets/images/logos/transmax.png 
+g3Dh <—— 304 Not Modified (<—> 0.8 ms)
+guxu ——> GET /favicon.ico 
+guxu <—— 200 OK 31.29 KB image/x-icon (<—> 2.4 ms)
+FUc0 ——> GET /login 
+FUc0 <—— 304 Not Modified (<—> 1.2 ms)
+ePVu ——> GET /static/css/main.a0de00f5.css 
+ePVu <—— 304 Not Modified (<—> 0.9 ms)
+qkF5 ——> GET /static/js/main.8e70d07e.js 
+qkF5 <—— 304 Not Modified (<—> 0.7 ms)
+hq0i ——> GET /assets/images/logos/transmax.png 
+hq0i <—— 304 Not Modified (<—> 0.9 ms)
+6jMX ——> GET / 
+6jMX <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.5 ms)
+5Vkw ——> GET /login 
+5Vkw <—— 304 Not Modified (<—> 1.0 ms)
+Cd5e ——> GET /static/css/main.a0de00f5.css 
+Cd5e <—— 304 Not Modified (<—> 0.7 ms)
+R3rR ——> GET /static/js/main.8e70d07e.js 
+R3rR <—— 304 Not Modified (<—> 0.6 ms)
+qDns ——> GET /assets/images/logos/transmax.png 
+qDns <—— 304 Not Modified (<—> 1.6 ms)
+ZkKR ——> GET /favicon.ico 
+ZkKR <—— 200 OK 31.29 KB image/x-icon (<—> 0.5 ms)
+bc0n ——> GET / 
+bc0n <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+0kuv ——> GET /static/js/main.8e70d07e.js 
+yzpK ——> GET /static/css/main.a0de00f5.css 
+yzpK <—— 200 OK 9.21 KB text/css; charset=UTF-8 (<—> 1.0 ms)
+0kuv <—— 200 OK 769.46 KB application/javascript; charset=UTF-8 (<—> 2753.8 ms)
+gmD4 ——> GET /assets/images/cascadia-parkinglot-960x1280.jpg 
+TZBC ——> GET /assets/images/logos/transmax.png 
+TZBC <—— 200 OK 28.34 KB image/png (<—> 1.8 ms)
+PXNH ——> GET /assets/images/green-coronado-driver-side-960x1280.jpg 
+A4WY ——> GET /assets/images/three-truck-parkinglot-750x1000.jpg 
+QG84 ——> GET /assets/images/cascadia-evo_800x1066.jpg 
+gmD4 <—— 200 OK 110.38 KB image/jpeg (<—> 488.3 ms)
+A4WY <—— 200 OK 135.8 KB image/jpeg (<—> 525.9 ms)
+XTyB ——> GET /assets/images/logos/facebook.png 
+XTyB <—— 200 OK 656 B image/png (<—> 2.2 ms)
+fvnW ——> GET /assets/images/logos/instagram.png 
+fvnW <—— 200 OK 4.73 KB image/png (<—> 0.9 ms)
+PXNH <—— 200 OK 218.05 KB image/jpeg (<—> 694.8 ms)
+QG84 <—— 200 OK 223.3 KB image/jpeg (<—> 759.1 ms)
+5991 ——> GET / 
+5991 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.9 ms)
+7Pea ——> GET /home 
+7Pea <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.7 ms)
+xhSd ——> GET /static/css/main.a0de00f5.css 
+xhSd <—— 304 Not Modified (<—> 0.9 ms)
+iQAp ——> GET /static/js/main.8e70d07e.js 
+iQAp <—— 304 Not Modified (<—> 0.7 ms)
+AWCp ——> GET /assets/images/logos/transmax.png 
+AWCp <—— 304 Not Modified (<—> 0.9 ms)
+0vHS ——> GET /assets/images/cascadia-parkinglot-960x1280.jpg 
+0vHS <—— 304 Not Modified (<—> 0.6 ms)
+aThI ——> GET /assets/images/green-coronado-driver-side-960x1280.jpg 
+aThI <—— 304 Not Modified (<—> 0.7 ms)
+9aNZ ——> GET /assets/images/three-truck-parkinglot-750x1000.jpg 
+uNGC ——> GET /assets/images/cascadia-evo_800x1066.jpg 
+9aNZ <—— 304 Not Modified (<—> 2.8 ms)
+uNGC <—— 304 Not Modified (<—> 2.8 ms)
+IR76 ——> GET /assets/images/logos/instagram.png 
+c9An ——> GET /assets/images/logos/facebook.png 
+IR76 <—— 304 Not Modified (<—> 1.1 ms)
+c9An <—— 304 Not Modified (<—> 1.8 ms)
+xwaK ——> GET /login 
+xwaK <—— 304 Not Modified (<—> 2.4 ms)
+hkT4 ——> GET /static/css/main.a0de00f5.css 
+hkT4 <—— 304 Not Modified (<—> 0.8 ms)
+vU5q ——> GET /static/js/main.8e70d07e.js 
+vU5q <—— 304 Not Modified (<—> 0.6 ms)
+QhBL ——> GET /assets/images/logos/transmax.png 
+QhBL <—— 304 Not Modified (<—> 0.8 ms)
+gEIE ——> GET /favicon.ico 
+gEIE <—— 200 OK 31.29 KB image/x-icon (<—> 7.5 ms)
+tEcJ ——> GET /robots.txt 
+tEcJ <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 2.6 ms)
+dB47 ——> GET / 
+dB47 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 0.8 ms)
+p2CL ——> GET /static/js/main.8e70d07e.js 
+p2CL <—— 200 OK 769.46 KB application/javascript; charset=UTF-8 (<—> 68.7 ms)
+qWEd ——> GET /robots.txt 
+qWEd <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+H8Qc ——> GET / 
+H8Qc <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+uiCY ——> GET / 
+uiCY <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+le9i ——> GET / 
+le9i <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+LTiA ——> GET / 
+LTiA <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+NYIY ——> GET / 
+NYIY <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 0.9 ms)
+0agd ——> GET / 
+0agd <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 0.9 ms)
+Q2vM ——> GET / 
+Q2vM <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+mrrR ——> GET / 
+mrrR <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+86AR ——> GET / 
+86AR <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.7 ms)
+uXeb ——> GET / 
+uXeb <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+Qamh ——> GET /manifest.json 
+Qamh <—— 200 OK 317 B application/json; charset=UTF-8 (<—> 3.1 ms)
+YRM2 ——> GET /favicon.ico 
+YRM2 <—— 200 OK 31.29 KB image/x-icon (<—> 0.5 ms)
+BMrH ——> GET /static/css/main.a0de00f5.css 
+BMrH <—— 200 OK 9.21 KB text/css; charset=UTF-8 (<—> 2.1 ms)
+pA17 ——> HEAD / 
+pA17 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+Yzdj ——> GET / 
+Yzdj <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 0.9 ms)
+1JcZ ——> GET / 
+1JcZ <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+wY44 ——> GET /xmlrpc.php 
+wY44 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 3.1 ms)
+Ueaf ——> GET / 
+Ueaf <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+R6hG ——> GET / 
+R6hG <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+Dlis ——> GET / 
+Dlis <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+uB8X ——> GET / 
+uB8X <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+ZtDt ——> PROPFIND / 
+ZtDt —X— connection closed before res end/flush
+pB0p ——> GET /webdav/ 
+pB0p <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+wLhj ——> GET /help.php 
+wLhj <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+Nj79 ——> GET /java.php 
+Nj79 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 4.4 ms)
+1o4l ——> GET /_query.php 
+1o4l <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+eABD ——> GET /test.php 
+eABD <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+PY3B ——> GET /db_cts.php 
+PY3B <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+0Ig7 ——> GET /db_pma.php 
+0Ig7 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+sJmu ——> GET /logon.php 
+sJmu <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+nDeZ ——> GET /help-e.php 
+nDeZ <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.3 ms)
+1g5j ——> GET /license.php 
+1g5j <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+EWz7 ——> GET /log.php 
+EWz7 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+EiOK ——> GET /hell.php 
+EiOK <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 4.8 ms)
+glJ5 ——> GET /pmd_online.php 
+glJ5 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+eQB0 ——> GET /x.php 
+eQB0 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+okY9 ——> GET /shell.php 
+okY9 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.3 ms)
+9a7m ——> GET /desktop.ini.php 
+9a7m <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+Wkis ——> GET /z.php 
+Wkis <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 3.1 ms)
+V5oc ——> GET /lala.php 
+V5oc <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+Kdjl ——> GET /lala-dpr.php 
+Kdjl <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+eXXz ——> GET /wpo.php 
+eXXz <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+crwx ——> GET /text.php 
+crwx <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+0nDP ——> GET /wp-config.php 
+0nDP <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+8Eii ——> GET /muhstik.php 
+8Eii <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+LqRx ——> GET /muhstik2.php 
+LqRx <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 2.0 ms)
+uIGK ——> GET /muhstiks.php 
+uIGK <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+dmKU ——> GET /muhstik-dpr.php 
+dmKU <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+tmaJ ——> GET /lol.php 
+tmaJ <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 5.2 ms)
+QRHO ——> GET /uploader.php 
+QRHO <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+t9lO ——> GET /cmd.php 
+t9lO <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+aSpu ——> GET /cmx.php 
+aSpu <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+wr6h ——> GET /cmv.php 
+wr6h <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+eRlv ——> GET /cmdd.php 
+eRlv <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+CLtb ——> GET /knal.php 
+CLtb <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+TpwP ——> GET /cmd.php 
+TpwP <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.3 ms)
+IHNw ——> GET /shell.php 
+IHNw <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+kXmv ——> GET /appserv.php 
+kXmv <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 2.2 ms)
+32UR ——> GET /scripts/setup.php 
+32UR <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+3X3b ——> GET /phpmyadmin/scripts/setup.php 
+3X3b <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+CQXh ——> GET /phpMyAdmin/scripts/setup.php 
+CQXh <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+7q5Z ——> GET /phpmyadmin/scripts/db___.init.php 
+7q5Z <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+bydq ——> GET /phpMyAdmin/scripts/db___.init.php 
+bydq <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+DIE3 ——> POST /wuwu11.php 21 B application/x-www-form-urlencoded
+DIE3 <—— 404 Not Found (<—> 35.1 ms)
+zTVw ——> POST /xw.php 21 B application/x-www-form-urlencoded
+zTVw <—— 404 Not Found (<—> 0.9 ms)
+W8w2 ——> POST /xw1.php 21 B application/x-www-form-urlencoded
+W8w2 <—— 404 Not Found (<—> 0.7 ms)
+gKeT ——> POST /9678.php 21 B application/x-www-form-urlencoded
+gKeT <—— 404 Not Found (<—> 0.6 ms)
+bpLi ——> POST /wc.php 21 B application/x-www-form-urlencoded
+bpLi <—— 404 Not Found (<—> 0.6 ms)
+NgLX ——> POST /xx.php 23 B application/x-www-form-urlencoded
+NgLX <—— 404 Not Found (<—> 0.6 ms)
+tLX0 ——> POST /s.php 24 B application/x-www-form-urlencoded
+tLX0 <—— 404 Not Found (<—> 0.7 ms)
+Pjbq ——> POST /w.php 24 B application/x-www-form-urlencoded
+Pjbq <—— 404 Not Found (<—> 0.6 ms)
+QgwJ ——> POST /sheep.php 20 B application/x-www-form-urlencoded
+QgwJ <—— 404 Not Found (<—> 0.6 ms)
+kprv ——> POST /qaq.php 20 B application/x-www-form-urlencoded
+kprv <—— 404 Not Found (<—> 0.7 ms)
+bxZi ——> POST /db.init.php 24 B application/x-www-form-urlencoded
+bxZi <—— 404 Not Found (<—> 0.6 ms)
+ucWH ——> POST /db_session.init.php 24 B application/x-www-form-urlencoded
+ucWH <—— 404 Not Found (<—> 0.6 ms)
+TLem ——> POST /db__.init.php 24 B application/x-www-form-urlencoded
+TLem <—— 404 Not Found (<—> 0.6 ms)
+F94D ——> POST /wp-admins.php 38 B application/x-www-form-urlencoded
+F94D <—— 404 Not Found (<—> 0.7 ms)
+Zh8W ——> POST /m.php?pbid=open 38 B application/x-www-form-urlencoded
+Zh8W <—— 404 Not Found (<—> 0.6 ms)
+7n6q ——> POST /db_dataml.php 20 B application/x-www-form-urlencoded
+7n6q <—— 404 Not Found (<—> 0.7 ms)
+A2d8 ——> POST /db_desql.php 20 B application/x-www-form-urlencoded
+A2d8 <—— 404 Not Found (<—> 1.7 ms)
+CQt2 ——> POST /mx.php 21 B application/x-www-form-urlencoded
+CQt2 <—— 404 Not Found (<—> 0.6 ms)
+m4bz ——> POST /wshell.php 23 B application/x-www-form-urlencoded
+m4bz <—— 404 Not Found (<—> 0.6 ms)
+yOd1 ——> POST /xshell.php 22 B application/x-www-form-urlencoded
+yOd1 <—— 404 Not Found (<—> 0.6 ms)
+7hsg ——> POST /qq.php 21 B application/x-www-form-urlencoded
+7hsg <—— 404 Not Found (<—> 0.6 ms)
+v7MU ——> POST /conflg.php 26 B application/x-www-form-urlencoded
+v7MU <—— 404 Not Found (<—> 0.6 ms)
+2seB ——> POST /lindex.php 26 B application/x-www-form-urlencoded
+2seB <—— 404 Not Found (<—> 0.6 ms)
+T8V8 ——> POST /phpstudy.php 21 B application/x-www-form-urlencoded
+T8V8 <—— 404 Not Found (<—> 0.6 ms)
+QyLY ——> POST /phpStudy.php 21 B application/x-www-form-urlencoded
+QyLY <—— 404 Not Found (<—> 0.6 ms)
+Ul53 ——> POST /weixiao.php 27 B application/x-www-form-urlencoded
+Ul53 <—— 404 Not Found (<—> 0.6 ms)
+KUls ——> POST /feixiang.php 28 B application/x-www-form-urlencoded
+KUls <—— 404 Not Found (<—> 0.6 ms)
+JiMN ——> POST /ak47.php 29 B application/x-www-form-urlencoded
+JiMN <—— 404 Not Found (<—> 0.7 ms)
+7i6B ——> POST /ak48.php 29 B application/x-www-form-urlencoded
+7i6B <—— 404 Not Found (<—> 0.6 ms)
+JabR ——> POST /xiao.php 24 B application/x-www-form-urlencoded
+JabR <—— 404 Not Found (<—> 0.6 ms)
+b7El ——> POST /yao.php 26 B application/x-www-form-urlencoded
+b7El <—— 404 Not Found (<—> 0.6 ms)
+G4eS ——> POST /defect.php 26 B application/x-www-form-urlencoded
+G4eS <—— 404 Not Found (<—> 0.6 ms)
+PPQu ——> POST /webslee.php 24 B application/x-www-form-urlencoded
+PPQu <—— 404 Not Found (<—> 0.6 ms)
+sBqK ——> POST /q.php 25 B application/x-www-form-urlencoded
+sBqK <—— 404 Not Found (<—> 0.6 ms)
+kDtr ——> POST /pe.php 24 B application/x-www-form-urlencoded
+kDtr <—— 404 Not Found (<—> 1.8 ms)
+zXGg ——> POST /hm.php 22 B application/x-www-form-urlencoded
+zXGg <—— 404 Not Found (<—> 0.6 ms)
+Tdhi ——> POST /cainiao.php 28 B application/x-www-form-urlencoded
+Tdhi <—— 404 Not Found (<—> 0.6 ms)
+hLvx ——> POST /zuoshou.php 23 B application/x-www-form-urlencoded
+hLvx <—— 404 Not Found (<—> 0.6 ms)
+iRiO ——> POST /zuo.php 23 B application/x-www-form-urlencoded
+iRiO <—— 404 Not Found (<—> 0.6 ms)
+VuMX ——> POST /aotu.php 27 B application/x-www-form-urlencoded
+VuMX <—— 404 Not Found (<—> 0.6 ms)
+tyxv ——> POST /cmd.php 23 B application/x-www-form-urlencoded
+tyxv <—— 404 Not Found (<—> 0.6 ms)
+mq3b ——> POST /bak.php 23 B application/x-www-form-urlencoded
+mq3b <—— 404 Not Found (<—> 0.6 ms)
+KhYJ ——> POST /system.php 23 B application/x-www-form-urlencoded
+KhYJ <—— 404 Not Found (<—> 0.6 ms)
+ooEU ——> POST /l6.php 22 B application/x-www-form-urlencoded
+ooEU <—— 404 Not Found (<—> 0.6 ms)
+mLFU ——> POST /l7.php 22 B application/x-www-form-urlencoded
+mLFU <—— 404 Not Found (<—> 0.6 ms)
+h5Iz ——> POST /l8.php 20 B application/x-www-form-urlencoded
+h5Iz <—— 404 Not Found (<—> 0.6 ms)
+q0ps ——> POST /q.php 21 B application/x-www-form-urlencoded
+q0ps <—— 404 Not Found (<—> 0.6 ms)
+o8l1 ——> POST /56.php 21 B application/x-www-form-urlencoded
+o8l1 <—— 404 Not Found (<—> 0.6 ms)
+Alpn ——> POST /mz.php 22 B application/x-www-form-urlencoded
+Alpn <—— 404 Not Found (<—> 0.6 ms)
+Y4E6 ——> POST /xx.php 22 B application/x-www-form-urlencoded
+Y4E6 <—— 404 Not Found (<—> 0.6 ms)
+fzp8 ——> POST /yumo.php 24 B application/x-www-form-urlencoded
+fzp8 <—— 404 Not Found (<—> 0.6 ms)
+6gyc ——> POST /min.php 25 B application/x-www-form-urlencoded
+6gyc <—— 404 Not Found (<—> 0.6 ms)
+WIvO ——> POST /wan.php 25 B application/x-www-form-urlencoded
+WIvO <—— 404 Not Found (<—> 0.6 ms)
+EQUT ——> POST /wanan.php 25 B application/x-www-form-urlencoded
+EQUT <—— 404 Not Found (<—> 0.6 ms)
+XL8T ——> POST /ssaa.php 21 B application/x-www-form-urlencoded
+XL8T <—— 404 Not Found (<—> 1.6 ms)
+fJYi ——> POST /qq.php 22 B application/x-www-form-urlencoded
+fJYi <—— 404 Not Found (<—> 0.6 ms)
+n9kS ——> POST /aw.php 22 B application/x-www-form-urlencoded
+n9kS <—— 404 Not Found (<—> 0.6 ms)
+UTb7 ——> POST /12.php 27 B application/x-www-form-urlencoded
+UTb7 <—— 404 Not Found (<—> 0.6 ms)
+sgFf ——> POST /hh.php 24 B application/x-www-form-urlencoded
+sgFf <—— 404 Not Found (<—> 0.6 ms)
+OXIs ——> POST /ak.php 24 B application/x-www-form-urlencoded
+OXIs <—— 404 Not Found (<—> 0.7 ms)
+Soe5 ——> POST /ip.php 24 B application/x-www-form-urlencoded
+Soe5 <—— 404 Not Found (<—> 0.6 ms)
+7dqe ——> POST /infoo.php 21 B application/x-www-form-urlencoded
+7dqe <—— 404 Not Found (<—> 0.6 ms)
+rf1m ——> POST /qq.php 20 B application/x-www-form-urlencoded
+rf1m <—— 404 Not Found (<—> 0.6 ms)
+XLav ——> POST /qwe.php 20 B application/x-www-form-urlencoded
+XLav <—— 404 Not Found (<—> 0.6 ms)
+tlSd ——> POST /1213.php 20 B application/x-www-form-urlencoded
+tlSd <—— 404 Not Found (<—> 0.6 ms)
+SOw6 ——> POST /post.php 22 B application/x-www-form-urlencoded
+SOw6 <—— 404 Not Found (<—> 0.7 ms)
+dKpE ——> POST /h1.php 21 B application/x-www-form-urlencoded
+dKpE <—— 404 Not Found (<—> 0.7 ms)
+1SME ——> POST /test.php 25 B application/x-www-form-urlencoded
+1SME <—— 404 Not Found (<—> 0.6 ms)
+BqJs ——> POST /3.php 23 B application/x-www-form-urlencoded
+BqJs <—— 404 Not Found (<—> 0.6 ms)
+yLDN ——> POST /phpinfi.php 24 B application/x-www-form-urlencoded
+yLDN <—— 404 Not Found (<—> 0.7 ms)
+vhjC ——> POST /aaaa.php 24 B application/x-www-form-urlencoded
+vhjC <—— 404 Not Found (<—> 0.6 ms)
+Rkcl ——> POST /9510.php 21 B application/x-www-form-urlencoded
+Rkcl <—— 404 Not Found (<—> 0.6 ms)
+iAVL ——> POST /python.php 20 B application/x-www-form-urlencoded
+iAVL <—— 404 Not Found (<—> 0.6 ms)
+JB1X ——> POST /default.php 20 B application/x-www-form-urlencoded
+JB1X <—— 404 Not Found (<—> 1.6 ms)
+rATZ ——> POST /sean.php 24 B application/x-www-form-urlencoded
+rATZ <—— 404 Not Found (<—> 0.6 ms)
+gZsm ——> POST /app.php 23 B application/x-www-form-urlencoded
+gZsm <—— 404 Not Found (<—> 0.6 ms)
+ChyM ——> POST /help.php 23 B application/x-www-form-urlencoded
+ChyM <—— 404 Not Found (<—> 0.6 ms)
+V7gt ——> POST /tiandi.php 20 B application/x-www-form-urlencoded
+V7gt <—— 404 Not Found (<—> 0.6 ms)
+F1iL ——> POST /miao.php 24 B application/x-www-form-urlencoded
+F1iL <—— 404 Not Found (<—> 0.6 ms)
+B3pb ——> POST /xz.php 29 B application/x-www-form-urlencoded
+B3pb <—— 404 Not Found (<—> 0.6 ms)
+hzvq ——> POST /linuxse.php 23 B application/x-www-form-urlencoded
+hzvq <—— 404 Not Found (<—> 0.7 ms)
+5kkp ——> POST /zuoindex.php 23 B application/x-www-form-urlencoded
+5kkp <—— 404 Not Found (<—> 0.6 ms)
+KtMJ ——> POST /zshmindex.php 23 B application/x-www-form-urlencoded
+KtMJ <—— 404 Not Found (<—> 0.6 ms)
+PWCu ——> POST /tomcat.php 23 B application/x-www-form-urlencoded
+PWCu <—— 404 Not Found (<—> 0.6 ms)
+Wfg9 ——> POST /ceshi.php 23 B application/x-www-form-urlencoded
+Wfg9 <—— 404 Not Found (<—> 7.7 ms)
+TgmR ——> POST /1hou.php 23 B application/x-www-form-urlencoded
+TgmR <—— 404 Not Found (<—> 0.6 ms)
+GWTW ——> POST /boots.php 24 B application/x-www-form-urlencoded
+GWTW <—— 404 Not Found (<—> 0.6 ms)
+xJYg ——> POST /she.php 24 B application/x-www-form-urlencoded
+xJYg <—— 404 Not Found (<—> 0.6 ms)
+d3As ——> POST /s.php 20 B application/x-www-form-urlencoded
+d3As <—— 404 Not Found (<—> 0.6 ms)
+yqpS ——> POST /qw.php 22 B application/x-www-form-urlencoded
+yqpS <—— 404 Not Found (<—> 0.6 ms)
+DDim ——> POST /test.php 24 B application/x-www-form-urlencoded
+DDim <—— 404 Not Found (<—> 0.6 ms)
+EARb ——> POST /caonma.php 26 B application/x-www-form-urlencoded
+EARb <—— 404 Not Found (<—> 0.6 ms)
+kInF ——> POST /ss.php 25 B application/x-www-form-urlencoded
+kInF <—— 404 Not Found (<—> 0.6 ms)
+Vwqo ——> POST /wcp.php 23 B application/x-www-form-urlencoded
+Vwqo <—— 404 Not Found (<—> 1.6 ms)
+FbIn ——> POST /uuu.php 23 B application/x-www-form-urlencoded
+FbIn <—— 404 Not Found (<—> 0.6 ms)
+GXhu ——> POST /sss.php 23 B application/x-www-form-urlencoded
+GXhu <—— 404 Not Found (<—> 0.6 ms)
+IwJu ——> POST /1.php 24 B application/x-www-form-urlencoded
+IwJu <—— 404 Not Found (<—> 0.6 ms)
+zJ7U ——> POST /2.php 24 B application/x-www-form-urlencoded
+zJ7U <—— 404 Not Found (<—> 0.6 ms)
+T1bR ——> POST /qaz.php 25 B application/x-www-form-urlencoded
+T1bR <—— 404 Not Found (<—> 0.7 ms)
+oRn5 ——> POST /sha.php 23 B application/x-www-form-urlencoded
+oRn5 <—— 404 Not Found (<—> 0.6 ms)
+PXp5 ——> POST /1.php 21 B application/x-www-form-urlencoded
+PXp5 <—— 404 Not Found (<—> 0.6 ms)
+2vkW ——> POST /confg.php 20 B application/x-www-form-urlencoded
+2vkW <—— 404 Not Found (<—> 0.6 ms)
+3olJ ——> POST /ver.php 23 B application/x-www-form-urlencoded
+3olJ <—— 404 Not Found (<—> 0.6 ms)
+znHp ——> POST /hack.php 23 B application/x-www-form-urlencoded
+znHp <—— 404 Not Found (<—> 0.6 ms)
+rM25 ——> POST /qa.php 21 B application/x-www-form-urlencoded
+rM25 <—— 404 Not Found (<—> 0.7 ms)
+fBtN ——> POST /Ss.php 24 B application/x-www-form-urlencoded
+fBtN <—— 404 Not Found (<—> 0.6 ms)
+A631 ——> POST /xxx.php 25 B application/x-www-form-urlencoded
+A631 <—— 404 Not Found (<—> 0.6 ms)
+xZ59 ——> POST /92.php 22 B application/x-www-form-urlencoded
+xZ59 <—— 404 Not Found (<—> 0.6 ms)
+BCKW ——> POST /xiaoma.php 23 B application/x-www-form-urlencoded
+BCKW <—— 404 Not Found (<—> 0.6 ms)
+td1c ——> POST /xiaomae.php 23 B application/x-www-form-urlencoded
+td1c <—— 404 Not Found (<—> 0.6 ms)
+xqQo ——> POST /xiaomar.php 23 B application/x-www-form-urlencoded
+xqQo <—— 404 Not Found (<—> 0.6 ms)
+skFi ——> POST /qq.php 23 B application/x-www-form-urlencoded
+skFi <—— 404 Not Found (<—> 0.6 ms)
+Waie ——> POST /data.php 23 B application/x-www-form-urlencoded
+Waie <—— 404 Not Found (<—> 1.4 ms)
+QZA2 ——> POST /log.php 21 B application/x-www-form-urlencoded
+QZA2 <—— 404 Not Found (<—> 0.7 ms)
+xErB ——> POST /fack.php 22 B application/x-www-form-urlencoded
+xErB <—— 404 Not Found (<—> 0.6 ms)
+GvIs ——> POST /angge.php 25 B application/x-www-form-urlencoded
+GvIs <—— 404 Not Found (<—> 0.6 ms)
+YAOT ——> GET /index.php 
+YAOT <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+02TD ——> GET /phpmyadmin/index.php 
+02TD <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+TGdZ ——> GET /phpMyAdmin/index.php 
+TGdZ <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+a22I ——> GET /pmd/index.php 
+a22I <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+jL7j ——> GET /pma/index.php 
+jL7j <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 5.2 ms)
+PIvn ——> GET /PMA/index.php 
+PIvn <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+T5x4 ——> GET /PMA2/index.php 
+T5x4 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+j5uc ——> GET /pmamy/index.php 
+j5uc <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+XCzK ——> GET /pmamy2/index.php 
+XCzK <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+E65a ——> GET /mysql/index.php 
+E65a <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+3tQg ——> GET /admin/index.php 
+3tQg <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+XqWJ ——> GET /db/index.php 
+XqWJ <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+xIEX ——> GET /dbadmin/index.php 
+xIEX <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+nJF0 ——> GET /web/phpMyAdmin/index.php 
+nJF0 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+INk3 ——> GET /admin/pma/index.php 
+INk3 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+Uv6S ——> GET /admin/PMA/index.php 
+Uv6S <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+mghh ——> GET /admin/mysql/index.php 
+mghh <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+DoyX ——> GET /admin/mysql2/index.php 
+DoyX <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+Bvc8 ——> GET /admin/phpmyadmin/index.php 
+Bvc8 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+ElcT ——> GET /admin/phpMyAdmin/index.php 
+ElcT <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+Pnf6 ——> GET /admin/phpmyadmin2/index.php 
+Pnf6 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 2.1 ms)
+a6pT ——> GET /mysqladmin/index.php 
+a6pT <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 4.5 ms)
+7gZN ——> GET /mysql-admin/index.php 
+7gZN <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+Mz6p ——> GET /phpadmin/index.php 
+Mz6p <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+FGrB ——> GET /phpAdmin/index.php 
+FGrB <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+S4wP ——> GET /phpmyadmin0/index.php 
+S4wP <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+Z45j ——> GET /phpmyadmin1/index.php 
+Z45j <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+wkRO ——> GET /phpmyadmin2/index.php 
+wkRO <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+Gn3x ——> GET /myadmin/index.php 
+Gn3x <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+J85G ——> GET /myadmin2/index.php 
+J85G <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+C86C ——> GET /xampp/phpmyadmin/index.php 
+C86C <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 3.2 ms)
+6YlJ ——> GET /phpMyadmin_bak/index.php 
+6YlJ <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.8 ms)
+A1vE ——> GET /www/phpMyAdmin/index.php 
+A1vE <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+yE5t ——> GET /tools/phpMyAdmin/index.php 
+yE5t <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+gaNb ——> GET /phpmyadmin-old/index.php 
+gaNb <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+rlaX ——> GET /phpMyAdminold/index.php 
+rlaX <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+bIuu ——> GET /phpMyAdmin.old/index.php 
+bIuu <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+648e ——> GET /pma-old/index.php 
+648e <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+jSKl ——> GET /claroline/phpMyAdmin/index.php 
+jSKl <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+s4uP ——> GET /typo3/phpmyadmin/index.php 
+s4uP <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+WcEB ——> GET /phpma/index.php 
+WcEB <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+a0tv ——> GET /phpmyadmin/phpmyadmin/index.php 
+a0tv <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+aPcn ——> GET /phpMyAdmin/phpMyAdmin/index.php 
+aPcn <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+MYPT ——> GET /v/index.php 
+MYPT <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.8 ms)
+is1j ——> GET /phpmyadm1n/index.php 
+is1j <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+gISL ——> GET /phpMyAdm1n/index.php 
+gISL <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+TbzA ——> GET / 
+TbzA <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.8 ms)
+inQP ——> GET / 
+inQP <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+7Tdq ——> GET / 
+7Tdq <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+AXkx ——> GET / 
+AXkx <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+2GBk ——> GET /manager/html 
+2GBk <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+0yvU ——> GET / 
+0yvU <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.0 ms)
+egd7 ——> GET /static/css/main.a0de00f5.css 
+SgAB ——> GET /static/js/main.8e70d07e.js 
+egd7 <—— 304 Not Modified (<—> 1.2 ms)
+SgAB <—— 304 Not Modified (<—> 1.1 ms)
+LBW9 ——> GET /assets/images/cascadia-parkinglot-960x1280.jpg 
+JSyW ——> GET /assets/images/logos/transmax.png 
+JSyW <—— 304 Not Modified (<—> 1.1 ms)
+OGLI ——> GET /assets/images/green-coronado-driver-side-960x1280.jpg 
+LBW9 <—— 200 OK 110.38 KB image/jpeg (<—> 33.8 ms)
+dKrh ——> GET /assets/images/cascadia-evo_800x1066.jpg 
+Chr0 ——> GET /assets/images/logos/facebook.png 
+C9qS ——> GET /assets/images/three-truck-parkinglot-750x1000.jpg 
+Chr0 <—— 200 OK 656 B image/png (<—> 7.1 ms)
+C9qS <—— 200 OK 135.8 KB image/jpeg (<—> 27.6 ms)
+9Cy5 ——> GET /assets/images/logos/instagram.png 
+9Cy5 <—— 200 OK 4.73 KB image/png (<—> 3.6 ms)
+OGLI <—— 200 OK 218.05 KB image/jpeg (<—> 47.0 ms)
+dKrh <—— 200 OK 223.3 KB image/jpeg (<—> 54.5 ms)
+tSrn ——> GET /login 
+tSrn <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+WSBa ——> GET /static/css/main.a0de00f5.css 
+WSBa <—— 304 Not Modified (<—> 0.7 ms)
+Kb5X ——> GET /static/js/main.8e70d07e.js 
+Kb5X <—— 304 Not Modified (<—> 0.6 ms)
+kFOc ——> GET /assets/images/logos/transmax.png 
+kFOc <—— 304 Not Modified (<—> 0.8 ms)
+JXCl ——> GET / 
+JXCl <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+ZmBS ——> GET / 
+ZmBS <—— 304 Not Modified (<—> 0.9 ms)
+ZRIV ——> GET / 
+ZRIV <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+m8Le ——> GET / 
+m8Le <—— 304 Not Modified (<—> 0.8 ms)
+FflF ——> GET /static/css/main.a0de00f5.css 
+FflF <—— 304 Not Modified (<—> 0.7 ms)
+oARJ ——> GET /static/js/main.8e70d07e.js 
+oARJ <—— 304 Not Modified (<—> 0.6 ms)
+vNFB ——> GET /assets/images/logos/transmax.png 
+mmgY ——> GET /assets/images/cascadia-parkinglot-960x1280.jpg 
+vNFB <—— 304 Not Modified (<—> 3.3 ms)
+mmgY <—— 304 Not Modified (<—> 2.4 ms)
+J3MU ——> GET /assets/images/cascadia-evo_800x1066.jpg 
+0esl ——> GET /assets/images/green-coronado-driver-side-960x1280.jpg 
+J3MU <—— 304 Not Modified (<—> 1.1 ms)
+0esl <—— 304 Not Modified (<—> 1.0 ms)
+pgZg ——> GET /assets/images/three-truck-parkinglot-750x1000.jpg 
+J0ys ——> GET /assets/images/logos/facebook.png 
+Ll5L ——> GET /assets/images/logos/instagram.png 
+pgZg <—— 304 Not Modified (<—> 1.4 ms)
+J0ys <—— 304 Not Modified (<—> 1.4 ms)
+Ll5L <—— 304 Not Modified (<—> 1.4 ms)
+g976 ——> GET / 
+g976 <—— 304 Not Modified (<—> 0.8 ms)
+g9MV ——> GET /static/css/main.a0de00f5.css 
+f38m ——> GET /static/js/main.8e70d07e.js 
+g9MV <—— 304 Not Modified (<—> 1.2 ms)
+f38m <—— 304 Not Modified (<—> 1.0 ms)
+9lVU ——> GET /assets/images/cascadia-parkinglot-960x1280.jpg 
+c5er ——> GET /assets/images/logos/transmax.png 
+9lVU <—— 304 Not Modified (<—> 1.2 ms)
+c5er <—— 304 Not Modified (<—> 1.0 ms)
+PL1x ——> GET /assets/images/green-coronado-driver-side-960x1280.jpg 
+mpJ4 ——> GET /assets/images/cascadia-evo_800x1066.jpg 
+PL1x <—— 304 Not Modified (<—> 1.0 ms)
+mpJ4 <—— 304 Not Modified (<—> 0.9 ms)
+XbiO ——> GET /assets/images/three-truck-parkinglot-750x1000.jpg 
+p0lW ——> GET /assets/images/logos/facebook.png 
+XbiO <—— 304 Not Modified (<—> 1.8 ms)
+p0lW <—— 304 Not Modified (<—> 1.7 ms)
+DWn4 ——> GET /assets/images/logos/instagram.png 
+DWn4 <—— 304 Not Modified (<—> 0.6 ms)
+dsA8 ——> GET /home 
+dsA8 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+s7Vq ——> GET /static/css/main.a0de00f5.css 
+L6aH ——> GET /static/js/main.8e70d07e.js 
+s7Vq <—— 304 Not Modified (<—> 1.1 ms)
+L6aH <—— 304 Not Modified (<—> 1.0 ms)
+A34h ——> GET /assets/images/logos/transmax.png 
+A34h <—— 304 Not Modified (<—> 0.8 ms)
+eSeo ——> GET /assets/images/cascadia-parkinglot-960x1280.jpg 
+eSeo <—— 304 Not Modified (<—> 0.7 ms)
+SHx8 ——> GET /assets/images/green-coronado-driver-side-960x1280.jpg 
+FdXS ——> GET /assets/images/cascadia-evo_800x1066.jpg 
+SHx8 <—— 304 Not Modified (<—> 1.0 ms)
+FdXS <—— 304 Not Modified (<—> 1.0 ms)
+vtae ——> GET /assets/images/logos/instagram.png 
+1uHj ——> GET /assets/images/logos/facebook.png 
+Sv8q ——> GET /assets/images/three-truck-parkinglot-750x1000.jpg 
+vtae <—— 304 Not Modified (<—> 1.4 ms)
+1uHj <—— 304 Not Modified (<—> 1.4 ms)
+Sv8q <—— 304 Not Modified (<—> 1.4 ms)
+X2df ——> GET /favicon.ico 
+X2df <—— 200 OK 31.29 KB image/x-icon (<—> 0.4 ms)
+hHm9 ——> GET /home 
+hHm9 <—— 304 Not Modified (<—> 0.9 ms)
+U22v ——> GET /static/css/main.a0de00f5.css 
+KwZD ——> GET /static/js/main.8e70d07e.js 
+U22v <—— 304 Not Modified (<—> 1.8 ms)
+KwZD <—— 304 Not Modified (<—> 1.8 ms)
+bpcz ——> GET /assets/images/logos/transmax.png 
+bpcz <—— 304 Not Modified (<—> 0.8 ms)
+B4Rt ——> GET /assets/images/cascadia-parkinglot-960x1280.jpg 
+B4Rt <—— 304 Not Modified (<—> 0.8 ms)
+FsBx ——> GET /assets/images/green-coronado-driver-side-960x1280.jpg 
+FsBx <—— 304 Not Modified (<—> 0.6 ms)
+XJDX ——> GET /assets/images/cascadia-evo_800x1066.jpg 
+XJDX <—— 304 Not Modified (<—> 0.6 ms)
+IoTv ——> GET /assets/images/three-truck-parkinglot-750x1000.jpg 
+f5d8 ——> GET /assets/images/logos/facebook.png 
+IoTv <—— 304 Not Modified (<—> 0.9 ms)
+f5d8 <—— 304 Not Modified (<—> 0.9 ms)
+VUPr ——> GET /assets/images/logos/instagram.png 
+VUPr <—— 304 Not Modified (<—> 6.7 ms)
+gmsS ——> GET /favicon.ico 
+gmsS <—— 200 OK 31.29 KB image/x-icon (<—> 0.5 ms)
+Opening connection to PostgreSQL: transmaxdb.csrfjhpv3e3t.us-east-1.rds.amazonaws.com pass transmax transmaxuser transmax
+Sun, 23 Sep 2018 14:12:50 GMT sequelize deprecated String based operators are now deprecated. Please use Symbol based operators for better security, read more at http://docs.sequelizejs.com/manual/tutorial/querying.html#operators at node_modules/sequelize/lib/sequelize.js:242:13
+Executing (default): DROP TABLE IF EXISTS "earnings" CASCADE;
+Executing (default): DROP TABLE IF EXISTS "loads" CASCADE;
+Executing (default): DROP TABLE IF EXISTS "brokers" CASCADE;
+Executing (default): DROP TABLE IF EXISTS "trucks" CASCADE;
+Executing (default): DROP TABLE IF EXISTS "companies" CASCADE;
+Executing (default): DROP TABLE IF EXISTS "drivers" CASCADE;
+Executing (default): DROP TABLE IF EXISTS "users" CASCADE;
+Executing (default): DROP TABLE IF EXISTS "candidates" CASCADE;
+Executing (default): DROP TABLE IF EXISTS "candidates" CASCADE;
+Executing (default): CREATE TABLE IF NOT EXISTS "candidates" ("id"   SERIAL , "firstName" VARCHAR(255), "lastName" VARCHAR(255), "email" VARCHAR(255) UNIQUE, "phone" VARCHAR(255), "driversLicense" VARCHAR(255), "experience" VARCHAR(255), "streetAddress" VARCHAR(255), "city" VARCHAR(255), "state" VARCHAR(255), "zipCode" VARCHAR(255), "dob" TIMESTAMP WITH TIME ZONE, "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("id"));
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'candidates' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+Executing (default): DROP TABLE IF EXISTS "users" CASCADE;
+Executing (default): CREATE TABLE IF NOT EXISTS "users" ("id"   SERIAL , "userName" VARCHAR(255) UNIQUE, "password" VARCHAR(255) NOT NULL, "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("id"));
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'users' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+Executing (default): DROP TABLE IF EXISTS "drivers" CASCADE;
+Executing (default): CREATE TABLE IF NOT EXISTS "drivers" ("id"   SERIAL , "driverId" INTEGER NOT NULL UNIQUE, "firstName" VARCHAR(255), "lastName" VARCHAR(255), "ssn" VARCHAR(255) NOT NULL, "driversLicense" VARCHAR(255) NOT NULL, "email" VARCHAR(255) UNIQUE, "phone" VARCHAR(255), "hireDate" VARCHAR(255) NOT NULL, "address" TEXT, "currentRate" DECIMAL, "earnings" DECIMAL, "employedBy" VARCHAR(255), "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("id"));
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'drivers' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+Executing (default): DROP TABLE IF EXISTS "companies" CASCADE;
+Executing (default): CREATE TABLE IF NOT EXISTS "companies" ("id"   SERIAL , "taxId" VARCHAR(255) NOT NULL, "name" VARCHAR(255), "foundedDate" VARCHAR(255), "incorporatedState" VARCHAR(255), "email" VARCHAR(255) UNIQUE, "phone" VARCHAR(255), "address" TEXT, "numberOfTrucks" INTEGER, "numberOfTrailers" INTEGER, "numberOfEmployees" INTEGER, "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("id"));
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'companies' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+Executing (default): DROP TABLE IF EXISTS "trucks" CASCADE;
+Executing (default): CREATE TABLE IF NOT EXISTS "trucks" ("id" INTEGER NOT NULL , "model" VARCHAR(255), "year" VARCHAR(255), "purchaseDate" VARCHAR(255), "purchasePrice" INTEGER, "originalMiles" INTEGER, "maintenanceDate" VARCHAR(255), "maintenanceType" TEXT, "maintenanceCost" INTEGER, "repairDate" VARCHAR(255), "repairType" TEXT, "repairCost" INTEGER, "companyId" INTEGER REFERENCES "companies" ("id") ON DELETE CASCADE ON UPDATE CASCADE, "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("id"));
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'trucks' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+Executing (default): DROP TABLE IF EXISTS "brokers" CASCADE;
+Executing (default): CREATE TABLE IF NOT EXISTS "brokers" ("id"   SERIAL , "brokerId" INTEGER NOT NULL UNIQUE, "name" VARCHAR(255), "email" VARCHAR(255), "phone" VARCHAR(255), "address" TEXT, "bookedLoads" INTEGER, "totalPayment" DECIMAL, "totalLoadedMiles" INTEGER, "avgDollarPerMile" DECIMAL, "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("id"));
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'brokers' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+Executing (default): DROP TABLE IF EXISTS "loads" CASCADE;
+Executing (default): CREATE TABLE IF NOT EXISTS "loads" ("id"   SERIAL , "bookDate" TIMESTAMP WITH TIME ZONE NOT NULL, "driverName" VARCHAR(255), "loadNumber" VARCHAR(255) NOT NULL, "brokerName" VARCHAR(255), "pickUpCityState" TEXT NOT NULL, "dropOffCityState" TEXT NOT NULL, "pickUpAddress" TEXT NOT NULL, "dropOffAddress" TEXT NOT NULL, "payment" DECIMAL NOT NULL, "loadedMiles" INTEGER NOT NULL, "emptyMiles" INTEGER NOT NULL, "mileage" INTEGER, "dollarPerMile" DECIMAL, "dieselPrice" DECIMAL, "fuelCost" DECIMAL, "driverPay" DECIMAL, "dispatchFee" DECIMAL, "lumper" DECIMAL, "detention" DECIMAL, "detentionDriverPay" DECIMAL, "lateFee" DECIMAL, "toll" DECIMAL, "roadMaintenance" DECIMAL, "otherExpenses" DECIMAL, "totalExpenses" DECIMAL, "profit" DECIMAL, "commodity" TEXT, "weight" INTEGER, "trailer" TEXT, "confirmFilePath" VARCHAR(255), "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, "brokerId" INTEGER REFERENCES "brokers" ("id") ON DELETE SET NULL ON UPDATE CASCADE, "driverId" INTEGER REFERENCES "drivers" ("id") ON DELETE SET NULL ON UPDATE CASCADE, "truckId" INTEGER REFERENCES "trucks" ("id") ON DELETE SET NULL ON UPDATE CASCADE, PRIMARY KEY ("id"));
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'loads' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+Executing (default): DROP TABLE IF EXISTS "earnings" CASCADE;
+Executing (default): CREATE TABLE IF NOT EXISTS "earnings" ("id"   SERIAL , "weekNumber" VARCHAR(255), "begWeekDate" TIMESTAMP WITH TIME ZONE, "endWeekDate" TIMESTAMP WITH TIME ZONE, "weekRange" VARCHAR(255), "revenue" DECIMAL, "fuelCost" DECIMAL, "milesPaid" INTEGER, "driverPay" DECIMAL, "dispatchFee" DECIMAL, "toll" DECIMAL, "lumper" DECIMAL, "detention" DECIMAL, "detentionDriverPay" DECIMAL, "lateFee" DECIMAL, "roadMaintenance" DECIMAL, "otherExpense" DECIMAL, "totalExpense" DECIMAL, "profit" DECIMAL, "operatingMargin" DECIMAL, "docFilePath" VARCHAR(255), "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("id"));
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'earnings' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+Beginning seed 
+Executing (default): INSERT INTO "users" ("id","userName","password","createdAt","updatedAt") VALUES (DEFAULT,'apenchev','fa36300440ca7e0baffa3689cc8b6a93','2018-09-23 14:12:50.939 +00:00','2018-09-23 14:12:50.939 +00:00') RETURNING *;
+Executing (default): INSERT INTO "users" ("id","userName","password","createdAt","updatedAt") VALUES (DEFAULT,'akarapeev','9bc7ae9eae3b17ee68eeb1bfb126853f','2018-09-23 14:12:50.940 +00:00','2018-09-23 14:12:50.940 +00:00') RETURNING *;
+Executing (default): INSERT INTO "brokers" ("id","brokerId","name","email","phone","address","bookedLoads","totalPayment","totalLoadedMiles","avgDollarPerMile","createdAt","updatedAt") VALUES (DEFAULT,1,'Transplace','','','',1,600,85,0,'2018-09-23 14:12:50.956 +00:00','2018-09-23 14:12:50.956 +00:00') RETURNING *;
+Executing (default): INSERT INTO "brokers" ("id","brokerId","name","email","phone","address","bookedLoads","totalPayment","totalLoadedMiles","avgDollarPerMile","createdAt","updatedAt") VALUES (DEFAULT,2,'TransportationOne','','','',1,1200,842,0,'2018-09-23 14:12:50.956 +00:00','2018-09-23 14:12:50.956 +00:00') RETURNING *;
+Executing (default): INSERT INTO "brokers" ("id","brokerId","name","email","phone","address","bookedLoads","totalPayment","totalLoadedMiles","avgDollarPerMile","createdAt","updatedAt") VALUES (DEFAULT,3,'Reliable Source Logistics','','','',1,2700,970,0,'2018-09-23 14:12:50.957 +00:00','2018-09-23 14:12:50.957 +00:00') RETURNING *;
+Executing (default): INSERT INTO "brokers" ("id","brokerId","name","email","phone","address","bookedLoads","totalPayment","totalLoadedMiles","avgDollarPerMile","createdAt","updatedAt") VALUES (DEFAULT,4,'Amstan Logistics','','','',1,750,357,0,'2018-09-23 14:12:50.957 +00:00','2018-09-23 14:12:50.957 +00:00') RETURNING *;
+Executing (default): INSERT INTO "brokers" ("id","brokerId","name","email","phone","address","bookedLoads","totalPayment","totalLoadedMiles","avgDollarPerMile","createdAt","updatedAt") VALUES (DEFAULT,5,'Axle Logistics','','','',1,2050,737,0,'2018-09-23 14:12:50.957 +00:00','2018-09-23 14:12:50.957 +00:00') RETURNING *;
+Executing (default): INSERT INTO "brokers" ("id","brokerId","name","email","phone","address","bookedLoads","totalPayment","totalLoadedMiles","avgDollarPerMile","createdAt","updatedAt") VALUES (DEFAULT,6,'American Logistics Inc.','','','',1,775,391,0,'2018-09-23 14:12:50.957 +00:00','2018-09-23 14:12:50.957 +00:00') RETURNING *;
+Executing (default): INSERT INTO "brokers" ("id","brokerId","name","email","phone","address","bookedLoads","totalPayment","totalLoadedMiles","avgDollarPerMile","createdAt","updatedAt") VALUES (DEFAULT,7,'Gateway Logistics Inc.','','','',1,1050,375,0,'2018-09-23 14:12:50.957 +00:00','2018-09-23 14:12:50.957 +00:00') RETURNING *;
+Executing (default): INSERT INTO "brokers" ("id","brokerId","name","email","phone","address","bookedLoads","totalPayment","totalLoadedMiles","avgDollarPerMile","createdAt","updatedAt") VALUES (DEFAULT,8,'Time Definite Services, Inc.','','','',1,940,468,0,'2018-09-23 14:12:50.957 +00:00','2018-09-23 14:12:50.957 +00:00') RETURNING *;
+Executing (default): INSERT INTO "brokers" ("id","brokerId","name","email","phone","address","bookedLoads","totalPayment","totalLoadedMiles","avgDollarPerMile","createdAt","updatedAt") VALUES (DEFAULT,9,'Grane Logistics Express','','','',1,1150,375,0,'2018-09-23 14:12:50.957 +00:00','2018-09-23 14:12:50.957 +00:00') RETURNING *;
+Executing (default): INSERT INTO "drivers" ("id","driverId","firstName","lastName","ssn","driversLicense","email","phone","hireDate","address","currentRate","earnings","employedBy","createdAt","updatedAt") VALUES (DEFAULT,1,'Kelvin','Miller','666-66-6666','123456','kelvin@gmail.com','568-456-7983','05/01/18','','0.55','20000','AIK Transport LLC','2018-09-23 14:12:50.991 +00:00','2018-09-23 14:12:50.991 +00:00') RETURNING *;
+Executing (default): INSERT INTO "drivers" ("id","driverId","firstName","lastName","ssn","driversLicense","email","phone","hireDate","address","currentRate","earnings","employedBy","createdAt","updatedAt") VALUES (DEFAULT,2,'Eric','Strugaria','666-66-1111','654321','eric@gmail.com','568-358-1110','07/15/18','','0.55','12500','AIK Transport LLC','2018-09-23 14:12:50.992 +00:00','2018-09-23 14:12:50.992 +00:00') RETURNING *;
+Executing (default): INSERT INTO "companies" ("id","taxId","name","foundedDate","incorporatedState","email","phone","address","numberOfTrucks","numberOfTrailers","numberOfEmployees","createdAt","updatedAt") VALUES (DEFAULT,'123','AIK Transport LLC','06/01/2013','OH','aiktransport@gmail.com','513-680-5334','3527 Riverwood Ln, Loveland, OH 45140','2','2','3','2018-09-23 14:12:51.000 +00:00','2018-09-23 14:12:51.000 +00:00') RETURNING *;
+Executing (default): INSERT INTO "companies" ("id","taxId","name","foundedDate","incorporatedState","email","phone","address","numberOfTrucks","numberOfTrailers","numberOfEmployees","createdAt","updatedAt") VALUES (DEFAULT,'83-1446378','Transmax LLC','08/01/2018','OH','transmaxfleet@gmail.com','513-680-5334','3527 Riverwood Ln, Loveland, OH 45140','1','1','0','2018-09-23 14:12:51.000 +00:00','2018-09-23 14:12:51.000 +00:00') RETURNING *;
+Executing (default): INSERT INTO "trucks" ("id","model","year","purchaseDate","purchasePrice","originalMiles","maintenanceDate","maintenanceType","maintenanceCost","repairDate","repairType","repairCost","companyId","createdAt","updatedAt") VALUES (117,'Volvo VNL670','2007','06/01/2013',40000,405000,'','',0,'','',0,1,'2018-09-23 14:12:51.007 +00:00','2018-09-23 14:12:51.007 +00:00') RETURNING *;
+Executing (default): INSERT INTO "trucks" ("id","model","year","purchaseDate","purchasePrice","originalMiles","maintenanceDate","maintenanceType","maintenanceCost","repairDate","repairType","repairCost","companyId","createdAt","updatedAt") VALUES (118,'Fraightliner Coronado','2014','11/1/2017',0,0,'','',0,'','',0,1,'2018-09-23 14:12:51.007 +00:00','2018-09-23 14:12:51.007 +00:00') RETURNING *;
+Executing (default): INSERT INTO "trucks" ("id","model","year","purchaseDate","purchasePrice","originalMiles","maintenanceDate","maintenanceType","maintenanceCost","repairDate","repairType","repairCost","companyId","createdAt","updatedAt") VALUES (119,'Fraightliner Cascadia','2015','8/30/2018',67500,350000,'','',0,'','',0,2,'2018-09-23 14:12:51.007 +00:00','2018-09-23 14:12:51.007 +00:00') RETURNING *;
+Sequelize models synced before LOADS
+Executing (default): INSERT INTO "loads" ("id","bookDate","driverName","loadNumber","brokerName","pickUpCityState","dropOffCityState","pickUpAddress","dropOffAddress","payment","loadedMiles","emptyMiles","mileage","dollarPerMile","dieselPrice","fuelCost","driverPay","dispatchFee","lumper","detention","detentionDriverPay","lateFee","toll","roadMaintenance","otherExpenses","profit","commodity","weight","trailer","confirmFilePath","createdAt","updatedAt","brokerId","driverId","truckId") VALUES (DEFAULT,'2018-08-31 00:00:00.000 +00:00','Kelvin','0277377','Transplace','Columbus, IN','Louisville, KY','4411 N Long Rd, Columbus, IN 47203','2000 Nelson Miller Pkwy, Louisville, KY 40223',600,85,207,0,0,3.22,0,160.6,0,0,0,0,0,0,0,0,0,'NA',38738,'Dry Van','/home/ubuntu/transmax/server/app/db/brokerConfirmations/083118_Transplace.pdf','2018-09-23 14:12:51.022 +00:00','2018-09-23 14:12:51.022 +00:00',1,1,119) RETURNING *;
+Executing (default): INSERT INTO "loads" ("id","bookDate","driverName","loadNumber","brokerName","pickUpCityState","dropOffCityState","pickUpAddress","dropOffAddress","payment","loadedMiles","emptyMiles","mileage","dollarPerMile","dieselPrice","fuelCost","driverPay","dispatchFee","lumper","detention","detentionDriverPay","lateFee","toll","roadMaintenance","otherExpenses","profit","commodity","weight","trailer","confirmFilePath","createdAt","updatedAt","brokerId","driverId","truckId") VALUES (DEFAULT,'2018-09-05 00:00:00.000 +00:00','Kelvin','0012104','Reliable Source Logistics','Orestes, IN','Concord, NH','120 W Oak St, Orestes, IN 46063','Concord, NH 03301',2700,970,136,0,0,3.22,0,0,0,0,0,0,0,0,0,0,0,'Canned Foods',42120,'Van or Reefer','/home/ubuntu/transmax/server/app/db/brokerConfirmations/090518_reliableSourceLogistics.pdf','2018-09-23 14:12:51.023 +00:00','2018-09-23 14:12:51.023 +00:00',2,1,119) RETURNING *;
+Executing (default): INSERT INTO "loads" ("id","bookDate","driverName","loadNumber","brokerName","pickUpCityState","dropOffCityState","pickUpAddress","dropOffAddress","payment","loadedMiles","emptyMiles","mileage","dollarPerMile","dieselPrice","fuelCost","driverPay","dispatchFee","lumper","detention","detentionDriverPay","lateFee","toll","roadMaintenance","otherExpenses","profit","commodity","weight","trailer","confirmFilePath","createdAt","updatedAt","brokerId","driverId","truckId") VALUES (DEFAULT,'2018-09-07 00:00:00.000 +00:00','Kelvin','99810','Transportation One','Rutland, VT','Cincinnati, OH','92 Park Street, Rutland, VT 05701','535 Shepherd Ave, Cincinnati, OH 45215',1200,842,105,0,0,3.22,0,0,0,0,0,0,0,0,0,0,0,'Crackers FSC',12680,'53V','/home/ubuntu/transmax/server/app/db/brokerConfirmations/090718_transportationOne.pdf','2018-09-23 14:12:51.023 +00:00','2018-09-23 14:12:51.023 +00:00',3,1,119) RETURNING *;
+Executing (default): INSERT INTO "loads" ("id","bookDate","driverName","loadNumber","brokerName","pickUpCityState","dropOffCityState","pickUpAddress","dropOffAddress","payment","loadedMiles","emptyMiles","mileage","dollarPerMile","dieselPrice","fuelCost","driverPay","dispatchFee","lumper","detention","detentionDriverPay","lateFee","toll","roadMaintenance","otherExpenses","profit","commodity","weight","trailer","confirmFilePath","createdAt","updatedAt","brokerId","driverId","truckId") VALUES (DEFAULT,'2018-09-10 00:00:00.000 +00:00','Kelvin','AMLO260554LN','Amstan Logistics','Fairfield, OH','Pleasant Prairie, WI','4255 Thunderbird Lane, Fairfield, OH 45014','13305 104th St, Pleasant Prairie, WI 53158',750,357,5,0,0,3.22,0,0,0,0,0,0,0,0,0,0,0,'NA',30687,'53V/R','/home/ubuntu/transmax/server/app/db/brokerConfirmations/090718_transportationOne.pdf','2018-09-23 14:12:51.024 +00:00','2018-09-23 14:12:51.024 +00:00',4,1,119) RETURNING *;
+Executing (default): INSERT INTO "loads" ("id","bookDate","driverName","loadNumber","brokerName","pickUpCityState","dropOffCityState","pickUpAddress","dropOffAddress","payment","loadedMiles","emptyMiles","mileage","dollarPerMile","dieselPrice","fuelCost","driverPay","dispatchFee","lumper","detention","detentionDriverPay","lateFee","toll","roadMaintenance","otherExpenses","profit","commodity","weight","trailer","confirmFilePath","createdAt","updatedAt","brokerId","driverId","truckId") VALUES (DEFAULT,'2018-09-11 00:00:00.000 +00:00','Kelvin','0123724','Axle Logistics','Aurora, IL','Taylor, PA','800 Bilter Rd, Aurora, IL 60502','22 Stauffer Industrial Park, Taylor, PA 18517',2050,737,72,0,0,3.22,0,0,0,0,0,0,0,0,0,0,0,'Packaging Materials',20000,'Van or Reefer','/home/ubuntu/transmax/server/app/db/brokerConfirmations/090718_transportationOne.pdf','2018-09-23 14:12:51.024 +00:00','2018-09-23 14:12:51.024 +00:00',5,1,119) RETURNING *;
+Executing (default): INSERT INTO "loads" ("id","bookDate","driverName","loadNumber","brokerName","pickUpCityState","dropOffCityState","pickUpAddress","dropOffAddress","payment","loadedMiles","emptyMiles","mileage","dollarPerMile","dieselPrice","fuelCost","driverPay","dispatchFee","lumper","detention","detentionDriverPay","lateFee","toll","roadMaintenance","otherExpenses","profit","commodity","weight","trailer","confirmFilePath","createdAt","updatedAt","brokerId","driverId","truckId") VALUES (DEFAULT,'2018-09-17 00:00:00.000 +00:00','Kelvin','929395','American Logistics Inc.','Batavia, OH','Kenosha, WI','1985 James E. Sauls Sr. Drive, Batavia, OH 45103','10901 38th St, Kenosha, WI 53144',775,391,35,0,0,3.22,0,0,0,0,0,0,0,0,0,0,0,'NA',20404,'Van or Reefer','/home/ubuntu/transmax/server/app/db/brokerConfirmations/090518_reliableSourceLogistics.pdf','2018-09-23 14:12:51.024 +00:00','2018-09-23 14:12:51.024 +00:00',6,1,119) RETURNING *;
+Executing (default): INSERT INTO "loads" ("id","bookDate","driverName","loadNumber","brokerName","pickUpCityState","dropOffCityState","pickUpAddress","dropOffAddress","payment","loadedMiles","emptyMiles","mileage","dollarPerMile","dieselPrice","fuelCost","driverPay","dispatchFee","lumper","detention","detentionDriverPay","lateFee","toll","roadMaintenance","otherExpenses","profit","commodity","weight","trailer","confirmFilePath","createdAt","updatedAt","brokerId","driverId","truckId") VALUES (DEFAULT,'2018-09-18 00:00:00.000 +00:00','Kelvin','41612','Gateway Logistics Inc.','Racine, WI','Cincinnati, OH','9201 Washington Ave, Racine, WI 53406','11755 Lebanon Rd, Cincinnati, OH 45241',1050,375,11,0,0,3.22,0,0,0,0,0,0,0,0,0,0,0,'Light poles & fixtures',35000,'Dry Van','/home/ubuntu/transmax/server/app/db/brokerConfirmations/090518_reliableSourceLogistics.pdf','2018-09-23 14:12:51.025 +00:00','2018-09-23 14:12:51.025 +00:00',7,1,119) RETURNING *;
+Executing (default): INSERT INTO "loads" ("id","bookDate","driverName","loadNumber","brokerName","pickUpCityState","dropOffCityState","pickUpAddress","dropOffAddress","payment","loadedMiles","emptyMiles","mileage","dollarPerMile","dieselPrice","fuelCost","driverPay","dispatchFee","lumper","detention","detentionDriverPay","lateFee","toll","roadMaintenance","otherExpenses","profit","commodity","weight","trailer","confirmFilePath","createdAt","updatedAt","brokerId","driverId","truckId") VALUES (DEFAULT,'2018-09-19 00:00:00.000 +00:00','Kelvin','0198170','Time Definite Services, Inc.','Cincinnati, OH','Manitowoc, WI','1625 Central Pkwy Cincinnati, OH 45214','4402 Custer St, Manitowoc, WI 54220',940,468,12,0,0,3.22,0,0,0,0,0,0,0,0,0,0,0,'NA',29673,'Dry Van','/home/ubuntu/transmax/server/app/db/brokerConfirmations/090518_reliableSourceLogistics.pdf','2018-09-23 14:12:51.025 +00:00','2018-09-23 14:12:51.025 +00:00',8,1,119) RETURNING *;
+Executing (default): INSERT INTO "loads" ("id","bookDate","driverName","loadNumber","brokerName","pickUpCityState","dropOffCityState","pickUpAddress","dropOffAddress","payment","loadedMiles","emptyMiles","mileage","dollarPerMile","dieselPrice","fuelCost","driverPay","dispatchFee","lumper","detention","detentionDriverPay","lateFee","toll","roadMaintenance","otherExpenses","profit","commodity","weight","trailer","confirmFilePath","createdAt","updatedAt","brokerId","driverId","truckId") VALUES (DEFAULT,'2018-09-20 00:00:00.000 +00:00','Kelvin','5058259','Grane Logistics Express','Racine, WI','Huber Heights, OH','1312 North Memorial Drive, Racine, WI 53404','6265 Executive Blvd, Huber Heights, OH 45424',1150,375,160,0,0,3.22,0,0,0,0,0,0,0,0,0,0,0,'NA',4813,'Dry Van','/home/ubuntu/transmax/server/app/db/brokerConfirmations/090518_reliableSourceLogistics.pdf','2018-09-23 14:12:51.025 +00:00','2018-09-23 14:12:51.025 +00:00',9,1,119) RETURNING *;
+Executing (default): INSERT INTO "earnings" ("id","weekNumber","begWeekDate","endWeekDate","weekRange","revenue","fuelCost","milesPaid","driverPay","dispatchFee","toll","docFilePath","createdAt","updatedAt") VALUES (DEFAULT,1,'2018-08-27 00:00:00.000 +00:00','2018-09-02 00:00:00.000 +00:00','08/27/18-09/02/18',600,370.46,292,160.6,60,0,'/home/ubuntu/transmax/server/app/db/brokerConfirmations/083118_Transplace.pdf','2018-09-23 14:12:51.065 +00:00','2018-09-23 14:12:51.065 +00:00') RETURNING *;
+Executing (default): INSERT INTO "earnings" ("id","weekNumber","begWeekDate","endWeekDate","weekRange","revenue","fuelCost","milesPaid","driverPay","dispatchFee","toll","docFilePath","createdAt","updatedAt") VALUES (DEFAULT,2,'2018-09-03 00:00:00.000 +00:00','2018-09-09 00:00:00.000 +00:00','09/03/18-09/09/18',4650,1603.98,1908,1049.4,465,0,'/home/ubuntu/transmax/server/app/db/brokerConfirmations/090518_reliableSourceLogistics.pdf','2018-09-23 14:12:51.065 +00:00','2018-09-23 14:12:51.065 +00:00') RETURNING *;
+Executing (default): INSERT INTO "earnings" ("id","weekNumber","begWeekDate","endWeekDate","weekRange","revenue","fuelCost","milesPaid","driverPay","dispatchFee","toll","docFilePath","createdAt","updatedAt") VALUES (DEFAULT,3,'2018-09-10 00:00:00.000 +00:00','2018-09-16 00:00:00.000 +00:00','09/10/18-09/16/18',2800,809.35,1174,170.7,280,142.8,'/home/ubuntu/transmax/server/app/db/brokerConfirmations/090518_reliableSourceLogistics.pdf','2018-09-23 14:12:51.066 +00:00','2018-09-23 14:12:51.066 +00:00') RETURNING *;
+Sequelize models synced to PostgreSQL
+Server started on port  3000
+R1gt ——> GET /home 
+R1gt <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 10.9 ms)
+me14 ——> GET /static/css/main.a0de00f5.css 
+me14 <—— 304 Not Modified (<—> 1.8 ms)
+IXk6 ——> GET /static/js/main.8e70d07e.js 
+IXk6 <—— 304 Not Modified (<—> 0.7 ms)
+65Bv ——> GET /assets/images/logos/transmax.png 
+65Bv <—— 304 Not Modified (<—> 0.9 ms)
+Jxl0 ——> GET /assets/images/cascadia-parkinglot-960x1280.jpg 
+Jxl0 <—— 304 Not Modified (<—> 0.9 ms)
+A7Ea ——> GET /assets/images/green-coronado-driver-side-960x1280.jpg 
+A7Ea <—— 304 Not Modified (<—> 0.6 ms)
+Zx5t ——> GET /assets/images/cascadia-evo_800x1066.jpg 
+Zx5t <—— 304 Not Modified (<—> 0.7 ms)
+qfPY ——> GET /assets/images/three-truck-parkinglot-750x1000.jpg 
+qfPY <—— 304 Not Modified (<—> 0.6 ms)
+ybwE ——> GET /assets/images/logos/facebook.png 
+AzPD ——> GET /assets/images/logos/instagram.png 
+ybwE <—— 304 Not Modified (<—> 1.1 ms)
+AzPD <—— 304 Not Modified (<—> 1.1 ms)
+ZShE ——> GET /static/js/main.8e70d07e.js.map 
+ZShE <—— 304 Not Modified (<—> 0.7 ms)
+MFmv ——> GET /static/css/main.a0de00f5.css.map 
+MFmv <—— 304 Not Modified (<—> 0.8 ms)
+NmXI ——> GET / 
+NmXI <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 2.7 ms)
+7qKQ ——> GET / 
+7qKQ <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.5 ms)
+BVlk ——> GET /axis-cgi/jpg/image.cgi 
+BVlk <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.6 ms)
+zFB6 ——> GET http://5.188.210.12/echo.php 
+zFB6 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 2.2 ms)
+ZKEl ——> GET / 
+ZKEl <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+NhAq ——> GET /robots.txt 
+NhAq <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+Xgpk ——> GET / 
+Xgpk <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 0.9 ms)
+XDZH ——> GET /static/js/main.8e70d07e.js 
+XDZH <—— 200 OK 769.46 KB application/javascript; charset=UTF-8 (<—> 69.8 ms)
+sJhL ——> GET / 
+sJhL <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+ZorB ——> GET / 
+ZorB <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+Wlwx ——> GET / 
+Wlwx <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.1 ms)
+TKOc ——> GET / 
+TKOc <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+iPd0 ——> GET / 
+iPd0 <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+yftS ——> GET /home 
+yftS <—— 200 OK 865 B text/html; charset=UTF-8 (<—> 1.2 ms)
+5Ke0 ——> GET /static/css/main.a0de00f5.css 
+5Ke0 <—— 200 OK 9.21 KB text/css; charset=UTF-8 (<—> 1.1 ms)
+z8cO ——> GET /static/js/main.8e70d07e.js 
+z8cO <—— 200 OK 769.46 KB application/javascript; charset=UTF-8 (<—> 203.7 ms)
+2tCk ——> GET /assets/images/logos/transmax.png 
+BlBl ——> GET /assets/images/cascadia-parkinglot-960x1280.jpg 
+2tCk <—— 200 OK 28.34 KB image/png (<—> 2.0 ms)
+BlBl <—— 200 OK 110.38 KB image/jpeg (<—> 29.9 ms)
+4TBQ ——> GET /assets/images/green-coronado-driver-side-960x1280.jpg 
+32GZ ——> GET /assets/images/three-truck-parkinglot-750x1000.jpg 
+iti6 ——> GET /assets/images/cascadia-evo_800x1066.jpg 
+K0AJ ——> GET /assets/images/logos/instagram.png 
+AqkU ——> GET /assets/images/logos/facebook.png 
+K0AJ <—— 200 OK 4.73 KB image/png (<—> 4.5 ms)
+AqkU <—— 200 OK 656 B image/png (<—> 4.6 ms)
+4TBQ <—— 200 OK 218.05 KB image/jpeg (<—> 7.7 ms)
+32GZ <—— 200 OK 135.8 KB image/jpeg (<—> 31.2 ms)
+iti6 <—— 200 OK 223.3 KB image/jpeg (<—> 63.1 ms)
+wFnR ——> GET /favicon.ico 
+wFnR <—— 200 OK 31.29 KB image/x-icon (<—> 2.9 ms)
+Opening connection to PostgreSQL: transmaxdb.csrfjhpv3e3t.us-east-1.rds.amazonaws.com pass transmax transmaxuser transmax
+Sun, 23 Sep 2018 21:08:33 GMT sequelize deprecated String based operators are now deprecated. Please use Symbol based operators for better security, read more at http://docs.sequelizejs.com/manual/tutorial/querying.html#operators at node_modules/sequelize/lib/sequelize.js:242:13
+Executing (default): DROP TABLE IF EXISTS "earnings" CASCADE;
+Executing (default): DROP TABLE IF EXISTS "loads" CASCADE;
+Executing (default): DROP TABLE IF EXISTS "brokers" CASCADE;
+Executing (default): DROP TABLE IF EXISTS "trucks" CASCADE;
+Executing (default): DROP TABLE IF EXISTS "companies" CASCADE;
+Executing (default): DROP TABLE IF EXISTS "drivers" CASCADE;
+Executing (default): DROP TABLE IF EXISTS "users" CASCADE;
+Executing (default): DROP TABLE IF EXISTS "candidates" CASCADE;
+Executing (default): DROP TABLE IF EXISTS "candidates" CASCADE;
+Executing (default): CREATE TABLE IF NOT EXISTS "candidates" ("id"   SERIAL , "firstName" VARCHAR(255), "lastName" VARCHAR(255), "email" VARCHAR(255) UNIQUE, "phone" VARCHAR(255), "driversLicense" VARCHAR(255), "experience" VARCHAR(255), "streetAddress" VARCHAR(255), "city" VARCHAR(255), "state" VARCHAR(255), "zipCode" VARCHAR(255), "dob" TIMESTAMP WITH TIME ZONE, "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("id"));
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'candidates' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+Executing (default): DROP TABLE IF EXISTS "users" CASCADE;
+Executing (default): CREATE TABLE IF NOT EXISTS "users" ("id"   SERIAL , "userName" VARCHAR(255) UNIQUE, "password" VARCHAR(255) NOT NULL, "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("id"));
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'users' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+Executing (default): DROP TABLE IF EXISTS "drivers" CASCADE;
+Executing (default): CREATE TABLE IF NOT EXISTS "drivers" ("id"   SERIAL , "driverId" INTEGER NOT NULL UNIQUE, "firstName" VARCHAR(255), "lastName" VARCHAR(255), "ssn" VARCHAR(255) NOT NULL, "driversLicense" VARCHAR(255) NOT NULL, "email" VARCHAR(255) UNIQUE, "phone" VARCHAR(255), "hireDate" VARCHAR(255) NOT NULL, "address" TEXT, "currentRate" DECIMAL, "earnings" DECIMAL, "employedBy" VARCHAR(255), "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("id"));
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'drivers' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+Executing (default): DROP TABLE IF EXISTS "companies" CASCADE;
+Executing (default): CREATE TABLE IF NOT EXISTS "companies" ("id"   SERIAL , "taxId" VARCHAR(255) NOT NULL, "name" VARCHAR(255), "foundedDate" VARCHAR(255), "incorporatedState" VARCHAR(255), "email" VARCHAR(255) UNIQUE, "phone" VARCHAR(255), "address" TEXT, "numberOfTrucks" INTEGER, "numberOfTrailers" INTEGER, "numberOfEmployees" INTEGER, "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("id"));
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'companies' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+Executing (default): DROP TABLE IF EXISTS "trucks" CASCADE;
+Executing (default): CREATE TABLE IF NOT EXISTS "trucks" ("id" INTEGER NOT NULL , "model" VARCHAR(255), "year" VARCHAR(255), "purchaseDate" VARCHAR(255), "purchasePrice" INTEGER, "originalMiles" INTEGER, "maintenanceDate" VARCHAR(255), "maintenanceType" TEXT, "maintenanceCost" INTEGER, "repairDate" VARCHAR(255), "repairType" TEXT, "repairCost" INTEGER, "companyId" INTEGER REFERENCES "companies" ("id") ON DELETE CASCADE ON UPDATE CASCADE, "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("id"));
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'trucks' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+Executing (default): DROP TABLE IF EXISTS "brokers" CASCADE;
+Executing (default): CREATE TABLE IF NOT EXISTS "brokers" ("id"   SERIAL , "brokerId" INTEGER NOT NULL UNIQUE, "name" VARCHAR(255), "email" VARCHAR(255), "phone" VARCHAR(255), "address" TEXT, "bookedLoads" INTEGER, "totalPayment" DECIMAL, "totalLoadedMiles" INTEGER, "avgDollarPerMile" DECIMAL, "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("id"));
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'brokers' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+Executing (default): DROP TABLE IF EXISTS "loads" CASCADE;
+Executing (default): CREATE TABLE IF NOT EXISTS "loads" ("id"   SERIAL , "bookDate" TIMESTAMP WITH TIME ZONE NOT NULL, "driverName" VARCHAR(255), "loadNumber" VARCHAR(255) NOT NULL, "brokerName" VARCHAR(255), "pickUpCityState" TEXT NOT NULL, "dropOffCityState" TEXT NOT NULL, "pickUpAddress" TEXT NOT NULL, "dropOffAddress" TEXT NOT NULL, "payment" DECIMAL NOT NULL, "loadedMiles" INTEGER NOT NULL, "emptyMiles" INTEGER NOT NULL, "mileage" INTEGER, "dollarPerMile" DECIMAL, "dieselPrice" DECIMAL, "fuelCost" DECIMAL, "driverPay" DECIMAL, "dispatchFee" DECIMAL, "lumper" DECIMAL, "detention" DECIMAL, "detentionDriverPay" DECIMAL, "lateFee" DECIMAL, "toll" DECIMAL, "roadMaintenance" DECIMAL, "otherExpenses" DECIMAL, "totalExpenses" DECIMAL, "profit" DECIMAL, "commodity" TEXT, "weight" INTEGER, "trailer" TEXT, "confirmFilePath" VARCHAR(255), "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, "brokerId" INTEGER REFERENCES "brokers" ("id") ON DELETE SET NULL ON UPDATE CASCADE, "driverId" INTEGER REFERENCES "drivers" ("id") ON DELETE SET NULL ON UPDATE CASCADE, "truckId" INTEGER REFERENCES "trucks" ("id") ON DELETE SET NULL ON UPDATE CASCADE, PRIMARY KEY ("id"));
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'loads' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+Executing (default): DROP TABLE IF EXISTS "earnings" CASCADE;
+Executing (default): CREATE TABLE IF NOT EXISTS "earnings" ("id"   SERIAL , "weekNumber" VARCHAR(255), "begWeekDate" TIMESTAMP WITH TIME ZONE, "endWeekDate" TIMESTAMP WITH TIME ZONE, "weekRange" VARCHAR(255), "revenue" DECIMAL, "fuelCost" DECIMAL, "milesPaid" INTEGER, "driverPay" DECIMAL, "dispatchFee" DECIMAL, "toll" DECIMAL, "lumper" DECIMAL, "detention" DECIMAL, "detentionDriverPay" DECIMAL, "lateFee" DECIMAL, "roadMaintenance" DECIMAL, "otherExpense" DECIMAL, "totalExpense" DECIMAL, "profit" DECIMAL, "operatingMargin" DECIMAL, "docFilePath" VARCHAR(255), "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("id"));
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'earnings' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+Beginning seed 
+Executing (default): INSERT INTO "users" ("id","userName","password","createdAt","updatedAt") VALUES (DEFAULT,'apenchev','fa36300440ca7e0baffa3689cc8b6a93','2018-09-23 21:08:34.166 +00:00','2018-09-23 21:08:34.166 +00:00') RETURNING *;
+Executing (default): INSERT INTO "users" ("id","userName","password","createdAt","updatedAt") VALUES (DEFAULT,'akarapeev','9bc7ae9eae3b17ee68eeb1bfb126853f','2018-09-23 21:08:34.167 +00:00','2018-09-23 21:08:34.167 +00:00') RETURNING *;
+Executing (default): INSERT INTO "brokers" ("id","brokerId","name","email","phone","address","bookedLoads","totalPayment","totalLoadedMiles","avgDollarPerMile","createdAt","updatedAt") VALUES (DEFAULT,1,'Transplace','','','',1,600,85,0,'2018-09-23 21:08:34.186 +00:00','2018-09-23 21:08:34.186 +00:00') RETURNING *;
+Executing (default): INSERT INTO "brokers" ("id","brokerId","name","email","phone","address","bookedLoads","totalPayment","totalLoadedMiles","avgDollarPerMile","createdAt","updatedAt") VALUES (DEFAULT,2,'TransportationOne','','','',1,1200,842,0,'2018-09-23 21:08:34.186 +00:00','2018-09-23 21:08:34.186 +00:00') RETURNING *;
+Executing (default): INSERT INTO "brokers" ("id","brokerId","name","email","phone","address","bookedLoads","totalPayment","totalLoadedMiles","avgDollarPerMile","createdAt","updatedAt") VALUES (DEFAULT,3,'Reliable Source Logistics','','','',1,2700,970,0,'2018-09-23 21:08:34.187 +00:00','2018-09-23 21:08:34.187 +00:00') RETURNING *;
+Executing (default): INSERT INTO "brokers" ("id","brokerId","name","email","phone","address","bookedLoads","totalPayment","totalLoadedMiles","avgDollarPerMile","createdAt","updatedAt") VALUES (DEFAULT,4,'Amstan Logistics','','','',1,750,357,0,'2018-09-23 21:08:34.187 +00:00','2018-09-23 21:08:34.187 +00:00') RETURNING *;
+Executing (default): INSERT INTO "brokers" ("id","brokerId","name","email","phone","address","bookedLoads","totalPayment","totalLoadedMiles","avgDollarPerMile","createdAt","updatedAt") VALUES (DEFAULT,5,'Axle Logistics','','','',1,2050,737,0,'2018-09-23 21:08:34.187 +00:00','2018-09-23 21:08:34.187 +00:00') RETURNING *;
+Executing (default): INSERT INTO "brokers" ("id","brokerId","name","email","phone","address","bookedLoads","totalPayment","totalLoadedMiles","avgDollarPerMile","createdAt","updatedAt") VALUES (DEFAULT,6,'American Logistics Inc.','','','',1,775,391,0,'2018-09-23 21:08:34.187 +00:00','2018-09-23 21:08:34.187 +00:00') RETURNING *;
+Executing (default): INSERT INTO "brokers" ("id","brokerId","name","email","phone","address","bookedLoads","totalPayment","totalLoadedMiles","avgDollarPerMile","createdAt","updatedAt") VALUES (DEFAULT,7,'Gateway Logistics Inc.','','','',1,1050,375,0,'2018-09-23 21:08:34.187 +00:00','2018-09-23 21:08:34.187 +00:00') RETURNING *;
+Executing (default): INSERT INTO "brokers" ("id","brokerId","name","email","phone","address","bookedLoads","totalPayment","totalLoadedMiles","avgDollarPerMile","createdAt","updatedAt") VALUES (DEFAULT,8,'Time Definite Services, Inc.','','','',1,940,468,0,'2018-09-23 21:08:34.187 +00:00','2018-09-23 21:08:34.187 +00:00') RETURNING *;
+Executing (default): INSERT INTO "brokers" ("id","brokerId","name","email","phone","address","bookedLoads","totalPayment","totalLoadedMiles","avgDollarPerMile","createdAt","updatedAt") VALUES (DEFAULT,9,'Grane Logistics Express','','','',1,1150,375,0,'2018-09-23 21:08:34.187 +00:00','2018-09-23 21:08:34.187 +00:00') RETURNING *;
+Executing (default): INSERT INTO "drivers" ("id","driverId","firstName","lastName","ssn","driversLicense","email","phone","hireDate","address","currentRate","earnings","employedBy","createdAt","updatedAt") VALUES (DEFAULT,1,'Kelvin','Miller','666-66-6666','123456','kelvin@gmail.com','568-456-7983','05/01/18','','0.55','20000','AIK Transport LLC','2018-09-23 21:08:34.219 +00:00','2018-09-23 21:08:34.219 +00:00') RETURNING *;
+Executing (default): INSERT INTO "drivers" ("id","driverId","firstName","lastName","ssn","driversLicense","email","phone","hireDate","address","currentRate","earnings","employedBy","createdAt","updatedAt") VALUES (DEFAULT,2,'Eric','Strugaria','666-66-1111','654321','eric@gmail.com','568-358-1110','07/15/18','','0.55','12500','AIK Transport LLC','2018-09-23 21:08:34.220 +00:00','2018-09-23 21:08:34.220 +00:00') RETURNING *;
+Executing (default): INSERT INTO "companies" ("id","taxId","name","foundedDate","incorporatedState","email","phone","address","numberOfTrucks","numberOfTrailers","numberOfEmployees","createdAt","updatedAt") VALUES (DEFAULT,'123','AIK Transport LLC','06/01/2013','OH','aiktransport@gmail.com','513-680-5334','3527 Riverwood Ln, Loveland, OH 45140','2','2','3','2018-09-23 21:08:34.230 +00:00','2018-09-23 21:08:34.230 +00:00') RETURNING *;
+Executing (default): INSERT INTO "companies" ("id","taxId","name","foundedDate","incorporatedState","email","phone","address","numberOfTrucks","numberOfTrailers","numberOfEmployees","createdAt","updatedAt") VALUES (DEFAULT,'83-1446378','Transmax LLC','08/01/2018','OH','transmaxfleet@gmail.com','513-680-5334','3527 Riverwood Ln, Loveland, OH 45140','1','1','0','2018-09-23 21:08:34.231 +00:00','2018-09-23 21:08:34.231 +00:00') RETURNING *;
+Executing (default): INSERT INTO "trucks" ("id","model","year","purchaseDate","purchasePrice","originalMiles","maintenanceDate","maintenanceType","maintenanceCost","repairDate","repairType","repairCost","companyId","createdAt","updatedAt") VALUES (117,'Volvo VNL670','2007','06/01/2013',40000,405000,'','',0,'','',0,1,'2018-09-23 21:08:34.237 +00:00','2018-09-23 21:08:34.237 +00:00') RETURNING *;
+Executing (default): INSERT INTO "trucks" ("id","model","year","purchaseDate","purchasePrice","originalMiles","maintenanceDate","maintenanceType","maintenanceCost","repairDate","repairType","repairCost","companyId","createdAt","updatedAt") VALUES (118,'Fraightliner Coronado','2014','11/1/2017',0,0,'','',0,'','',0,1,'2018-09-23 21:08:34.237 +00:00','2018-09-23 21:08:34.237 +00:00') RETURNING *;
+Executing (default): INSERT INTO "trucks" ("id","model","year","purchaseDate","purchasePrice","originalMiles","maintenanceDate","maintenanceType","maintenanceCost","repairDate","repairType","repairCost","companyId","createdAt","updatedAt") VALUES (119,'Fraightliner Cascadia','2015','8/30/2018',67500,350000,'','',0,'','',0,2,'2018-09-23 21:08:34.237 +00:00','2018-09-23 21:08:34.237 +00:00') RETURNING *;
+Sequelize models synced before LOADS
+Executing (default): INSERT INTO "loads" ("id","bookDate","driverName","loadNumber","brokerName","pickUpCityState","dropOffCityState","pickUpAddress","dropOffAddress","payment","loadedMiles","emptyMiles","mileage","dollarPerMile","dieselPrice","fuelCost","driverPay","dispatchFee","lumper","detention","detentionDriverPay","lateFee","toll","roadMaintenance","otherExpenses","profit","commodity","weight","trailer","confirmFilePath","createdAt","updatedAt","brokerId","driverId","truckId") VALUES (DEFAULT,'2018-08-31 00:00:00.000 +00:00','Kelvin','0277377','Transplace','Columbus, IN','Louisville, KY','4411 N Long Rd, Columbus, IN 47203','2000 Nelson Miller Pkwy, Louisville, KY 40223',600,85,207,0,0,3.22,0,160.6,0,0,0,0,0,0,0,0,0,'NA',38738,'Dry Van','/home/ubuntu/transmax/server/app/db/brokerConfirmations/083118_Transplace.pdf','2018-09-23 21:08:34.250 +00:00','2018-09-23 21:08:34.250 +00:00',1,1,119) RETURNING *;
+Executing (default): INSERT INTO "loads" ("id","bookDate","driverName","loadNumber","brokerName","pickUpCityState","dropOffCityState","pickUpAddress","dropOffAddress","payment","loadedMiles","emptyMiles","mileage","dollarPerMile","dieselPrice","fuelCost","driverPay","dispatchFee","lumper","detention","detentionDriverPay","lateFee","toll","roadMaintenance","otherExpenses","profit","commodity","weight","trailer","confirmFilePath","createdAt","updatedAt","brokerId","driverId","truckId") VALUES (DEFAULT,'2018-09-05 00:00:00.000 +00:00','Kelvin','0012104','Reliable Source Logistics','Orestes, IN','Concord, NH','120 W Oak St, Orestes, IN 46063','Concord, NH 03301',2700,970,136,0,0,3.22,0,0,0,0,0,0,0,0,0,0,0,'Canned Foods',42120,'Van or Reefer','/home/ubuntu/transmax/server/app/db/brokerConfirmations/090518_reliableSourceLogistics.pdf','2018-09-23 21:08:34.250 +00:00','2018-09-23 21:08:34.250 +00:00',2,1,119) RETURNING *;
+Executing (default): INSERT INTO "loads" ("id","bookDate","driverName","loadNumber","brokerName","pickUpCityState","dropOffCityState","pickUpAddress","dropOffAddress","payment","loadedMiles","emptyMiles","mileage","dollarPerMile","dieselPrice","fuelCost","driverPay","dispatchFee","lumper","detention","detentionDriverPay","lateFee","toll","roadMaintenance","otherExpenses","profit","commodity","weight","trailer","confirmFilePath","createdAt","updatedAt","brokerId","driverId","truckId") VALUES (DEFAULT,'2018-09-07 00:00:00.000 +00:00','Kelvin','99810','Transportation One','Rutland, VT','Cincinnati, OH','92 Park Street, Rutland, VT 05701','535 Shepherd Ave, Cincinnati, OH 45215',1200,842,105,0,0,3.22,0,0,0,0,0,0,0,0,0,0,0,'Crackers FSC',12680,'53V','/home/ubuntu/transmax/server/app/db/brokerConfirmations/090718_transportationOne.pdf','2018-09-23 21:08:34.251 +00:00','2018-09-23 21:08:34.251 +00:00',3,1,119) RETURNING *;
+Executing (default): INSERT INTO "loads" ("id","bookDate","driverName","loadNumber","brokerName","pickUpCityState","dropOffCityState","pickUpAddress","dropOffAddress","payment","loadedMiles","emptyMiles","mileage","dollarPerMile","dieselPrice","fuelCost","driverPay","dispatchFee","lumper","detention","detentionDriverPay","lateFee","toll","roadMaintenance","otherExpenses","profit","commodity","weight","trailer","confirmFilePath","createdAt","updatedAt","brokerId","driverId","truckId") VALUES (DEFAULT,'2018-09-10 00:00:00.000 +00:00','Kelvin','AMLO260554LN','Amstan Logistics','Fairfield, OH','Pleasant Prairie, WI','4255 Thunderbird Lane, Fairfield, OH 45014','13305 104th St, Pleasant Prairie, WI 53158',750,357,5,0,0,3.22,0,0,0,0,0,0,0,0,0,0,0,'NA',30687,'53V/R','/home/ubuntu/transmax/server/app/db/brokerConfirmations/090718_transportationOne.pdf','2018-09-23 21:08:34.251 +00:00','2018-09-23 21:08:34.251 +00:00',4,1,119) RETURNING *;
+Executing (default): INSERT INTO "loads" ("id","bookDate","driverName","loadNumber","brokerName","pickUpCityState","dropOffCityState","pickUpAddress","dropOffAddress","payment","loadedMiles","emptyMiles","mileage","dollarPerMile","dieselPrice","fuelCost","driverPay","dispatchFee","lumper","detention","detentionDriverPay","lateFee","toll","roadMaintenance","otherExpenses","profit","commodity","weight","trailer","confirmFilePath","createdAt","updatedAt","brokerId","driverId","truckId") VALUES (DEFAULT,'2018-09-11 00:00:00.000 +00:00','Kelvin','0123724','Axle Logistics','Aurora, IL','Taylor, PA','800 Bilter Rd, Aurora, IL 60502','22 Stauffer Industrial Park, Taylor, PA 18517',2050,737,72,0,0,3.22,0,0,0,0,0,0,0,0,0,0,0,'Packaging Materials',20000,'Van or Reefer','/home/ubuntu/transmax/server/app/db/brokerConfirmations/090718_transportationOne.pdf','2018-09-23 21:08:34.251 +00:00','2018-09-23 21:08:34.251 +00:00',5,1,119) RETURNING *;
+Executing (default): INSERT INTO "loads" ("id","bookDate","driverName","loadNumber","brokerName","pickUpCityState","dropOffCityState","pickUpAddress","dropOffAddress","payment","loadedMiles","emptyMiles","mileage","dollarPerMile","dieselPrice","fuelCost","driverPay","dispatchFee","lumper","detention","detentionDriverPay","lateFee","toll","roadMaintenance","otherExpenses","profit","commodity","weight","trailer","confirmFilePath","createdAt","updatedAt","brokerId","driverId","truckId") VALUES (DEFAULT,'2018-09-17 00:00:00.000 +00:00','Kelvin','929395','American Logistics Inc.','Batavia, OH','Kenosha, WI','1985 James E. Sauls Sr. Drive, Batavia, OH 45103','10901 38th St, Kenosha, WI 53144',775,391,35,0,0,3.22,0,0,0,0,0,0,0,0,0,0,0,'NA',20404,'Van or Reefer','/home/ubuntu/transmax/server/app/db/brokerConfirmations/090518_reliableSourceLogistics.pdf','2018-09-23 21:08:34.252 +00:00','2018-09-23 21:08:34.252 +00:00',6,1,119) RETURNING *;
+Executing (default): INSERT INTO "loads" ("id","bookDate","driverName","loadNumber","brokerName","pickUpCityState","dropOffCityState","pickUpAddress","dropOffAddress","payment","loadedMiles","emptyMiles","mileage","dollarPerMile","dieselPrice","fuelCost","driverPay","dispatchFee","lumper","detention","detentionDriverPay","lateFee","toll","roadMaintenance","otherExpenses","profit","commodity","weight","trailer","confirmFilePath","createdAt","updatedAt","brokerId","driverId","truckId") VALUES (DEFAULT,'2018-09-18 00:00:00.000 +00:00','Kelvin','41612','Gateway Logistics Inc.','Racine, WI','Cincinnati, OH','9201 Washington Ave, Racine, WI 53406','11755 Lebanon Rd, Cincinnati, OH 45241',1050,375,11,0,0,3.22,0,0,0,0,0,0,0,0,0,0,0,'Light poles & fixtures',35000,'Dry Van','/home/ubuntu/transmax/server/app/db/brokerConfirmations/090518_reliableSourceLogistics.pdf','2018-09-23 21:08:34.252 +00:00','2018-09-23 21:08:34.252 +00:00',7,1,119) RETURNING *;
+Executing (default): INSERT INTO "loads" ("id","bookDate","driverName","loadNumber","brokerName","pickUpCityState","dropOffCityState","pickUpAddress","dropOffAddress","payment","loadedMiles","emptyMiles","mileage","dollarPerMile","dieselPrice","fuelCost","driverPay","dispatchFee","lumper","detention","detentionDriverPay","lateFee","toll","roadMaintenance","otherExpenses","profit","commodity","weight","trailer","confirmFilePath","createdAt","updatedAt","brokerId","driverId","truckId") VALUES (DEFAULT,'2018-09-19 00:00:00.000 +00:00','Kelvin','0198170','Time Definite Services, Inc.','Cincinnati, OH','Manitowoc, WI','1625 Central Pkwy Cincinnati, OH 45214','4402 Custer St, Manitowoc, WI 54220',940,468,12,0,0,3.22,0,0,0,0,0,0,0,0,0,0,0,'NA',29673,'Dry Van','/home/ubuntu/transmax/server/app/db/brokerConfirmations/090518_reliableSourceLogistics.pdf','2018-09-23 21:08:34.252 +00:00','2018-09-23 21:08:34.252 +00:00',8,1,119) RETURNING *;
+Executing (default): INSERT INTO "loads" ("id","bookDate","driverName","loadNumber","brokerName","pickUpCityState","dropOffCityState","pickUpAddress","dropOffAddress","payment","loadedMiles","emptyMiles","mileage","dollarPerMile","dieselPrice","fuelCost","driverPay","dispatchFee","lumper","detention","detentionDriverPay","lateFee","toll","roadMaintenance","otherExpenses","profit","commodity","weight","trailer","confirmFilePath","createdAt","updatedAt","brokerId","driverId","truckId") VALUES (DEFAULT,'2018-09-20 00:00:00.000 +00:00','Kelvin','5058259','Grane Logistics Express','Racine, WI','Huber Heights, OH','1312 North Memorial Drive, Racine, WI 53404','6265 Executive Blvd, Huber Heights, OH 45424',1150,375,160,0,0,3.22,0,0,0,0,0,0,0,0,0,0,0,'NA',4813,'Dry Van','/home/ubuntu/transmax/server/app/db/brokerConfirmations/090518_reliableSourceLogistics.pdf','2018-09-23 21:08:34.252 +00:00','2018-09-23 21:08:34.252 +00:00',9,1,119) RETURNING *;
+Executing (default): INSERT INTO "earnings" ("id","weekNumber","begWeekDate","endWeekDate","weekRange","revenue","fuelCost","milesPaid","driverPay","dispatchFee","toll","docFilePath","createdAt","updatedAt") VALUES (DEFAULT,1,'2018-08-27 00:00:00.000 +00:00','2018-09-02 00:00:00.000 +00:00','08/27/18-09/02/18',600,370.46,292,160.6,60,0,'/home/ubuntu/transmax/server/app/db/brokerConfirmations/083118_Transplace.pdf','2018-09-23 21:08:34.291 +00:00','2018-09-23 21:08:34.291 +00:00') RETURNING *;
+Executing (default): INSERT INTO "earnings" ("id","weekNumber","begWeekDate","endWeekDate","weekRange","revenue","fuelCost","milesPaid","driverPay","dispatchFee","toll","docFilePath","createdAt","updatedAt") VALUES (DEFAULT,2,'2018-09-03 00:00:00.000 +00:00','2018-09-09 00:00:00.000 +00:00','09/03/18-09/09/18',4650,1603.98,1908,1049.4,465,0,'/home/ubuntu/transmax/server/app/db/brokerConfirmations/090518_reliableSourceLogistics.pdf','2018-09-23 21:08:34.292 +00:00','2018-09-23 21:08:34.292 +00:00') RETURNING *;
+Executing (default): INSERT INTO "earnings" ("id","weekNumber","begWeekDate","endWeekDate","weekRange","revenue","fuelCost","milesPaid","driverPay","dispatchFee","toll","docFilePath","createdAt","updatedAt") VALUES (DEFAULT,3,'2018-09-10 00:00:00.000 +00:00','2018-09-16 00:00:00.000 +00:00','09/10/18-09/16/18',2800,809.35,1174,170.7,280,142.8,'/home/ubuntu/transmax/server/app/db/brokerConfirmations/090518_reliableSourceLogistics.pdf','2018-09-23 21:08:34.292 +00:00','2018-09-23 21:08:34.292 +00:00') RETURNING *;
+Sequelize models synced to PostgreSQL
+Server started on port  3000
+Server started on port  8443
+Ch6d ——> GET / 
+Ch6d <—— 302 Found 40 B text/plain; charset=utf-8 (<—> 7.2 ms)
+gyXt ——> GET / 
+gyXt <—— 304 Not Modified (<—> 2.6 ms)
+RUSd ——> GET /static/css/main.a0de00f5.css 
+RUSd <—— 304 Not Modified (<—> 1.4 ms)
+iGjx ——> GET /static/js/main.8e70d07e.js 
+iGjx <—— 304 Not Modified (<—> 0.7 ms)
+Lg1Z ——> GET /static/css/main.a0de00f5.css.map 
+Lg1Z <—— 200 OK 12.38 KB application/json; charset=UTF-8 (<—> 5.3 ms)
+FTeK ——> GET /assets/images/logos/transmax.png 
+FTeK <—— 304 Not Modified (<—> 0.9 ms)
+ysKd ——> GET /assets/images/cascadia-parkinglot-960x1280.jpg 
+ysKd <—— 304 Not Modified (<—> 0.7 ms)
+2dUx ——> GET /assets/images/green-coronado-driver-side-960x1280.jpg 
+2dUx <—— 304 Not Modified (<—> 0.7 ms)
+d3GE ——> GET /assets/images/cascadia-evo_800x1066.jpg 
+d3GE <—— 304 Not Modified (<—> 1.2 ms)
+hETo ——> GET /assets/images/three-truck-parkinglot-750x1000.jpg 
+hETo <—— 304 Not Modified (<—> 0.7 ms)
+s9IM ——> GET /assets/images/logos/instagram.png 
+N6Je ——> GET /assets/images/logos/facebook.png 
+s9IM <—— 304 Not Modified (<—> 1.4 ms)
+N6Je <—— 304 Not Modified (<—> 1.2 ms)
+rGcc ——> GET /static/js/main.8e70d07e.js.map 
+rGcc <—— 200 OK 5.42 MB application/json; charset=UTF-8 (<—> 622.8 ms)
+16g9 ——> GET / 
+16g9 <—— 302 Found 96 B text/html; charset=utf-8 (<—> 3.3 ms)
+C0HX ——> GET / 
+C0HX <—— 304 Not Modified (<—> 0.8 ms)
+4QUb ——> GET /static/css/main.a0de00f5.css 
+4QUb <—— 304 Not Modified (<—> 1.0 ms)
+GFC0 ——> GET /static/js/main.8e70d07e.js 
+GFC0 <—— 304 Not Modified (<—> 0.7 ms)
+pnmA ——> GET /assets/images/logos/transmax.png 
+pnmA <—— 304 Not Modified (<—> 0.9 ms)
+mIsA ——> GET /assets/images/cascadia-parkinglot-960x1280.jpg 
+mIsA <—— 304 Not Modified (<—> 0.9 ms)
+Cm0K ——> GET /assets/images/green-coronado-driver-side-960x1280.jpg 
+Cm0K <—— 304 Not Modified (<—> 0.7 ms)
+RjRJ ——> GET /assets/images/cascadia-evo_800x1066.jpg 
+RjRJ <—— 304 Not Modified (<—> 0.7 ms)
+dNbH ——> GET /assets/images/three-truck-parkinglot-750x1000.jpg 
+dNbH <—— 304 Not Modified (<—> 0.7 ms)
+vEYb ——> GET /assets/images/logos/facebook.png 
+vEYb <—— 304 Not Modified (<—> 0.7 ms)
+VW8g ——> GET /assets/images/logos/instagram.png 
+VW8g <—— 304 Not Modified (<—> 0.8 ms)
+XreS ——> GET /static/js/main.8e70d07e.js.map 
+XreS <—— 304 Not Modified (<—> 0.9 ms)
+tL7f ——> GET /static/css/main.a0de00f5.css.map 
+tL7f <—— 304 Not Modified (<—> 0.9 ms)
+3RWt ——> GET / 
+3RWt <—— 302 Found 46 B text/plain; charset=utf-8 (<—> 1.8 ms)
+Opening connection to PostgreSQL: transmaxdb.csrfjhpv3e3t.us-east-1.rds.amazonaws.com pass transmax transmaxuser transmax
+Sun, 23 Sep 2018 22:05:14 GMT sequelize deprecated String based operators are now deprecated. Please use Symbol based operators for better security, read more at http://docs.sequelizejs.com/manual/tutorial/querying.html#operators at node_modules/sequelize/lib/sequelize.js:242:13
+Executing (default): DROP TABLE IF EXISTS "earnings" CASCADE;
+Executing (default): DROP TABLE IF EXISTS "loads" CASCADE;
+Executing (default): DROP TABLE IF EXISTS "brokers" CASCADE;
+Executing (default): DROP TABLE IF EXISTS "trucks" CASCADE;
+Executing (default): DROP TABLE IF EXISTS "companies" CASCADE;
+Executing (default): DROP TABLE IF EXISTS "drivers" CASCADE;
+Executing (default): DROP TABLE IF EXISTS "users" CASCADE;
+Executing (default): DROP TABLE IF EXISTS "candidates" CASCADE;
+Executing (default): DROP TABLE IF EXISTS "candidates" CASCADE;
+Executing (default): CREATE TABLE IF NOT EXISTS "candidates" ("id"   SERIAL , "firstName" VARCHAR(255), "lastName" VARCHAR(255), "email" VARCHAR(255) UNIQUE, "phone" VARCHAR(255), "driversLicense" VARCHAR(255), "experience" VARCHAR(255), "streetAddress" VARCHAR(255), "city" VARCHAR(255), "state" VARCHAR(255), "zipCode" VARCHAR(255), "dob" TIMESTAMP WITH TIME ZONE, "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("id"));
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'candidates' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+Executing (default): DROP TABLE IF EXISTS "users" CASCADE;
+Executing (default): CREATE TABLE IF NOT EXISTS "users" ("id"   SERIAL , "userName" VARCHAR(255) UNIQUE, "password" VARCHAR(255) NOT NULL, "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("id"));
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'users' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+Executing (default): DROP TABLE IF EXISTS "drivers" CASCADE;
+Executing (default): CREATE TABLE IF NOT EXISTS "drivers" ("id"   SERIAL , "driverId" INTEGER NOT NULL UNIQUE, "firstName" VARCHAR(255), "lastName" VARCHAR(255), "ssn" VARCHAR(255) NOT NULL, "driversLicense" VARCHAR(255) NOT NULL, "email" VARCHAR(255) UNIQUE, "phone" VARCHAR(255), "hireDate" VARCHAR(255) NOT NULL, "address" TEXT, "currentRate" DECIMAL, "earnings" DECIMAL, "employedBy" VARCHAR(255), "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("id"));
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'drivers' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+Executing (default): DROP TABLE IF EXISTS "companies" CASCADE;
+Executing (default): CREATE TABLE IF NOT EXISTS "companies" ("id"   SERIAL , "taxId" VARCHAR(255) NOT NULL, "name" VARCHAR(255), "foundedDate" VARCHAR(255), "incorporatedState" VARCHAR(255), "email" VARCHAR(255) UNIQUE, "phone" VARCHAR(255), "address" TEXT, "numberOfTrucks" INTEGER, "numberOfTrailers" INTEGER, "numberOfEmployees" INTEGER, "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("id"));
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'companies' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+Executing (default): DROP TABLE IF EXISTS "trucks" CASCADE;
+Executing (default): CREATE TABLE IF NOT EXISTS "trucks" ("id" INTEGER NOT NULL , "model" VARCHAR(255), "year" VARCHAR(255), "purchaseDate" VARCHAR(255), "purchasePrice" INTEGER, "originalMiles" INTEGER, "maintenanceDate" VARCHAR(255), "maintenanceType" TEXT, "maintenanceCost" INTEGER, "repairDate" VARCHAR(255), "repairType" TEXT, "repairCost" INTEGER, "companyId" INTEGER REFERENCES "companies" ("id") ON DELETE CASCADE ON UPDATE CASCADE, "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("id"));
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'trucks' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+Executing (default): DROP TABLE IF EXISTS "brokers" CASCADE;
+Executing (default): CREATE TABLE IF NOT EXISTS "brokers" ("id"   SERIAL , "brokerId" INTEGER NOT NULL UNIQUE, "name" VARCHAR(255), "email" VARCHAR(255), "phone" VARCHAR(255), "address" TEXT, "bookedLoads" INTEGER, "totalPayment" DECIMAL, "totalLoadedMiles" INTEGER, "avgDollarPerMile" DECIMAL, "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("id"));
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'brokers' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+Executing (default): DROP TABLE IF EXISTS "loads" CASCADE;
+Executing (default): CREATE TABLE IF NOT EXISTS "loads" ("id"   SERIAL , "bookDate" TIMESTAMP WITH TIME ZONE NOT NULL, "driverName" VARCHAR(255), "loadNumber" VARCHAR(255) NOT NULL, "brokerName" VARCHAR(255), "pickUpCityState" TEXT NOT NULL, "dropOffCityState" TEXT NOT NULL, "pickUpAddress" TEXT NOT NULL, "dropOffAddress" TEXT NOT NULL, "payment" DECIMAL NOT NULL, "loadedMiles" INTEGER NOT NULL, "emptyMiles" INTEGER NOT NULL, "mileage" INTEGER, "dollarPerMile" DECIMAL, "dieselPrice" DECIMAL, "fuelCost" DECIMAL, "driverPay" DECIMAL, "dispatchFee" DECIMAL, "lumper" DECIMAL, "detention" DECIMAL, "detentionDriverPay" DECIMAL, "lateFee" DECIMAL, "toll" DECIMAL, "roadMaintenance" DECIMAL, "otherExpenses" DECIMAL, "totalExpenses" DECIMAL, "profit" DECIMAL, "commodity" TEXT, "weight" INTEGER, "trailer" TEXT, "confirmFilePath" VARCHAR(255), "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, "brokerId" INTEGER REFERENCES "brokers" ("id") ON DELETE SET NULL ON UPDATE CASCADE, "driverId" INTEGER REFERENCES "drivers" ("id") ON DELETE SET NULL ON UPDATE CASCADE, "truckId" INTEGER REFERENCES "trucks" ("id") ON DELETE SET NULL ON UPDATE CASCADE, PRIMARY KEY ("id"));
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'loads' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+Executing (default): DROP TABLE IF EXISTS "earnings" CASCADE;
+Executing (default): CREATE TABLE IF NOT EXISTS "earnings" ("id"   SERIAL , "weekNumber" VARCHAR(255), "begWeekDate" TIMESTAMP WITH TIME ZONE, "endWeekDate" TIMESTAMP WITH TIME ZONE, "weekRange" VARCHAR(255), "revenue" DECIMAL, "fuelCost" DECIMAL, "milesPaid" INTEGER, "driverPay" DECIMAL, "dispatchFee" DECIMAL, "toll" DECIMAL, "lumper" DECIMAL, "detention" DECIMAL, "detentionDriverPay" DECIMAL, "lateFee" DECIMAL, "roadMaintenance" DECIMAL, "otherExpense" DECIMAL, "totalExpense" DECIMAL, "profit" DECIMAL, "operatingMargin" DECIMAL, "docFilePath" VARCHAR(255), "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("id"));
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'earnings' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+Beginning seed 
+Executing (default): INSERT INTO "users" ("id","userName","password","createdAt","updatedAt") VALUES (DEFAULT,'apenchev','fa36300440ca7e0baffa3689cc8b6a93','2018-09-23 22:05:15.330 +00:00','2018-09-23 22:05:15.330 +00:00') RETURNING *;
+Executing (default): INSERT INTO "users" ("id","userName","password","createdAt","updatedAt") VALUES (DEFAULT,'akarapeev','9bc7ae9eae3b17ee68eeb1bfb126853f','2018-09-23 22:05:15.331 +00:00','2018-09-23 22:05:15.331 +00:00') RETURNING *;
+Executing (default): INSERT INTO "brokers" ("id","brokerId","name","email","phone","address","bookedLoads","totalPayment","totalLoadedMiles","avgDollarPerMile","createdAt","updatedAt") VALUES (DEFAULT,1,'Transplace','','','',1,600,85,0,'2018-09-23 22:05:15.347 +00:00','2018-09-23 22:05:15.347 +00:00') RETURNING *;
+Executing (default): INSERT INTO "brokers" ("id","brokerId","name","email","phone","address","bookedLoads","totalPayment","totalLoadedMiles","avgDollarPerMile","createdAt","updatedAt") VALUES (DEFAULT,2,'TransportationOne','','','',1,1200,842,0,'2018-09-23 22:05:15.347 +00:00','2018-09-23 22:05:15.347 +00:00') RETURNING *;
+Executing (default): INSERT INTO "brokers" ("id","brokerId","name","email","phone","address","bookedLoads","totalPayment","totalLoadedMiles","avgDollarPerMile","createdAt","updatedAt") VALUES (DEFAULT,3,'Reliable Source Logistics','','','',1,2700,970,0,'2018-09-23 22:05:15.348 +00:00','2018-09-23 22:05:15.348 +00:00') RETURNING *;
+Executing (default): INSERT INTO "brokers" ("id","brokerId","name","email","phone","address","bookedLoads","totalPayment","totalLoadedMiles","avgDollarPerMile","createdAt","updatedAt") VALUES (DEFAULT,4,'Amstan Logistics','','','',1,750,357,0,'2018-09-23 22:05:15.348 +00:00','2018-09-23 22:05:15.348 +00:00') RETURNING *;
+Executing (default): INSERT INTO "brokers" ("id","brokerId","name","email","phone","address","bookedLoads","totalPayment","totalLoadedMiles","avgDollarPerMile","createdAt","updatedAt") VALUES (DEFAULT,5,'Axle Logistics','','','',1,2050,737,0,'2018-09-23 22:05:15.348 +00:00','2018-09-23 22:05:15.348 +00:00') RETURNING *;
+Executing (default): INSERT INTO "brokers" ("id","brokerId","name","email","phone","address","bookedLoads","totalPayment","totalLoadedMiles","avgDollarPerMile","createdAt","updatedAt") VALUES (DEFAULT,6,'American Logistics Inc.','','','',1,775,391,0,'2018-09-23 22:05:15.348 +00:00','2018-09-23 22:05:15.348 +00:00') RETURNING *;
+Executing (default): INSERT INTO "brokers" ("id","brokerId","name","email","phone","address","bookedLoads","totalPayment","totalLoadedMiles","avgDollarPerMile","createdAt","updatedAt") VALUES (DEFAULT,7,'Gateway Logistics Inc.','','','',1,1050,375,0,'2018-09-23 22:05:15.348 +00:00','2018-09-23 22:05:15.348 +00:00') RETURNING *;
+Executing (default): INSERT INTO "brokers" ("id","brokerId","name","email","phone","address","bookedLoads","totalPayment","totalLoadedMiles","avgDollarPerMile","createdAt","updatedAt") VALUES (DEFAULT,8,'Time Definite Services, Inc.','','','',1,940,468,0,'2018-09-23 22:05:15.348 +00:00','2018-09-23 22:05:15.348 +00:00') RETURNING *;
+Executing (default): INSERT INTO "brokers" ("id","brokerId","name","email","phone","address","bookedLoads","totalPayment","totalLoadedMiles","avgDollarPerMile","createdAt","updatedAt") VALUES (DEFAULT,9,'Grane Logistics Express','','','',1,1150,375,0,'2018-09-23 22:05:15.348 +00:00','2018-09-23 22:05:15.348 +00:00') RETURNING *;
+Executing (default): INSERT INTO "drivers" ("id","driverId","firstName","lastName","ssn","driversLicense","email","phone","hireDate","address","currentRate","earnings","employedBy","createdAt","updatedAt") VALUES (DEFAULT,1,'Kelvin','Miller','666-66-6666','123456','kelvin@gmail.com','568-456-7983','05/01/18','','0.55','20000','AIK Transport LLC','2018-09-23 22:05:15.378 +00:00','2018-09-23 22:05:15.378 +00:00') RETURNING *;
+Executing (default): INSERT INTO "drivers" ("id","driverId","firstName","lastName","ssn","driversLicense","email","phone","hireDate","address","currentRate","earnings","employedBy","createdAt","updatedAt") VALUES (DEFAULT,2,'Eric','Strugaria','666-66-1111','654321','eric@gmail.com','568-358-1110','07/15/18','','0.55','12500','AIK Transport LLC','2018-09-23 22:05:15.378 +00:00','2018-09-23 22:05:15.378 +00:00') RETURNING *;
+Executing (default): INSERT INTO "companies" ("id","taxId","name","foundedDate","incorporatedState","email","phone","address","numberOfTrucks","numberOfTrailers","numberOfEmployees","createdAt","updatedAt") VALUES (DEFAULT,'123','AIK Transport LLC','06/01/2013','OH','aiktransport@gmail.com','513-680-5334','3527 Riverwood Ln, Loveland, OH 45140','2','2','3','2018-09-23 22:05:15.386 +00:00','2018-09-23 22:05:15.386 +00:00') RETURNING *;
+Executing (default): INSERT INTO "companies" ("id","taxId","name","foundedDate","incorporatedState","email","phone","address","numberOfTrucks","numberOfTrailers","numberOfEmployees","createdAt","updatedAt") VALUES (DEFAULT,'83-1446378','Transmax LLC','08/01/2018','OH','transmaxfleet@gmail.com','513-680-5334','3527 Riverwood Ln, Loveland, OH 45140','1','1','0','2018-09-23 22:05:15.386 +00:00','2018-09-23 22:05:15.386 +00:00') RETURNING *;
+Executing (default): INSERT INTO "trucks" ("id","model","year","purchaseDate","purchasePrice","originalMiles","maintenanceDate","maintenanceType","maintenanceCost","repairDate","repairType","repairCost","companyId","createdAt","updatedAt") VALUES (117,'Volvo VNL670','2007','06/01/2013',40000,405000,'','',0,'','',0,1,'2018-09-23 22:05:15.393 +00:00','2018-09-23 22:05:15.393 +00:00') RETURNING *;
+Executing (default): INSERT INTO "trucks" ("id","model","year","purchaseDate","purchasePrice","originalMiles","maintenanceDate","maintenanceType","maintenanceCost","repairDate","repairType","repairCost","companyId","createdAt","updatedAt") VALUES (118,'Fraightliner Coronado','2014','11/1/2017',0,0,'','',0,'','',0,1,'2018-09-23 22:05:15.393 +00:00','2018-09-23 22:05:15.393 +00:00') RETURNING *;
+Executing (default): INSERT INTO "trucks" ("id","model","year","purchaseDate","purchasePrice","originalMiles","maintenanceDate","maintenanceType","maintenanceCost","repairDate","repairType","repairCost","companyId","createdAt","updatedAt") VALUES (119,'Fraightliner Cascadia','2015','8/30/2018',67500,350000,'','',0,'','',0,2,'2018-09-23 22:05:15.394 +00:00','2018-09-23 22:05:15.394 +00:00') RETURNING *;
+Sequelize models synced before LOADS
+Executing (default): INSERT INTO "loads" ("id","bookDate","driverName","loadNumber","brokerName","pickUpCityState","dropOffCityState","pickUpAddress","dropOffAddress","payment","loadedMiles","emptyMiles","mileage","dollarPerMile","dieselPrice","fuelCost","driverPay","dispatchFee","lumper","detention","detentionDriverPay","lateFee","toll","roadMaintenance","otherExpenses","profit","commodity","weight","trailer","confirmFilePath","createdAt","updatedAt","brokerId","driverId","truckId") VALUES (DEFAULT,'2018-08-31 00:00:00.000 +00:00','Kelvin','0277377','Transplace','Columbus, IN','Louisville, KY','4411 N Long Rd, Columbus, IN 47203','2000 Nelson Miller Pkwy, Louisville, KY 40223',600,85,207,0,0,3.22,0,160.6,0,0,0,0,0,0,0,0,0,'NA',38738,'Dry Van','/home/ubuntu/transmax/server/app/db/brokerConfirmations/083118_Transplace.pdf','2018-09-23 22:05:15.406 +00:00','2018-09-23 22:05:15.406 +00:00',1,1,119) RETURNING *;
+Executing (default): INSERT INTO "loads" ("id","bookDate","driverName","loadNumber","brokerName","pickUpCityState","dropOffCityState","pickUpAddress","dropOffAddress","payment","loadedMiles","emptyMiles","mileage","dollarPerMile","dieselPrice","fuelCost","driverPay","dispatchFee","lumper","detention","detentionDriverPay","lateFee","toll","roadMaintenance","otherExpenses","profit","commodity","weight","trailer","confirmFilePath","createdAt","updatedAt","brokerId","driverId","truckId") VALUES (DEFAULT,'2018-09-05 00:00:00.000 +00:00','Kelvin','0012104','Reliable Source Logistics','Orestes, IN','Concord, NH','120 W Oak St, Orestes, IN 46063','Concord, NH 03301',2700,970,136,0,0,3.22,0,0,0,0,0,0,0,0,0,0,0,'Canned Foods',42120,'Van or Reefer','/home/ubuntu/transmax/server/app/db/brokerConfirmations/090518_reliableSourceLogistics.pdf','2018-09-23 22:05:15.407 +00:00','2018-09-23 22:05:15.407 +00:00',2,1,119) RETURNING *;
+Executing (default): INSERT INTO "loads" ("id","bookDate","driverName","loadNumber","brokerName","pickUpCityState","dropOffCityState","pickUpAddress","dropOffAddress","payment","loadedMiles","emptyMiles","mileage","dollarPerMile","dieselPrice","fuelCost","driverPay","dispatchFee","lumper","detention","detentionDriverPay","lateFee","toll","roadMaintenance","otherExpenses","profit","commodity","weight","trailer","confirmFilePath","createdAt","updatedAt","brokerId","driverId","truckId") VALUES (DEFAULT,'2018-09-07 00:00:00.000 +00:00','Kelvin','99810','Transportation One','Rutland, VT','Cincinnati, OH','92 Park Street, Rutland, VT 05701','535 Shepherd Ave, Cincinnati, OH 45215',1200,842,105,0,0,3.22,0,0,0,0,0,0,0,0,0,0,0,'Crackers FSC',12680,'53V','/home/ubuntu/transmax/server/app/db/brokerConfirmations/090718_transportationOne.pdf','2018-09-23 22:05:15.407 +00:00','2018-09-23 22:05:15.407 +00:00',3,1,119) RETURNING *;
+Executing (default): INSERT INTO "loads" ("id","bookDate","driverName","loadNumber","brokerName","pickUpCityState","dropOffCityState","pickUpAddress","dropOffAddress","payment","loadedMiles","emptyMiles","mileage","dollarPerMile","dieselPrice","fuelCost","driverPay","dispatchFee","lumper","detention","detentionDriverPay","lateFee","toll","roadMaintenance","otherExpenses","profit","commodity","weight","trailer","confirmFilePath","createdAt","updatedAt","brokerId","driverId","truckId") VALUES (DEFAULT,'2018-09-10 00:00:00.000 +00:00','Kelvin','AMLO260554LN','Amstan Logistics','Fairfield, OH','Pleasant Prairie, WI','4255 Thunderbird Lane, Fairfield, OH 45014','13305 104th St, Pleasant Prairie, WI 53158',750,357,5,0,0,3.22,0,0,0,0,0,0,0,0,0,0,0,'NA',30687,'53V/R','/home/ubuntu/transmax/server/app/db/brokerConfirmations/090718_transportationOne.pdf','2018-09-23 22:05:15.412 +00:00','2018-09-23 22:05:15.412 +00:00',4,1,119) RETURNING *;
+Executing (default): INSERT INTO "loads" ("id","bookDate","driverName","loadNumber","brokerName","pickUpCityState","dropOffCityState","pickUpAddress","dropOffAddress","payment","loadedMiles","emptyMiles","mileage","dollarPerMile","dieselPrice","fuelCost","driverPay","dispatchFee","lumper","detention","detentionDriverPay","lateFee","toll","roadMaintenance","otherExpenses","profit","commodity","weight","trailer","confirmFilePath","createdAt","updatedAt","brokerId","driverId","truckId") VALUES (DEFAULT,'2018-09-11 00:00:00.000 +00:00','Kelvin','0123724','Axle Logistics','Aurora, IL','Taylor, PA','800 Bilter Rd, Aurora, IL 60502','22 Stauffer Industrial Park, Taylor, PA 18517',2050,737,72,0,0,3.22,0,0,0,0,0,0,0,0,0,0,0,'Packaging Materials',20000,'Van or Reefer','/home/ubuntu/transmax/server/app/db/brokerConfirmations/090718_transportationOne.pdf','2018-09-23 22:05:15.412 +00:00','2018-09-23 22:05:15.412 +00:00',5,1,119) RETURNING *;
+Executing (default): INSERT INTO "loads" ("id","bookDate","driverName","loadNumber","brokerName","pickUpCityState","dropOffCityState","pickUpAddress","dropOffAddress","payment","loadedMiles","emptyMiles","mileage","dollarPerMile","dieselPrice","fuelCost","driverPay","dispatchFee","lumper","detention","detentionDriverPay","lateFee","toll","roadMaintenance","otherExpenses","profit","commodity","weight","trailer","confirmFilePath","createdAt","updatedAt","brokerId","driverId","truckId") VALUES (DEFAULT,'2018-09-17 00:00:00.000 +00:00','Kelvin','929395','American Logistics Inc.','Batavia, OH','Kenosha, WI','1985 James E. Sauls Sr. Drive, Batavia, OH 45103','10901 38th St, Kenosha, WI 53144',775,391,35,0,0,3.22,0,0,0,0,0,0,0,0,0,0,0,'NA',20404,'Van or Reefer','/home/ubuntu/transmax/server/app/db/brokerConfirmations/090518_reliableSourceLogistics.pdf','2018-09-23 22:05:15.412 +00:00','2018-09-23 22:05:15.412 +00:00',6,1,119) RETURNING *;
+Executing (default): INSERT INTO "loads" ("id","bookDate","driverName","loadNumber","brokerName","pickUpCityState","dropOffCityState","pickUpAddress","dropOffAddress","payment","loadedMiles","emptyMiles","mileage","dollarPerMile","dieselPrice","fuelCost","driverPay","dispatchFee","lumper","detention","detentionDriverPay","lateFee","toll","roadMaintenance","otherExpenses","profit","commodity","weight","trailer","confirmFilePath","createdAt","updatedAt","brokerId","driverId","truckId") VALUES (DEFAULT,'2018-09-18 00:00:00.000 +00:00','Kelvin','41612','Gateway Logistics Inc.','Racine, WI','Cincinnati, OH','9201 Washington Ave, Racine, WI 53406','11755 Lebanon Rd, Cincinnati, OH 45241',1050,375,11,0,0,3.22,0,0,0,0,0,0,0,0,0,0,0,'Light poles & fixtures',35000,'Dry Van','/home/ubuntu/transmax/server/app/db/brokerConfirmations/090518_reliableSourceLogistics.pdf','2018-09-23 22:05:15.413 +00:00','2018-09-23 22:05:15.413 +00:00',7,1,119) RETURNING *;
+Executing (default): INSERT INTO "loads" ("id","bookDate","driverName","loadNumber","brokerName","pickUpCityState","dropOffCityState","pickUpAddress","dropOffAddress","payment","loadedMiles","emptyMiles","mileage","dollarPerMile","dieselPrice","fuelCost","driverPay","dispatchFee","lumper","detention","detentionDriverPay","lateFee","toll","roadMaintenance","otherExpenses","profit","commodity","weight","trailer","confirmFilePath","createdAt","updatedAt","brokerId","driverId","truckId") VALUES (DEFAULT,'2018-09-19 00:00:00.000 +00:00','Kelvin','0198170','Time Definite Services, Inc.','Cincinnati, OH','Manitowoc, WI','1625 Central Pkwy Cincinnati, OH 45214','4402 Custer St, Manitowoc, WI 54220',940,468,12,0,0,3.22,0,0,0,0,0,0,0,0,0,0,0,'NA',29673,'Dry Van','/home/ubuntu/transmax/server/app/db/brokerConfirmations/090518_reliableSourceLogistics.pdf','2018-09-23 22:05:15.413 +00:00','2018-09-23 22:05:15.413 +00:00',8,1,119) RETURNING *;
+Executing (default): INSERT INTO "loads" ("id","bookDate","driverName","loadNumber","brokerName","pickUpCityState","dropOffCityState","pickUpAddress","dropOffAddress","payment","loadedMiles","emptyMiles","mileage","dollarPerMile","dieselPrice","fuelCost","driverPay","dispatchFee","lumper","detention","detentionDriverPay","lateFee","toll","roadMaintenance","otherExpenses","profit","commodity","weight","trailer","confirmFilePath","createdAt","updatedAt","brokerId","driverId","truckId") VALUES (DEFAULT,'2018-09-20 00:00:00.000 +00:00','Kelvin','5058259','Grane Logistics Express','Racine, WI','Huber Heights, OH','1312 North Memorial Drive, Racine, WI 53404','6265 Executive Blvd, Huber Heights, OH 45424',1150,375,160,0,0,3.22,0,0,0,0,0,0,0,0,0,0,0,'NA',4813,'Dry Van','/home/ubuntu/transmax/server/app/db/brokerConfirmations/090518_reliableSourceLogistics.pdf','2018-09-23 22:05:15.413 +00:00','2018-09-23 22:05:15.413 +00:00',9,1,119) RETURNING *;
+Executing (default): INSERT INTO "earnings" ("id","weekNumber","begWeekDate","endWeekDate","weekRange","revenue","fuelCost","milesPaid","driverPay","dispatchFee","toll","docFilePath","createdAt","updatedAt") VALUES (DEFAULT,1,'2018-08-27 00:00:00.000 +00:00','2018-09-02 00:00:00.000 +00:00','08/27/18-09/02/18',600,370.46,292,160.6,60,0,'/home/ubuntu/transmax/server/app/db/brokerConfirmations/083118_Transplace.pdf','2018-09-23 22:05:15.462 +00:00','2018-09-23 22:05:15.462 +00:00') RETURNING *;
+Executing (default): INSERT INTO "earnings" ("id","weekNumber","begWeekDate","endWeekDate","weekRange","revenue","fuelCost","milesPaid","driverPay","dispatchFee","toll","docFilePath","createdAt","updatedAt") VALUES (DEFAULT,2,'2018-09-03 00:00:00.000 +00:00','2018-09-09 00:00:00.000 +00:00','09/03/18-09/09/18',4650,1603.98,1908,1049.4,465,0,'/home/ubuntu/transmax/server/app/db/brokerConfirmations/090518_reliableSourceLogistics.pdf','2018-09-23 22:05:15.462 +00:00','2018-09-23 22:05:15.462 +00:00') RETURNING *;
+Executing (default): INSERT INTO "earnings" ("id","weekNumber","begWeekDate","endWeekDate","weekRange","revenue","fuelCost","milesPaid","driverPay","dispatchFee","toll","docFilePath","createdAt","updatedAt") VALUES (DEFAULT,3,'2018-09-10 00:00:00.000 +00:00','2018-09-16 00:00:00.000 +00:00','09/10/18-09/16/18',2800,809.35,1174,170.7,280,142.8,'/home/ubuntu/transmax/server/app/db/brokerConfirmations/090518_reliableSourceLogistics.pdf','2018-09-23 22:05:15.462 +00:00','2018-09-23 22:05:15.462 +00:00') RETURNING *;
+Sequelize models synced to PostgreSQL
+Server started on port  3000
+buie ——> GET / 
+buie <—— 302 Found 96 B text/html; charset=utf-8 (<—> 9.7 ms)
