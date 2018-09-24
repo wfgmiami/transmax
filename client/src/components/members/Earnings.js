@@ -162,16 +162,18 @@ class Earnings extends Component {
   calculateTotal({ data, column }) {
     // console.log("....data",data, "column", column);
     let dollarSign = false;
-    const earningsCount = data.length;
+    const weekCount = data.length;
     let value;
 
     const total = data.reduce((memo, earnings) => {
-      // console.log("....info", earnings,column.id, earnings[column.id]);
+      // console.log("calculateTotal ", weekCount, earnings,column,column.id, earnings[column.id]);
       if (typeof earnings[column.id] === "object") {
         value = earnings[column.id].props.dangerouslySetInnerHTML.__html;
         if (typeof value === "string" && value.substring(0, 1) === "$") {
           dollarSign = true;
           value = value.slice(1);
+        } else if (value.substring(value.length - 1) === "%") {
+          value = value.slice(0, value.length - 1);
         }
         memo += Number(value);
       } else {
@@ -185,10 +187,16 @@ class Earnings extends Component {
       return memo;
     }, 0);
 
-    if (dollarSign || column.id === "earnings") {
+    if (
+      dollarSign ||
+      (column.id !== "milesPaid" && column.id !== "weekNumber")
+    ) {
+      if (column.id === "margin") {
+        return Number((total / weekCount).toFixed(2)).toLocaleString() + "%";
+      }
       return "$" + Number(total.toFixed(0)).toLocaleString();
-    } else if (column.id === "firstName") {
-      return `Total Earnings: ${earningsCount}`;
+    } else if (column.id === "weekNumber") {
+      return `Weeks: ${weekCount}`;
     }
 
     return Number(Number(total).toFixed(0)).toLocaleString();
@@ -225,6 +233,7 @@ class Earnings extends Component {
     return [
       {
         Header: "Week",
+        Footer: this.calculateTotal,
         accessor: "weekNumber",
         show: true,
         className: "columnBorder",
@@ -340,7 +349,6 @@ class Earnings extends Component {
         show: true,
         className: "columnBorder",
         accessor: d => {
-
           let totalExpenses =
             Number(d.fuelCost) +
             Number(d.driverPay) +
@@ -375,16 +383,16 @@ class Earnings extends Component {
             revenue = parseFloat(revenue.replace(/,/g, ""));
 
           let totalExpenses =
-              Number(d.fuelCost) +
-              Number(d.driverPay) +
-              Number(d.dispatchFee) +
-              Number(d.lumper) +
-              Number(d.detention) +
-              Number(d.detentionDriverPay) +
-              Number(d.lateFee) +
-              Number(d.toll) +
-              Number(d.roadMaintenance) +
-              Number(d.otherExpense);
+            Number(d.fuelCost) +
+            Number(d.driverPay) +
+            Number(d.dispatchFee) +
+            Number(d.lumper) +
+            Number(d.detention) +
+            Number(d.detentionDriverPay) +
+            Number(d.lateFee) +
+            Number(d.toll) +
+            Number(d.roadMaintenance) +
+            Number(d.otherExpense);
 
           let profit = revenue - totalExpenses;
 

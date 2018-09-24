@@ -12,7 +12,12 @@ const EarningsSeed = [
     driverPay: 160.6,
     fuelCost: 370.46,
     toll: 0,
+    lumper: 0,
+    detention: 0,
     detentionDriverPay: 0,
+    lateFee: 0,
+    roadMaintenance: 0,
+    otherExpense: 0,
     docFilePath: path.join(
       __dirname,
       "/brokerConfirmations/083118_Transplace.pdf"
@@ -29,7 +34,12 @@ const EarningsSeed = [
     driverPay: 1049.40,
     fuelCost: 1028.98,
     toll: 0,
+    lumper: 0,
+    detention: 0,
     detentionDriverPay: 0,
+    lateFee: 0,
+    roadMaintenance: 0,
+    otherExpense: 0,
     docFilePath: path.join(
       __dirname,
       "/brokerConfirmations/090518_reliableSourceLogistics.pdf"
@@ -46,7 +56,12 @@ const EarningsSeed = [
     driverPay: 170.7,
     fuelCost: 809.35,
     toll: 142.8,
+    lumper: 0,
+    detention: 0,
     detentionDriverPay: 0,
+    lateFee: 0,
+    roadMaintenance: 0,
+    otherExpense: 0,
     docFilePath: path.join(
       __dirname,
       "/brokerConfirmations/090518_reliableSourceLogistics.pdf"
@@ -63,7 +78,12 @@ const EarningsSeed = [
     driverPay: 1056,
     fuelCost: 0,
     toll: 0,
+    lumper: 0,
+    detention: 0,
     detentionDriverPay: 10,
+    lateFee: 0,
+    roadMaintenance: 0,
+    otherExpense: 0,
     docFilePath: path.join(
       __dirname,
       "/brokerConfirmations/090518_reliableSourceLogistics.pdf"
