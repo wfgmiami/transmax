@@ -12,6 +12,7 @@ const EarningsSeed = [
     driverPay: 160.6,
     fuelCost: 370.46,
     toll: 0,
+    detentionDriverPay: 0,
     docFilePath: path.join(
       __dirname,
       "/brokerConfirmations/083118_Transplace.pdf"
@@ -22,12 +23,13 @@ const EarningsSeed = [
     begWeekDate: "09/03/18",
     endWeekDate: "09/09/18",
     weekRange: "09/03/18-09/09/18",
-    revenue: 4650,
-    dispatchFee: 465,
+    revenue: 3900,
+    dispatchFee: 390,
     milesPaid: 1908,
     driverPay: 1049.40,
-    fuelCost: 1603.98,
+    fuelCost: 1028.98,
     toll: 0,
+    detentionDriverPay: 0,
     docFilePath: path.join(
       __dirname,
       "/brokerConfirmations/090518_reliableSourceLogistics.pdf"
@@ -44,6 +46,24 @@ const EarningsSeed = [
     driverPay: 170.7,
     fuelCost: 809.35,
     toll: 142.8,
+    detentionDriverPay: 0,
+    docFilePath: path.join(
+      __dirname,
+      "/brokerConfirmations/090518_reliableSourceLogistics.pdf"
+    )
+  },
+  {
+    weekNumber: 4,
+    begWeekDate: "09/17/18",
+    endWeekDate: "09/23/18",
+    weekRange: "09/17/18-09/23/18",
+    revenue: 4500,
+    dispatchFee: 450,
+    milesPaid: 1920,
+    driverPay: 1056,
+    fuelCost: 0,
+    toll: 0,
+    detentionDriverPay: 10,
     docFilePath: path.join(
       __dirname,
       "/brokerConfirmations/090518_reliableSourceLogistics.pdf"

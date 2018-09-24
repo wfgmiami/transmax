@@ -17,6 +17,7 @@
 .env.test.local
 .env.production.local
 prod.env
+dev.env
 Procfile
 nohup.out
 

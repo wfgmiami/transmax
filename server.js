@@ -34,7 +34,7 @@ const createApplication = () => {
 
 const startServer = () => {
 
-	const httpPORT = process.env.HTTPPORT || 3000;
+	const httpPORT = process.env.HTTPPORT || 5000;
 	httpServer.createServer(app).listen(httpPORT, () => {
         console.log(chalk.blue('Server started on port ', chalk.magenta(httpPORT)));
     });

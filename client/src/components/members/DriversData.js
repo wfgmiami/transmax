@@ -146,7 +146,7 @@ class DriversData extends Component {
   }
 
   saveRows() {
-    console.log("DriversData.js saveRows this.props", this.props);
+    // console.log("DriversData.js saveRows this.props", this.props);
     this.props.saveDriver(this.props.driver);
   }
 
@@ -194,7 +194,7 @@ class DriversData extends Component {
   onColumnUpdate(index) {
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();
-    console.log("onColumnUpdate index ", index, "...", columns[index]);
+    // console.log("onColumnUpdate index ", index, "...", columns[index]);
     this.setState(
       prevState => {
         const columns1 = [];
@@ -217,7 +217,7 @@ class DriversData extends Component {
   }
 
   createColumns() {
-    console.log("ShipmentsData.js createColumns this.props: ", this.props);
+    // console.log("ShipmentsData.js createColumns this.props: ", this.props);
 
     return [
       {

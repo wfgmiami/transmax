@@ -8,7 +8,7 @@ const DATABASE_PASSWORD = require(path.join(__dirname, '../../env')).DATABASE_PA
 const DATABASE_USERNAME = require(path.join(__dirname, '../../env')).DATABASE_USERNAME;
 
 
-console.log(chalk.yellow('Opening connection to PostgreSQL:', DATABASE_HOST, 'pass', DATABASE_PASSWORD, DATABASE_USERNAME, DATABASE_NAME));
+// console.log(chalk.yellow('Opening connection to PostgreSQL:', DATABASE_HOST, 'pass', DATABASE_PASSWORD, DATABASE_USERNAME, DATABASE_NAME));
 // create the database instance
 
 module.exports = new Sequelize(DATABASE_NAME, DATABASE_USERNAME, DATABASE_PASSWORD, {
