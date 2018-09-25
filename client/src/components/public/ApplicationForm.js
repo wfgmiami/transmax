@@ -60,8 +60,48 @@ class ApplicationForm extends Component {
     errorMsg =
       validationObj.dob === "Invalid birthdate" ? "Invalid birthdate" : null;
 
-    if (requiredViolation !== -1)
-      errorMsg = validationArray[requiredViolation] + " is a required field";
+    if (requiredViolation !== -1) {
+      let field = "";
+      switch (validationArray[requiredViolation]) {
+        case "firstName":
+          field = "First Name";
+          break;
+        case "lastName":
+          field = "Last Name";
+          break;
+        case "phone":
+          field = "Phone";
+          break;
+        case "streetAddress":
+          field = "Street Address";
+          break;
+        case "city":
+          field = "City";
+          break;
+        case "state":
+          field = "State";
+          break;
+        case "zipCode":
+          field = "Zip Code";
+          break;
+        case "driversLicense":
+          field = "Drivers Licence";
+          break;
+        case "dob":
+          field = "Date of birth";
+          break;
+        case "ssn":
+          field = "Social Security Number";
+          break;
+        case "experience":
+          field = "Experience";
+          break;
+        default:
+          field = "";
+      }
+      // errorMsg = validationArray[requiredViolation] + " is a required field";
+      errorMsg = field + " is a required field";
+    }
 
     if (!errorMsg) {
       // this.props.onCreate(candidate);
@@ -190,7 +230,22 @@ class ApplicationForm extends Component {
               />
             )}
           </InputMask>
-
+          <InputMask
+            mask="999-99-9999"
+            maskChar="_"
+            value={candidate.ssn}
+            onChange={this.handleChange("ssn")}
+          >
+            {() => (
+              <TextField
+                id="ssn"
+                label="Social Security Number"
+                className={classes.textField}
+                margin="normal"
+                type="text"
+              />
+            )}
+          </InputMask>
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="experience-simple">Experience</InputLabel>
             <Select

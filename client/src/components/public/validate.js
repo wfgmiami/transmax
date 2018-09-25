@@ -11,6 +11,7 @@ const validateCandidate = values => {
     "zipCode",
     "driversLicense",
     "dob",
+    "ssn",
     "experience"
   ];
   const phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;

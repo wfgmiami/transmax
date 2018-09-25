@@ -496,4 +496,65 @@ const EarningsData = [
   },
 
 ];
-export { Datatable, EmptyRow, ShipmentsData, Driver, Truck, Firm, Broker, EarningsData };
+
+
+const FixedCost = [
+  {
+    costName: "Truck Loan Payment",
+    costValue: 1750
+  },
+  {
+    costName: "Trailer Loan Payment",
+    costValue: 255
+  },
+  {
+    costName: "Liability Insurance",
+    costValue: 785
+  },
+  {
+    costName: "Property Insurance",
+    costValue: 350
+  },
+  {
+    costName: "Truck IRP Registration",
+    costValue: 825
+  },
+  {
+    costName: "Trailer IRP Registration",
+    costValue: 325
+  },
+  {
+    costName: "Highway Tax",
+    costValue: 415
+  },
+  {
+    costName: "ELD Monthly Fee",
+    costValue: 15
+  },
+  {
+    costName: "GPS Tracking",
+    costValue: 10
+  },
+  {
+    costName: "Parking",
+    costValue: 75
+  },
+  {
+    costName: "Load Board Fee",
+    costValue: 35
+  },
+  {
+    costName: "Maintenance Truck",
+    costValue: 0
+  },
+  {
+    costName: "Maintenance Trailer",
+    costValue: 0
+  },
+  {
+    costName: "Tires",
+    costValue: 0
+  }
+];
+
+export { Datatable, EmptyRow, ShipmentsData, Driver, Truck, Firm, Broker, EarningsData, FixedCost };

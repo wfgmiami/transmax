@@ -98,6 +98,28 @@ const BrokersData = [
     totalLoadedMiles: 375,
     avgDollarPerMile: 0
   },
+  {
+    brokerId: 10,
+    name: "XPO Logistics",
+    address: "",
+    phone: "",
+    email: "",
+    bookedLoads: 1,
+    totalPayment: 2350,
+    totalLoadedMiles: 820,
+    avgDollarPerMile: 0
+  },
+  {
+    brokerId: 11,
+    name: "PLS Logistics Services",
+    address: "",
+    phone: "",
+    email: "",
+    bookedLoads: 1,
+    totalPayment: 1150,
+    totalLoadedMiles: 800,
+    avgDollarPerMile: 0
+  },
 ];
 
 

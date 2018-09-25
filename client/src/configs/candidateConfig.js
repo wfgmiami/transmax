@@ -11,5 +11,6 @@ export const candidateConfig =
     driversLicense: "",
     experience: "",
     dob: "",
+    ssn: "",
     applicationSuccess: ""
   }
