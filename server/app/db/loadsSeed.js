@@ -204,7 +204,7 @@ const LoadsData = [
     dropOffCityState: "Kenosha, WI",
     pickUpAddress: "1985 James E. Sauls Sr. Drive, Batavia, OH 45103",
     dropOffAddress: "10901 38th St, Kenosha, WI 53144",
-    payment: 775,
+    payment: 1000,
     loadedMiles: 391,
     emptyMiles: 35,
     mileage: 0,
