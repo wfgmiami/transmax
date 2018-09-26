@@ -15,6 +15,9 @@ import SideMenu from "./SideMenu";
 import Inputs from "./Inputs";
 import ActionBtn from "./ActionBtn";
 import DateFilter from "./DateFilter";
+import CustomPagination from "./CustomPagination.js";
+import { exportTableToCSV } from "./export.js";
+import { exportTableToJSON } from "./export.js";
 
 import * as loadActions from "../../store/actions/load";
 
@@ -50,11 +53,27 @@ class TripsData extends Component {
     this.onColumnUpdate = this.onColumnUpdate.bind(this);
     this.createColumns = this.createColumns.bind(this);
     this.calculateTotal = this.calculateTotal.bind(this);
+    this.handleDownload = this.handleDownload.bind(this);
+    this.handleDownloadToJson = this.handleDownloadToJson.bind(this);
   }
 
   componentDidMount() {
     // console.log("TripsData componentDidMount ");
     this.props.getTrip();
+  }
+  
+  handleDownload() {
+    const data = this.reactTable.getResolvedState().sortedData;
+    const columns = this.createColumns();
+    // console.log("handle download ", data, columns);
+    exportTableToCSV(data, columns, "data.csv");
+    //console.log(data);
+  }
+  handleDownloadToJson() {
+    // console.log("test json", this);
+    const data = this.reactTable.getResolvedState().sortedData;
+    exportTableToJSON(data, this.state.columns, "data.json");
+    //console.log(data[0]._original);
   }
 
   getConfirmDoc(docLink) {
@@ -732,8 +751,12 @@ class TripsData extends Component {
         </Toolbar>
 
         <ReactTable
+          ref={r => (this.reactTable = r)}
           data={trip}
           showPaginationBottom={true}
+          handleDownloadToJson={this.handleDownloadToJson}
+          handleDownload={this.handleDownload}
+          PaginationComponent={CustomPagination}
           columns={columns}
           defaultPageSize={10}
           style={
