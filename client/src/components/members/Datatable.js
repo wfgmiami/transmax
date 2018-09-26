@@ -501,35 +501,39 @@ const EarningsData = [
 const FixedCost = [
   {
     costName: "Truck Loan Payment",
-    costValue: 1750
+    costValue: 1781.1
   },
   {
     costName: "Trailer Loan Payment",
-    costValue: 255
+    costValue: 255.12
   },
   {
-    costName: "Liability Insurance",
-    costValue: 785
+    costName: "Liability Ins",
+    costValue: 754
   },
   {
-    costName: "Property Insurance",
-    costValue: 350
+    costName: "Physical Damage & NTL Ins Truck",
+    costValue: 238.53
+  },
+  {
+    costName: "Collision & Comprehen Ins Trailer",
+    costValue: 98.63
   },
   {
     costName: "Truck IRP Registration",
-    costValue: 825
+    costValue: 137.55
   },
   {
     costName: "Trailer IRP Registration",
-    costValue: 325
+    costValue: 6.53
   },
   {
     costName: "Highway Tax",
-    costValue: 415
+    costValue: 38.19
   },
   {
     costName: "ELD Monthly Fee",
-    costValue: 15
+    costValue: 14.95
   },
   {
     costName: "GPS Tracking",
