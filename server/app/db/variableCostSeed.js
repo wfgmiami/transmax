@@ -1,22 +1,22 @@
 const VariableCostSeed = [
   {
-    costName: "Driver",
+    costName: "Driver Pay",
     dollarPerMile: 0.55,
   },
   {
-    costName: "Diesel",
+    costName: "Diesel Cost",
     dollarPerMile: 0.54,
   },
   {
-    costName: "DEF",
+    costName: "DEF Cost",
     dollarPerMile: 0.05,
   },
   {
-    costName: "OilChange",
+    costName: "Oil Change",
     dollarPerMile: 0.02,
   },
   {
-    costName: "TiresChange",
+    costName: "Tires Change",
     dollarPerMile: 0.08,
   },
 
