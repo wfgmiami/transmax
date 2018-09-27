@@ -8,7 +8,7 @@ const CostAssumptionSeed = [
   {
     costName: "DEF",
     defDollarPerGallon: 2.7,
-    defPerGalDiesel: 0.125
+    defConsumptionRate: 0.03
   },
   {
     costName: "OilChange",

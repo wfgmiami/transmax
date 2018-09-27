@@ -31,8 +31,8 @@ class Inputs extends React.Component {
     originalInputs: {}
   };
 
-  componentDidMount(){
-    this.setState({ originalInputs: this.props.inputVariable })
+  componentDidMount() {
+    this.setState({ originalInputs: this.props.inputVariable });
   }
 
   handleChange = key => ({ target: { value } }) => {
@@ -45,8 +45,8 @@ class Inputs extends React.Component {
 
   handleCloseCancel = () => {
     this.setState({ open: false });
-    this.props.setInputVariableValue(this.state.originalInputs)
-  }
+    this.props.setInputVariableValue(this.state.originalInputs);
+  };
 
   handleCloseOK = () => {
     this.setState({ open: false });
@@ -77,9 +77,18 @@ class Inputs extends React.Component {
           open={this.state.open}
           onClose={this.handleClose}
         >
-          <DialogTitle>TRIP INPUTS</DialogTitle>
+          <DialogTitle>VARIABLE COST INPUTS</DialogTitle>
           <DialogContent>
             <form className={classes.container}>
+              <TextField
+                id="dieselPrice"
+                label="Diesel Price"
+                className={classes.textField}
+                value={inputVariable.mpg}
+                onChange={this.handleChange("dieselppg")}
+                margin="normal"
+              />
+              &nbsp;
               <TextField
                 id="mpg"
                 label="MPG"
@@ -88,6 +97,70 @@ class Inputs extends React.Component {
                 onChange={this.handleChange("mpg")}
                 margin="normal"
               />
+              &nbsp;
+              <TextField
+                id="defPrice"
+                label="DEF Price"
+                className={classes.textField}
+                value={inputVariable.mpg}
+                onChange={this.handleChange("defppg")}
+                margin="normal"
+              />
+              &nbsp;
+              <TextField
+                id="defConsumptionRate"
+                label="DEF % Diesel Burned"
+                className={classes.textField}
+                value={inputVariable.dispatchPercent}
+                onChange={this.handleChange("defConsumptionRate")}
+                margin="normal"
+              />
+              &nbsp;
+              <TextField
+                id="oilChangeMiles"
+                label="Oil Change Miles"
+                className={classes.textField}
+                value={inputVariable.dispatchPercent}
+                onChange={this.handleChange("oilChangeMiles")}
+                margin="normal"
+              />
+              &nbsp;
+              <TextField
+                id="oilChangeCost"
+                label="Oil Change Cost"
+                className={classes.textField}
+                value={inputVariable.dispatchPercent}
+                onChange={this.handleChange("oilChangeCost")}
+                margin="normal"
+              />
+              &nbsp;
+              <TextField
+                id="tiresChangeMiles"
+                label="Tires Change Miles"
+                className={classes.textField}
+                value={inputVariable.dispatchPercent}
+                onChange={this.handleChange("tiresChangeMiles")}
+                margin="normal"
+              />
+              &nbsp;
+              <TextField
+                id="truckTiresChangeCost"
+                label="Truck Tires Change Cost"
+                className={classes.textField}
+                value={inputVariable.dispatchPercent}
+                onChange={this.handleChange("truckTiresChangeCost")}
+                margin="normal"
+              />
+              &nbsp;
+              <TextField
+                id="trailerTiresChangeCost"
+                label="Trailer Tires Change Cost"
+                className={classes.textField}
+                value={inputVariable.dispatchPercent}
+                onChange={this.handleChange("trailerTiresChangeCost")}
+                margin="normal"
+              />
+              &nbsp;
               <TextField
                 id="dispatchFee"
                 label="Dispatch"
@@ -98,6 +171,7 @@ class Inputs extends React.Component {
               />
             </form>
           </DialogContent>
+
           <DialogActions>
             <Button onClick={this.handleCloseCancel} color="primary">
               Cancel

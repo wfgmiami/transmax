@@ -1,6 +1,7 @@
 import * as Actions from "../../actions/index";
+import { costAssumptionConfig } from "../../../configs/costAssumptionConfig";
 
-const initialState = { mpg: "6", dispatchPercent: "0.1" };
+const initialState = costAssumptionConfig;
 
 const inputVariable = (state = initialState, action) => {
   switch (action.type) {
@@ -14,7 +15,7 @@ const inputVariable = (state = initialState, action) => {
       };
     }
     case Actions.SET_INPUT_VARIABLE_VALUE: {
-      // console.log("input var reducer action ", action);
+      // console.log("inputVariable reducer action ", action);
       return {
         ...state,
         ...action.value
