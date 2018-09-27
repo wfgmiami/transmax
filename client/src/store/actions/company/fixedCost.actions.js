@@ -7,20 +7,20 @@ export const UPDATE_FIXED_COST = "UPDATE FIXED_COST";
 export const SAVE_FIXED_COST = "SAVE FIXED_COST";
 
 export function getFixedCost() {
-  return dispatch =>
-    dispatch({
-      type: GET_FIXED_COST,
-      payload: FixedCost
-    });
-  // const getFixedCost = axios.get("/api/fixedcost");
-
   // return dispatch =>
-  //   getFixedCost.then(response =>
-  //     dispatch({
-  //       type: GET_FIXED_COST,
-  //       payload: response.data
-  //     })
-  //   );
+  //   dispatch({
+  //     type: GET_FIXED_COST,
+  //     payload: FixedCost
+  //   });
+  const getFixedCost = axios.get("/api/fixedcost");
+
+  return dispatch =>
+    getFixedCost.then(response =>
+      dispatch({
+        type: GET_FIXED_COST,
+        payload: response.data
+      })
+    );
 }
 
 export function setFixedCost(fixedCost) {

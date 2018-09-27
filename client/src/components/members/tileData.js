@@ -12,6 +12,7 @@ import Financials from "@material-ui/icons/AccountBalance";
 import Logout from "@material-ui/icons/NetworkLocked";
 import Functions from "@material-ui/icons/Functions";
 import FixedCost from "@material-ui/icons/AccountBalanceWallet";
+import VariableCost from "@material-ui/icons/CompareArrows";
 
 export const viewItems = (
   <div>
@@ -26,12 +27,6 @@ export const viewItems = (
         <Functions />
       </ListItemIcon>
       <ListItemText primary="Earnings" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <StarIcon />
-      </ListItemIcon>
-      <ListItemText primary="Shipments" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
@@ -61,6 +56,12 @@ export const otherViewItems = (
         <Drivers />
       </ListItemIcon>
       <ListItemText primary="Drivers" />
+    </ListItem>
+    <ListItem button>
+      <ListItemIcon>
+        <VariableCost />
+      </ListItemIcon>
+      <ListItemText primary="Variable Cost" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>

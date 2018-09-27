@@ -1,7 +1,8 @@
 export const fixedCostConfig = [
     {
       costName: "",
-      costValue: 0
+      monthlyAmount: "",
+      yearlyAmount: 0
     }
   ];
-  
+

@@ -1,64 +1,90 @@
 const FixedCostSeed = [
   {
     costName: "Truck Loan Payment",
-    costValue: 1781.1
+    monthlyAmount: 1781.1,
+    yearlyAmount: 21373.2
   },
   {
     costName: "Trailer Loan Payment",
-    costValue: 255.12
+    monthlyAmount: 255.12,
+    yearlyAmount: 3061.44
   },
   {
-    costName: "Liability Ins",
-    costValue: 754
+    costName: "Liability Insurance",
+    monthlyAmount: 754,
+    yearlyAmount: 9048
   },
   {
     costName: "Physical Damage & NTL Ins Truck",
-    costValue: 238.53
+    monthlyAmount: 238.53,
+    yearlyAmount: 2862.36
   },
   {
     costName: "Collision & Comprehen Ins Trailer",
-    costValue: 98.63
+    monthlyAmount: 98.63,
+    yearlyAmount: 1183.56
   },
   {
     costName: "Truck IRP Registration",
-    costValue: 137.55
+    monthlyAmount: 137.55,
+    yearlyAmount: 1650.6
   },
   {
     costName: "Trailer IRP Registration",
-    costValue: 6.53
+    monthlyAmount: 6.53,
+    yearlyAmount: 78.36
   },
   {
     costName: "Highway Tax",
-    costValue: 38.19
+    monthlyAmount: 38.19,
+    yearlyAmount: 458.28
+  },
+  {
+    costName: "DOT Inspection(truck&trailer)",
+    monthlyAmount: 12.5,
+    yearlyAmount: 150
+  },
+  {
+    costName: "United Carrier Reg License",
+    monthlyAmount: 6.5,
+    yearlyAmount: 78
+  },
+  {
+    costName: "Driver Occupational Accident Ins",
+    monthlyAmount: 130,
+    yearlyAmount: 1560
   },
   {
     costName: "ELD Monthly Fee",
-    costValue: 14.95
+    monthlyAmount: 14.95,
+    yearlyAmount: 179.4
   },
   {
     costName: "GPS Tracking",
-    costValue: 10
+    monthlyAmount: 10,
+    yearlyAmount: 120
   },
   {
     costName: "Parking",
-    costValue: 75
+    monthlyAmount: 75,
+    yearlyAmount: 900
   },
   {
     costName: "Load Board Fee",
-    costValue: 35
+    monthlyAmount: 0,
+    yearlyAmount: 0
   },
   {
     costName: "Maintenance Truck",
-    costValue: 0
+    monthlyAmount: 0,
+    yearlyAmount: 0
   },
   {
     costName: "Maintenance Trailer",
-    costValue: 0
+    monthlyAmount: 0,
+    yearlyAmount: 0
   },
-  {
-    costName: "Tires",
-    costValue: 0
-  }
+
 ];
 
 module.exports = FixedCostSeed;

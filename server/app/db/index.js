@@ -14,6 +14,9 @@ const Company = require('./models').Company;
 const Broker = require('./models').Broker;
 const Truck = require('./models').Truck;
 const Earning = require('./models').Earning;
+const FixedCost = require('./models').FixedCost;
+const VariableCost = require('./models').VariableCost;
+
 const users = require('./usersSeed');
 const drivers = require('./driversSeed');
 const companies = require('./companiesSeed');
@@ -21,6 +24,8 @@ const brokers = require('./brokersSeed');
 const trucks = require('./trucksSeed');
 const loads = require('./loadsSeed');
 const earnings = require('./earningsSeed');
+const fixedcost = require('./fixedCostSeed');
+const variablecost = require('./variableCostSeed');
 
 // Syncing all the models at once. This promise is used by main.js.
 module.exports = db.sync({ force: true })
@@ -29,6 +34,8 @@ module.exports = db.sync({ force: true })
   .then( () => Promise.all(brokers.map( broker => Broker.create( broker ))))
   .then( () => Promise.all(drivers.map( driver => Driver.create( driver ))))
   .then( () => Promise.all(companies.map( company => Company.create( company ))))
+  .then( () => Promise.all(fixedcost.map( fixedcost => FixedCost.create( fixedcost ))))
+  .then( () => Promise.all(variablecost.map( variablecost => VariableCost.create( variablecost ))))
   .then( () => Promise.all(trucks.map( truck => Truck.create( truck ))))
   .then( () => console.log(chalk.green('Sequelize models synced before LOADS')))
 

@@ -8,7 +8,7 @@ import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import "react-table/react-table.css";
 import { Datatable } from "./Datatable";
-import { fixedCostConfig } from "../../configs/fixedCostConfig";
+import { variableCostConfig } from "../../configs/variableCostConfig";
 import ColumnChooser from "./ColumnChooser.js";
 import SideMenu from "./SideMenu";
 import ActionBtn from "./ActionBtn";
@@ -25,7 +25,7 @@ const styles = theme => ({
   }
 });
 
-class FixedCost extends Component {
+class VariableCost extends Component {
   constructor() {
     super();
     this.state = {
@@ -45,7 +45,7 @@ class FixedCost extends Component {
   }
 
   componentDidMount() {
-    this.props.getFixedCost();
+    this.props.getVariableCost();
   }
 
   getConfirmDoc(docLink) {
@@ -86,14 +86,14 @@ class FixedCost extends Component {
         contentEditable
         suppressContentEditableWarning
         onBlur={e => {
-          const data = [...this.props.fixedCost];
+          const data = [...this.props.variableCost];
           data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
-          this.props.updateFixedCost({ data });
+          this.props.updateVariableCost({ data });
         }}
         dangerouslySetInnerHTML={{
           __html:
             // dollarSign +
-            this.props.fixedCost[cellInfo.index][
+            this.props.variableCost[cellInfo.index][
               cellInfo.column.id
             ].toLocaleString()
         }}
@@ -103,14 +103,14 @@ class FixedCost extends Component {
         style={{ backgroundColor: "#fafafa" }}
         suppressContentEditableWarning
         onBlur={e => {
-          const data = [...this.props.fixedCost];
+          const data = [...this.props.variableCost];
           data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
-          this.props.updateFixedCost({ data });
+          this.props.updateVariableCost({ data });
         }}
         dangerouslySetInnerHTML={{
           __html:
             dollarSign +
-            this.props.fixedCost[cellInfo.index][
+            this.props.variableCost[cellInfo.index][
               cellInfo.column.id
             ].toLocaleString()
         }}
@@ -137,23 +137,23 @@ class FixedCost extends Component {
   }
 
   deleteRow(row) {
-    this.props.updateFixedCost({
+    this.props.updateVariableCost({
       data: [
-        ...this.props.fixedCost.slice(0, row.index),
-        ...this.props.fixedCost.slice(row.index + 1)
+        ...this.props.variableCost.slice(0, row.index),
+        ...this.props.variableCost.slice(row.index + 1)
       ]
     });
   }
 
   saveRows() {
-    // console.log("FixedCost.js saveRows this.props", this.props);
-    this.props.saveFixedCost(this.props.fixedCost);
+    // console.log("VariableCost.js saveRows this.props", this.props);
+    this.props.saveVariableCost(this.props.variableCost);
   }
 
   addEmptyRow() {
-    let emptyRow = Object.assign({}, ...fixedCostConfig);
-    // console.log("FixedCostsData.js addEmptyRow ", emptyRow);
-    this.props.setFixedCost(emptyRow);
+    let emptyRow = Object.assign({}, ...variableCostConfig);
+    // console.log("VariableCostsData.js addEmptyRow ", emptyRow);
+    this.props.setVariableCost(emptyRow);
     // this.props.setTrip({
     //   data: this.props.trip.concat(emptyRow)
     // });
@@ -162,36 +162,36 @@ class FixedCost extends Component {
   calculateTotal({ data, column }) {
     // console.log("....data",data, "column", column);
     let dollarSign = false;
-    const fixedCostCount = data.length;
+    const variableCostCount = data.length;
     let value;
 
-    const total = data.reduce((memo, fixedCost) => {
-      // console.log("....info", fixedCost,column.id, fixedCost[column.id]);
-      if (typeof fixedCost[column.id] === "object") {
-        value = fixedCost[column.id].props.dangerouslySetInnerHTML.__html;
+    const total = data.reduce((memo, variableCost) => {
+      // console.log("....info", variableCost,column.id, variableCost[column.id]);
+      if (typeof variableCost[column.id] === "object") {
+        value = variableCost[column.id].props.dangerouslySetInnerHTML.__html;
         if (typeof value === "string" && value.substring(0, 1) === "$") {
           dollarSign = true;
           value = value.slice(1);
         }
         memo += Number(value);
       } else {
-        let amount = fixedCost[column.id];
+        let amount = variableCost[column.id];
         if (amount === "") amount = 0;
         if (typeof amount === "string") {
-          amount = parseFloat(fixedCost[column.id].replace(/,/g, ""));
+          amount = parseFloat(variableCost[column.id].replace(/,/g, ""));
         }
         memo += amount;
       }
       return memo;
     }, 0);
 
-    if (dollarSign || column.id === "costValue") {
-      return "$" + Number(total.toFixed(0)).toLocaleString();
+    if (dollarSign || column.id === "dollarPerMile") {
+      return "$" + Number(total.toFixed(2)).toLocaleString();
     } else if (column.id === "costName") {
-      return `Total Count: ${fixedCostCount}`;
+      return `Total Count: ${variableCostCount}`;
     }
 
-    return Number(Number(total).toFixed(0)).toLocaleString();
+    return Number(Number(total).toFixed(2)).toLocaleString();
   }
 
   onColumnUpdate(index) {
@@ -220,11 +220,11 @@ class FixedCost extends Component {
   }
 
   createColumns() {
-    // console.log("fixedCostsData.js createColumns this.props: ", this.props);
+    // console.log("variableCostsData.js createColumns this.props: ", this.props);
 
     return [
       {
-        Header: "Fixed Cost",
+        Header: "Variable Cost",
         Footer: this.calculateTotal,
         id: "costName",
         accessor: d => d.truckLoadPayment,
@@ -234,21 +234,14 @@ class FixedCost extends Component {
         Cell: this.editTable
       },
       {
-        Header: "Monthly Cost",
+        Header: "Dollar Per Mile",
         Footer: this.calculateTotal,
-        accessor: "monthlyAmount",
+        accessor: "dollarPerMile",
         show: true,
         className: "columnBorder",
         Cell: this.editTable
       },
-      {
-        Header: "Yearly Cost",
-        Footer: this.calculateTotal,
-        accessor: "yearlyAmount",
-        show: true,
-        className: "columnBorder",
-        Cell: this.editTable
-      },
+
 
       {
         Header: "Edit",
@@ -293,7 +286,7 @@ class FixedCost extends Component {
 
   render() {
     // const { data } = this.state;
-    const { fixedCost, classes } = this.props;
+    const { variableCost, classes } = this.props;
 
     // console.log("TripsData.js this.state ", this.state);
 
@@ -312,7 +305,7 @@ class FixedCost extends Component {
         </Toolbar>
 
         <ReactTable
-          data={fixedCost}
+          data={variableCost}
           showPaginationBottom={true}
           columns={columns}
           defaultPageSize={10}
@@ -330,17 +323,17 @@ class FixedCost extends Component {
 
 function mapStateToProps({ company }) {
   return {
-    fixedCost: company.fixedCost
+    variableCost: company.variableCost
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
-      getFixedCost: companyActions.getFixedCost,
-      setFixedCost: companyActions.setFixedCost,
-      updateFixedCost: companyActions.updateFixedCost,
-      saveFixedCost: companyActions.saveFixedCost
+      getVariableCost: companyActions.getVariableCost,
+      setVariableCost: companyActions.setVariableCost,
+      updateVariableCost: companyActions.updateVariableCost,
+      saveVariableCost: companyActions.saveVariableCost
     },
     dispatch
   );
@@ -351,6 +344,6 @@ export default withStyles(styles, { withTheme: true })(
     connect(
       mapStateToProps,
       mapDispatchToProps
-    )(FixedCost)
+    )(VariableCost)
   )
 );

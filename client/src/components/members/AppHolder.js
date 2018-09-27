@@ -11,6 +11,7 @@ import TrucksData from "./TrucksData";
 import BrokersData from "./BrokersData";
 import Earnings from "./Earnings";
 import FixedCost from "./FixedCost";
+import VariableCost from "./VariableCost";
 
 import * as authActions from "../../store/actions/authentication";
 
@@ -51,6 +52,9 @@ function AppHolder(props) {
       break;
     case "Drivers":
       showComponent = <DriversData />;
+      break;
+    case "Variable Cost":
+      showComponent = <VariableCost />;
       break;
     case "Fixed Cost":
       showComponent = <FixedCost />;

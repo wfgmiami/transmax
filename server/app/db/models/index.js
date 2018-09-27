@@ -12,6 +12,8 @@ const Broker = require('./broker');
 const Company = require('./company');
 const Load = require('./load');
 const Earning = require('./earning');
+const FixedCost = require('./fixedcost');
+const VariableCost = require('./variablecost');
 
 // Form the associations
 
@@ -40,5 +42,7 @@ module.exports = {
     Truck: Truck,
     Broker: Broker,
     Load: Load,
-    Earning: Earning
+    Earning: Earning,
+    FixedCost: FixedCost,
+    VariableCost: VariableCost
 };
