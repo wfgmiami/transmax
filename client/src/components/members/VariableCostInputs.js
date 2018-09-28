@@ -25,14 +25,14 @@ const styles = theme => ({
   }
 });
 
-class Inputs extends React.Component {
+class VariableCostInputs extends React.Component {
   state = {
     open: false,
     originalInputs: {}
   };
 
   componentDidMount() {
-    this.setState({ originalInputs: this.props.inputVariable });
+    this.setState({ originalInputs: this.props.costInputs });
   }
 
   handleChange = key => ({ target: { value } }) => {
@@ -53,7 +53,7 @@ class Inputs extends React.Component {
   };
 
   render() {
-    const { classes, inputVariable } = this.props;
+    const { classes, costInputs } = this.props;
 
     return (
       <div>
@@ -80,11 +80,20 @@ class Inputs extends React.Component {
           <DialogTitle>VARIABLE COST INPUTS</DialogTitle>
           <DialogContent>
             <form className={classes.container}>
+            <TextField
+                id="driverpayDollarPerMile"
+                label="Driver's Pay"
+                className={classes.textField}
+                value={costInputs.driverpayDollarPerMile}
+                onChange={this.handleChange("driverpayDollarPerMile")}
+                margin="normal"
+              />
+              &nbsp;
               <TextField
                 id="dieselPrice"
                 label="Diesel Price"
                 className={classes.textField}
-                value={inputVariable.mpg}
+                value={costInputs.dieselppg}
                 onChange={this.handleChange("dieselppg")}
                 margin="normal"
               />
@@ -93,7 +102,7 @@ class Inputs extends React.Component {
                 id="mpg"
                 label="MPG"
                 className={classes.textField}
-                value={inputVariable.mpg}
+                value={costInputs.mpg}
                 onChange={this.handleChange("mpg")}
                 margin="normal"
               />
@@ -102,7 +111,7 @@ class Inputs extends React.Component {
                 id="defPrice"
                 label="DEF Price"
                 className={classes.textField}
-                value={inputVariable.mpg}
+                value={costInputs.defppg}
                 onChange={this.handleChange("defppg")}
                 margin="normal"
               />
@@ -111,7 +120,7 @@ class Inputs extends React.Component {
                 id="defConsumptionRate"
                 label="DEF % Diesel Burned"
                 className={classes.textField}
-                value={inputVariable.dispatchPercent}
+                value={costInputs.defConsumptionRate}
                 onChange={this.handleChange("defConsumptionRate")}
                 margin="normal"
               />
@@ -120,7 +129,7 @@ class Inputs extends React.Component {
                 id="oilChangeMiles"
                 label="Oil Change Miles"
                 className={classes.textField}
-                value={inputVariable.dispatchPercent}
+                value={costInputs.oilChangeMiles}
                 onChange={this.handleChange("oilChangeMiles")}
                 margin="normal"
               />
@@ -129,17 +138,17 @@ class Inputs extends React.Component {
                 id="oilChangeCost"
                 label="Oil Change Cost"
                 className={classes.textField}
-                value={inputVariable.dispatchPercent}
+                value={costInputs.oilChangeCost}
                 onChange={this.handleChange("oilChangeCost")}
                 margin="normal"
               />
               &nbsp;
               <TextField
-                id="tiresChangeMiles"
-                label="Tires Change Miles"
+                id="truckTiresChangeMiles"
+                label="Truck Tires Change Miles"
                 className={classes.textField}
-                value={inputVariable.dispatchPercent}
-                onChange={this.handleChange("tiresChangeMiles")}
+                value={costInputs.truckTiresChangeMiles}
+                onChange={this.handleChange("truckTiresChangeMiles")}
                 margin="normal"
               />
               &nbsp;
@@ -147,8 +156,17 @@ class Inputs extends React.Component {
                 id="truckTiresChangeCost"
                 label="Truck Tires Change Cost"
                 className={classes.textField}
-                value={inputVariable.dispatchPercent}
+                value={costInputs.truckTiresChangeCost}
                 onChange={this.handleChange("truckTiresChangeCost")}
+                margin="normal"
+              />
+              &nbsp;
+              <TextField
+                id="trailerTiresChangeMiles"
+                label="Trailer Tires Change Miles"
+                className={classes.textField}
+                value={costInputs.trailerTiresChangeMiles}
+                onChange={this.handleChange("trailerTiresChangeMiles")}
                 margin="normal"
               />
               &nbsp;
@@ -156,7 +174,7 @@ class Inputs extends React.Component {
                 id="trailerTiresChangeCost"
                 label="Trailer Tires Change Cost"
                 className={classes.textField}
-                value={inputVariable.dispatchPercent}
+                value={costInputs.trailerTiresChangeCost}
                 onChange={this.handleChange("trailerTiresChangeCost")}
                 margin="normal"
               />
@@ -165,7 +183,7 @@ class Inputs extends React.Component {
                 id="dispatchFee"
                 label="Dispatch"
                 className={classes.textField}
-                value={inputVariable.dispatchPercent}
+                value={costInputs.dispatchPercent}
                 onChange={this.handleChange("dispatchPercent")}
                 margin="normal"
               />
@@ -186,13 +204,13 @@ class Inputs extends React.Component {
   }
 }
 
-Inputs.propTypes = {
+VariableCostInputs.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
 function mapStateToProps({ load }) {
   return {
-    inputVariable: load.inputVariable
+    costInputs: load.costInputs
   };
 }
 
@@ -211,6 +229,6 @@ export default withStyles(styles, { withTheme: true })(
     connect(
       mapStateToProps,
       mapDispatchToProps
-    )(Inputs)
+    )(VariableCostInputs)
   )
 );

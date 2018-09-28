@@ -12,6 +12,7 @@ import { variableCostConfig } from "../../configs/variableCostConfig";
 import ColumnChooser from "./ColumnChooser.js";
 import SideMenu from "./SideMenu";
 import ActionBtn from "./ActionBtn";
+import VariableCostInputs from "./VariableCostInputs";
 import axios from "axios";
 
 import * as companyActions from "../../store/actions/company";
@@ -302,6 +303,8 @@ class VariableCost extends Component {
             columns={columns}
             onColumnUpdate={this.onColumnUpdate}
           />
+          <div>&nbsp;</div>
+          <VariableCostInputs />
         </Toolbar>
 
         <ReactTable

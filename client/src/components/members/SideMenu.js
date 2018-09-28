@@ -8,7 +8,7 @@ import Divider from "@material-ui/core/Divider";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
-import { viewItems, otherViewItems } from "./tileData";
+import { viewItems, otherViewItems } from "./SideMenuList";
 
 import * as authActions from "../../store/actions/authentication";
 import * as navActions from "../../store/actions/navigation";

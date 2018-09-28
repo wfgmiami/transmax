@@ -1,9 +1,9 @@
 import * as Actions from "../../actions/index";
-import { costAssumptionConfig } from "../../../configs/costAssumptionConfig";
+import { costInputsConfig } from "../../../configs/costInputsConfig";
 
-const initialState = costAssumptionConfig;
+const initialState = costInputsConfig;
 
-const inputVariable = (state = initialState, action) => {
+const costInputs = (state = initialState, action) => {
   switch (action.type) {
     case Actions.GET_INPUT_VARIABLE: {
       // console.log("...action payload", action);
@@ -15,7 +15,7 @@ const inputVariable = (state = initialState, action) => {
       };
     }
     case Actions.SET_INPUT_VARIABLE_VALUE: {
-      // console.log("inputVariable reducer action ", action);
+      console.log("inputVariable reducer SET_INPUT_VARIABLE_VALUE ", state, action);
       return {
         ...state,
         ...action.value
@@ -27,4 +27,4 @@ const inputVariable = (state = initialState, action) => {
   }
 };
 
-export default inputVariable;
+export default costInputs;

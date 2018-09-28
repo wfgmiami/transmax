@@ -1,5 +1,6 @@
-export const costAssumptionConfig = [
+export const costInputsConfig =
     {
+      driverpayDollarPerMile: 0.55,
       dieselppg: 3.2,
       mpg: 6,
       defppg: 2.7,
@@ -12,4 +13,4 @@ export const costAssumptionConfig = [
       trailerTiresChangeCost: 2600,
       dispatchPercent: 0.1
     }
-  ];
+

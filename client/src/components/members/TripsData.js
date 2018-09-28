@@ -12,7 +12,6 @@ import "react-table/react-table.css";
 import { loadsConfig } from "../../configs/loadsConfig";
 import ColumnChooser from "./ColumnChooser.js";
 import SideMenu from "./SideMenu";
-import Inputs from "./Inputs";
 import ActionBtn from "./ActionBtn";
 import DateFilter from "./DateFilter";
 import CustomPagination from "./CustomPagination.js";
@@ -21,7 +20,6 @@ import { exportTableToJSON } from "./export.js";
 
 import * as loadActions from "../../store/actions/load";
 
-// const copyOfDatable = [].concat(Datatable);
 
 const styles = theme => ({
   root: {
@@ -39,10 +37,8 @@ class TripsData extends Component {
   constructor() {
     super();
     this.state = {
-      // data: copyOfDatable,
       columns: [],
       editableRowIndex: [],
-      driverPay: 0.55
     };
 
     this.editTable = this.editTable.bind(this);
@@ -61,7 +57,7 @@ class TripsData extends Component {
     // console.log("TripsData componentDidMount ");
     this.props.getTrip();
   }
-  
+
   handleDownload() {
     const data = this.reactTable.getResolvedState().sortedData;
     const columns = this.createColumns();
@@ -503,7 +499,7 @@ class TripsData extends Component {
         accessor: d => {
           let driverPay =
             (Number(d.loadedMiles) + Number(d.emptyMiles)) *
-            this.state.driverPay;
+            this.props.driverPay;
           driverPay = isNaN(driverPay) ? null : driverPay;
 
           return (
@@ -610,7 +606,7 @@ class TripsData extends Component {
             ((Number(d.loadedMiles) + Number(d.emptyMiles)) / Number(mpg)) *
               Number(d.dieselPrice) +
             (Number(d.loadedMiles) + Number(d.emptyMiles)) *
-              this.state.driverPay +
+              this.props.driverPay +
             Number(payment) * Number(dispatchPercent) +
             Number(d.lumper) +
             Number(d.detention) +
@@ -647,7 +643,7 @@ class TripsData extends Component {
             (((Number(d.loadedMiles) + Number(d.emptyMiles)) / Number(mpg)) *
               Number(d.dieselPrice) +
               (Number(d.loadedMiles) + Number(d.emptyMiles)) *
-                this.state.driverPay +
+                this.props.driverPay +
               Number(payment) * Number(dispatchPercent) +
               Number(d.lumper) +
               Number(d.detention) +
@@ -746,8 +742,7 @@ class TripsData extends Component {
           />
           &nbsp;
           <ActionBtn saveRows={this.saveRows} addEmptyRow={this.addEmptyRow} />
-          <div>&nbsp;</div>
-          <Inputs />
+
         </Toolbar>
 
         <ReactTable
@@ -758,10 +753,10 @@ class TripsData extends Component {
           handleDownload={this.handleDownload}
           PaginationComponent={CustomPagination}
           columns={columns}
-          defaultPageSize={10}
+          defaultPageSize={20}
           style={
             {
-              // height: "400px"
+              height: "800px"
             }
           }
           className="-striped -highlight"
@@ -774,8 +769,9 @@ class TripsData extends Component {
 function mapStateToProps({ load }) {
   return {
     trip: load.trip,
-    mpg: load.inputVariable.mpg,
-    dispatchPercent: load.inputVariable.dispatchPercent
+    driverPay: load.costInputs.driverpayDollarPerMile,
+    mpg: load.costInputs.mpg,
+    dispatchPercent: load.costInputs.dispatchPercent
   };
 }
 
