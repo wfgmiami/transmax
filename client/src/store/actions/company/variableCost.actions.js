@@ -7,21 +7,21 @@ export const UPDATE_VARIABLE_COST = "UPDATE VARIABLE_COST";
 export const SAVE_VARIABLE_COST = "SAVE VARIABLE_COST";
 
 export function getVariableCost() {
-  // return dispatch =>
-  //   dispatch({
-  //     type: GET_VARIABLE_COST,
-  //     payload: VariableCost
-  //   });
-
-  const getVariableCost = axios.get("/api/variablecost");
-
   return dispatch =>
-    getVariableCost.then(response =>
-      dispatch({
-        type: GET_VARIABLE_COST,
-        payload: response.data
-      })
-    );
+    dispatch({
+      type: GET_VARIABLE_COST,
+      payload: VariableCost
+    });
+
+  // const getVariableCost = axios.get("/api/variablecost");
+
+  // return dispatch =>
+  //   getVariableCost.then(response =>
+  //     dispatch({
+  //       type: GET_VARIABLE_COST,
+  //       payload: response.data
+  //     })
+  //   );
 }
 
 export function setVariableCost(variableCost) {
@@ -45,9 +45,16 @@ export function saveVariableCost(variableCost) {
 }
 
 export function updateVariableCost(variableCost) {
-  // console.log("variableCost.actions.js ", variableCost);
+  console.log("variableCost.actions.js ", variableCost);
+  let costToUpdate = {};
+  if (variableCost.driverpayDollarPerMile) {
+    costToUpdate = {
+      costName: "Driver",
+      dollarPerMile: Number(variableCost.driverpayDollarPerMile)
+    };
+  }
   return {
     type: UPDATE_VARIABLE_COST,
-    variableCost
+    costToUpdate
   };
 }

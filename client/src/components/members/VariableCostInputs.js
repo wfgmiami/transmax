@@ -13,6 +13,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 import * as loadActions from "../../store/actions/load";
+import * as companyActions from "../../store/actions/company";
 
 const styles = theme => ({
   container: {
@@ -50,6 +51,7 @@ class VariableCostInputs extends React.Component {
 
   handleCloseOK = () => {
     this.setState({ open: false });
+    this.props.updateVariableCost(this.props.costInputs);
   };
 
   render() {
@@ -80,7 +82,7 @@ class VariableCostInputs extends React.Component {
           <DialogTitle>VARIABLE COST INPUTS</DialogTitle>
           <DialogContent>
             <form className={classes.container}>
-            <TextField
+              <TextField
                 id="driverpayDollarPerMile"
                 label="Driver's Pay"
                 className={classes.textField}
@@ -218,7 +220,8 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
       setInputVariableValue: loadActions.setInputVariableValue,
-      setInputVariable: loadActions.setInputVariable
+      setInputVariable: loadActions.setInputVariable,
+      updateVariableCost: companyActions.updateVariableCost
     },
     dispatch
   );
