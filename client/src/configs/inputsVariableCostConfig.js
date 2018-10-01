@@ -1,4 +1,4 @@
-export const costInputsConfig =
+export const inputsVariableCostConfig =
     {
       driverpayDollarPerMile: 0.55,
       dieselppg: 3.2,

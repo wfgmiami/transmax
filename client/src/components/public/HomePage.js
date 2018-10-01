@@ -51,7 +51,7 @@ class HomePage extends Component {
                 The company goal is to provide superior transportation solutions to wide range of customers. We are looking to add new trucks to our fleet and hire more safe and reliable drivers.
               </p>
             <br/><br/>
-            <h2 className="py-16">WE PAY UP TO $0.55 CENTS PER MILE</h2><br/>
+            <h2 className="py-16">WE PAY $0.55 CENTS PER MILE</h2><br/>
               <p className={classes.mainText}>
                   The company is co-founded by a truck driver that knows what is takes to be a trucker.<br/>
                   Do not spend days on the road without being adequately compensated for your hard work - contact us today!<br/>

@@ -36,7 +36,7 @@ class Earnings extends Component {
 
     this.editTable = this.editTable.bind(this);
     this.editRow = this.editRow.bind(this);
-    this.saveRows = this.saveRows.bind(this);
+    this.saveRow = this.saveRow.bind(this);
     this.deleteRow = this.deleteRow.bind(this);
     this.addEmptyRow = this.addEmptyRow.bind(this);
     this.onColumnUpdate = this.onColumnUpdate.bind(this);
@@ -137,16 +137,19 @@ class Earnings extends Component {
   }
 
   deleteRow(row) {
-    this.props.updateEarnings({
-      data: [
-        ...this.props.earnings.slice(0, row.index),
-        ...this.props.earnings.slice(row.index + 1)
-      ]
-    });
+    let result = window.confirm("Do you want to delete this row?")
+    if(result){
+      this.props.updateEarnings({
+        data: [
+          ...this.props.earnings.slice(0, row.index),
+          ...this.props.earnings.slice(row.index + 1)
+        ]
+      });
+    }
   }
 
-  saveRows() {
-    // console.log("SarningssData.js saveRows this.props", this.props);
+  saveRow() {
+    // console.log("SarningssData.js saveRow this.props", this.props);
     this.props.saveEarnings(this.props.earnings);
   }
 
@@ -476,6 +479,13 @@ class Earnings extends Component {
                 onClick={() => this.deleteRow(row)}
               >
                 Delete
+                </Button>&nbsp;
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => this.saveRow(row)}
+              >
+                Save
               </Button>
             </div>
           );
@@ -496,7 +506,7 @@ class Earnings extends Component {
       <div className={classes.root}>
         <Toolbar className={classes.toolbar}>
           <SideMenu />
-          <ActionBtn saveRows={this.saveRows} addEmptyRow={this.addEmptyRow} />
+          <ActionBtn saveRow={this.saveRow} addEmptyRow={this.addEmptyRow} />
           &nbsp;
           <ColumnChooser
             columns={columns}

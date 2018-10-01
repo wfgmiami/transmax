@@ -30,12 +30,6 @@ export const viewItems = (
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <SendIcon />
-      </ListItemIcon>
-      <ListItemText primary="Companies" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
         <Brokers />
       </ListItemIcon>
       <ListItemText primary="Brokers" />
@@ -45,6 +39,12 @@ export const viewItems = (
 
 export const otherViewItems = (
   <div>
+    <ListItem button>
+      <ListItemIcon>
+        <SendIcon />
+      </ListItemIcon>
+      <ListItemText primary="Companies" />
+    </ListItem>
     <ListItem button>
       <ListItemIcon>
         <TruckIcon />

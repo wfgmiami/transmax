@@ -8,6 +8,7 @@ const fixedCost = (state = initialState, action) => {
   //   ...state,
   //   { ...action.fixedCost }
   // ]);
+
   switch (action.type) {
     case Actions.GET_FIXED_COST: {
       return [...action.payload];

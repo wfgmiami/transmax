@@ -1,12 +1,12 @@
 import { combineReducers } from "redux";
 import trip from "./trip.reducer";
-import costInputs from "./costInputs.reducer";
+import inputsVariableCost from "./inputsVariableCost.reducer";
 import dateRange from "./dateRange.reducer";
 // import message from './message.reducer';
 
 const tripReducers = combineReducers({
   trip,
-  costInputs,
+  inputsVariableCost,
   dateRange
   // message
 });

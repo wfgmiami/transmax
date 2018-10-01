@@ -36,7 +36,7 @@ class FixedCost extends Component {
 
     this.editTable = this.editTable.bind(this);
     this.editRow = this.editRow.bind(this);
-    this.saveRows = this.saveRows.bind(this);
+    this.saveRow = this.saveRow.bind(this);
     this.deleteRow = this.deleteRow.bind(this);
     this.addEmptyRow = this.addEmptyRow.bind(this);
     this.onColumnUpdate = this.onColumnUpdate.bind(this);
@@ -78,7 +78,13 @@ class FixedCost extends Component {
     const findEditableRow = this.state.editableRowIndex.find(
       row => row === cellInfo.index
     );
-    dollarSign = cellInfo.column.id === "costValue" ? "$" : "";
+    dollarSign = ( cellInfo.column.id === "monthlyAmount" || cellInfo.column.id === "yearlyAmount" ) ? "$" : "";
+
+    let value = this.props.fixedCost[cellInfo.index][ cellInfo.column.id];
+
+    if( typeof(value) === 'string' && dollarSign ) {
+      value = Number(value).toLocaleString();
+    }
 
     return findEditableRow || findEditableRow === 0 ? (
       <div
@@ -91,11 +97,7 @@ class FixedCost extends Component {
           this.props.updateFixedCost({ data });
         }}
         dangerouslySetInnerHTML={{
-          __html:
-            // dollarSign +
-            this.props.fixedCost[cellInfo.index][
-              cellInfo.column.id
-            ].toLocaleString()
+          __html: value
         }}
       />
     ) : (
@@ -109,17 +111,14 @@ class FixedCost extends Component {
         }}
         dangerouslySetInnerHTML={{
           __html:
-            dollarSign +
-            this.props.fixedCost[cellInfo.index][
-              cellInfo.column.id
-            ].toLocaleString()
+            dollarSign + value
         }}
       />
     );
   }
 
   editRow(row) {
-    // console.log("TripsData.js editRow ", row, "row index: ", row.index);
+    // console.log("FixedCost.js editRow ", row, "row index: ", row.index);
     const alreadyEditable = this.state.editableRowIndex.find(
       editableRow => editableRow === row.index
     );
@@ -137,17 +136,21 @@ class FixedCost extends Component {
   }
 
   deleteRow(row) {
-    this.props.updateFixedCost({
-      data: [
-        ...this.props.fixedCost.slice(0, row.index),
-        ...this.props.fixedCost.slice(row.index + 1)
-      ]
-    });
+    let result = window.confirm("Do you want to delete this row?")
+    if(result){
+      this.props.updateFixedCost({
+        data: [
+          ...this.props.fixedCost.slice(0, row.index),
+          ...this.props.fixedCost.slice(row.index + 1)
+        ]
+      });
+    }
+
   }
 
-  saveRows() {
-    // console.log("FixedCost.js saveRows this.props", this.props);
-    this.props.saveFixedCost(this.props.fixedCost);
+  saveRow(row) {
+    console.log("FixedCost.js saveRow row", row);
+    this.props.saveFixedCost(row);
   }
 
   addEmptyRow() {
@@ -185,7 +188,7 @@ class FixedCost extends Component {
       return memo;
     }, 0);
 
-    if (dollarSign || column.id === "costValue") {
+    if (dollarSign || column.id === "monthlyAmount" || column.id === "yearlyAmount") {
       return "$" + Number(total.toFixed(0)).toLocaleString();
     } else if (column.id === "costName") {
       return `Total Count: ${fixedCostCount}`;
@@ -283,6 +286,13 @@ class FixedCost extends Component {
                 onClick={() => this.deleteRow(row)}
               >
                 Delete
+              </Button>&nbsp;
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => this.saveRow(row)}
+              >
+                Save
               </Button>
             </div>
           );
@@ -303,7 +313,7 @@ class FixedCost extends Component {
       <div className={classes.root}>
         <Toolbar className={classes.toolbar}>
           <SideMenu />
-          <ActionBtn saveRows={this.saveRows} addEmptyRow={this.addEmptyRow} />
+          <ActionBtn addEmptyRow={this.addEmptyRow} />
           &nbsp;
           <ColumnChooser
             columns={columns}
@@ -315,7 +325,7 @@ class FixedCost extends Component {
           data={fixedCost}
           showPaginationBottom={true}
           columns={columns}
-          defaultPageSize={10}
+          defaultPageSize={20}
           style={
             {
               // height: "400px"

@@ -12,7 +12,7 @@ import { variableCostConfig } from "../../configs/variableCostConfig";
 import ColumnChooser from "./ColumnChooser.js";
 import SideMenu from "./SideMenu";
 import ActionBtn from "./ActionBtn";
-import VariableCostInputs from "./VariableCostInputs";
+import InputsVariableCost from "./InputsVariableCost";
 import axios from "axios";
 
 import * as companyActions from "../../store/actions/company";
@@ -37,7 +37,7 @@ class VariableCost extends Component {
 
     this.editTable = this.editTable.bind(this);
     this.editRow = this.editRow.bind(this);
-    this.saveRows = this.saveRows.bind(this);
+    this.saveRow = this.saveRow.bind(this);
     this.deleteRow = this.deleteRow.bind(this);
     this.addEmptyRow = this.addEmptyRow.bind(this);
     this.onColumnUpdate = this.onColumnUpdate.bind(this);
@@ -79,7 +79,13 @@ class VariableCost extends Component {
     const findEditableRow = this.state.editableRowIndex.find(
       row => row === cellInfo.index
     );
-    dollarSign = cellInfo.column.id === "costValue" ? "$" : "";
+
+    dollarSign = cellInfo.column.id === "dollarPerMile"  ? "$" : "";
+    let value = this.props.variableCost[cellInfo.index][ cellInfo.column.id];
+
+    if( typeof(value) === 'string' && dollarSign ) {
+      value = Number(value).toLocaleString();
+    }
 
     return findEditableRow || findEditableRow === 0 ? (
       <div
@@ -89,14 +95,10 @@ class VariableCost extends Component {
         onBlur={e => {
           const data = [...this.props.variableCost];
           data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
-          this.props.updateVariableCost({ data });
+          this.props.updateDirectVariableCost({ data });
         }}
         dangerouslySetInnerHTML={{
-          __html:
-            // dollarSign +
-            this.props.variableCost[cellInfo.index][
-              cellInfo.column.id
-            ].toLocaleString()
+          __html: value
         }}
       />
     ) : (
@@ -106,21 +108,18 @@ class VariableCost extends Component {
         onBlur={e => {
           const data = [...this.props.variableCost];
           data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
-          this.props.updateVariableCost({ data });
+          this.props.updateDirectVariableCost({ data });
         }}
         dangerouslySetInnerHTML={{
           __html:
-            dollarSign +
-            this.props.variableCost[cellInfo.index][
-              cellInfo.column.id
-            ].toLocaleString()
+            dollarSign + value
         }}
       />
     );
   }
 
   editRow(row) {
-    // console.log("TripsData.js editRow ", row, "row index: ", row.index);
+    // console.log("VariableCost.js editRow ", row, "row index: ", row.index);
     const alreadyEditable = this.state.editableRowIndex.find(
       editableRow => editableRow === row.index
     );
@@ -138,17 +137,20 @@ class VariableCost extends Component {
   }
 
   deleteRow(row) {
-    this.props.updateVariableCost({
-      data: [
-        ...this.props.variableCost.slice(0, row.index),
-        ...this.props.variableCost.slice(row.index + 1)
-      ]
-    });
+    let result = window.confirm("Do you want to delete this row?")
+    if(result){
+      this.props.updateVariableCost({
+        data: [
+          ...this.props.variableCost.slice(0, row.index),
+          ...this.props.variableCost.slice(row.index + 1)
+        ]
+      });
+    }
   }
 
-  saveRows() {
-    // console.log("VariableCost.js saveRows this.props", this.props);
-    this.props.saveVariableCost(this.props.variableCost);
+  saveRow(row) {
+    // console.log("VariableCost.js saveRow this.props", this.props);
+    this.props.saveVariableCost(row);
   }
 
   addEmptyRow() {
@@ -277,6 +279,13 @@ class VariableCost extends Component {
                 onClick={() => this.deleteRow(row)}
               >
                 Delete
+              </Button>&nbsp;
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => this.saveRow(row)}
+              >
+                Save
               </Button>
             </div>
           );
@@ -297,14 +306,14 @@ class VariableCost extends Component {
       <div className={classes.root}>
         <Toolbar className={classes.toolbar}>
           <SideMenu />
-          <ActionBtn saveRows={this.saveRows} addEmptyRow={this.addEmptyRow} />
+          <ActionBtn saveRow={this.saveRow} addEmptyRow={this.addEmptyRow} />
           &nbsp;
           <ColumnChooser
             columns={columns}
             onColumnUpdate={this.onColumnUpdate}
           />
           <div>&nbsp;</div>
-          <VariableCostInputs />
+          <InputsVariableCost />
         </Toolbar>
 
         <ReactTable
@@ -336,6 +345,7 @@ function mapDispatchToProps(dispatch) {
       getVariableCost: companyActions.getVariableCost,
       setVariableCost: companyActions.setVariableCost,
       updateVariableCost: companyActions.updateVariableCost,
+      updateDirectVariableCost: companyActions.updateDirectVariableCost,
       saveVariableCost: companyActions.saveVariableCost
     },
     dispatch

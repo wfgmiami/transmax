@@ -36,7 +36,7 @@ class TrucksData extends Component {
 
     this.editTable = this.editTable.bind(this);
     this.editRow = this.editRow.bind(this);
-    this.saveRows = this.saveRows.bind(this);
+    this.saveRow = this.saveRow.bind(this);
     this.deleteRow = this.deleteRow.bind(this);
     this.addEmptyRow = this.addEmptyRow.bind(this);
     this.onColumnUpdate = this.onColumnUpdate.bind(this);
@@ -149,16 +149,19 @@ class TrucksData extends Component {
   }
 
   deleteRow(row) {
-    this.props.updateTruck({
-      data: [
-        ...this.props.truck.slice(0, row.index),
-        ...this.props.truck.slice(row.index + 1)
-      ]
-    });
+    let result = window.confirm("Do you want to delete this row?")
+    if(result){
+      this.props.updateTruck({
+        data: [
+          ...this.props.truck.slice(0, row.index),
+          ...this.props.truck.slice(row.index + 1)
+        ]
+      });
+    }
   }
 
-  saveRows() {
-    // console.log("TrucksData.js saveRows this.props", this.props);
+  saveRow() {
+    // console.log("TrucksData.js saveRow this.props", this.props);
     this.props.saveTruck(this.props.truck);
   }
 
@@ -371,6 +374,13 @@ class TrucksData extends Component {
                 onClick={() => this.deleteRow(row)}
               >
                 Delete
+                </Button>&nbsp;
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => this.saveRow(row)}
+              >
+                Save
               </Button>
             </div>
           );
@@ -391,7 +401,7 @@ class TrucksData extends Component {
       <div className={classes.root}>
         <Toolbar className={classes.toolbar}>
           <SideMenu />
-          <ActionBtn saveRows={this.saveRows} addEmptyRow={this.addEmptyRow} />
+          <ActionBtn saveRow={this.saveRow} addEmptyRow={this.addEmptyRow} />
           &nbsp;
           <ColumnChooser
             columns={columns}

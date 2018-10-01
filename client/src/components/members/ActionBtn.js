@@ -34,10 +34,10 @@ class AddSaveBtn extends React.Component {
     this.handleClose();
   };
 
-  handleSaveRows = () => {
-    this.props.saveRows();
-    this.handleClose();
-  };
+  // handleSaveRows = () => {
+  //   this.props.saveRows();
+  //   this.handleClose();
+  // };
 
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -82,13 +82,13 @@ class AddSaveBtn extends React.Component {
               >
                 Add Row
               </Button>&nbsp;
-              <Button
+              {/* <Button
                 variant="contained"
                 color="primary"
                 onClick={this.handleSaveRows}
               >
                 Save
-              </Button>
+              </Button> */}
             </form>
           </DialogContent>
           <DialogActions>
@@ -116,7 +116,7 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
       setInputVariableValue: loadActions.setInputVariableValue,
-      setInputVariable: loadActions.setInputVariable
+      // setInputVariable: loadActions.setInputVariable
     },
     dispatch
   );

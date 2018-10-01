@@ -1,14 +1,7 @@
 import React, { Component } from "react";
-import classnames from "classnames";
 import Button from "@material-ui/core/Button";
 import Download from "@material-ui/icons/GetApp";
 import { withStyles } from "@material-ui/core/styles";
-//import  classes  from "classnames";
-
-// import _ from './utils'
-
-import Icon from "@material-ui/core/Icon";
-import IconButton from "@material-ui/core/IconButton";
 import classes1 from "classnames";
 import Typography from "@material-ui/core/Typography";
 import Popover from "@material-ui/core/Popover";
@@ -19,11 +12,6 @@ const styles = {
   }
 };
 
-const defaultButton = props => (
-  <button type="button" {...props} className="-btn">
-    {props.children}
-  </button>
-);
 class CustomPagination extends Component {
   constructor(props) {
     super();
@@ -87,8 +75,6 @@ class CustomPagination extends Component {
       // Computed
       pages,
       classes,
-      columns,
-      onColumnUpdate,
       handleDownload,
       handleDownloadToJson,
       page,
@@ -100,8 +86,6 @@ class CustomPagination extends Component {
       canNext,
       onPageSizeChange,
       className,
-      //PreviousComponent = defaultButton,
-      NextComponent = defaultButton
     } = this.props;
     const { anchorEl } = this.state;
 
@@ -202,11 +186,11 @@ class CustomPagination extends Component {
           onClose={this.handleClose}
           anchorOrigin={{
             vertical: "top",
-            horizontal: "bottom"
+            horizontal: "center"
           }}
           transformOrigin={{
-            vertical: "bottom",
-            horizontal: "bottom"
+            vertical: "center",
+            horizontal: "center"
           }}
         >
           <Typography

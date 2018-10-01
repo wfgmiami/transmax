@@ -43,7 +43,7 @@ class TripsData extends Component {
 
     this.editTable = this.editTable.bind(this);
     this.editRow = this.editRow.bind(this);
-    this.saveRows = this.saveRows.bind(this);
+    this.saveRow = this.saveRow.bind(this);
     this.deleteRow = this.deleteRow.bind(this);
     this.addEmptyRow = this.addEmptyRow.bind(this);
     this.onColumnUpdate = this.onColumnUpdate.bind(this);
@@ -205,16 +205,19 @@ class TripsData extends Component {
   }
 
   deleteRow(row) {
-    this.props.updateTrip({
-      data: [
-        ...this.props.trip.slice(0, row.index),
-        ...this.props.trip.slice(row.index + 1)
-      ]
-    });
+    let result = window.confirm("Do you want to delete this row?")
+    if(result){
+      this.props.updateTrip({
+        data: [
+          ...this.props.trip.slice(0, row.index),
+          ...this.props.trip.slice(row.index + 1)
+        ]
+      });
+    }
   }
 
-  saveRows() {
-    // console.log("TripsData.js saveRows this.props", this.props);
+  saveRow() {
+    // console.log("TripsData.js saveRow this.props", this.props);
     this.props.saveTrips(this.props.trip);
   }
 
@@ -497,18 +500,23 @@ class TripsData extends Component {
         show: true,
         className: "columnBorder",
         accessor: d => {
-          let driverPay =
-            (Number(d.loadedMiles) + Number(d.emptyMiles)) *
-            this.props.driverPay;
-          driverPay = isNaN(driverPay) ? null : driverPay;
+          // if(this.state.editableRowIndex.length > 0){
 
-          return (
-            <div
-              dangerouslySetInnerHTML={{
-                __html: "$" + Number(driverPay).toFixed(0)
-              }}
-            />
-          );
+            let driverPay =
+              (Number(d.loadedMiles) + Number(d.emptyMiles)) *
+              this.props.driverPay;
+            driverPay = isNaN(driverPay) ? null : driverPay;
+
+            return (
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: "$" + Number(driverPay).toFixed(0)
+                }}
+              />
+            );
+          // } else {
+          //   d.driverPay
+          // }
         }
       },
       {
@@ -714,6 +722,13 @@ class TripsData extends Component {
                 onClick={() => this.deleteRow(row)}
               >
                 Delete
+                </Button>&nbsp;
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => this.saveRow(row)}
+              >
+                Save
               </Button>
             </div>
           );
@@ -741,7 +756,7 @@ class TripsData extends Component {
             onColumnUpdate={this.onColumnUpdate}
           />
           &nbsp;
-          <ActionBtn saveRows={this.saveRows} addEmptyRow={this.addEmptyRow} />
+          <ActionBtn saveRow={this.saveRow} addEmptyRow={this.addEmptyRow} />
 
         </Toolbar>
 
@@ -769,9 +784,9 @@ class TripsData extends Component {
 function mapStateToProps({ load }) {
   return {
     trip: load.trip,
-    driverPay: load.costInputs.driverpayDollarPerMile,
-    mpg: load.costInputs.mpg,
-    dispatchPercent: load.costInputs.dispatchPercent
+    driverPay: load.inputsVariableCost.driverpayDollarPerMile,
+    mpg: load.inputsVariableCost.mpg,
+    dispatchPercent: load.inputsVariableCost.dispatchPercent
   };
 }
 
