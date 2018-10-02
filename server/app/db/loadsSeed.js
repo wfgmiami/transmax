@@ -420,6 +420,44 @@ const LoadsData = [
       "/brokerConfirmations/090518_reliableSourceLogistics.pdf"
     )
   },
+  {
+    bookDate: "10/01/18",
+    truckId: 119,
+    driverId: 1,
+    driverName: "Kelvin",
+    loadNumber: "150753",
+    brokerId: 12,
+    brokerName: "AuptiX, Inc.",
+    pickUpCityState: "Columbus, IN",
+    dropOffCityState: "Mohnton, PA",
+    pickUpAddress:  "6848 East 500 South, Columbus, IN 47201",
+    dropOffAddress:  "390 Orchard Road, Mohnton, PA 19540",
+    payment: 2450,
+    loadedMiles: 610,
+    emptyMiles: 91,
+    mileage: 0,
+    dollarPerMile: 0,
+    dieselPrice: 3.22,
+    fuelCost: 0,
+    driverPay: 0,
+    dispatchFee: 0,
+    lumper: 0,
+    detention: 0,
+    detentionDriverPay: 0,
+    lateFee: 0,
+    toll: 0,
+    roadMaintenance: 0,
+    otherExpenses: 0,
+    totalExpense: 0,
+    profit: 0,
+    commodity: "Pumpkins",
+    weight: 40000,
+    trailer: "Dry Van",
+    confirmFilePath: path.join(
+      __dirname,
+      "/brokerConfirmations/090518_reliableSourceLogistics.pdf"
+    )
+  },
 ];
 
 

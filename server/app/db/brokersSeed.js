@@ -120,6 +120,17 @@ const BrokersData = [
     totalLoadedMiles: 800,
     avgDollarPerMile: 0
   },
+  {
+    brokerId: 12,
+    name: "AuptiX, Inc.",
+    address: "",
+    phone: "",
+    email: "",
+    bookedLoads: 1,
+    totalPayment: 2450,
+    totalLoadedMiles: 610,
+    avgDollarPerMile: 0
+  },
 ];
 
 

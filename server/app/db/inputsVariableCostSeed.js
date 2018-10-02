@@ -1,4 +1,4 @@
-const InputsVariableCostSeed =
+const InputsVariableCostSeed =[
   {
     driverpayDollarPerMile: 0.55,
     dieselppg: 3.2,
@@ -13,8 +13,7 @@ const InputsVariableCostSeed =
     trailerTiresChangeCost: 2600,
     dispatchPercent: 0.1
   }
-
-
+]
 
 module.exports = InputsVariableCostSeed;
 

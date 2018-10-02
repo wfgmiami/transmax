@@ -89,6 +89,28 @@ const EarningsSeed = [
       "/brokerConfirmations/090518_reliableSourceLogistics.pdf"
     )
   },
+  {
+    weekNumber: 5,
+    begWeekDate: "09/24/18",
+    endWeekDate: "09/30/18",
+    weekRange: "09/24/18-09/30/18",
+    revenue: 3600,
+    dispatchFee: 360,
+    milesPaid: 1726,
+    driverPay: 949.3,
+    fuelCost: 877.59,
+    toll: 0,
+    lumper: 0,
+    detention: 0,
+    detentionDriverPay: 0,
+    lateFee: 0,
+    roadMaintenance: 0,
+    otherExpense: 0,
+    docFilePath: path.join(
+      __dirname,
+      "/brokerConfirmations/090518_reliableSourceLogistics.pdf"
+    )
+  },
 
 
 ];
