@@ -1,7 +1,7 @@
 import * as Actions from "../../actions/index";
-import { variableCostConfig } from "../../../configs/variableCostConfig.js";
+// import { variableCostConfig } from "../../../configs/variableCostConfig.js";
 
-const initialState = variableCostConfig;
+const initialState = [];
 
 const variableCost = (state = initialState, action) => {
   // console.log("variableCost reducer actionObj", action, " ", [
@@ -10,7 +10,7 @@ const variableCost = (state = initialState, action) => {
   // ]);
   switch (action.type) {
     case Actions.GET_VARIABLE_COST: {
-      return [...action.payload];
+      return [...state,...action.payload];
     }
 
     case Actions.SET_VARIABLE_COST: {
@@ -18,11 +18,11 @@ const variableCost = (state = initialState, action) => {
     }
 
     case Actions.UPDATE_VARIABLE_COST: {
-      // console.log('action ', action)
+      // console.log('action ', action, state)
 
       let costToUpdate = {};
       let updatedState = [];
-      updatedState.push({ costName: "Driver",
+      updatedState.push({ costName: "Driver Pay",
                         dollarPerMile: Number(action.variableCost.driverpayDollarPerMile).toFixed(2) })
       updatedState.push({ costName: "Diesel Cost",
                         dollarPerMile: (Number(action.variableCost.dieselppg) / Number(action.variableCost.mpg)).toFixed(2) })
@@ -39,7 +39,7 @@ const variableCost = (state = initialState, action) => {
 
       updatedState.push({ costName: "Tires Change",
                         dollarPerMile: (truckTiresChangeCost + trailerTiresChangeCost).toFixed(2) })
-
+                        // console.log('action2 ', updatedState)
       return [...updatedState]
     }
 

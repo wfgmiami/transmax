@@ -54,7 +54,8 @@ class InputsVariableCost extends React.Component {
   handleCloseOK = () => {
     this.setState({ open: false });
     this.props.updateVariableCost(this.props.inputsVariableCost);
-    this.props.saveInputVariable(this.props.inputsVariableCost)
+    this.props.saveInputVariable(this.props.inputsVariableCost);
+    // this.props.saveVariableCost(this.props.variableCost);
   };
 
   render() {
@@ -227,7 +228,8 @@ function mapDispatchToProps(dispatch) {
       getInputVariable: loadActions.getInputVariable,
       setInputVariableValue: loadActions.setInputVariableValue,
       saveInputVariable: loadActions.saveInputVariable,
-      updateVariableCost: companyActions.updateVariableCost
+      updateVariableCost: companyActions.updateVariableCost,
+      saveVariableCost: companyActions.saveVariableCost
     },
     dispatch
   );

@@ -15,7 +15,7 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
-  // console.log('post variableCost', req.body.row._original.id)
+  // console.log('post variableCost', req.body)
   VariableCost.findById(req.body.row._original.id)
     .then( variableCost => {
       if(!variableCost){
