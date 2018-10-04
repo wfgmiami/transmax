@@ -9,8 +9,12 @@ const variableCost = (state = initialState, action) => {
   //   { ...action.variableCost }
   // ]);
   switch (action.type) {
+
     case Actions.GET_VARIABLE_COST: {
-      return [...state,...action.payload];
+      if( state.length === 0 ) return [...state,...action.payload]
+      else return [...state.map(stateCost => {
+        return action.payload.find( updatedCost => updatedCost.costName === stateCost.costName )
+      })]
     }
 
     case Actions.SET_VARIABLE_COST: {
@@ -18,7 +22,7 @@ const variableCost = (state = initialState, action) => {
     }
 
     case Actions.UPDATE_VARIABLE_COST: {
-      // console.log('action ', action, state)
+      console.log('action ', action, state)
 
       let costToUpdate = {};
       let updatedState = [];
@@ -39,8 +43,14 @@ const variableCost = (state = initialState, action) => {
 
       updatedState.push({ costName: "Tires Change",
                         dollarPerMile: (truckTiresChangeCost + trailerTiresChangeCost).toFixed(2) })
-                        // console.log('action2 ', updatedState)
-      return [...updatedState]
+                        console.log('action2 ', updatedState)
+
+        return [...state.map(stateCost => {
+          return updatedState.find( updatedCost => {
+            return updatedCost.costName === stateCost.costName
+          })
+        })]
+
     }
 
     case Actions.DIRECT_UPDATE_VARIABLE_COST: {

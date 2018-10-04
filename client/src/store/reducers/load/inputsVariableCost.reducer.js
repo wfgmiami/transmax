@@ -1,7 +1,7 @@
 import * as Actions from "../../actions/index";
 import { inputsVariableCostConfig } from "../../../configs/inputsVariableCostConfig";
 
-const initialState = inputsVariableCostConfig;
+const initialState ={};
 
 const inputsVariableCost = (state = initialState, action) => {
   // console.log("input variable cost reducer action ", state, action);
@@ -11,8 +11,9 @@ const inputsVariableCost = (state = initialState, action) => {
       return {...action.payload[0]};
     }
     case Actions.SAVE_INPUT_VARIABLE: {
-      //  console.log("input variable cost reducer SAVE_INPUT_VARIABLE ", state, action);
+       console.log("input variable cost reducer SAVE_INPUT_VARIABLE ", state, action);
       return {
+        ...state,
         ...action.payload
       };
     }

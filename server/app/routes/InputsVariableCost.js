@@ -15,7 +15,7 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
-  // console.log('post InputsVariableCost', req.body)
+  console.log('post InputsVariableCost', req.body)
   InputsVariableCost.findById(req.body.id)
     .then( inputsVariableCost => {
       if(!inputsVariableCost){
