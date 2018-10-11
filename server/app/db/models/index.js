@@ -12,9 +12,9 @@ const Broker = require('./broker');
 const Company = require('./company');
 const Load = require('./load');
 const Earning = require('./earning');
-const FixedCost = require('./FixedCost');
-const VariableCost = require('./VariableCost');
-const InputsVariableCost = require('./InputsVariableCost');
+const FixedCost = require('./fixedCost');
+const VariableCost = require('./variableCost');
+const InputsVariableCost = require('./inputsVariableCost');
 
 // Form the associations
 

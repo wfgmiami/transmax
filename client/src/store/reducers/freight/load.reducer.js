@@ -4,18 +4,18 @@ import { loadsConfig } from "../../../configs/loadsConfig.js";
 
 const initialState = loadsConfig;
 
-const trips = (state = initialState, action) => {
-  // console.log("trip reducer actionObj", action, " ", [
+const loads = (state = initialState, action) => {
+  // console.log("load reducer actionObj", action, " ", [
   //   ...state,
-  //   { ...action.trip }
+  //   { ...action.load }
   // ]);
 
   switch (action.type) {
-    case Actions.GET_TRIP: {
+    case Actions.GET_LOAD: {
       return [...action.payload];
     }
 
-    case Actions.GET_TRIP_DATE_RANGE: {
+    case Actions.GET_LOAD_DATE_RANGE: {
 
       // const startDate = action.payload.startDate;
       // const endDate = action.payload.endDate;
@@ -29,19 +29,19 @@ const trips = (state = initialState, action) => {
       // console.log("filteredDateRange", filteredDateRange);
 
       // return [...filteredDateRange];
-      // console.log("trip reducer GET_TRIP_DATE_RANGE", action);
+      // console.log("load reducer GET_LOAD_DATE_RANGE", action);
       return [...action.payload];
     }
 
-    case Actions.SET_TRIP: {
-      return [...state, { ...action.trip }];
+    case Actions.SET_LOAD: {
+      return [...state, { ...action.load }];
     }
 
-    case Actions.UPDATE_TRIP: {
-      return [...action.trips.data];
+    case Actions.UPDATE_LOAD: {
+      return [...action.loads.data];
     }
 
-    case Actions.SAVE_TRIPS: {
+    case Actions.SAVE_LOADS: {
       return [...state];
     }
 
@@ -51,4 +51,4 @@ const trips = (state = initialState, action) => {
   }
 };
 
-export default trips;
+export default loads;

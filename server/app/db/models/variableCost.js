@@ -7,7 +7,7 @@ const VariableCost = db.define('variablecost', {
     costName: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true
+        // unique: true
     },
     dollarPerMile: DataTypes.DECIMAL,
 

@@ -1,13 +1,13 @@
 import { combineReducers } from "redux";
 import application from "./application";
-import load from "./load";
+import freight from "./freight";
 import navigation from "./navigation";
 import authentication from './authentication';
 import company from "./company";
 
 const appReducers = combineReducers({
   application,
-  load,
+  freight,
   navigation,
   authentication,
   company

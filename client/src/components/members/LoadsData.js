@@ -18,7 +18,7 @@ import CustomPagination from "./CustomPagination.js";
 import { exportTableToCSV } from "./export.js";
 import { exportTableToJSON } from "./export.js";
 
-import * as loadActions from "../../store/actions/load";
+import * as freightActions from "../../store/actions/freight";
 
 
 const styles = theme => ({
@@ -33,7 +33,7 @@ const styles = theme => ({
   }
 });
 
-class TripsData extends Component {
+class LoadsData extends Component {
   constructor() {
     super();
     this.state = {
@@ -54,8 +54,8 @@ class TripsData extends Component {
   }
 
   componentDidMount() {
-    // console.log("TripsData componentDidMount ");
-    this.props.getTrip();
+    // console.log("LoadsData componentDidMount ");
+    this.props.getLoad();
   }
 
   handleDownload() {
@@ -73,7 +73,7 @@ class TripsData extends Component {
   }
 
   getConfirmDoc(docLink) {
-    // console.log("TripsData docLink ", Modal, SideMenu);
+    // console.log("LoadsData docLink ", Modal, SideMenu);
 
     axios
       .post(
@@ -113,21 +113,21 @@ class TripsData extends Component {
     );
 
     if( cellInfo.column.id === 'truck.company.name'){
-      console.log('field: ', this.props.trip[cellInfo.index])
-      fieldValue = this.props.trip[cellInfo.index][
-       'truck'] ? this.props.trip[cellInfo.index][
+      console.log('field: ', this.props.load[cellInfo.index])
+      fieldValue = this.props.load[cellInfo.index][
+       'truck'] ? this.props.load[cellInfo.index][
         'truck']['company'].name : '';
 
     } else {
-      fieldValue = this.props.trip[cellInfo.index][
+      fieldValue = this.props.load[cellInfo.index][
         cellInfo.column.id
       ]
     }
 
-    if( cellInfo.column.id === 'bookDate' && this.props.trip[cellInfo.index][
+    if( cellInfo.column.id === 'pickupDate' && this.props.load[cellInfo.index][
       cellInfo.column.id
     ] !== ''){
-      fieldValue = new Date(this.props.trip[cellInfo.index][
+      fieldValue = new Date(this.props.load[cellInfo.index][
         cellInfo.column.id
       ]).toLocaleDateString();
     }
@@ -158,9 +158,9 @@ class TripsData extends Component {
         contentEditable
         suppressContentEditableWarning
         onBlur={e => {
-          const data = [...this.props.trip];
+          const data = [...this.props.load];
           data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
-          this.props.updateTrip({ data });
+          this.props.updateLoad({ data });
         }}
         dangerouslySetInnerHTML={{
           __html:
@@ -173,9 +173,9 @@ class TripsData extends Component {
         style={{ backgroundColor: "#fafafa" }}
         suppressContentEditableWarning
         onBlur={e => {
-          const data = [...this.props.trip];
+          const data = [...this.props.load];
           data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
-          this.props.updateTrip({ data });
+          this.props.updateLoad({ data });
         }}
         dangerouslySetInnerHTML={{
           __html:
@@ -187,7 +187,7 @@ class TripsData extends Component {
   }
 
   editRow(row) {
-    // console.log("TripsData.js editRow ", row, "row index: ", row.index);
+    // console.log("LoadsData.js editRow ", row, "row index: ", row.index);
     const alreadyEditable = this.state.editableRowIndex.find(
       editableRow => editableRow === row.index
     );
@@ -207,50 +207,50 @@ class TripsData extends Component {
   deleteRow(row) {
     let result = window.confirm("Do you want to delete this row?")
     if(result){
-      this.props.updateTrip({
+      this.props.updateLoad({
         data: [
-          ...this.props.trip.slice(0, row.index),
-          ...this.props.trip.slice(row.index + 1)
+          ...this.props.load.slice(0, row.index),
+          ...this.props.load.slice(row.index + 1)
         ]
       });
     }
   }
 
   saveRow() {
-    // console.log("TripsData.js saveRow this.props", this.props);
-    this.props.saveTrips(this.props.trip);
+    // console.log("LoadsData.js saveRow this.props", this.props);
+    this.props.saveLoads(this.props.load);
   }
 
   addEmptyRow() {
     let emptyRow = Object.assign({}, ...loadsConfig);
-    // console.log("TripsData.js addEmptyRow ", emptyRow);
-    this.props.setTrip(emptyRow);
-    // this.props.setTrip({
-    //   data: this.props.trip.concat(emptyRow)
+    // console.log("LoadsData.js addEmptyRow ", emptyRow);
+    this.props.setLoad(emptyRow);
+    // this.props.setLoad({
+    //   data: this.props.load.concat(emptyRow)
     // });
   }
 
   calculateTotal({ data, column }) {
-    // console.log("TripsData calculateTotal data", data, "column", column);
-    const tripsCount = data.length;
+    // console.log("LoadsData calculateTotal data", data, "column", column);
+    const loadsCount = data.length;
     let dollarSign = false;
     let value;
 
-    const total = data.reduce((memo, trip) => {
-      // console.log("....info", trip,column.id, trip[column.id]);
+    const total = data.reduce((memo, load) => {
+      // console.log("....info", load,column.id, load[column.id]);
 
-      if (typeof trip[column.id] === "object") {
-        value = trip[column.id].props.dangerouslySetInnerHTML.__html;
+      if (typeof load[column.id] === "object") {
+        value = load[column.id].props.dangerouslySetInnerHTML.__html;
         if (typeof value === "string" && value.substring(0, 1) === "$") {
           dollarSign = true;
           value = value.slice(1);
         }
         memo += Number(value);
       } else {
-        let payment = trip[column.id];
+        let payment = load[column.id];
         if (payment === "") payment = 0;
         if (typeof payment === "string") {
-          payment = parseFloat(trip[column.id].replace(/,/g, ""));
+          payment = parseFloat(load[column.id].replace(/,/g, ""));
         }
 
         memo += payment;
@@ -261,13 +261,13 @@ class TripsData extends Component {
 
     if (dollarSign || column.id === "payment" || column.id === "toll") {
       if (column.id === "dollarPerMile") {
-        return "$" + Number((total / tripsCount).toFixed(2)).toLocaleString();
+        return "$" + Number((total / loadsCount).toFixed(2)).toLocaleString();
       }
       return "$" + Number(total.toFixed(0)).toLocaleString();
     } else if (column.id === "dieselPrice") {
-      return "$" + Number((total / tripsCount).toFixed(2)).toLocaleString();
+      return "$" + Number((total / loadsCount).toFixed(2)).toLocaleString();
     } else if (column.id === "bookDate") {
-      return `Total Trips: ${tripsCount}`;
+      return `Total Loads: ${loadsCount}`;
     }
 
     return Number(Number(total).toFixed(0)).toLocaleString();
@@ -299,14 +299,14 @@ class TripsData extends Component {
   }
 
   createColumns() {
-    // console.log("TripsData.js createColumns this.props: ", this.props);
+    // console.log("LoadsData.js createColumns this.props: ", this.props);
     const { mpg, dispatchPercent } = this.props;
 
     return [
       {
         Header: "Date",
         Footer: this.calculateTotal,
-        accessor: "bookDate",
+        accessor: "pickupDate",
         show: true,
         className: "columnBorder",
         Cell: this.editTable
@@ -342,6 +342,20 @@ class TripsData extends Component {
       {
         Header: "Broker",
         accessor: "brokerName",
+        show: true,
+        className: "columnBorder",
+        Cell: this.editTable
+      },
+      {
+        Header: "Shipper",
+        accessor: "shipper",
+        show: true,
+        className: "columnBorder",
+        Cell: this.editTable
+      },
+      {
+        Header: "Consignee",
+        accessor: "consignee",
         show: true,
         className: "columnBorder",
         Cell: this.editTable
@@ -568,6 +582,14 @@ class TripsData extends Component {
         Cell: this.editTable
       },
       {
+        Header: "Second Stop Driver Pay",
+        Footer: this.calculateTotal,
+        accessor: "secondStopDriverPay",
+        show: false,
+        className: "columnBorder",
+        Cell: this.editTable
+      },
+      {
         Header: "Late Fee",
         Footer: this.calculateTotal,
         accessor: "lateFee",
@@ -739,9 +761,9 @@ class TripsData extends Component {
 
   render() {
     // const { data } = this.state;
-    const { trip, classes } = this.props;
+    const { load, classes } = this.props;
 
-    // console.log("TripsData.js this.props ", this.props);
+    console.log("LoadsData.js this.props ", this.props);
 
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();
@@ -762,7 +784,7 @@ class TripsData extends Component {
 
         <ReactTable
           ref={r => (this.reactTable = r)}
-          data={trip}
+          data={load}
           showPaginationBottom={true}
           handleDownloadToJson={this.handleDownloadToJson}
           handleDownload={this.handleDownload}
@@ -774,29 +796,29 @@ class TripsData extends Component {
               height: "800px"
             }
           }
-          className="-striped -highlight"
+          className="-sloaded -highlight"
         />
       </div>
     );
   }
 }
 
-function mapStateToProps({ load }) {
+function mapStateToProps({ freight, company }) {
   return {
-    trip: load.trip,
-    driverPay: load.inputsVariableCost.driverpayDollarPerMile,
-    mpg: load.inputsVariableCost.mpg,
-    dispatchPercent: load.inputsVariableCost.dispatchPercent
+    load: freight.load,
+    driverPay: company.inputsVariableCost.driverpayDollarPerMile,
+    mpg: company.inputsVariableCost.mpg,
+    dispatchPercent: company.inputsVariableCost.dispatchPercent
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
-      getTrip: loadActions.getTrip,
-      setTrip: loadActions.setTrip,
-      updateTrip: loadActions.updateTrip,
-      saveTrips: loadActions.saveTrips
+      getLoad: freightActions.getLoad,
+      setLoad: freightActions.setLoad,
+      updateLoad: freightActions.updateLoad,
+      saveLoads: freightActions.saveLoads
     },
     dispatch
   );
@@ -807,6 +829,6 @@ export default withStyles(styles, { withTheme: true })(
     connect(
       mapStateToProps,
       mapDispatchToProps
-    )(TripsData)
+    )(LoadsData)
   )
 );

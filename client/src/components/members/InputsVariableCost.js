@@ -12,7 +12,6 @@ import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-import * as loadActions from "../../store/actions/load";
 import * as companyActions from "../../store/actions/company";
 
 const styles = theme => ({
@@ -53,9 +52,9 @@ class InputsVariableCost extends React.Component {
 
   handleCloseOK = () => {
     this.setState({ open: false });
-    this.props.updateVariableCost(this.props.inputsVariableCost);
+    // this.props.updateVariableCost(this.props.inputsVariableCost);
     this.props.saveInputVariable(this.props.inputsVariableCost);
-    // this.props.saveVariableCost(this.props.variableCost);
+    this.props.saveVariableCost(this.props.inputsVariableCost);
   };
 
   render() {
@@ -215,9 +214,9 @@ InputsVariableCost.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-function mapStateToProps({ load, company }) {
+function mapStateToProps({ company }) {
   return {
-    inputsVariableCost: load.inputsVariableCost,
+    inputsVariableCost: company.inputsVariableCost,
     variableCost: company.variableCost
   };
 }
@@ -225,9 +224,9 @@ function mapStateToProps({ load, company }) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
-      getInputVariable: loadActions.getInputVariable,
-      setInputVariableValue: loadActions.setInputVariableValue,
-      saveInputVariable: loadActions.saveInputVariable,
+      getInputVariable: companyActions.getInputVariable,
+      setInputVariableValue: companyActions.setInputVariableValue,
+      saveInputVariable: companyActions.saveInputVariable,
       updateVariableCost: companyActions.updateVariableCost,
       saveVariableCost: companyActions.saveVariableCost
     },

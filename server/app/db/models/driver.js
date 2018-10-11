@@ -13,25 +13,37 @@ const Driver = db.define('driver', {
     lastName: DataTypes.STRING,
     ssn: {
       type: DataTypes.STRING,
-      allowNull: false
+
     },
     driversLicense: {
       type: DataTypes.STRING,
-      allowNull: false
+
     },
     email: {
         type: DataTypes.STRING,
-        unique: true,
     },
     phone: {
         type: DataTypes.STRING
     },
     hireDate: {
       type: DataTypes.STRING,
-      allowNull: false
+
     },
-    address: {
+    dob: {
+      type: DataTypes.STRING,
+
+    },
+    streetAddress: {
       type: DataTypes.TEXT
+    },
+    city: {
+      type: DataTypes.STRING
+    },
+    state: {
+      type: DataTypes.STRING
+    },
+    zipCode: {
+      type: DataTypes.STRING
     },
     currentRate: {
       type: DataTypes.DECIMAL
@@ -47,4 +59,5 @@ const Driver = db.define('driver', {
 })
 
 module.exports = Driver;
+
 

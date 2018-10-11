@@ -4,7 +4,7 @@ const db = require('../db');
 const DataTypes = db.Sequelize;
 
 const Load = db.define('load', {
-    bookDate: {
+    pickupDate: {
         type: DataTypes.DATE,
         allowNull: false
 
@@ -18,7 +18,12 @@ const Load = db.define('load', {
     },
     brokerName: {
         type: DataTypes.STRING,
-
+    },
+    shipper: {
+        type: DataTypes.STRING,
+    },
+    consignee: {
+        type: DataTypes.STRING,
     },
     pickUpCityState: {
         type: DataTypes.TEXT,
@@ -32,7 +37,7 @@ const Load = db.define('load', {
         type: DataTypes.TEXT,
         allowNull: false
     },
-        dropOffAddress: {
+    dropOffAddress: {
         type: DataTypes.TEXT,
         allowNull: false
     },
@@ -73,6 +78,9 @@ const Load = db.define('load', {
         type: DataTypes.DECIMAL,
     },
     detentionDriverPay: {
+        type: DataTypes.DECIMAL,
+    },
+    secondStopDriverPay: {
         type: DataTypes.DECIMAL,
     },
     lateFee: {

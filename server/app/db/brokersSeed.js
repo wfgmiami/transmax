@@ -131,9 +131,29 @@ const BrokersData = [
     totalLoadedMiles: 610,
     avgDollarPerMile: 0
   },
+  {
+    brokerId: 13,
+    name: "Trinity Logistics",
+    address: "",
+    phone: "",
+    email: "",
+    bookedLoads: 1,
+    totalPayment: 925,
+    totalLoadedMiles: 487,
+    avgDollarPerMile: 0
+  },
+  {
+    brokerId: 14,
+    name: "West Motor Freight of PA",
+    address: "",
+    phone: "",
+    email: "",
+    bookedLoads: 1,
+    totalPayment: 900,
+    totalLoadedMiles: 546,
+    avgDollarPerMile: 0
+  },
 ];
-
-
 
 
 module.exports = BrokersData;

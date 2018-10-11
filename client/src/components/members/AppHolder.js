@@ -4,7 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
-import TripsData from "./TripsData";
+import LoadsData from "./LoadsData";
 import DriversData from "./DriversData";
 import CompaniesData from "./CompaniesData";
 import TrucksData from "./TrucksData";
@@ -36,7 +36,7 @@ function AppHolder(props) {
 
   switch (menuItem) {
     case "Trips":
-      showComponent = <TripsData />;
+      showComponent = <LoadsData />;
       break;
     case "Earnings":
       showComponent = <Earnings />;
@@ -60,7 +60,7 @@ function AppHolder(props) {
       showComponent = <FixedCost />;
       break;
     default:
-      showComponent = <TripsData />;
+      showComponent = <LoadsData />;
   }
 
   return (

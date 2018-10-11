@@ -11,7 +11,7 @@ import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-import * as loadActions from "../../store/actions/load";
+import * as companyActions from "../../store/actions/company";
 
 const styles = theme => ({
   container: {
@@ -106,17 +106,17 @@ AddSaveBtn.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-function mapStateToProps({ load }) {
+function mapStateToProps({ company }) {
   return {
-    inputVariable: load.inputVariable
+    inputVariable: company.inputVariable
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
-      setInputVariableValue: loadActions.setInputVariableValue,
-      // setInputVariable: loadActions.setInputVariable
+      setInputVariableValue: companyActions.setInputVariableValue,
+      // setInputVariable: freightActions.setInputVariable
     },
     dispatch
   );

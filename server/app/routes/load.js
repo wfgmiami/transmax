@@ -15,7 +15,7 @@ router.get('/', (req, res, next) => {
         model: Company
       }],
       order:
-      [['bookDate', 'ASC']]
+      [['pickupDate', 'ASC']]
     }],
 
   })
@@ -30,7 +30,7 @@ router.get( '/daterange', ( req, res, next ) => {
   // console.log( 'daterange: ', startDate, endDate);
   Load.findAll({
     where: {
-      bookDate: {
+      pickupDate: {
         "$between": [startDate, endDate]
       }
     },
@@ -40,7 +40,7 @@ router.get( '/daterange', ( req, res, next ) => {
         model: Company
       }],
       order:
-      [['bookDate', 'ASC']]
+      [['pickupDate', 'ASC']]
     }],
 
   })

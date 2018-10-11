@@ -6,7 +6,7 @@ import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-import * as loadActions from "../../store/actions/load";
+import * as freightActions from "../../store/actions/freight";
 
 const styles = theme => ({
   container: {
@@ -62,16 +62,16 @@ DatePicker.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-function mapStateToProps({ load }) {
+function mapStateToProps({ freight }) {
   return {
-    dateRange: load.dateRange
+    dateRange: freight.dateRange
   };
 }
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
-      setDateRangeValue: loadActions.setDateRangeValue,
-      setDateRange: loadActions.setDateRange
+      setDateRangeValue: freightActions.setDateRangeValue,
+      setDateRange: freightActions.setDateRange
     },
     dispatch
   );

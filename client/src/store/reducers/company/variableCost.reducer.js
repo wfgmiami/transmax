@@ -22,34 +22,14 @@ const variableCost = (state = initialState, action) => {
     }
 
     case Actions.UPDATE_VARIABLE_COST: {
-      console.log('action ', action, state)
 
-      let costToUpdate = {};
-      let updatedState = [];
-      updatedState.push({ costName: "Driver Pay",
-                        dollarPerMile: Number(action.variableCost.driverpayDollarPerMile).toFixed(2) })
-      updatedState.push({ costName: "Diesel Cost",
-                        dollarPerMile: (Number(action.variableCost.dieselppg) / Number(action.variableCost.mpg)).toFixed(2) })
-      updatedState.push({ costName: "DEF Cost",
-                        dollarPerMile:(Number(action.variableCost.defppg) /
-                        (Number(action.variableCost.mpg) / Number(action.variableCost.defConsumptionRate))).toFixed(2) })
-      updatedState.push({ costName: "Oil Change",
-                        dollarPerMile: (Number(action.variableCost.oilChangeCost) / Number(action.variableCost.oilChangeMiles)).toFixed(2) })
+      console.log('reducer update variable cost ', action, state)
 
-      let truckTiresChangeCost =  Number(action.variableCost.truckTiresChangeCost) /
-                                  Number(action.variableCost.truckTiresChangeMiles);
-      let trailerTiresChangeCost = Number(action.variableCost.trailerTiresChangeCost) /
-                                  Number(action.variableCost.trailerTiresChangeMiles);
-
-      updatedState.push({ costName: "Tires Change",
-                        dollarPerMile: (truckTiresChangeCost + trailerTiresChangeCost).toFixed(2) })
-                        console.log('action2 ', updatedState)
-
-        return [...state.map(stateCost => {
-          return updatedState.find( updatedCost => {
-            return updatedCost.costName === stateCost.costName
-          })
-        })]
+      return [...state.map(stateCost => {
+        return action.payload.find( updatedCost => {
+          return action.payload.id === stateCost.id
+        })
+      })]
 
     }
 
@@ -59,7 +39,8 @@ const variableCost = (state = initialState, action) => {
     }
 
     case Actions.SAVE_VARIABLE_COST: {
-      return [...state];
+
+
     }
 
     default: {

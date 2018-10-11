@@ -383,7 +383,7 @@ class BrokersData extends Component {
           data={broker}
           showPaginationBottom={true}
           columns={columns}
-          defaultPageSize={10}
+          defaultPageSize={20}
           style={
             {
               // height: "400px"

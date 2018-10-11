@@ -4,10 +4,16 @@ export const driverConfig = [
     lastName: "",
     ssn: "",
     driversLicense: "",
+    dob:"",
     hireDate: "",
+    streetAddress: "",
+    city: "",
+    state: "",
+    zipCode: "",
     phone: "",
     email: "",
-    currentRate: "",
-    earnings: ""
+    currentRate: 0,
+    earnings: 0
   }
 ];
+

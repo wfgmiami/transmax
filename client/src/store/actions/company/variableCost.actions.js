@@ -34,12 +34,35 @@ export function setVariableCost(variableCost) {
 }
 
 export function saveVariableCost(variableCost) {
-  // console.log("variableCost.actions.js variableCost ", variableCost);
-  const postVariableCost = axios.post("/api/variablecost", { ...variableCost });
+  console.log("variableCostaction.js variableCost ", variableCost);
+  let costToUpdate = {};
+  let updatedState = [];
+  updatedState.push({ id: 1, costName: "Driver Pay",
+                    dollarPerMile: Number(variableCost.driverpayDollarPerMile).toFixed(2) })
+  updatedState.push({ id: 2, costName: "Diesel Cost",
+                    dollarPerMile: (Number(variableCost.dieselppg) / Number(variableCost.mpg)).toFixed(2) })
+  updatedState.push({ id: 3, costName: "DEF Cost",
+                    dollarPerMile:(Number(variableCost.defppg) /
+                    (Number(variableCost.mpg) / Number(variableCost.defConsumptionRate))).toFixed(2) })
+  updatedState.push({ id: 4, costName: "Oil Change",
+                    dollarPerMile: (Number(variableCost.oilChangeCost) / Number(variableCost.oilChangeMiles)).toFixed(2) })
+
+  let truckTiresChangeCost =  Number(variableCost.truckTiresChangeCost) /
+                              Number(variableCost.truckTiresChangeMiles);
+  let trailerTiresChangeCost = Number(variableCost.trailerTiresChangeCost) /
+                              Number(variableCost.trailerTiresChangeMiles);
+
+  updatedState.push({ id: 5, costName: "Tires Change",
+                    dollarPerMile: (truckTiresChangeCost + trailerTiresChangeCost).toFixed(2) })
+
+                    // console.log(' ', updatedState)
+
+
+  const postVariableCost = axios.post("/api/variablecost", [...updatedState ]);
   return dispatch =>
     postVariableCost.then(response =>
       dispatch({
-        type: SAVE_VARIABLE_COST,
+        type: UPDATE_VARIABLE_COST,
         payload: response.data
       })
     );

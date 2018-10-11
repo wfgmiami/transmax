@@ -12,7 +12,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import DatePicker from "./DatePicker";
 
-import * as loadActions from "../../store/actions/load";
+import * as freightActions from "../../store/actions/freight";
 
 const styles = theme => ({
   container: {
@@ -53,7 +53,7 @@ class DateFilter extends React.Component {
   };
 
   handleCloseOK = () => {
-    this.props.getTripDateRange(this.props.dateRange);
+    this.props.getLoadDateRange(this.props.dateRange);
     this.setState({ open: false });
   };
 
@@ -105,17 +105,17 @@ DateFilter.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-function mapStateToProps({ load }) {
+function mapStateToProps({ freight }) {
   return {
-    dateRange: load.dateRange
+    dateRange: freight.dateRange
   };
 }
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
-      setDateRangeValue: loadActions.setDateRangeValue,
-      setDateRange: loadActions.setDateRange,
-      getTripDateRange: loadActions.getTripDateRange
+      setDateRangeValue: freightActions.setDateRangeValue,
+      setDateRange: freightActions.setDateRange,
+      getLoadDateRange: freightActions.getLoadDateRange
     },
     dispatch
   );

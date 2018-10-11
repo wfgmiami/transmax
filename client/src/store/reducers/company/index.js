@@ -6,6 +6,7 @@ import broker from "./broker.reducer";
 import earnings from "./earnings.reducer";
 import fixedCost from "./fixedCost.reducer";
 import variableCost from "./variableCost.reducer";
+import inputsVariableCost from "./inputsVariableCost.reducer";
 
 const companyReducers = combineReducers({
   driver,
@@ -14,7 +15,8 @@ const companyReducers = combineReducers({
   broker,
   earnings,
   fixedCost,
-  variableCost
+  variableCost,
+  inputsVariableCost
 });
 
 export default companyReducers;
