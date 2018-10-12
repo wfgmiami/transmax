@@ -59,9 +59,6 @@ const Load = db.define('load', {
     dollarPerMile: {
         type: DataTypes.DECIMAL,
     },
-    dieselPrice: {
-        type: DataTypes.DECIMAL,
-    },
     fuelCost: {
         type: DataTypes.DECIMAL,
     },

@@ -19,7 +19,7 @@ import { exportTableToCSV } from "./export.js";
 import { exportTableToJSON } from "./export.js";
 
 import * as freightActions from "../../store/actions/freight";
-
+import * as companyActions from "../../store/actions/company";
 
 const styles = theme => ({
   root: {
@@ -54,8 +54,15 @@ class LoadsData extends Component {
   }
 
   componentDidMount() {
-    // console.log("LoadsData componentDidMount ");
     this.props.getLoad();
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshop){
+    console.log('..............')
+    if(this.props.load !== prevProps.load){
+      console.log('..............////////////////')
+      this.props.getVariableCost();
+    }
   }
 
   handleDownload() {
@@ -300,7 +307,7 @@ class LoadsData extends Component {
 
   createColumns() {
     // console.log("LoadsData.js createColumns this.props: ", this.props);
-    const { mpg, dispatchPercent } = this.props;
+    const { mpg, dispatchPercent, dieselppg } = this.props;
 
     return [
       {
@@ -476,15 +483,15 @@ class LoadsData extends Component {
           );
         }
       },
-
-      {
-        Header: "Diesel Price",
-        Footer: this.calculateTotal,
-        show: true,
-        accessor: "dieselPrice",
-        className: "columnBorder",
-        Cell: this.editTable
-      },
+      // {
+      //   Header: "Diesel Price",
+      //   id: 'dieselPrice',
+      //   Footer: this.calculateTotal,
+      //   show: true,
+      //   accessor: d => dieselppg,
+      //   className: "columnBorder",
+      //   Cell: this.editTable
+      // },
       {
         Header: "Fuel Cost",
         Footer: this.calculateTotal,
@@ -494,7 +501,7 @@ class LoadsData extends Component {
         accessor: d => {
           let fuelCost =
             ((Number(d.loadedMiles) + Number(d.emptyMiles)) / Number(mpg)) *
-            Number(d.dieselPrice);
+            Number(dieselppg);
 
           fuelCost = isNaN(fuelCost) ? null : fuelCost;
 
@@ -634,7 +641,7 @@ class LoadsData extends Component {
 
           let totalExpenses =
             ((Number(d.loadedMiles) + Number(d.emptyMiles)) / Number(mpg)) *
-              Number(d.dieselPrice) +
+              Number(dieselppg) +
             (Number(d.loadedMiles) + Number(d.emptyMiles)) *
               this.props.driverPay +
             Number(payment) * Number(dispatchPercent) +
@@ -671,7 +678,7 @@ class LoadsData extends Component {
           let profit =
             payment -
             (((Number(d.loadedMiles) + Number(d.emptyMiles)) / Number(mpg)) *
-              Number(d.dieselPrice) +
+              Number(dieselppg) +
               (Number(d.loadedMiles) + Number(d.emptyMiles)) *
                 this.props.driverPay +
               Number(payment) * Number(dispatchPercent) +
@@ -808,6 +815,7 @@ function mapStateToProps({ freight, company }) {
     load: freight.load,
     driverPay: company.inputsVariableCost.driverpayDollarPerMile,
     mpg: company.inputsVariableCost.mpg,
+    dieselppg: company.inputsVariableCost.dieselppg,
     dispatchPercent: company.inputsVariableCost.dispatchPercent
   };
 }
@@ -818,7 +826,8 @@ function mapDispatchToProps(dispatch) {
       getLoad: freightActions.getLoad,
       setLoad: freightActions.setLoad,
       updateLoad: freightActions.updateLoad,
-      saveLoads: freightActions.saveLoads
+      saveLoads: freightActions.saveLoads,
+      getVariableCost: companyActions.getVariableCost,
     },
     dispatch
   );

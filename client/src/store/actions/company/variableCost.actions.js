@@ -8,11 +8,6 @@ export const DIRECT_UPDATE_VARIABLE_COST = "DIRECT UPDATE VARIABLE COST";
 export const SAVE_VARIABLE_COST = "SAVE VARIABLE_COST";
 
 export function getVariableCost() {
-  // return dispatch =>
-  //   dispatch({
-  //     type: GET_VARIABLE_COST,
-  //     payload: VariableCost
-  //   });
 
   const getVariableCost = axios.get("/api/variablecost");
 
@@ -23,6 +18,7 @@ export function getVariableCost() {
         payload: response.data
       })
     );
+
 }
 
 export function setVariableCost(variableCost) {
@@ -60,11 +56,12 @@ export function saveVariableCost(variableCost) {
 
   const postVariableCost = axios.post("/api/variablecost", [...updatedState ]);
   return dispatch =>
-    postVariableCost.then(response =>
+    postVariableCost.then(response =>{
+      console.log('response from variableCost axios post ', response)
       dispatch({
         type: UPDATE_VARIABLE_COST,
         payload: response.data
-      })
+      })}
     );
 }
 

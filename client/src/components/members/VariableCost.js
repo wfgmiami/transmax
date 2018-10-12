@@ -32,134 +32,14 @@ class VariableCost extends Component {
     this.state = {
       data: copyOfDatable,
       columns: [],
-      editableRowIndex: []
     };
 
-    this.editTable = this.editTable.bind(this);
-    this.editRow = this.editRow.bind(this);
-    this.saveRow = this.saveRow.bind(this);
-    this.deleteRow = this.deleteRow.bind(this);
-    this.addEmptyRow = this.addEmptyRow.bind(this);
-    this.onColumnUpdate = this.onColumnUpdate.bind(this);
     this.createColumns = this.createColumns.bind(this);
     this.calculateTotal = this.calculateTotal.bind(this);
   }
 
   componentDidMount() {
-    this.props.getVariableCost();
-  }
-
-  getConfirmDoc(docLink) {
-    // console.log("TripsData docLink ", docLink);
-    axios
-      .post(
-        "/api/pdf",
-        { docLink },
-        {
-          method: "POST",
-          responseType: "blob"
-        }
-      )
-      .then(response => {
-        const file = new Blob([response.data], { type: "application/pdf" });
-        const fileURL = URL.createObjectURL(file);
-        window.open(fileURL);
-      })
-      .catch(error => console.log(error));
-  }
-
-  editTable(cellInfo) {
-    // console.log(
-    //   "cell info........",
-    //   cellInfo,
-    //   "id: ",
-    //   cellInfo.row[cellInfo.column.id]
-    // );
-    let dollarSign;
-    const findEditableRow = this.state.editableRowIndex.find(
-      row => row === cellInfo.index
-    );
-
-    dollarSign = cellInfo.column.id === "dollarPerMile"  ? "$" : "";
-    let value = this.props.variableCost[cellInfo.index][ cellInfo.column.id];
-
-    if( typeof(value) === 'string' && dollarSign ) {
-      value = Number(value).toLocaleString();
-    }
-
-    return findEditableRow || findEditableRow === 0 ? (
-      <div
-        style={{ backgroundColor: "#fafafa" }}
-        contentEditable
-        suppressContentEditableWarning
-        onBlur={e => {
-          const data = [...this.props.variableCost];
-          data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
-          this.props.updateDirectVariableCost({ data });
-        }}
-        dangerouslySetInnerHTML={{
-          __html: value
-        }}
-      />
-    ) : (
-      <div
-        style={{ backgroundColor: "#fafafa" }}
-        suppressContentEditableWarning
-        onBlur={e => {
-          const data = [...this.props.variableCost];
-          data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
-          this.props.updateDirectVariableCost({ data });
-        }}
-        dangerouslySetInnerHTML={{
-          __html:
-            dollarSign + value
-        }}
-      />
-    );
-  }
-
-  editRow(row) {
-    // console.log("VariableCost.js editRow ", row, "row index: ", row.index);
-    const alreadyEditable = this.state.editableRowIndex.find(
-      editableRow => editableRow === row.index
-    );
-    if (alreadyEditable || alreadyEditable === 0) {
-      this.setState({
-        editableRowIndex: this.state.editableRowIndex.filter(
-          editableRow => editableRow !== row.index
-        )
-      });
-    } else {
-      this.setState({
-        editableRowIndex: [...this.state.editableRowIndex, row.index]
-      });
-    }
-  }
-
-  deleteRow(row) {
-    let result = window.confirm("Do you want to delete this row?")
-    if(result){
-      this.props.updateVariableCost({
-        data: [
-          ...this.props.variableCost.slice(0, row.index),
-          ...this.props.variableCost.slice(row.index + 1)
-        ]
-      });
-    }
-  }
-
-  saveRow(row) {
-    // console.log("VariableCost.js saveRow this.props", this.props);
-    this.props.saveVariableCost(row);
-  }
-
-  addEmptyRow() {
-    let emptyRow = Object.assign({}, ...variableCostConfig);
-    // console.log("VariableCostsData.js addEmptyRow ", emptyRow);
-    this.props.setVariableCost(emptyRow);
-    // this.props.setTrip({
-    //   data: this.props.trip.concat(emptyRow)
-    // });
+    // this.props.getVariableCost();
   }
 
   calculateTotal({ data, column }) {
@@ -197,31 +77,6 @@ class VariableCost extends Component {
     return Number(Number(total).toFixed(2)).toLocaleString();
   }
 
-  onColumnUpdate(index) {
-    const columns =
-      this.state.columns.length > 0 ? this.state.columns : this.createColumns();
-    // console.log("onColumnUpdate index ", index, "...", columns[index]);
-    this.setState(
-      prevState => {
-        const columns1 = [];
-        columns1.push(...columns);
-        columns1[index].show = !columns1[index].show;
-        if (columns1[index].columns) {
-          columns1[index].columns.forEach(item => {
-            item.show = !item.show;
-          });
-        }
-
-        return {
-          columns: columns1
-        };
-      },
-      () => {
-        // console.log('onColumnUpdate columns: ', this.state.columns)
-      }
-    );
-  }
-
   createColumns() {
     // console.log("variableCostsData.js createColumns this.props: ", this.props);
 
@@ -230,11 +85,10 @@ class VariableCost extends Component {
         Header: "Variable Cost",
         Footer: this.calculateTotal,
         id: "costName",
-        accessor: d => d.truckLoadPayment,
+        accessor: "costName",
         show: true,
-        minWidth: 170,
         className: "columnBorder",
-        Cell: this.editTable
+
       },
       {
         Header: "Dollar Per Mile",
@@ -242,55 +96,9 @@ class VariableCost extends Component {
         accessor: "dollarPerMile",
         show: true,
         className: "columnBorder",
-        Cell: this.editTable
+
       },
 
-
-      {
-        Header: "Edit",
-        id: "edit",
-        accessor: "edit",
-        minWidth: 200,
-        show: true,
-        Cell: row => {
-          const editableRow = this.state.editableRowIndex.filter(
-            editableRow => editableRow === row.index
-          );
-          let editBtnColor = "secondary";
-          let editBtnName = "Edit";
-
-          if (editableRow.length > 0) {
-            editBtnName = "Editing...";
-            editBtnColor = "primary";
-          }
-
-          return (
-            <div>
-              <Button
-                variant="contained"
-                color={editBtnColor}
-                onClick={() => this.editRow(row)}
-              >
-                {editBtnName}
-              </Button>&nbsp;
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => this.deleteRow(row)}
-              >
-                Delete
-              </Button>&nbsp;
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => this.saveRow(row)}
-              >
-                Save
-              </Button>
-            </div>
-          );
-        }
-      }
     ];
   }
 
@@ -306,12 +114,6 @@ class VariableCost extends Component {
       <div className={classes.root}>
         <Toolbar className={classes.toolbar}>
           <SideMenu />
-          <ActionBtn saveRow={this.saveRow} addEmptyRow={this.addEmptyRow} />
-          &nbsp;
-          <ColumnChooser
-            columns={columns}
-            onColumnUpdate={this.onColumnUpdate}
-          />
           <div>&nbsp;</div>
           <InputsVariableCost />
         </Toolbar>

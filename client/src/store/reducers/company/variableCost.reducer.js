@@ -11,6 +11,7 @@ const variableCost = (state = initialState, action) => {
   switch (action.type) {
 
     case Actions.GET_VARIABLE_COST: {
+      console.log('ACTIONSSSSSSSSS ', state, action.payload)
       if( state.length === 0 ) return [...state,...action.payload]
       else return [...state.map(stateCost => {
         return action.payload.find( updatedCost => updatedCost.costName === stateCost.costName )
@@ -27,7 +28,7 @@ const variableCost = (state = initialState, action) => {
 
       return [...state.map(stateCost => {
         return action.payload.find( updatedCost => {
-          return action.payload.id === stateCost.id
+          return updatedCost.id === stateCost.id
         })
       })]
 

@@ -15,7 +15,6 @@ export const loadsConfig =  [{
   emptyMiles: 0,
   mileage: 0,
   dollarPerMile: 0,
-  dieselPrice: 0,
   fuelCost: 0,
   driverPay: 0,
   dispatchFee: 0,

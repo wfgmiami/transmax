@@ -15,24 +15,8 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
-  console.log('post variableCost', req.body)
+  // console.log('post variableCost', req.body)
   const variableCosts = req.body;
-  // for( let cost of req.body ){
-  //   console.log('cost', cost)
-  //   VariableCost.findById(cost.id)
-  //     .then( variableCost => {
-  //       if(!variableCost){
-  //         return res.status(404).send({
-  //           message: "Variable Cost Not Found"
-  //         })
-  //       }
-  //       variableCost.update({
-  //         id: cost.id,
-  //         costName: cost.costName,
-  //         dollarPerMile: cost.dollarPerMile,
-  //       })
-  //     })
-  // }
 
   async function processCost (variableCosts)  {
     await Promise.all(variableCosts.map(async cost => {
@@ -48,23 +32,6 @@ router.post('/', (req, res, next) => {
 
   }
   processCost(variableCosts)
-
-  // for( let i = 0; i < req.body.length; i++ ){
-  //   VariableCost.findById(cost.id)
-  //     .then( variableCost => {
-  //       if(!variableCost){
-  //         return res.status(404).send({
-  //           message: "Variable Cost Not Found"
-  //         })
-  //       }
-  //       variableCost.update({
-  //         costName: req.body.costName,
-  //         dollarPerMile: req.body.dollarPerMile,
-  //       })
-  //     })
-
-  // }
-
 
 })
 

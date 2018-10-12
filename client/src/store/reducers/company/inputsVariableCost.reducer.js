@@ -1,7 +1,7 @@
 import * as Actions from "../../actions/index";
 import { inputsVariableCostConfig } from "../../../configs/inputsVariableCostConfig";
 
-const initialState = inputsVariableCostConfig;
+const initialState = {};
 
 const inputsVariableCost = (state = initialState, action) => {
   // console.log("input variable cost reducer action ", state, action);
