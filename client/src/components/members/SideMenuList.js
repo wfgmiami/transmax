@@ -20,7 +20,7 @@ export const viewItems = (
       <ListItemIcon>
         <InboxIcon />
       </ListItemIcon>
-      <ListItemText primary="Trips" />
+      <ListItemText primary="Loads Data" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>

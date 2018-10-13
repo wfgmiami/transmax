@@ -32,7 +32,7 @@ class InputsVariableCost extends React.Component {
   };
 
   componentDidMount() {
-    this.props.getInputVariable()
+    // this.props.getInputVariable()
     this.setState({ originalInputs: this.props.inputsVariableCost })
   }
 

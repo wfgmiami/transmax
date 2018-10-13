@@ -5,10 +5,7 @@ import { loadsConfig } from "../../../configs/loadsConfig.js";
 const initialState = loadsConfig;
 
 const loads = (state = initialState, action) => {
-  // console.log("load reducer actionObj", action, " ", [
-  //   ...state,
-  //   { ...action.load }
-  // ]);
+  // console.log("load reducer actionObj", action)
 
   switch (action.type) {
     case Actions.GET_LOAD: {

@@ -35,7 +35,7 @@ function AppHolder(props) {
   let showComponent = "";
 
   switch (menuItem) {
-    case "Trips":
+    case "Loads Data":
       showComponent = <LoadsData />;
       break;
     case "Earnings":

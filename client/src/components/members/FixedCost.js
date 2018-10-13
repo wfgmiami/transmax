@@ -13,7 +13,11 @@ import ColumnChooser from "./ColumnChooser.js";
 import SideMenu from "./SideMenu";
 import ActionBtn from "./ActionBtn";
 import axios from "axios";
-
+import Edit from '@material-ui/icons/Edit';
+import Delete from '@material-ui/icons/Delete';
+import Save from '@material-ui/icons/Save';
+import Input from '@material-ui/icons/Input';
+import IconButton from '@material-ui/core/IconButton';
 import * as companyActions from "../../store/actions/company";
 
 const copyOfDatable = [].concat(Datatable);
@@ -222,6 +226,23 @@ class FixedCost extends Component {
     );
   }
 
+  getColumnWidth(accessor){
+    let data = this.props.fixedCost;
+    let max = 0;
+    const maxWidth = 400;
+    const spacing = 7.2;
+
+    for (let i = 0; i < data.length; i++){
+      if(data[i] !== undefined && data[i][accessor] !== null){
+        if(JSON.stringify(data[i][accessor] || 'null').length > max){
+          max = JSON.stringify(data[i][accessor] || 'null').length;
+        }
+      }
+    }
+    // console.log('max ', max)
+    return Math.min(maxWidth, max * spacing);
+  }
+
   createColumns() {
     // console.log("fixedCostsData.js createColumns this.props: ", this.props);
 
@@ -229,10 +250,9 @@ class FixedCost extends Component {
       {
         Header: "Fixed Cost",
         Footer: this.calculateTotal,
-        id: "costName",
-        accessor: d => d.truckLoadPayment,
+        accessor: "costName",
         show: true,
-        minWidth: 170,
+        width: this.getColumnWidth("costName"),
         className: "columnBorder",
         Cell: this.editTable
       },
@@ -241,6 +261,7 @@ class FixedCost extends Component {
         Footer: this.calculateTotal,
         accessor: "monthlyAmount",
         show: true,
+        width: 80,
         className: "columnBorder",
         Cell: this.editTable
       },
@@ -249,6 +270,7 @@ class FixedCost extends Component {
         Footer: this.calculateTotal,
         accessor: "yearlyAmount",
         show: true,
+        width: 80,
         className: "columnBorder",
         Cell: this.editTable
       },
@@ -257,43 +279,47 @@ class FixedCost extends Component {
         Header: "Edit",
         id: "edit",
         accessor: "edit",
-        minWidth: 200,
         show: true,
+        width: 200,
         Cell: row => {
           const editableRow = this.state.editableRowIndex.filter(
             editableRow => editableRow === row.index
           );
           let editBtnColor = "secondary";
           let editBtnName = "Edit";
+          let editIcon = <Edit />;
 
           if (editableRow.length > 0) {
             editBtnName = "Editing...";
             editBtnColor = "primary";
+            editIcon = <Input />;
           }
 
           return (
             <div>
-              <Button
+              <IconButton
                 variant="contained"
                 color={editBtnColor}
                 onClick={() => this.editRow(row)}
               >
-                {editBtnName}
-              </Button>&nbsp;
-              <Button
+                {editIcon}
+              </IconButton>&nbsp;
+
+              <IconButton
                 variant="contained"
                 color="secondary"
                 onClick={() => this.deleteRow(row)}
               >
-                Delete
-              </Button>&nbsp;
-              <Button
+                <Delete/>
+              </IconButton>&nbsp;
+
+              <IconButton
                 variant="contained"
                 color="secondary"
                 onClick={() => this.saveRow(row)}
               >
-                Save
-              </Button>
+                <Save/>
+              </IconButton>
             </div>
           );
         }
@@ -302,13 +328,12 @@ class FixedCost extends Component {
   }
 
   render() {
-    // const { data } = this.state;
     const { fixedCost, classes } = this.props;
-
-    // console.log("TripsData.js this.state ", this.state);
+    // console.log("*** FixedCost this.props ", this.props);
 
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();
+
     return (
       <div className={classes.root}>
         <Toolbar className={classes.toolbar}>

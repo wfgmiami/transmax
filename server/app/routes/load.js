@@ -14,10 +14,9 @@ router.get('/', (req, res, next) => {
       include: [{
         model: Company
       }],
-      order:
-      [['pickupDate', 'ASC']]
     }],
-
+    order:
+      [['pickupDate', 'ASC']]
   })
     .then( loads => res.json( loads ))
     .catch( next )

@@ -39,7 +39,7 @@ class VariableCost extends Component {
   }
 
   componentDidMount() {
-    // this.props.getVariableCost();
+    this.props.getVariableCost();
   }
 
   calculateTotal({ data, column }) {

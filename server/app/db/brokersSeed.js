@@ -137,9 +137,9 @@ const BrokersData = [
     address: "",
     phone: "",
     email: "",
-    bookedLoads: 1,
-    totalPayment: 925,
-    totalLoadedMiles: 487,
+    bookedLoads: 2,
+    totalPayment: 3325,
+    totalLoadedMiles: 1307,
     avgDollarPerMile: 0
   },
   {
@@ -150,6 +150,17 @@ const BrokersData = [
     email: "",
     bookedLoads: 1,
     totalPayment: 900,
+    totalLoadedMiles: 546,
+    avgDollarPerMile: 0
+  },
+  {
+    brokerId: 15,
+    name: "Landstar",
+    address: "",
+    phone: "",
+    email: "",
+    bookedLoads: 1,
+    totalPayment: 2150,
     totalLoadedMiles: 546,
     avgDollarPerMile: 0
   },

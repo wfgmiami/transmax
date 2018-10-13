@@ -14,6 +14,11 @@ import ColumnChooser from "./ColumnChooser.js";
 import SideMenu from "./SideMenu";
 import ActionBtn from "./ActionBtn";
 import DateFilter from "./DateFilter";
+import Edit from '@material-ui/icons/Edit';
+import Delete from '@material-ui/icons/Delete';
+import Save from '@material-ui/icons/Save';
+import Input from '@material-ui/icons/Input';
+import IconButton from '@material-ui/core/IconButton';
 import CustomPagination from "./CustomPagination.js";
 import { exportTableToCSV } from "./export.js";
 import { exportTableToJSON } from "./export.js";
@@ -58,10 +63,9 @@ class LoadsData extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshop){
-    console.log('..............')
+    // console.log('***componentDidUpdate ')
     if(this.props.load !== prevProps.load){
-      console.log('..............////////////////')
-      this.props.getVariableCost();
+      this.props.getInputVariable()
     }
   }
 
@@ -70,13 +74,12 @@ class LoadsData extends Component {
     const columns = this.createColumns();
     // console.log("handle download ", data, columns);
     exportTableToCSV(data, columns, "data.csv");
-    //console.log(data);
   }
+
   handleDownloadToJson() {
     // console.log("test json", this);
     const data = this.reactTable.getResolvedState().sortedData;
     exportTableToJSON(data, this.state.columns, "data.json");
-    //console.log(data[0]._original);
   }
 
   getConfirmDoc(docLink) {
@@ -101,6 +104,23 @@ class LoadsData extends Component {
         // window.open(fileURL);
       })
       .catch(error => console.log(error));
+  }
+
+  getColumnWidth(accessor){
+    let data = this.props.load;
+    let max = 0;
+    const maxWidth = 400;
+    const spacing = 7.3;
+
+    for (let i = 0; i < data.length; i++){
+      if(data[i] !== undefined && data[i][accessor] !== null){
+        if(JSON.stringify(data[i][accessor] || 'null').length > max){
+          max = JSON.stringify(data[i][accessor] || 'null').length;
+        }
+      }
+    }
+    // console.log('max ', max)
+    return Math.min(maxWidth, max * spacing);
   }
 
   editTable(cellInfo) {
@@ -155,9 +175,9 @@ class LoadsData extends Component {
         dollarSign = "";
     }
 
-    // if (cellInfo.column.id === "payment") {
-    //   dollarSign = "$";
-    // }
+    if( typeof(fieldValue) === 'string' && dollarSign ) {
+      fieldValue = Number(fieldValue).toLocaleString();
+    }
 
     return findEditableRow || findEditableRow === 0 ? (
       <div
@@ -245,19 +265,22 @@ class LoadsData extends Component {
 
     const total = data.reduce((memo, load) => {
       // console.log("....info", load,column.id, load[column.id]);
+      let payment = load[column.id];
 
-      if (typeof load[column.id] === "object") {
-        value = load[column.id].props.dangerouslySetInnerHTML.__html;
+      if (typeof payment === "object") {
+        value = payment.props.dangerouslySetInnerHTML.__html;
+
         if (typeof value === "string" && value.substring(0, 1) === "$") {
           dollarSign = true;
           value = value.slice(1);
+          value = parseFloat(value.replace(/,/g, ""));
         }
         memo += Number(value);
       } else {
-        let payment = load[column.id];
+
         if (payment === "") payment = 0;
         if (typeof payment === "string") {
-          payment = parseFloat(load[column.id].replace(/,/g, ""));
+          payment = parseFloat(payment.replace(/,/g, ""));
         }
 
         memo += payment;
@@ -273,7 +296,7 @@ class LoadsData extends Component {
       return "$" + Number(total.toFixed(0)).toLocaleString();
     } else if (column.id === "dieselPrice") {
       return "$" + Number((total / loadsCount).toFixed(2)).toLocaleString();
-    } else if (column.id === "bookDate") {
+    } else if (column.id === "pickupDate") {
       return `Total Loads: ${loadsCount}`;
     }
 
@@ -316,6 +339,7 @@ class LoadsData extends Component {
         accessor: "pickupDate",
         show: true,
         className: "columnBorder",
+        minWidth: 120,
         Cell: this.editTable
       },
       {
@@ -323,6 +347,7 @@ class LoadsData extends Component {
         accessor: "truckId",
         show: false,
         className: "columnBorder",
+        minWidth: this.getColumnWidth("truckId"),
         Cell: this.editTable
       },
       {
@@ -330,6 +355,7 @@ class LoadsData extends Component {
         accessor: "driverName",
         show: false,
         className: "columnBorder",
+        minWidth: this.getColumnWidth("driverName"),
         Cell: this.editTable
       },
       {
@@ -337,34 +363,39 @@ class LoadsData extends Component {
         accessor: "truck.company.name",
         show: false,
         className: "columnBorder",
+        minWidth: this.getColumnWidth("truck.company.name"),
         Cell: this.editTable
       },
       {
         Header: "Load",
         accessor: "loadNumber",
-        show: true,
+        show: false,
         className: "columnBorder",
+        minWidth: this.getColumnWidth("loadNumber"),
         Cell: this.editTable
       },
       {
         Header: "Broker",
         accessor: "brokerName",
-        show: true,
+        show: false,
         className: "columnBorder",
+        minWidth: this.getColumnWidth("brokerName"),
         Cell: this.editTable
       },
       {
         Header: "Shipper",
         accessor: "shipper",
-        show: true,
+        show: false,
         className: "columnBorder",
+        minWidth: this.getColumnWidth("shipper"),
         Cell: this.editTable
       },
       {
         Header: "Consignee",
         accessor: "consignee",
-        show: true,
+        show: false,
         className: "columnBorder",
+        minWidth: this.getColumnWidth("consignee"),
         Cell: this.editTable
       },
       {
@@ -372,7 +403,7 @@ class LoadsData extends Component {
         accessor: "pickUpCityState",
         show: true,
         className: "columnBorder",
-        minWidth: 130,
+        minWidth: this.getColumnWidth("pickUpCityState"),
         Cell: this.editTable
       },
       {
@@ -380,7 +411,7 @@ class LoadsData extends Component {
         accessor: "dropOffCityState",
         show: true,
         className: "columnBorder",
-        minWidth: 130,
+        minWidth: this.getColumnWidth("dropOffCityState"),
         Cell: this.editTable
       },
       {
@@ -388,7 +419,7 @@ class LoadsData extends Component {
         accessor: "pickUpAddress",
         show: false,
         className: "columnBorder",
-        minWidth: 240,
+        minWidth: this.getColumnWidth("pickUpAddress"),
         Cell: this.editTable
       },
       {
@@ -396,13 +427,14 @@ class LoadsData extends Component {
         accessor: "dropOffAddress",
         show: false,
         className: "columnBorder",
-        minWidth: 240,
+        minWidth: this.getColumnWidth("dropOffAddress"),
         Cell: this.editTable
       },
       {
         Header: "Commodity",
         accessor: "commodity",
         show: false,
+        minWidth: this.getColumnWidth("commodity"),
         Cell: this.editTable
       },
       {
@@ -410,6 +442,7 @@ class LoadsData extends Component {
         accessor: "weight",
         show: false,
         className: "columnBorder",
+        minWidth: 80,
         Cell: this.editTable
       },
       {
@@ -417,6 +450,7 @@ class LoadsData extends Component {
         accessor: "trailer",
         show: false,
         className: "columnBorder",
+        minWidth: 80,
         Cell: this.editTable
       },
       {
@@ -425,6 +459,7 @@ class LoadsData extends Component {
         accessor: "payment",
         show: true,
         className: "columnBorder",
+        minWidth: 80,
         Cell: this.editTable
       },
       {
@@ -432,6 +467,7 @@ class LoadsData extends Component {
         Footer: this.calculateTotal,
         accessor: "loadedMiles",
         className: "columnBorder",
+        minWidth: 80,
         show: true,
         Cell: this.editTable
       },
@@ -441,6 +477,7 @@ class LoadsData extends Component {
         accessor: "emptyMiles",
         show: true,
         className: "columnBorder",
+        minWidth: 80,
         Cell: this.editTable
       },
       {
@@ -448,6 +485,7 @@ class LoadsData extends Component {
         Footer: this.calculateTotal,
         id: "mileage",
         show: true,
+        minWidth: 80,
         className: "columnBorder",
         accessor: d => {
           const totalMiles = Number(d.loadedMiles) + Number(d.emptyMiles);
@@ -467,6 +505,7 @@ class LoadsData extends Component {
         id: "dollarPerMile",
         show: true,
         className: "columnBorder",
+        minWidth: 80,
         accessor: d => {
           let payment = d.payment;
           if (typeof d.payment === "string")
@@ -498,6 +537,7 @@ class LoadsData extends Component {
         id: "fuelCost",
         show: true,
         className: "columnBorder",
+        minWidth: 80,
         accessor: d => {
           let fuelCost =
             ((Number(d.loadedMiles) + Number(d.emptyMiles)) / Number(mpg)) *
@@ -520,6 +560,7 @@ class LoadsData extends Component {
         id: "driverPay",
         show: true,
         className: "columnBorder",
+        minWidth: 80,
         accessor: d => {
           // if(this.state.editableRowIndex.length > 0){
 
@@ -544,8 +585,9 @@ class LoadsData extends Component {
         Header: "Dispatch Fee",
         Footer: this.calculateTotal,
         id: "dispatchFee",
-        show: true,
+        show: false,
         className: "columnBorder",
+        minWidth: 80,
         accessor: d => {
           let payment = d.payment;
           if (typeof d.payment === "string")
@@ -570,6 +612,7 @@ class LoadsData extends Component {
         accessor: "lumper",
         show: false,
         className: "columnBorder",
+        minWidth: 80,
         Cell: this.editTable
       },
       {
@@ -578,6 +621,7 @@ class LoadsData extends Component {
         accessor: "detention",
         show: false,
         className: "columnBorder",
+        minWidth: 80,
         Cell: this.editTable
       },
       {
@@ -586,6 +630,7 @@ class LoadsData extends Component {
         accessor: "detentionDriverPay",
         show: false,
         className: "columnBorder",
+        minWidth: 80,
         Cell: this.editTable
       },
       {
@@ -594,6 +639,7 @@ class LoadsData extends Component {
         accessor: "secondStopDriverPay",
         show: false,
         className: "columnBorder",
+        minWidth: 80,
         Cell: this.editTable
       },
       {
@@ -602,6 +648,7 @@ class LoadsData extends Component {
         accessor: "lateFee",
         show: false,
         className: "columnBorder",
+        minWidth: 80,
         Cell: this.editTable
       },
       {
@@ -610,6 +657,7 @@ class LoadsData extends Component {
         accessor: "toll",
         show: false,
         className: "columnBorder",
+        minWidth: 80,
         Cell: this.editTable
       },
       {
@@ -618,6 +666,7 @@ class LoadsData extends Component {
         accessor: "roadMaintenance",
         show: false,
         className: "columnBorder",
+        minWidth: 80,
         Cell: this.editTable
       },
       {
@@ -626,6 +675,7 @@ class LoadsData extends Component {
         accessor: "otherExpenses",
         show: false,
         className: "columnBorder",
+        minWidth: 80,
         Cell: this.editTable
       },
       {
@@ -634,6 +684,7 @@ class LoadsData extends Component {
         id: "totalExpenses",
         show: true,
         className: "columnBorder",
+        minWidth: 80,
         accessor: d => {
           let payment = d.payment;
           if (typeof d.payment === "string")
@@ -658,7 +709,7 @@ class LoadsData extends Component {
           return (
             <div
               dangerouslySetInnerHTML={{
-                __html: "$" + Number(totalExpenses).toFixed(0)
+                __html: "$" + Number(Number(totalExpenses).toFixed(0)).toLocaleString()
               }}
             />
           );
@@ -670,6 +721,7 @@ class LoadsData extends Component {
         id: "profit",
         show: true,
         className: "columnBorder",
+        minWidth: 80,
         accessor: d => {
           let payment = d.payment;
           if (typeof d.payment === "string")
@@ -695,7 +747,7 @@ class LoadsData extends Component {
           return (
             <div
               dangerouslySetInnerHTML={{
-                __html: "$" + Number(profit).toFixed(0)
+                __html: "$" + Number(Number(profit).toFixed(0)).toLocaleString()
               }}
             />
           );
@@ -706,6 +758,7 @@ class LoadsData extends Component {
         accessor: "confirmFilePath",
         show: true,
         className: "columnBorder",
+        minWidth: 50,
         Cell: ({ row }) => {
           return (
             <a
@@ -730,35 +783,39 @@ class LoadsData extends Component {
           );
           let editBtnColor = "secondary";
           let editBtnName = "Edit";
+          let editIcon = <Edit />;
 
           if (editableRow.length > 0) {
             editBtnName = "Editing...";
             editBtnColor = "primary";
+            editIcon = <Input />;
           }
 
           return (
             <div>
-              <Button
+              <IconButton
                 variant="contained"
                 color={editBtnColor}
                 onClick={() => this.editRow(row)}
               >
-                {editBtnName}
-              </Button>&nbsp;
-              <Button
+                {editIcon}
+              </IconButton>&nbsp;
+
+              <IconButton
                 variant="contained"
                 color="secondary"
                 onClick={() => this.deleteRow(row)}
               >
-                Delete
-                </Button>&nbsp;
-              <Button
+                <Delete/>
+              </IconButton>&nbsp;
+
+              <IconButton
                 variant="contained"
                 color="secondary"
                 onClick={() => this.saveRow(row)}
               >
-                Save
-              </Button>
+                <Save/>
+              </IconButton>
             </div>
           );
         }
@@ -767,13 +824,13 @@ class LoadsData extends Component {
   }
 
   render() {
-    // const { data } = this.state;
-    const { load, classes } = this.props;
 
-    console.log("LoadsData.js this.props ", this.props);
+    const { load, classes } = this.props;
+    console.log("*** render LoadsData this.props ", this.props);
 
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();
+
     return (
       <div className={classes.root}>
         <Toolbar className={classes.toolbar}>
@@ -799,9 +856,9 @@ class LoadsData extends Component {
           columns={columns}
           defaultPageSize={20}
           style={
-            {
+            {/* {
               height: "800px"
-            }
+            } */}
           }
           className="-sloaded -highlight"
         />
@@ -827,7 +884,7 @@ function mapDispatchToProps(dispatch) {
       setLoad: freightActions.setLoad,
       updateLoad: freightActions.updateLoad,
       saveLoads: freightActions.saveLoads,
-      getVariableCost: companyActions.getVariableCost,
+      getInputVariable: companyActions.getInputVariable
     },
     dispatch
   );
