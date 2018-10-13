@@ -1,27 +1,26 @@
 import React, { Component } from "react";
 import ReactTable from "react-table";
-import Button from "@material-ui/core/Button";
-import { withStyles } from "@material-ui/core/styles";
-import Toolbar from "@material-ui/core/Toolbar";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 import "react-table/react-table.css";
-// import { Datatable } from "./Datatable";
-import { loadsConfig } from "../../configs/loadsConfig";
-import ColumnChooser from "./ColumnChooser.js";
-import SideMenu from "./SideMenu";
-import ActionBtn from "./ActionBtn";
-import DateFilter from "./DateFilter";
+import { withStyles } from "@material-ui/core/styles";
+import Toolbar from "@material-ui/core/Toolbar";
 import Edit from '@material-ui/icons/Edit';
 import Delete from '@material-ui/icons/Delete';
 import Save from '@material-ui/icons/Save';
 import Input from '@material-ui/icons/Input';
 import IconButton from '@material-ui/core/IconButton';
-import CustomPagination from "./CustomPagination.js";
 import { exportTableToCSV } from "./export.js";
 import { exportTableToJSON } from "./export.js";
+import { loadsConfig } from "../../configs/loadsConfig";
+import ColumnChooser from "./ColumnChooser.js";
+import SideMenu from "./SideMenu";
+import ActionBtn from "./ActionBtn";
+import DateFilter from "./DateFilter";
+import CustomPagination from "./CustomPagination.js";
+import InputsVariableCost from './InputsVariableCost';
 
 import * as freightActions from "../../store/actions/freight";
 import * as companyActions from "../../store/actions/company";
@@ -782,11 +781,9 @@ class LoadsData extends Component {
             editableRow => editableRow === row.index
           );
           let editBtnColor = "secondary";
-          let editBtnName = "Edit";
           let editIcon = <Edit />;
 
           if (editableRow.length > 0) {
-            editBtnName = "Editing...";
             editBtnColor = "primary";
             editIcon = <Input />;
           }
@@ -835,7 +832,10 @@ class LoadsData extends Component {
       <div className={classes.root}>
         <Toolbar className={classes.toolbar}>
           <SideMenu />
+          &nbsp;
           <DateFilter />
+          &nbsp;
+          <InputsVariableCost />
           &nbsp;
           <ColumnChooser
             columns={columns}

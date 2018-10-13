@@ -112,11 +112,6 @@ class VariableCost extends Component {
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();
     return (
       <div className={classes.root}>
-        <Toolbar className={classes.toolbar}>
-          <SideMenu />
-          <div>&nbsp;</div>
-          <InputsVariableCost />
-        </Toolbar>
 
         <ReactTable
           data={variableCost}

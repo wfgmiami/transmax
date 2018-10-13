@@ -5,6 +5,7 @@ import Popover, { PopoverAnimationVertical } from "@material-ui/core/Popover";
 import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import ViewColumn from "@material-ui/icons/ViewColumn";
 import { withStyles } from "@material-ui/core/styles";
 //import 'font-awesome/css/font-awesome.min.css';
 import AlarmIcon from "@material-ui/icons/Reorder";
@@ -85,8 +86,8 @@ class ColumnChooser extends React.Component {
             marginLeft: "5px"
           }}
         >
-          Select Columns
-          <AlarmIcon className={classes.icon} />
+          Columns &nbsp;
+          <ViewColumn />
         </Button>
 
         <Popover

@@ -4,7 +4,6 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import Brokers from "@material-ui/icons/ViewList";
-import StarIcon from "@material-ui/icons/Star";
 import SendIcon from "@material-ui/icons/Send";
 import TruckIcon from "@material-ui/icons/LocalShipping";
 import Drivers from "@material-ui/icons/Person";

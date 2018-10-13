@@ -2,9 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
+import Menu from "@material-ui/icons/Menu";
+import IconButton from '@material-ui/core/IconButton';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
@@ -35,11 +36,6 @@ class SideMenu extends React.Component {
   };
 
   handleMenuClick = e => {
-    // console.log(
-    //   "SideMenu handleMenuClick ",
-    //   this.props,
-    //   this.props.nav.activeMenu
-    // );
     const chosenNav = e.target.textContent;
     this.setState({ left: false }, () => {
       if (chosenNav === "Log Out") {
@@ -64,7 +60,7 @@ class SideMenu extends React.Component {
 
     return (
       <div>
-        <Button onClick={this.toggleDrawer("left", true)}>Menu</Button>
+        <IconButton onClick={this.toggleDrawer("left", true)}><Menu /></IconButton>
 
         <SwipeableDrawer
           open={this.state.left}

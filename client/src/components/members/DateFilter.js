@@ -6,7 +6,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 // import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogActions from "@material-ui/core/DialogActions";
-import AlarmIcon from "@material-ui/icons/Reorder";
+import DateRange from "@material-ui/icons/DateRange";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
@@ -73,8 +73,8 @@ class DateFilter extends React.Component {
             marginLeft: "5px"
           }}
         >
-          DATE RANGE
-          <AlarmIcon className={classes.icon} />
+          DATES &nbsp;
+          <DateRange />
         </Button>
         <Dialog
           disableBackdropClick

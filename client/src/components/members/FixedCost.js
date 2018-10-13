@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import ReactTable from "react-table";
-import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import { connect } from "react-redux";
@@ -286,12 +285,9 @@ class FixedCost extends Component {
             editableRow => editableRow === row.index
           );
           let editBtnColor = "secondary";
-          let editBtnName = "Edit";
           let editIcon = <Edit />;
 
           if (editableRow.length > 0) {
-            editBtnName = "Editing...";
-            editBtnColor = "primary";
             editIcon = <Input />;
           }
 
