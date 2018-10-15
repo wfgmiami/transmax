@@ -6,7 +6,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 // import DialogTitle from "@material-ui/core/DialogTitle";
-import AlarmIcon from "@material-ui/icons/Reorder";
+import AddCircle from '@material-ui/icons/AddCircle';
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
@@ -55,7 +55,7 @@ class AddSaveBtn extends React.Component {
         <Button
           size="small"
           variant="outlined"
-          onClick={this.handleClickOpen}
+          onClick={this.handleAddEmptyRow}
           style={{
             backgroundColor: "white",
             height: "32px",
@@ -63,40 +63,9 @@ class AddSaveBtn extends React.Component {
             marginLeft: "5px"
           }}
         >
-          ACTION
-          <AlarmIcon className={classes.icon} />
+          Add Row &nbsp;
+          <AddCircle />
         </Button>
-        <Dialog
-          disableBackdropClick
-          disableEscapeKeyDown
-          open={this.state.open}
-          onClose={this.handleClose}
-        >
-
-          <DialogContent>
-            <form className={classes.container}>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={this.handleAddEmptyRow}
-              >
-                Add Row
-              </Button>&nbsp;
-              {/* <Button
-                variant="contained"
-                color="primary"
-                onClick={this.handleSaveRows}
-              >
-                Save
-              </Button> */}
-            </form>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-              Cancel
-            </Button>
-          </DialogActions>
-        </Dialog>
       </div>
     );
   }

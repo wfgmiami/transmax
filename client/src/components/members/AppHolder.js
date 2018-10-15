@@ -53,9 +53,6 @@ function AppHolder(props) {
     case "Drivers":
       showComponent = <DriversData />;
       break;
-    case "Variable Cost":
-      showComponent = <VariableCost />;
-      break;
     case "Fixed Cost":
       showComponent = <FixedCost />;
       break;

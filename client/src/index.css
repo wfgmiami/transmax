@@ -22,3 +22,19 @@ body {
   border-right: 0.2px solid lightgrey !important;
   border-left: 0.2px solid lightgrey !important;
 }
+
+.ReactTable .rt-thead {
+  overflow-y: scroll;
+}
+
+.ReactTable .rt-thead::-webkit-scrollbar {
+  background: transparent;
+}
+
+.ReactTable .rt-tfoot {
+  overflow-y: scroll;
+}
+
+.ReactTable .rt-tfoot::-webkit-scrollbar {
+  background: transparent;
+ }

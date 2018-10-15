@@ -123,14 +123,14 @@ class LoadsData extends Component {
   }
 
   editTable(cellInfo) {
-    // console.log(
-    //   "cell info........",
-    //   cellInfo,
-    //   "cellInfo.column.id ",
-    //   cellInfo.column.id,
-    //   'cellInfo.row[cellInfo.column.id]:',
-    //   cellInfo.row[cellInfo.column.id]
-    // );
+    console.log(
+      "cell info........",
+      cellInfo,
+      "cellInfo.column.id ",
+      cellInfo.column.id,
+      'cellInfo.row[cellInfo.column.id]:',
+      cellInfo.row[cellInfo.column.id]
+    );
 
     let dollarSign;
     let fieldValue;
@@ -139,7 +139,6 @@ class LoadsData extends Component {
     );
 
     if( cellInfo.column.id === 'truck.company.name'){
-      console.log('field: ', this.props.load[cellInfo.index])
       fieldValue = this.props.load[cellInfo.index][
        'truck'] ? this.props.load[cellInfo.index][
         'truck']['company'].name : '';
@@ -177,16 +176,27 @@ class LoadsData extends Component {
     if( typeof(fieldValue) === 'string' && dollarSign ) {
       fieldValue = Number(fieldValue).toLocaleString();
     }
-
+    // if edit is enabled- first case, if it is not- second case
     return findEditableRow || findEditableRow === 0 ? (
       <div
         style={{ backgroundColor: "#fafafa" }}
         contentEditable
         suppressContentEditableWarning
         onBlur={e => {
-          const data = [...this.props.load];
-          data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
-          this.props.updateLoad({ data });
+          {/* const data = [...this.props.load]; */}
+          {/* data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML; */}
+          const keyToUpdate = cellInfo.column.id;
+          const valueToUpdate = e.target.innerHTML;
+          const indexToUpdate = cellInfo.index;
+        ``
+          const updateInfo = {
+            keyToUpdate: keyToUpdate,
+            valueToUpdate: valueToUpdate,
+            indexToUpdate: indexToUpdate
+          }
+
+          console.log('updateInfo ', updateInfo, cellInfo, cellInfo.column)
+          this.props.updateLoad(updateInfo);
         }}
         dangerouslySetInnerHTML={{
           __html:
@@ -198,11 +208,6 @@ class LoadsData extends Component {
       <div
         style={{ backgroundColor: "#fafafa" }}
         suppressContentEditableWarning
-        onBlur={e => {
-          const data = [...this.props.load];
-          data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
-          this.props.updateLoad({ data });
-        }}
         dangerouslySetInnerHTML={{
           __html:
             dollarSign +
@@ -232,28 +237,78 @@ class LoadsData extends Component {
 
   deleteRow(row) {
     let result = window.confirm("Do you want to delete this row?")
-    if(result){
-      this.props.updateLoad({
-        data: [
-          ...this.props.load.slice(0, row.index),
-          ...this.props.load.slice(row.index + 1)
-        ]
-      });
-    }
+    // console.log('row.index ', row.index, ' ', row)
+    this.props.deleteLoad(row.index)
   }
 
-  saveRow() {
-    // console.log("LoadsData.js saveRow this.props", this.props);
-    this.props.saveLoads(this.props.load);
+  // getId(){
+  //   const loads = this.props.load;
+  //   const arrayIds = loads.filter( load => load.id )
+  //     .map(load => load.id)
+  //   return Math.max(...arrayIds) + 1;
+  // }
+
+  saveRow(selectedRow) {
+    let rowId = null;
+    let rowToUpdate = {};
+    let toSaveRow = {};
+
+      const mandatoryItems = ['pickupDate', 'driverName', 'loadNumber', 'brokerName', 'pickUpCityState', 'dropOffCityState', 'pickUpAddress', 'dropOffAddress', 'payment',
+      'mileage', 'fuelCost', 'driverPay', 'totalExpenses']
+
+    // if(selectedRow.original.id){
+    //   rowId = selectedRow.original.id;
+    //   rowToUpdate = this.props.load.filter( load => load.id === rowId )[0];
+    // }else{
+      rowToUpdate = selectedRow.row;
+    // }
+
+    // console.log('**** rowToUpdate; selectedRow ', rowToUpdate, selectedRow)
+
+    let keys = Object.keys(rowToUpdate);
+
+    const emptyFields = keys.map( key => { if(!rowToUpdate[key]) return key })
+      .filter( loadItem => loadItem )
+
+    const requiredFieldsCheck = emptyFields.map( loadItem => {
+      if(mandatoryItems.includes( loadItem )) return loadItem
+    })
+      .filter( result => result)
+
+    // console.log("emtyFields, checkRequired ",emptyFields, " ", requiredFieldsCheck)
+
+    if(requiredFieldsCheck.length > 0) {
+      const msgString = requiredFieldsCheck.join(", ");
+      alert("Required fields: \n" +  msgString)
+    }
+
+
+    keys.forEach( key => {
+
+      let loadItem = rowToUpdate[key];
+      if(typeof(loadItem) === 'object' && key !== '_original'){
+
+        let value = loadItem.props.dangerouslySetInnerHTML.__html;
+        if (typeof value === "string" && value.substring(0, 1) === "$") {
+          value = value.slice(1);
+          value = parseFloat(value.replace(/,/g, ""));
+        }
+        toSaveRow[key] = value;
+      }
+
+      if(!isNaN(loadItem) && typeof loadItem === 'string'){
+        toSaveRow[key] = Number(loadItem)
+      }
+
+    })
+
+    const newRow = Object.assign(rowToUpdate, toSaveRow);
+    this.props.saveLoads(newRow);
   }
 
   addEmptyRow() {
     let emptyRow = Object.assign({}, ...loadsConfig);
-    // console.log("LoadsData.js addEmptyRow ", emptyRow);
-    this.props.setLoad(emptyRow);
-    // this.props.setLoad({
-    //   data: this.props.load.concat(emptyRow)
-    // });
+    this.props.addLoad(emptyRow);
   }
 
   calculateTotal({ data, column }) {
@@ -328,7 +383,7 @@ class LoadsData extends Component {
   }
 
   createColumns() {
-    // console.log("LoadsData.js createColumns this.props: ", this.props);
+    console.log("LoadsData.js createColumns this.props: ", this.props);
     const { mpg, dispatchPercent, dieselppg } = this.props;
 
     return [
@@ -358,6 +413,14 @@ class LoadsData extends Component {
         Cell: this.editTable
       },
       {
+        Header: "Driver Id",
+        accessor: "driverId",
+        show: false,
+        className: "columnBorder",
+        width: 70,
+        Cell: this.editTable
+      },
+      {
         Header: "Company",
         accessor: "truck.company.name",
         show: false,
@@ -379,6 +442,14 @@ class LoadsData extends Component {
         show: false,
         className: "columnBorder",
         minWidth: this.getColumnWidth("brokerName"),
+        Cell: this.editTable
+      },
+      {
+        Header: "Broker Id",
+        accessor: "brokerId",
+        show: false,
+        className: "columnBorder",
+        width: 70,
         Cell: this.editTable
       },
       {
@@ -538,9 +609,16 @@ class LoadsData extends Component {
         className: "columnBorder",
         minWidth: 80,
         accessor: d => {
-          let fuelCost =
-            ((Number(d.loadedMiles) + Number(d.emptyMiles)) / Number(mpg)) *
+          let fuelCost = null;
+          const findEditableRow = this.state.editableRowIndex.find(
+            row => row === d.id
+          );
+
+          // console.log('*** findEditableRow ', findEditableRow, " d.index ", d, "state ", this.state.editableRowIndex)
+          // if(findEditableRow === d.id){
+            fuelCost = ((Number(d.loadedMiles) + Number(d.emptyMiles)) / Number(mpg)) *
             Number(dieselppg);
+          // }
 
           fuelCost = isNaN(fuelCost) ? null : fuelCost;
 
@@ -823,7 +901,7 @@ class LoadsData extends Component {
   render() {
 
     const { load, classes } = this.props;
-    console.log("*** render LoadsData this.props ", this.props);
+    // console.log("*** render LoadsData this.props ", this.props);
 
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();
@@ -842,7 +920,7 @@ class LoadsData extends Component {
             onColumnUpdate={this.onColumnUpdate}
           />
           &nbsp;
-          <ActionBtn saveRow={this.saveRow} addEmptyRow={this.addEmptyRow} />
+          <ActionBtn addEmptyRow={this.addEmptyRow} />
 
         </Toolbar>
 
@@ -856,9 +934,9 @@ class LoadsData extends Component {
           columns={columns}
           defaultPageSize={20}
           style={
-            {/* {
+            {
               height: "800px"
-            } */}
+            }
           }
           className="-sloaded -highlight"
         />
@@ -881,7 +959,8 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
       getLoad: freightActions.getLoad,
-      setLoad: freightActions.setLoad,
+      deleteLoad: freightActions.deleteLoad,
+      addLoad: freightActions.addLoad,
       updateLoad: freightActions.updateLoad,
       saveLoads: freightActions.saveLoads,
       getInputVariable: companyActions.getInputVariable

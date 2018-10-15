@@ -88,8 +88,8 @@ class InputsVariableCost extends React.Component {
             disableEscapeKeyDown
             open={this.state.open}
             onClose={this.handleClose}
-            maxWidth="md"
           >
+            <div className={classes.container}>
             <div className={classes.varCostSection}>
             <DialogTitle>INPUTS</DialogTitle>
             <DialogContent >
@@ -220,7 +220,7 @@ class InputsVariableCost extends React.Component {
               <VariableCost />
             </DialogContent>
             </div>
-
+            </div>
           </Dialog>
         </div>
       </div>

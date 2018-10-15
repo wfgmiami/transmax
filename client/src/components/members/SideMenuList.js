@@ -58,12 +58,6 @@ export const otherViewItems = (
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <VariableCost />
-      </ListItemIcon>
-      <ListItemText primary="Variable Cost" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
         <FixedCost />
       </ListItemIcon>
       <ListItemText primary="Fixed Cost" />

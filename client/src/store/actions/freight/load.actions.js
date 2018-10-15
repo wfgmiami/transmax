@@ -2,17 +2,14 @@ import axios from "axios";
 // import { Datatable } from "../../../components/members/Datatable";
 
 export const GET_LOAD = "GET LOAD";
-export const SET_LOAD = "SET LOAD";
-export const UPDATE_LOAD = "UPDATE LOAD"
-export const SAVE_LOADS = "SAVE LOADS";
+export const DELETE_LOAD = "DELETE LOAD";
+export const ADD_LOAD = "ADD LOAD"
+export const UPDATE_LOAD = "UPDATE LOAD";
+export const SAVE_LOAD = "SAVE LOAD";
 export const GET_LOAD_DATE_RANGE = "GET LOAD DATE RANGE";
 
 export function getLoad() {
-  // return dispatch =>
-  //   dispatch({
-  //     type: GET_LOAD,
-  //     payload: Datatable
-  //   });
+
   const getLoad = axios.get("/api/load");
 
   return dispatch =>
@@ -24,13 +21,6 @@ export function getLoad() {
     );
 }
 
-export function setLoad(load) {
-  // console.log("set load called", load);
-  return {
-    type: SET_LOAD,
-    load
-  };
-}
 
 export function saveLoads(loads) {
   // console.log("load.actions.js saveLoad loads ", loads);
@@ -38,26 +28,37 @@ export function saveLoads(loads) {
   return dispatch =>
     postLoad.then(response =>
       dispatch({
-        type: SAVE_LOADS,
+        type: SAVE_LOAD,
         payload: response.data
       })
     );
 }
 
-export function updateLoad(loads) {
-  // console.log("load.actions.js updateLoad loads ", loads);
+export function addLoad(load) {
+  // console.log("load.actions.js addloads ", loads);
+  return {
+    type: ADD_LOAD,
+    load
+  };
+}
+
+export function updateLoad(load) {
+  // console.log("load.actions.js addloads ", loads);
   return {
     type: UPDATE_LOAD,
-    loads
+    load
+  };
+}
+
+export function deleteLoad(index) {
+  // console.log("load.actions.js delete loads ", index);
+  return {
+    type: DELETE_LOAD,
+    index: index
   };
 }
 
 export function getLoadDateRange(dateRange) {
-  // return dispatch =>
-  //   dispatch({
-  //     type: GET_LOAD_DATE_RANGE,
-  //     payload: dateRange
-  //   });
 
   const getLoadDateRange = axios.get('/api/load/daterange',
    { params:

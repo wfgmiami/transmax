@@ -115,12 +115,12 @@ class VariableCost extends Component {
 
         <ReactTable
           data={variableCost}
-          showPaginationBottom={true}
+          showPaginationBottom={false}
           columns={columns}
           defaultPageSize={10}
           style={
             {
-              // height: "400px"
+              height: "300px"
             }
           }
           className="-striped -highlight"

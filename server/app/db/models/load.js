@@ -7,10 +7,10 @@ const Load = db.define('load', {
     pickupDate: {
         type: DataTypes.DATE,
         allowNull: false
-
     },
     driverName: {
         type: DataTypes.STRING,
+        allowNull: false
     },
     loadNumber: {
         type: DataTypes.STRING,
@@ -18,6 +18,7 @@ const Load = db.define('load', {
     },
     brokerName: {
         type: DataTypes.STRING,
+        allowNull: false
     },
     shipper: {
         type: DataTypes.STRING,
@@ -47,23 +48,24 @@ const Load = db.define('load', {
     },
     loadedMiles: {
         type: DataTypes.INTEGER,
-        allowNull: false
     },
     emptyMiles: {
         type: DataTypes.INTEGER,
-        allowNull: false
     },
     mileage: {
         type: DataTypes.INTEGER,
+        allowNull: false
     },
     dollarPerMile: {
         type: DataTypes.DECIMAL,
     },
     fuelCost: {
         type: DataTypes.DECIMAL,
+        allowNull: false
     },
     driverPay: {
         type: DataTypes.DECIMAL,
+        allowNull: false
     },
     dispatchFee: {
         type: DataTypes.DECIMAL,
@@ -94,17 +96,19 @@ const Load = db.define('load', {
     },
     totalExpenses: {
         type: DataTypes.DECIMAL,
+        allowNull: false
     },
     profit: {
         type: DataTypes.DECIMAL,
+        allowNull: false
     },
     commodity: {
         type: DataTypes.TEXT,
       },
-      weight: {
+    weight: {
         type: DataTypes.INTEGER
       },
-      trailer: {
+    trailer: {
         type: DataTypes.TEXT,
       },
     confirmFilePath: {
