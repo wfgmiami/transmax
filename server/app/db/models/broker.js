@@ -4,11 +4,11 @@ const db = require('../db');
 const DataTypes = db.Sequelize;
 
 const Broker = db.define('broker', {
-    brokerId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        unique: true
-    },
+    // brokerId: {
+    //     type: DataTypes.INTEGER,
+    //     allowNull: false,
+    //     unique: true
+    // },
     name: DataTypes.STRING,
     email: {
         type: DataTypes.STRING,

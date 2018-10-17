@@ -123,14 +123,14 @@ class LoadsData extends Component {
   }
 
   editTable(cellInfo) {
-    console.log(
-      "cell info........",
-      cellInfo,
-      "cellInfo.column.id ",
-      cellInfo.column.id,
-      'cellInfo.row[cellInfo.column.id]:',
-      cellInfo.row[cellInfo.column.id]
-    );
+    // console.log(
+    //   "cell info........",
+    //   cellInfo,
+    //   "cellInfo.column.id ",
+    //   cellInfo.column.id,
+    //   'cellInfo.row[cellInfo.column.id]:',
+    //   cellInfo.row[cellInfo.column.id]
+    // );
 
     let dollarSign;
     let fieldValue;
@@ -253,7 +253,8 @@ class LoadsData extends Component {
     let rowToUpdate = {};
     let toSaveRow = {};
 
-      const mandatoryItems = ['pickupDate', 'driverName', 'loadNumber', 'brokerName', 'pickUpCityState', 'dropOffCityState', 'pickUpAddress', 'dropOffAddress', 'payment',
+      const mandatoryItems = ['pickupDate', 'truckId', 'driverName', 'driverId','loadNumber', 'brokerName',
+      'brokerId','pickUpCityState', 'dropOffCityState', 'pickUpAddress', 'dropOffAddress', 'payment',
       'mileage', 'fuelCost', 'driverPay', 'totalExpenses']
 
     // if(selectedRow.original.id){

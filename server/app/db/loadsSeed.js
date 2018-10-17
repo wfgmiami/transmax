@@ -642,6 +642,46 @@ const LoadsData = [
       "/brokerConfirmations/090518_reliableSourceLogistics.pdf"
     )
   },
+  {
+    pickupDate: "10/15/18",
+    truckId: 119,
+    driverId: 3,
+    driverName: "Tim",
+    loadNumber: "LD3207515",
+    brokerId: 16,
+    brokerName: "Dupre Logistics",
+    shipper: "Forever Collectibles",
+    consignee: "Fanatics",
+    pickUpCityState: "Arlington, TX 76011",
+    dropOffCityState: "Frazeysburg, OH 43822",
+    pickUpAddress:  "2007 Exchange Dr, Arlington, TX 76011",
+    dropOffAddress:  "11630 Old Riley Rd, Frazeysburg, OH 43822",
+    payment: 1500,
+    loadedMiles: 1128,
+    emptyMiles: 22,
+    mileage: 0,
+    dollarPerMile: 0,
+    fuelCost: 0,
+    driverPay: 0,
+    dispatchFee: 0,
+    lumper: 0,
+    detention: 0,
+    detentionDriverPay: 0,
+    secondStopDriverPay: 0,
+    lateFee: 0,
+    toll: 0,
+    roadMaintenance: 0,
+    otherExpenses: 0,
+    totalExpenses: 0,
+    profit: 0,
+    commodity: "General Commodities",
+    weight: 16600,
+    trailer: "Dry Van",
+    confirmFilePath: path.join(
+      __dirname,
+      "/brokerConfirmations/090518_reliableSourceLogistics.pdf"
+    )
+  },
 ];
 
 

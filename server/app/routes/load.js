@@ -48,9 +48,9 @@ router.get( '/daterange', ( req, res, next ) => {
 })
 
 router.post('/', (req, res, next) => {
-  console.log('*** post loads', req.body)
-  const rowId = req.body._original.id ? req.body._original.id : 0;
-  console.log('...............rowId', rowId)
+
+  const loadId = req.body._original.id ? req.body._original.id : 0;
+  console.log('*** post loads: ', req.body, " loadId: ", loadId)
 
   const loadObj = {
     pickupDate: req.body.pickupDate,
@@ -90,25 +90,55 @@ router.post('/', (req, res, next) => {
     confirmFilePath: req.body.confirmFilePath,
   }
 //if with new broker - first create broker with and id, then Load can be created
-  Load.findOrCreate({
-      where: { id: rowId },
-      defaults: loadObj
-      // include: [ Broker ]
-    })
-    .spread((load, created) => {
+  if(!loadId){
 
-      if(created){
-        console.log('created------------- ', created)
-        // return Load.create(loadObj)
-        // return created;
-      }else{
-        console.log('created.......... ', loadObj)
-        return load.update(loadObj)
+    Broker.create({
+      name: req.body.brokerName,
+    })
+    .then( broker => {
+      console.log('broker ', broker, " Brokerid ", broker.dataValues.id)
+
+      loadObj.brokerId = broker.dataValues.id;
+    })
+    .then( () => {
+      Load.create(loadObj)
+      .then( (load) => res.status(200).send(load))
+      .catch( (error) => res.status(400).send(error))
+     })
+
+  }else{
+    Load.findOne({
+      where: { id: loadId },
+      include: [ { model: Broker }]
+    })
+    .then( load => {
+      if(!load){
+        return res.status(404).send({
+          message: "Load Not Found"
+        })
       }
-    })
-    // .then( () => res.status(200).send(load))
-    // .catch( (error) => res.status(400).send(error))
+      const updateBroker = {
+        bookedLoads: Number(load.broker.bookedLoads) + 1,
+        totalPayment: Number(load.broker.totalPayment) +
+          Number(loadObj.payment),
+        totalLoadedMiles: Number(load.broker.totalLoadedMiles) +
+          Number(loadObj.loadedMiles)
+      }
 
+      console.log('** load ', load, "** updateBroker", updateBroker)
+      return Promise.all(
+
+           [load.broker.updateAttributes(updateBroker),
+           load.update(loadObj)]
+      )
+      //return load.Broker.updateAttributes(updateBroker)
+      // return load.update(loadObj)
+      .then( () => res.status(200).send(load))
+      .catch( (error) => res.status(400).send(error))
+    })
+
+  }
 
 })
+
 module.exports = router;

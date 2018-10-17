@@ -164,6 +164,17 @@ const BrokersData = [
     totalLoadedMiles: 546,
     avgDollarPerMile: 0
   },
+  {
+    brokerId: 16,
+    name: "Dupre Logistics",
+    address: "",
+    phone: "",
+    email: "",
+    bookedLoads: 1,
+    totalPayment: 1500,
+    totalLoadedMiles: 1128,
+    avgDollarPerMile: 0
+  },
 ];
 
 
