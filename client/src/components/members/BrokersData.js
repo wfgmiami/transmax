@@ -68,12 +68,12 @@ class BrokersData extends Component {
   }
 
   editTable(cellInfo) {
-    // console.log(
-    //   "cell info........",
-    //   cellInfo,
-    //   "id: ",
-    //   cellInfo.row[cellInfo.column.id]
-    // );
+    console.log(
+      "cell info........",
+      cellInfo,
+      "id: ",
+      cellInfo.row[cellInfo.column.id]
+    );
     let dollarSign;
     const findEditableRow = this.state.editableRowIndex.find(
       row => row === cellInfo.index

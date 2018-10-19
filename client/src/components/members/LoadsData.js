@@ -253,18 +253,13 @@ class LoadsData extends Component {
     let rowToUpdate = {};
     let toSaveRow = {};
 
-      const mandatoryItems = ['pickupDate', 'truckId', 'driverName', 'driverId','loadNumber', 'brokerName',
+    const mandatoryItems = ['pickupDate', 'truckId', 'driverName', 'driverId','loadNumber', 'brokerName',
       'brokerId','pickUpCityState', 'dropOffCityState', 'pickUpAddress', 'dropOffAddress', 'payment',
       'mileage', 'fuelCost', 'driverPay', 'totalExpenses']
 
-    // if(selectedRow.original.id){
-    //   rowId = selectedRow.original.id;
-    //   rowToUpdate = this.props.load.filter( load => load.id === rowId )[0];
-    // }else{
-      rowToUpdate = selectedRow.row;
-    // }
+    rowToUpdate = selectedRow.row;
 
-    // console.log('**** rowToUpdate; selectedRow ', rowToUpdate, selectedRow)
+    console.log("*** selectedRow ",  selectedRow, " ", selectedRow.original.id)
 
     let keys = Object.keys(rowToUpdate);
 
@@ -276,35 +271,40 @@ class LoadsData extends Component {
     })
       .filter( result => result)
 
-    // console.log("emtyFields, checkRequired ",emptyFields, " ", requiredFieldsCheck)
+
 
     if(requiredFieldsCheck.length > 0) {
       const msgString = requiredFieldsCheck.join(", ");
       alert("Required fields: \n" +  msgString)
+
+    }else{
+
+      keys.forEach( key => {
+        let loadItem = rowToUpdate[key];
+        if(typeof(loadItem) === 'object' && key !== '_original'){
+
+          let value = loadItem.props.dangerouslySetInnerHTML.__html;
+          if (typeof value === "string" && value.substring(0, 1) === "$") {
+            value = value.slice(1);
+            value = parseFloat(value.replace(/,/g, ""));
+          }
+          toSaveRow[key] = value;
+        }
+
+        if(!isNaN(loadItem) && typeof loadItem === 'string'){
+          toSaveRow[key] = Number(loadItem)
+        }
+
+      })
+
+      const newRow = Object.assign(rowToUpdate, toSaveRow);
+
+      if(selectedRow.original.id) this.props.editExistingLoad(newRow);
+      else  this.props.saveNewLoad(newRow);
+
+
     }
 
-
-    keys.forEach( key => {
-
-      let loadItem = rowToUpdate[key];
-      if(typeof(loadItem) === 'object' && key !== '_original'){
-
-        let value = loadItem.props.dangerouslySetInnerHTML.__html;
-        if (typeof value === "string" && value.substring(0, 1) === "$") {
-          value = value.slice(1);
-          value = parseFloat(value.replace(/,/g, ""));
-        }
-        toSaveRow[key] = value;
-      }
-
-      if(!isNaN(loadItem) && typeof loadItem === 'string'){
-        toSaveRow[key] = Number(loadItem)
-      }
-
-    })
-
-    const newRow = Object.assign(rowToUpdate, toSaveRow);
-    this.props.saveLoads(newRow);
   }
 
   addEmptyRow() {
@@ -902,7 +902,7 @@ class LoadsData extends Component {
   render() {
 
     const { load, classes } = this.props;
-    // console.log("*** render LoadsData this.props ", this.props);
+    console.log("*** render LoadsData this.props ", this.props);
 
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();
@@ -963,7 +963,8 @@ function mapDispatchToProps(dispatch) {
       deleteLoad: freightActions.deleteLoad,
       addLoad: freightActions.addLoad,
       updateLoad: freightActions.updateLoad,
-      saveLoads: freightActions.saveLoads,
+      saveNewLoad: freightActions.saveNewLoad,
+      editExistingLoad: freightActions.editExistingLoad,
       getInputVariable: companyActions.getInputVariable
     },
     dispatch

@@ -175,6 +175,28 @@ const BrokersData = [
     totalLoadedMiles: 1128,
     avgDollarPerMile: 0
   },
+  {
+    brokerId: 17,
+    name: "U.S. Xpress Logistics",
+    address: "",
+    phone: "",
+    email: "",
+    bookedLoads: 1,
+    totalPayment: 530,
+    totalLoadedMiles: 122,
+    avgDollarPerMile: 0
+  },
+  {
+    brokerId: 18,
+    name: "C.W. Brokerage, Inc",
+    address: "",
+    phone: "",
+    email: "",
+    bookedLoads: 1,
+    totalPayment: 2700,
+    totalLoadedMiles: 1085,
+    avgDollarPerMile: 0
+  },
 ];
 
 

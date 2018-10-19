@@ -5,12 +5,13 @@ export const GET_LOAD = "GET LOAD";
 export const DELETE_LOAD = "DELETE LOAD";
 export const ADD_LOAD = "ADD LOAD"
 export const UPDATE_LOAD = "UPDATE LOAD";
-export const SAVE_LOAD = "SAVE LOAD";
+export const SAVE_NEW_LOAD = "SAVE LOAD";
+export const EDIT_EXISTING_LOAD = "SAVE EXISTING LOAD";
 export const GET_LOAD_DATE_RANGE = "GET LOAD DATE RANGE";
 
 export function getLoad() {
 
-  const getLoad = axios.get("/api/load");
+  const getLoad = axios.get("/api/existingload");
 
   return dispatch =>
     getLoad.then(response =>
@@ -22,13 +23,25 @@ export function getLoad() {
 }
 
 
-export function saveLoads(loads) {
+export function saveNewLoad(load) {
   // console.log("load.actions.js saveLoad loads ", loads);
-  const postLoad = axios.post("/api/load", { ...loads });
+  const postLoad = axios.post("/api/newload", { ...load });
   return dispatch =>
     postLoad.then(response =>
       dispatch({
-        type: SAVE_LOAD,
+        type: SAVE_NEW_LOAD,
+        payload: response.data
+      })
+    );
+}
+
+export function editExistingLoad(load) {
+  // console.log("load.actions.js saveLoad loads ", loads);
+  const postLoad = axios.post("/api/existingload", { ...load });
+  return dispatch =>
+    postLoad.then(response =>
+      dispatch({
+        type: EDIT_EXISTING_LOAD,
         payload: response.data
       })
     );
@@ -60,7 +73,7 @@ export function deleteLoad(index) {
 
 export function getLoadDateRange(dateRange) {
 
-  const getLoadDateRange = axios.get('/api/load/daterange',
+  const getLoadDateRange = axios.get('/api/existingload/daterange',
    { params:
     { startDate: dateRange.startDate,
      endDate: dateRange.endDate } });

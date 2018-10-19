@@ -9,7 +9,7 @@ const loads = (state = initialState, action) => {
 
   switch (action.type) {
     case Actions.GET_LOAD: {
-      return [...action.payload];
+      return [...state, ...action.payload];
     }
 
     case Actions.GET_LOAD_DATE_RANGE: {
@@ -50,8 +50,24 @@ const loads = (state = initialState, action) => {
     }
 
 
-    case Actions.SAVE_LOAD: {
-      // console.log('*** save loads reducer ', action, state)
+    case Actions.SAVE_NEW_LOAD: {
+      console.log('*** save new load reducer ', action, state)
+
+      return [...state.map( (load, idx) => {
+        if( !load.id ) {
+          return action.payload;
+        }
+        else return load
+      })]
+
+      // return [
+      //   ...state,{...action.payload}
+      // ]
+
+    }
+
+    case Actions.EDIT_EXISTING_LOAD: {
+      console.log('*** save existing load reducer ', action, state)
 
       return [...state.map(load => {
         if(action.payload.id === load.id) return action.payload
