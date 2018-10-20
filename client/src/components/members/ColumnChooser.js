@@ -71,8 +71,54 @@ class ColumnChooser extends React.Component {
   };
 
   render() {
-    const { classes, columns } = this.props;
+    let { classes, columns } = this.props;
     // console.log("columnChooser this props: ", this.props);
+
+    columns.forEach( column => {
+
+      switch(column.Header){
+        case "Date":
+          column.Header = "Date (req)";
+          break;
+        case "Truck Id":
+          column.Header = "Truck Id (req)";
+          break;
+        case "Driver":
+          column.Header = "Driver (req)";
+          break;
+        case "Driver Id":
+          column.Header = "Driver Id (req)";
+          break;
+        case "Load":
+          column.Header = "Load (req)";
+          break;
+        case "Broker":
+          column.Header = "Broker (req)";
+          break;
+        case "Broker Id":
+          column.Header = "Broker Id (req)";
+          break;
+          case "Origin":
+          column.Header = "Origin (req)";
+          break;
+        case "Destination":
+          column.Header = "Destination (req)";
+          break;
+        case "Payment":
+          column.Header = "Payment";
+          break;
+        case "Loaded Miles":
+          column.Header = "Loaded Miles (req)";
+          break;
+        case "Empty Miles":
+          column.Header = "Empty Miles (req)";
+          break;
+        default:
+          column.Header;
+      }
+    })
+
+
     return (
       <div className={classes.root}>
         <Button
