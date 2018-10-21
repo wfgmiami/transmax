@@ -73,8 +73,9 @@ class ColumnChooser extends React.Component {
   render() {
     let { classes, columns } = this.props;
     // console.log("columnChooser this props: ", this.props);
+    const cols = columns.map( col => Object.assign({}, col) );
 
-    columns.forEach( column => {
+    cols.forEach( column => {
 
       switch(column.Header){
         case "Date":
@@ -98,14 +99,20 @@ class ColumnChooser extends React.Component {
         case "Broker Id":
           column.Header = "Broker Id (req)";
           break;
-          case "Origin":
+        case "Pick Up":
+          column.Header = "Pick Up (req)";
+          break;
+        case "Drop Off":
+          column.Header = "Drop Off (req)";
+          break;
+        case "Origin":
           column.Header = "Origin (req)";
           break;
         case "Destination":
           column.Header = "Destination (req)";
           break;
         case "Payment":
-          column.Header = "Payment";
+          column.Header = "Payment (req)";
           break;
         case "Loaded Miles":
           column.Header = "Loaded Miles (req)";
@@ -146,7 +153,7 @@ class ColumnChooser extends React.Component {
         >
           <FormControl component={"fieldset"} className={classes.boxElementPad}>
             <FormGroup className={classes.formGroup}>
-              {columns.map((column, index) => {
+              {cols.map((column, index) => {
                 return (
                   <FormControlLabel
                     key={index}

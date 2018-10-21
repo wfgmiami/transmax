@@ -18,15 +18,13 @@ const loads = (state = initialState, action) => {
 
     case Actions.DELETE_LOAD: {
       console.log('*** action load reducer delete load ', state, " ", action)
-      // return [...state.map(load => {
-      //   if(action.load.id === load.id) return action.load
-      //   else return load
-      // })]
 
-      return [
-        ...state.slice(0, action.index),
-        ...state.slice(action.index + 1)
+      return [...state.map(load => {
+              if(action.payload !== load.id)
+                 return load })
+              .filter( keepLoad => keepLoad)
       ]
+
     }
 
     case Actions.ADD_LOAD: {

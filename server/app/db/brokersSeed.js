@@ -61,7 +61,7 @@ const BrokersData = [
     phone: "",
     email: "",
     bookedLoads: 1,
-    totalPayment: 775,
+    totalPayment: 1000,
     totalLoadedMiles: 391,
     avgDollarPerMile: 0
   },
@@ -116,7 +116,7 @@ const BrokersData = [
     phone: "",
     email: "",
     bookedLoads: 1,
-    totalPayment: 1150,
+    totalPayment: 1250,
     totalLoadedMiles: 800,
     avgDollarPerMile: 0
   },

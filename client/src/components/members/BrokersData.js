@@ -35,70 +35,35 @@ class BrokersData extends Component {
     };
 
     this.editTable = this.editTable.bind(this);
-    this.editRow = this.editRow.bind(this);
-    this.saveRow = this.saveRow.bind(this);
-    this.deleteRow = this.deleteRow.bind(this);
-    this.addEmptyRow = this.addEmptyRow.bind(this);
-    this.onColumnUpdate = this.onColumnUpdate.bind(this);
     this.createColumns = this.createColumns.bind(this);
     this.calculateTotal = this.calculateTotal.bind(this);
+    this.onColumnUpdate = this.onColumnUpdate.bind(this);
   }
 
   componentDidMount() {
     this.props.getBroker();
   }
 
-  getConfirmDoc(docLink) {
-    // console.log("CompaniesData docLink ", docLink);
-    axios
-      .post(
-        "/api/pdf",
-        { docLink },
-        {
-          method: "POST",
-          responseType: "blob"
-        }
-      )
-      .then(response => {
-        const file = new Blob([response.data], { type: "application/pdf" });
-        const fileURL = URL.createObjectURL(file);
-        window.open(fileURL);
-      })
-      .catch(error => console.log(error));
-  }
-
   editTable(cellInfo) {
-    console.log(
-      "cell info........",
-      cellInfo,
-      "id: ",
-      cellInfo.row[cellInfo.column.id]
-    );
+    // console.log(
+    //   "cell info........",
+    //   cellInfo,
+    //   "id: ",
+    //   cellInfo.row[cellInfo.column.id]
+    // );
     let dollarSign;
+    let fieldValue;
+
     const findEditableRow = this.state.editableRowIndex.find(
       row => row === cellInfo.index
     );
-    dollarSign = cellInfo.column.id === "totalBooked" ? "$" : "";
+    dollarSign = cellInfo.column.id === "totalPayment" ? "$" : "";
+    fieldValue = this.props.broker[cellInfo.index][cellInfo.column.id];
+    if( typeof(fieldValue) === 'string' && !isNaN(fieldValue)) {
+      fieldValue = isNaN(Number(fieldValue)) ? fieldValue : Number(fieldValue).toLocaleString()
+    }
 
-    return findEditableRow || findEditableRow === 0 ? (
-      <div
-        style={{ backgroundColor: "#fafafa" }}
-        contentEditable
-        suppressContentEditableWarning
-        onBlur={e => {
-          const data = [...this.props.broker];
-          data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
-          this.props.updateBroker({ data });
-        }}
-        dangerouslySetInnerHTML={{
-          __html:
-            // dollarSign +
-            this.props.broker[cellInfo.index][
-              cellInfo.column.id
-            ].toLocaleString()
-        }}
-      />
-    ) : (
+    return  (
       <div
         style={{ backgroundColor: "#fafafa" }}
         suppressContentEditableWarning
@@ -110,56 +75,10 @@ class BrokersData extends Component {
         dangerouslySetInnerHTML={{
           __html:
             dollarSign +
-            this.props.broker[cellInfo.index][
-              cellInfo.column.id
-            ].toLocaleString()
+            fieldValue.toLocaleString()
         }}
       />
     );
-  }
-
-  editRow(row) {
-    // console.log("TripsData.js editRow ", row, "row index: ", row.index);
-    const alreadyEditable = this.state.editableRowIndex.find(
-      editableRow => editableRow === row.index
-    );
-    if (alreadyEditable || alreadyEditable === 0) {
-      this.setState({
-        editableRowIndex: this.state.editableRowIndex.filter(
-          editableRow => editableRow !== row.index
-        )
-      });
-    } else {
-      this.setState({
-        editableRowIndex: [...this.state.editableRowIndex, row.index]
-      });
-    }
-  }
-
-  deleteRow(row) {
-    let result = window.confirm("Do you want to delete this row?")
-    if(result){
-      this.props.updateBroker({
-        data: [
-          ...this.props.broker.slice(0, row.index),
-          ...this.props.broker.slice(row.index + 1)
-        ]
-      });
-    }
-  }
-
-  saveRow() {
-    // console.log("CompaniesData.js saveRow this.props", this.props);
-    this.props.saveBroker(this.props.broker);
-  }
-
-  addEmptyRow() {
-    let emptyRow = Object.assign({}, ...brokerConfig);
-    // console.log("CompaniesData.js addEmptyRow ", emptyRow);
-    this.props.setBroker(emptyRow);
-    // this.props.setTrip({
-    //   data: this.props.trip.concat(emptyRow)
-    // });
   }
 
   calculateTotal({ data, column }) {
@@ -188,7 +107,7 @@ class BrokersData extends Component {
       return memo;
     }, 0);
 
-    if (dollarSign || column.id === "totalBooked") {
+    if (dollarSign || column.id === "totalPayment") {
       if (column.id === "avgDollarPerMile") {
         return "$" + Number((total / brokersCount).toFixed(2)).toLocaleString();
       }
@@ -201,6 +120,7 @@ class BrokersData extends Component {
   }
 
   onColumnUpdate(index) {
+     console.log("onColumnUpdate index ", index, "...", this.state.columns);
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();
     // console.log("onColumnUpdate index ", index, "...", columns[index]);
@@ -232,10 +152,9 @@ class BrokersData extends Component {
       {
         Header: "Broker Id",
         Footer: this.calculateTotal,
-        accessor: "brokerId",
+        accessor: "id",
         show: false,
         className: "columnBorder",
-        Cell: this.editTable
       },
       {
         Header: "Name",
@@ -243,28 +162,24 @@ class BrokersData extends Component {
         show: true,
         minWidth: 170,
         className: "columnBorder",
-        Cell: this.editTable
       },
       {
         Header: "Address",
         accessor: "address",
         show: false,
         className: "columnBorder",
-        Cell: this.editTable
       },
       {
         Header: "Phone",
         accessor: "phone",
-        show: true,
+        show: false,
         className: "columnBorder",
-        Cell: this.editTable
       },
       {
         Header: "Email",
         accessor: "email",
-        show: true,
+        show: false,
         className: "columnBorder",
-        Cell: this.editTable
       },
       {
         Header: "Booked Loads",
@@ -272,7 +187,6 @@ class BrokersData extends Component {
         accessor: "bookedLoads",
         show: true,
         className: "columnBorder",
-        Cell: this.editTable
       },
       {
         Header: "Total Payment",
@@ -297,65 +211,18 @@ class BrokersData extends Component {
         show: true,
         className: "columnBorder",
         accessor: d => {
-          let amount = d.totalBooked;
-          if (typeof d.totalBooked === "string")
-            amount = parseFloat(d.totalBooked.replace(/,/g, ""));
-          let dollarPerMile = Number(amount) / Number(d.totalMiles);
-          dollarPerMile = isNaN(dollarPerMile) ? null : dollarPerMile;
-          return (
-            <div
-              dangerouslySetInnerHTML={{
-                __html: "$" + Number(dollarPerMile).toFixed(2)
-              }}
-            />
-          );
+        let dollarPerMile = Number(d.totalPayment) / Number(d.totalLoadedMiles);
+        dollarPerMile = isNaN(dollarPerMile) ? null : dollarPerMile;
+        return (
+          <div
+            dangerouslySetInnerHTML={{
+              __html: "$" + Number(dollarPerMile).toFixed(2)
+            }}
+          />
+        );
         }
       },
-      {
-        Header: "Edit",
-        id: "edit",
-        accessor: "edit",
-        minWidth: 200,
-        show: true,
-        Cell: row => {
-          const editableRow = this.state.editableRowIndex.filter(
-            editableRow => editableRow === row.index
-          );
-          let editBtnColor = "secondary";
-          let editBtnName = "Edit";
 
-          if (editableRow.length > 0) {
-            editBtnName = "Editing...";
-            editBtnColor = "primary";
-          }
-
-          return (
-            <div>
-              <Button
-                variant="contained"
-                color={editBtnColor}
-                onClick={() => this.editRow(row)}
-              >
-                {editBtnName}
-              </Button>&nbsp;
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => this.deleteRow(row)}
-              >
-                Delete
-              </Button>&nbsp;
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => this.saveRow(row)}
-              >
-                Save
-              </Button>
-            </div>
-          );
-        }
-      }
     ];
   }
 
@@ -385,8 +252,8 @@ class BrokersData extends Component {
           columns={columns}
           defaultPageSize={20}
           style={
-            {
-              // height: "400px"
+           {
+              height: "700px"
             }
           }
           className="-striped -highlight"
@@ -406,9 +273,6 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
       getBroker: companyActions.getBroker,
-      setBroker: companyActions.setBroker,
-      updateBroker: companyActions.updateBroker,
-      saveBroker: companyActions.saveBroker
     },
     dispatch
   );

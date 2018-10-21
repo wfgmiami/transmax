@@ -76,13 +76,13 @@ const FixedCostSeed = [
   },
   {
     costName: "Maintenance Truck",
-    monthlyAmount: 0,
-    yearlyAmount: 0
+    monthlyAmount: 1000,
+    yearlyAmount: 12000
   },
   {
     costName: "Maintenance Trailer",
-    monthlyAmount: 0,
-    yearlyAmount: 0
+    monthlyAmount: 200,
+    yearlyAmount: 2400
   },
 
 ];

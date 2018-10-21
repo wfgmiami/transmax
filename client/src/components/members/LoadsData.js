@@ -58,7 +58,8 @@ class LoadsData extends Component {
   }
 
   componentDidMount() {
-    this.props.getLoad();
+    if(this.props.load.length === 0)
+      this.props.getLoad();
   }
 
   componentDidUpdate(prevProps, prevState, snapshop){
@@ -173,9 +174,11 @@ class LoadsData extends Component {
         dollarSign = "";
     }
 
-    if( typeof(fieldValue) === 'string' && dollarSign ) {
-      fieldValue = Number(fieldValue).toLocaleString();
+    // for numbers stored as strings:
+    if( typeof(fieldValue) === 'string' && !isNaN(fieldValue)) {
+      fieldValue = isNaN(Number(fieldValue)) ? fieldValue : Number(fieldValue).toLocaleString()
     }
+
     // if edit is enabled- first case, if it is not- second case
     return findEditableRow || findEditableRow === 0 ? (
       <div
@@ -237,8 +240,8 @@ class LoadsData extends Component {
 
   deleteRow(row) {
     let result = window.confirm("Do you want to delete this row?")
-    // console.log('row.index ', row.index, ' ', row)
-    this.props.deleteLoad(row.index)
+    // console.log('row.index ', row.index, ' ', row.original.id)
+    this.props.deleteLoad(row.original.id)
   }
 
   // getId(){
@@ -321,7 +324,7 @@ class LoadsData extends Component {
     const total = data.reduce((memo, load) => {
       // console.log("....info", load,column.id, load[column.id]);
       let payment = load[column.id];
-
+      // console.log("....info", load,column.id,payment);
       if (typeof payment === "object") {
         value = payment.props.dangerouslySetInnerHTML.__html;
 
@@ -329,10 +332,14 @@ class LoadsData extends Component {
           dollarSign = true;
           value = value.slice(1);
           value = parseFloat(value.replace(/,/g, ""));
+
+        // mileage that might have , in the number (shows as string)
+        } else if (typeof value === "string") {
+          value = parseFloat(value.replace(",",""));
         }
         memo += Number(value);
-      } else {
 
+      } else {
         if (payment === "") payment = 0;
         if (typeof payment === "string") {
           payment = parseFloat(payment.replace(/,/g, ""));
@@ -384,7 +391,7 @@ class LoadsData extends Component {
   }
 
   createColumns() {
-    console.log("LoadsData.js createColumns this.props: ", this.props);
+    // console.log("LoadsData.js createColumns this.props: ", this.props);
     const { mpg, dispatchPercent, dieselppg } = this.props;
 
     return [
@@ -559,12 +566,15 @@ class LoadsData extends Component {
         minWidth: 80,
         className: "columnBorder",
         accessor: d => {
-          const totalMiles = Number(d.loadedMiles) + Number(d.emptyMiles);
+
+          const loadedMiles = isNaN(d.loadedMiles) ? d.loadedMiles.replace(",","") : d.loadedMiles;
+          const emptyMiles = isNaN(d.emptyMiles) ? d.emptyMiles.replace(",","") : d.emptyMiles;
+          const totalMiles = Number(loadedMiles) + Number(emptyMiles);
 
           return (
             <div
               dangerouslySetInnerHTML={{
-                __html: totalMiles
+                __html: totalMiles.toLocaleString()
               }}
             />
           );
@@ -578,11 +588,16 @@ class LoadsData extends Component {
         className: "columnBorder",
         minWidth: 80,
         accessor: d => {
-          let payment = d.payment;
-          if (typeof d.payment === "string")
-            payment = parseFloat(d.payment.replace(/,/g, ""));
+
+          let payment = typeof(d.payment) === "string" ? parseFloat(d.payment.replace(/,/g, "")) : d.payment;
+
+          let loadedMiles = typeof(d.loadedMiles) === "string" ? parseFloat(d.loadedMiles.replace(/,/g, "")) : d.loadedMiles;
+
+          let emptyMiles = typeof(d.emptyMiles) === "string" ? parseFloat(d.emptyMiles.replace(/,/g, "")) : d.emptyMiles;
+
           let dollarPerMile =
-            Number(payment) / (Number(d.loadedMiles) + Number(d.emptyMiles));
+            Number(payment) / (Number(loadedMiles) + Number(emptyMiles));
+
           dollarPerMile = isNaN(dollarPerMile) ? null : dollarPerMile;
           return (
             <div
@@ -615,11 +630,11 @@ class LoadsData extends Component {
             row => row === d.id
           );
 
-          // console.log('*** findEditableRow ', findEditableRow, " d.index ", d, "state ", this.state.editableRowIndex)
-          // if(findEditableRow === d.id){
-            fuelCost = ((Number(d.loadedMiles) + Number(d.emptyMiles)) / Number(mpg)) *
+          const loadedMiles = isNaN(d.loadedMiles) ? d.loadedMiles.replace(",","") : d.loadedMiles;
+          const emptyMiles = isNaN(d.emptyMiles) ? d.emptyMiles.replace(",","") : d.emptyMiles;
+
+          fuelCost = ((Number(loadedMiles) + Number(emptyMiles)) / Number(mpg)) *
             Number(dieselppg);
-          // }
 
           fuelCost = isNaN(fuelCost) ? null : fuelCost;
 
@@ -642,8 +657,11 @@ class LoadsData extends Component {
         accessor: d => {
           // if(this.state.editableRowIndex.length > 0){
 
+            const loadedMiles = isNaN(d.loadedMiles) ? d.loadedMiles.replace(",","") : d.loadedMiles;
+            const emptyMiles = isNaN(d.emptyMiles) ? d.emptyMiles.replace(",","") : d.emptyMiles;
+
             let driverPay =
-              (Number(d.loadedMiles) + Number(d.emptyMiles)) *
+              (Number(loadedMiles) + Number(emptyMiles)) *
               this.props.driverPay;
             driverPay = isNaN(driverPay) ? null : driverPay;
 
@@ -768,10 +786,13 @@ class LoadsData extends Component {
           if (typeof d.payment === "string")
             payment = parseFloat(d.payment.replace(/,/g, ""));
 
+            const loadedMiles = isNaN(d.loadedMiles) ? d.loadedMiles.replace(",","") : d.loadedMiles;
+            const emptyMiles = isNaN(d.emptyMiles) ? d.emptyMiles.replace(",","") : d.emptyMiles;
+
           let totalExpenses =
-            ((Number(d.loadedMiles) + Number(d.emptyMiles)) / Number(mpg)) *
+            ((Number(loadedMiles) + Number(emptyMiles)) / Number(mpg)) *
               Number(dieselppg) +
-            (Number(d.loadedMiles) + Number(d.emptyMiles)) *
+            (Number(loadedMiles) + Number(emptyMiles)) *
               this.props.driverPay +
             Number(payment) * Number(dispatchPercent) +
             Number(d.lumper) +
@@ -805,11 +826,14 @@ class LoadsData extends Component {
           if (typeof d.payment === "string")
             payment = parseFloat(d.payment.replace(/,/g, ""));
 
+            const loadedMiles = isNaN(d.loadedMiles) ? d.loadedMiles.replace(",","") : d.loadedMiles;
+            const emptyMiles = isNaN(d.emptyMiles) ? d.emptyMiles.replace(",","") : d.emptyMiles;
+
           let profit =
             payment -
-            (((Number(d.loadedMiles) + Number(d.emptyMiles)) / Number(mpg)) *
+            (((Number(loadedMiles) + Number(emptyMiles)) / Number(mpg)) *
               Number(dieselppg) +
-              (Number(d.loadedMiles) + Number(d.emptyMiles)) *
+              (Number(loadedMiles) + Number(emptyMiles)) *
                 this.props.driverPay +
               Number(payment) * Number(dispatchPercent) +
               Number(d.lumper) +

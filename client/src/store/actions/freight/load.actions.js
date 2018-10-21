@@ -63,12 +63,22 @@ export function updateLoad(load) {
   };
 }
 
-export function deleteLoad(index) {
+export function deleteLoad(loadId) {
   // console.log("load.actions.js delete loads ", index);
-  return {
-    type: DELETE_LOAD,
-    index: index
-  };
+
+  const deleteLoad = axios.delete(`/api/existingload/deleteload/${loadId}`);
+
+  return dispatch =>
+  deleteLoad.then(response => {
+      if(response.data === 1)
+        return dispatch({
+          type: DELETE_LOAD,
+          payload: loadId
+        })
+      else alert("The delete was not processed")
+    }
+  );
+
 }
 
 export function getLoadDateRange(dateRange) {

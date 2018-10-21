@@ -47,6 +47,19 @@ router.get( '/daterange', ( req, res, next ) => {
     .catch( next )
 })
 
+router.delete('/deleteload/:loadId', (req, res, next) => {
+
+  Load.destroy({
+    where: {
+      id: req.params.loadId
+    }
+  })
+  .then( rowDeleted => {
+    res.json( rowDeleted )
+  })
+  .catch( (error) => res.status(400).send(error))
+})
+
 router.post('/', (req, res, next) => {
 
   const loadId = req.body._original.id;
@@ -91,7 +104,6 @@ router.post('/', (req, res, next) => {
   }
 //if with new broker - first create broker with and id, then Load can be created
 
-
   Load.findOne({
     where: { id: loadId },
     include: [ { model: Broker }]
@@ -117,22 +129,6 @@ router.post('/', (req, res, next) => {
       res.json( load.dataValues )
     })
     .catch( (error) => res.status(400).send(error))
-
-    // .then( () => {
-    //   Load.findAll({
-    //     include: [{
-    //       model: Truck,
-    //       include: [{
-    //         model: Company
-    //       }],
-    //     }],
-    //     order:
-    //       [['pickupDate', 'ASC']]
-    //   })
-    //     .then( loads => res.json( loads ))
-    // })
-
-    // .catch( (error) => res.status(400).send(error))
   })
 
 

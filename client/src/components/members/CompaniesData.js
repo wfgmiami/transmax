@@ -3,6 +3,11 @@ import ReactTable from "react-table";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
+import Edit from '@material-ui/icons/Edit';
+import Delete from '@material-ui/icons/Delete';
+import Save from '@material-ui/icons/Save';
+import Input from '@material-ui/icons/Input';
+import IconButton from '@material-ui/core/IconButton';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
@@ -287,36 +292,39 @@ class CompaniesData extends Component {
             editableRow => editableRow === row.index
           );
           let editBtnColor = "secondary";
-          let editBtnName = "Edit";
+          let editIcon = <Edit />;
 
           if (editableRow.length > 0) {
-            editBtnName = "Editing...";
             editBtnColor = "primary";
+            editIcon = <Input />;
           }
 
           return (
             <div>
-              <Button
+              <IconButton
                 variant="contained"
                 color={editBtnColor}
                 onClick={() => this.editRow(row)}
               >
-                {editBtnName}
-              </Button>&nbsp;
-              <Button
+                {editIcon}
+              </IconButton>&nbsp;
+
+              <IconButton
                 variant="contained"
                 color="secondary"
                 onClick={() => this.deleteRow(row)}
               >
-                Delete
-              </Button>&nbsp;
-              <Button
+                <Delete/>
+              </IconButton>&nbsp;
+
+              <IconButton
                 variant="contained"
                 color="secondary"
                 onClick={() => this.saveRow(row)}
               >
-                Save
-              </Button>
+                <Save/>
+              </IconButton>
+
             </div>
           );
         }

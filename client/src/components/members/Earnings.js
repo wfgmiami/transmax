@@ -3,6 +3,11 @@ import ReactTable from "react-table";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
+import Edit from '@material-ui/icons/Edit';
+import Delete from '@material-ui/icons/Delete';
+import Save from '@material-ui/icons/Save';
+import Input from '@material-ui/icons/Input';
+import IconButton from '@material-ui/core/IconButton';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
@@ -75,10 +80,32 @@ class Earnings extends Component {
     //   cellInfo.row[cellInfo.column.id]
     // );
     let dollarSign;
+    let fieldValue;
+
     const findEditableRow = this.state.editableRowIndex.find(
       row => row === cellInfo.index
     );
-    dollarSign = cellInfo.column.id === "payment" ? "$" : "";
+
+    switch (cellInfo.column.id) {
+      case "revenue":
+      case "dispatchFee":
+      case "fuelCost":
+      case "driverPay":
+      case "toll":
+        dollarSign = "$";
+        break;
+      default:
+        dollarSign = "";
+    }
+
+    fieldValue = this.props.earnings[cellInfo.index][
+      cellInfo.column.id
+    ]
+
+ // for numbers stored as strings:
+    if( typeof(fieldValue) === 'string' && !isNaN(fieldValue)) {
+      fieldValue = isNaN(Number(fieldValue)) ? fieldValue : Number(fieldValue).toLocaleString()
+    }
 
     return findEditableRow || findEditableRow === 0 ? (
       <div
@@ -93,9 +120,7 @@ class Earnings extends Component {
         dangerouslySetInnerHTML={{
           __html:
             // dollarSign +
-            this.props.earnings[cellInfo.index][
-              cellInfo.column.id
-            ].toLocaleString()
+            fieldValue.toLocaleString()
         }}
       />
     ) : (
@@ -110,9 +135,7 @@ class Earnings extends Component {
         dangerouslySetInnerHTML={{
           __html:
             dollarSign +
-            this.props.earnings[cellInfo.index][
-              cellInfo.column.id
-            ].toLocaleString()
+            fieldValue.toLocaleString()
         }}
       />
     );
@@ -175,6 +198,7 @@ class Earnings extends Component {
         if (typeof value === "string" && value.substring(0, 1) === "$") {
           dollarSign = true;
           value = value.slice(1);
+          value = parseFloat(value.replace(/,/g, ""));
         } else if (value.substring(value.length - 1) === "%") {
           value = value.slice(0, value.length - 1);
         }
@@ -228,6 +252,34 @@ class Earnings extends Component {
         // console.log('onColumnUpdate columns: ', this.state.columns)
       }
     );
+  }
+
+  convertToNumber(dataObj){
+
+    const fuelCost = isNaN(dataObj.fuelCost) ? dataObj.fuelCost.replace(",","") : dataObj.fuelCost;
+    const driverPay = isNaN(dataObj.driverPay) ? dataObj.driverPay.replace(",","") : dataObj.driverPay;
+    const dispatchFee = isNaN(dataObj.dispatchFee) ? dataObj.dispatchFee.replace(",","") : dataObj.dispatchFee;
+    const lumper = isNaN(dataObj.lumper) ? dataObj.lumper.replace(",","") : dataObj.lumper;
+    const detention = isNaN(dataObj.detention) ? dataObj.detention.replace(",","") : dataObj.detention;
+    const detentionDriverPay = isNaN(dataObj.detentionDriverPay) ? dataObj.detentionDriverPay.replace(",","") : dataObj.detentionDriverPay;
+    const lateFee = isNaN(dataObj.lateFee) ? dataObj.lateFee.replace(",","") : dataObj.lateFee;
+    const toll = isNaN(dataObj.toll) ? dataObj.toll.replace(",","") : dataObj.toll;
+    const roadMaintenance = isNaN(dataObj.roadMaintenance) ? dataObj.roadMaintenance.replace(",","") : dataObj.roadMaintenance;
+    const otherExpense = isNaN(dataObj.otherExpense) ? dataObj.otherExpense.replace(",","") : dataObj.otherExpense;
+
+    let totalExpenses =
+      Number(fuelCost) +
+      Number(driverPay) +
+      Number(dispatchFee) +
+      Number(lumper) +
+      Number(detention) +
+      Number(detentionDriverPay) +
+      Number(lateFee) +
+      Number(toll) +
+      Number(roadMaintenance) +
+      Number(otherExpense);
+
+      return totalExpenses;
   }
 
   createColumns() {
@@ -352,23 +404,28 @@ class Earnings extends Component {
         show: true,
         className: "columnBorder",
         accessor: d => {
-          let totalExpenses =
-            Number(d.fuelCost) +
-            Number(d.driverPay) +
-            Number(d.dispatchFee) +
-            Number(d.lumper) +
-            Number(d.detention) +
-            Number(d.detentionDriverPay) +
-            Number(d.lateFee) +
-            Number(d.toll) +
-            Number(d.roadMaintenance);
+
+          const dataObj = {
+            fuelCost: d.fuelCost,
+            driverPay: d.driverPay,
+            dispatchFee:d.dispatchFee,
+            lumper: d.lumper,
+            detention: d.detention,
+            detentionDriverPay:  d.detentionDriverPay,
+            lateFee: d.lateFee,
+            toll: d.toll,
+            roadMaintenance: d.roadMaintenance,
+            otherExpense: d.otherExpense
+          }
+
+          let totalExpenses = this.convertToNumber(dataObj)
 
           totalExpenses = isNaN(totalExpenses) ? null : totalExpenses;
 
           return (
             <div
               dangerouslySetInnerHTML={{
-                __html: "$" + Number(totalExpenses).toFixed(0)
+                __html: "$" + Number(Number(totalExpenses).toFixed(0)).toLocaleString()
               }}
             />
           );
@@ -385,17 +442,20 @@ class Earnings extends Component {
           if (typeof d.revenue === "string")
             revenue = parseFloat(revenue.replace(/,/g, ""));
 
-          let totalExpenses =
-            Number(d.fuelCost) +
-            Number(d.driverPay) +
-            Number(d.dispatchFee) +
-            Number(d.lumper) +
-            Number(d.detention) +
-            Number(d.detentionDriverPay) +
-            Number(d.lateFee) +
-            Number(d.toll) +
-            Number(d.roadMaintenance) +
-            Number(d.otherExpense);
+          const dataObj = {
+            fuelCost: d.fuelCost,
+            driverPay: d.driverPay,
+            dispatchFee:d.dispatchFee,
+            lumper: d.lumper,
+            detention: d.detention,
+            detentionDriverPay:  d.detentionDriverPay,
+            lateFee: d.lateFee,
+            toll: d.toll,
+            roadMaintenance: d.roadMaintenance,
+            otherExpense: d.otherExpense
+          }
+
+          let totalExpenses = this.convertToNumber(dataObj)
 
           let profit = revenue - totalExpenses;
 
@@ -404,7 +464,7 @@ class Earnings extends Component {
           return (
             <div
               dangerouslySetInnerHTML={{
-                __html: "$" + Number(profit).toFixed(0)
+                __html: "$" + Number(Number(profit).toFixed(0)).toLocaleString()
               }}
             />
           );
@@ -421,18 +481,20 @@ class Earnings extends Component {
           if (typeof d.revenue === "string")
             revenue = parseFloat(revenue.replace(/,/g, ""));
 
-          let totalExpenses =
-            Number(d.fuelCost) +
-            Number(d.driverPay) +
-            Number(d.dispatchFee) +
-            Number(d.lumper) +
-            Number(d.detention) +
-            Number(d.detentionDriverPay) +
-            Number(d.lateFee) +
-            Number(d.toll) +
-            Number(d.roadMaintenance) +
-            Number(d.otherExpense);
+          const dataObj = {
+            fuelCost: d.fuelCost,
+            driverPay: d.driverPay,
+            dispatchFee:d.dispatchFee,
+            lumper: d.lumper,
+            detention: d.detention,
+            detentionDriverPay:  d.detentionDriverPay,
+            lateFee: d.lateFee,
+            toll: d.toll,
+            roadMaintenance: d.roadMaintenance,
+            otherExpense: d.otherExpense
+          }
 
+          let totalExpenses = this.convertToNumber(dataObj);
           let profit = revenue - totalExpenses;
 
           profit = isNaN(profit) ? null : profit;
@@ -456,37 +518,41 @@ class Earnings extends Component {
           const editableRow = this.state.editableRowIndex.filter(
             editableRow => editableRow === row.index
           );
+
           let editBtnColor = "secondary";
-          let editBtnName = "Edit";
+          let editIcon = <Edit />;
 
           if (editableRow.length > 0) {
-            editBtnName = "Editing...";
             editBtnColor = "primary";
+            editIcon = <Input />;
           }
 
           return (
             <div>
-              <Button
+              <IconButton
                 variant="contained"
                 color={editBtnColor}
                 onClick={() => this.editRow(row)}
               >
-                {editBtnName}
-              </Button>&nbsp;
-              <Button
+                {editIcon}
+              </IconButton>&nbsp;
+
+              <IconButton
                 variant="contained"
                 color="secondary"
                 onClick={() => this.deleteRow(row)}
               >
-                Delete
-                </Button>&nbsp;
-              <Button
+                <Delete/>
+              </IconButton>&nbsp;
+
+              <IconButton
                 variant="contained"
                 color="secondary"
                 onClick={() => this.saveRow(row)}
               >
-                Save
-              </Button>
+                <Save/>
+              </IconButton>
+
             </div>
           );
         }
@@ -521,7 +587,7 @@ class Earnings extends Component {
           defaultPageSize={10}
           style={
             {
-              // height: "400px"
+               height: "700px"
             }
           }
           className="-striped -highlight"
