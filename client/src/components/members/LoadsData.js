@@ -226,6 +226,7 @@ class LoadsData extends Component {
     Object.keys(row).forEach( key => {
       if( typeof row[key] === "object" && key !== "_original" ){
         load[key] = row[key].props.dangerouslySetInnerHTML.__html;
+        if(load[key].substring(0,1) === '$') load[key] = load[key].slice(1);
       }else if(!key.includes('_') && !key.includes(".") && key !== 'edit') {
         load[key] = row[key];
       }
@@ -335,15 +336,15 @@ class LoadsData extends Component {
   }
 
   calculateTotal({ data, column }) {
-    // console.log("LoadsData calculateTotal data", data, "column", column);
+    // console.log("*** LoadsData calculateTotal data", data, "column ", column);
     const loadsCount = data.length;
     let dollarSign = false;
     let value;
 
     const total = data.reduce((memo, load) => {
-      // console.log("....info", load,column.id, load[column.id]);
+
       let payment = load[column.id];
-      // console.log("....info", load,column.id,payment);
+
       if (typeof payment === "object") {
         value = payment.props.dangerouslySetInnerHTML.__html;
 
@@ -360,8 +361,14 @@ class LoadsData extends Component {
 
       } else {
         if (payment === "") payment = 0;
-        if (typeof payment === "string") {
-          payment = parseFloat(payment.replace(/,/g, ""));
+        // formula values(eg fuel cost) from db are not objects but strings with $
+        if (typeof payment === "string" && payment.substring(0,1) === '$') {
+          dollarSign = true;
+          payment = payment.slice(1);
+          payment = parseFloat(payment.replace(",",""));
+        // parseFload will convert to number the string, ok if no "," is found
+        }else if(typeof payment === "string"){
+          payment = parseFloat(payment.replace(",",""));
         }
 
         memo += payment;
@@ -409,9 +416,40 @@ class LoadsData extends Component {
     );
   }
 
+  dollarFormat(strNum,dec,sign){
+    // "1200" => "$1,200.00" or "1,200"
+    return sign + Number(Number(strNum).toFixed(dec)).toLocaleString();
+  }
+
+  numberFormat(num){
+    // '$1,200' || '1200' => 1200
+
+    if (typeof num === 'number') return num;
+    num = num.includes("$") ? num.slice(1,0) : num;
+    return parseFloat(num.replace(",",""));
+  }
+
+  returnTableData(data, expense){
+    const editable = this.state.editableRowIndex;
+    let check = 0;
+    let dec = (expense === "dollarPerMile") ? 2 : 0;
+
+    if (editable.length === 0) return this.dollarFormat(data[expense],dec,'$');
+    for(let index of editable){
+      check++;
+      if( this.props.load[index].id === data.id ) return null;
+      if( this.props.load[index].id !== data.id && check === editable.length)
+        return this.dollarFormat(data[expense],dec,'$')
+    }
+  }
+
   createColumns() {
     // console.log("LoadsData.js createColumns this.props: ", this.props);
-    const { mpg, dispatchPercent, dieselppg } = this.props;
+    let { mpg, dispatchPercent, dieselppg, driverPay } = this.props;
+    mpg = Number(mpg);
+    dispatchPercent = Number(dispatchPercent);
+    dieselppg = Number(dieselppg);
+    driverPay = Number(driverPay);
 
     return [
       {
@@ -586,14 +624,18 @@ class LoadsData extends Component {
         className: "columnBorder",
         accessor: d => {
 
-          const loadedMiles = isNaN(d.loadedMiles) ? d.loadedMiles.replace(",","") : d.loadedMiles;
-          const emptyMiles = isNaN(d.emptyMiles) ? d.emptyMiles.replace(",","") : d.emptyMiles;
-          const totalMiles = Number(loadedMiles) + Number(emptyMiles);
+          const tableData = this.returnTableData(d, 'mileage');
+          if( tableData ) return tableData;
+
+          const loadedMiles = this.numberFormat(d.loadedMiles);
+          const emptyMiles = this.numberFormat(d.emptyMiles);
+          const totalMiles = loadedMiles + emptyMiles;
+         console.log('..............', loadedMiles, typeof loadedMiles, typeof emptyMiles, loadedMiles + emptyMiles)
 
           return (
             <div
               dangerouslySetInnerHTML={{
-                __html: totalMiles.toLocaleString()
+                __html: this.dollarFormat(totalMiles,0,'')
               }}
             />
           );
@@ -608,20 +650,22 @@ class LoadsData extends Component {
         minWidth: 80,
         accessor: d => {
 
-          let payment = typeof(d.payment) === "string" ? parseFloat(d.payment.replace(/,/g, "")) : d.payment;
+          const tableData = this.returnTableData(d, 'dollarPerMile');
 
-          let loadedMiles = typeof(d.loadedMiles) === "string" ? parseFloat(d.loadedMiles.replace(/,/g, "")) : d.loadedMiles;
+          if( tableData ) return tableData;
 
-          let emptyMiles = typeof(d.emptyMiles) === "string" ? parseFloat(d.emptyMiles.replace(/,/g, "")) : d.emptyMiles;
+          let payment = this.numberFormat(d.payment);
+          let loadedMiles = this.numberFormat(d.loadedMiles);
+          let emptyMiles = this.numberFormat(d.emptyMiles);
 
           let dollarPerMile =
-            Number(payment) / (Number(loadedMiles) + Number(emptyMiles));
+            payment / (loadedMiles + emptyMiles)
 
           dollarPerMile = isNaN(dollarPerMile) ? null : dollarPerMile;
           return (
             <div
               dangerouslySetInnerHTML={{
-                __html: "$" + Number(dollarPerMile).toFixed(2)
+                __html: this.dollarFormat(dollarPerMile,2,'$')
               }}
             />
           );
@@ -644,31 +688,21 @@ class LoadsData extends Component {
         className: "columnBorder",
         minWidth: 80,
         accessor: d => {
-          // console.log('*** fuel cost ', this.props, this.state, d.id)
-          const editable = this.state.editableRowIndex;
-          let check = 0;
 
-          if (editable.length === 0) return d.fuelCost;
-          for(let index of editable){
-            check++;
-            if( this.props.load[index].id === d.id ) break;
-            if( this.props.load[index].id !== d.id && check === editable.length)
-              return d.fuelCost;
-          }
+          const tableData = this.returnTableData(d, 'fuelCost');
+          if( tableData ) return tableData;
 
           let fuelCost = null;
-          const loadedMiles = isNaN(d.loadedMiles) ? d.loadedMiles.replace(",","") : d.loadedMiles;
-          const emptyMiles = isNaN(d.emptyMiles) ? d.emptyMiles.replace(",","") : d.emptyMiles;
+          const loadedMiles = this.numberFormat(d.loadedMiles);
+          const emptyMiles = this.numberFormat(d.emptyMiles);
 
-          fuelCost = ((Number(loadedMiles) + Number(emptyMiles)) / Number(mpg)) *
-            Number(dieselppg);
-
+          fuelCost = (loadedMiles + emptyMiles) / mpg * dieselppg;
           fuelCost = isNaN(fuelCost) ? null : fuelCost;
 
           return (
             <div
               dangerouslySetInnerHTML={{
-                __html: "$" + Number(fuelCost).toFixed(0)
+                __html: this.dollarFormat(fuelCost,0,"$")
               }}
             />
           );
@@ -682,29 +716,20 @@ class LoadsData extends Component {
         className: "columnBorder",
         minWidth: 80,
         accessor: d => {
-          const editable = this.state.editableRowIndex;
-          let check = 0;
 
-          if (editable.length === 0) return d.driverPay;
-          for(let index of editable){
-            check++;
-            if( this.props.load[index].id === d.id ) break;
-            if( this.props.load[index].id !== d.id && check === editable.length)
-              return d.driverPay;
-          }
+          const tableData = this.returnTableData(d, 'driverPay');
+          if( tableData ) return tableData;
 
-          const loadedMiles = isNaN(d.loadedMiles) ? d.loadedMiles.replace(",","") : d.loadedMiles;
-          const emptyMiles = isNaN(d.emptyMiles) ? d.emptyMiles.replace(",","") : d.emptyMiles;
-
-          let driverPay =
-            (Number(loadedMiles) + Number(emptyMiles)) *
-            this.props.driverPay;
-          driverPay = isNaN(driverPay) ? null : driverPay;
+          const loadedMiles = this.numberFormat(d.loadedMiles);
+          const emptyMiles = this.numberFormat(d.emptyMiles);
+// console.log('..............', loadedMiles, typeof loadedMiles, typeof emptyMiles, loadedMiles+ emptyMiles)
+          let totalDriverPay = (loadedMiles + emptyMiles) * driverPay
+          totalDriverPay = isNaN(totalDriverPay) ? null : totalDriverPay;
 
           return (
             <div
               dangerouslySetInnerHTML={{
-                __html: "$" + Number(driverPay).toFixed(0)
+                __html: this.dollarFormat(totalDriverPay, 0, "$")
               }}
             />
           );
@@ -720,29 +745,18 @@ class LoadsData extends Component {
         minWidth: 80,
         accessor: d => {
 
-          const editable = this.state.editableRowIndex;
-          let check = 0;
+          const tableData = this.returnTableData(d, 'dispatchFee');
+          if( tableData ) return tableData;
 
-          if (editable.length === 0) return d.dispatchFee;
-          for(let index of editable){
-            check++;
-            if( this.props.load[index].id === d.id ) break;
-            if( this.props.load[index].id !== d.id && check === editable.length)
-              return d.dispatchFee;
-          }
-
-          let payment = d.payment;
-          if (typeof d.payment === "string")
-            payment = parseFloat(d.payment.replace(/,/g, ""));
-
-          let dispatchFee = Number(payment) * Number(dispatchPercent);
+          let payment = this.numberFormat(d.payment)
+          let dispatchFee = payment * dispatchPercent;
 
           dispatchFee = isNaN(dispatchFee) ? null : dispatchFee;
 
           return (
             <div
               dangerouslySetInnerHTML={{
-                __html: "$" + Number(dispatchFee).toFixed(0)
+                __html: this.dollarFormat(dispatchFee, 0, "$")
               }}
             />
           );
@@ -828,33 +842,28 @@ class LoadsData extends Component {
         className: "columnBorder",
         minWidth: 80,
         accessor: d => {
-          let payment = d.payment;
-          if (typeof d.payment === "string")
-            payment = parseFloat(d.payment.replace(/,/g, ""));
 
-            const loadedMiles = isNaN(d.loadedMiles) ? d.loadedMiles.replace(",","") : d.loadedMiles;
-            const emptyMiles = isNaN(d.emptyMiles) ? d.emptyMiles.replace(",","") : d.emptyMiles;
+          const tableData = this.returnTableData(d, 'totalExpenses');
+          if( tableData ) return tableData;
+
+          let payment = this.numberFormat(d.payment)
+          const loadedMiles = this.numberFormat(d.loadedMiles);
+          const emptyMiles = this.numberFormat(d.emptyMiles);
 
           let totalExpenses =
-            ((Number(loadedMiles) + Number(emptyMiles)) / Number(mpg)) *
-              Number(dieselppg) +
-            (Number(loadedMiles) + Number(emptyMiles)) *
-              this.props.driverPay +
-            Number(payment) * Number(dispatchPercent) +
-            Number(d.lumper) +
-            Number(d.detention) +
-            Number(d.detentionDriverPay) +
-            Number(d.lateFee) +
-            Number(d.toll) +
-            Number(d.roadMaintenance) +
-            Number(d.otherExpenses);
+            ((loadedMiles + emptyMiles) / mpg * dieselppg) +
+            ((loadedMiles + emptyMiles) * driverPay) +
+            (payment * dispatchPercent) +
+            d.lumper + d.detention + d.detentionDriverPay + d.lateFee +
+            d.toll + d.roadMaintenance + d.otherExpenses;
 
           totalExpenses = isNaN(totalExpenses) ? null : totalExpenses;
-
+console.log('...............', totalExpenses, driverPay,loadedMiles, emptyMiles, mpg, dieselppg,
+payment * dispatchPercent, payment, dispatchPercent, d.lumpter, d.latefee)
           return (
             <div
               dangerouslySetInnerHTML={{
-                __html: "$" + Number(Number(totalExpenses).toFixed(0)).toLocaleString()
+                __html: this.dollarFormat(totalExpenses, 0, "$")
               }}
             />
           );
@@ -868,34 +877,27 @@ class LoadsData extends Component {
         className: "columnBorder",
         minWidth: 80,
         accessor: d => {
-          let payment = d.payment;
-          if (typeof d.payment === "string")
-            payment = parseFloat(d.payment.replace(/,/g, ""));
+          const tableData = this.returnTableData(d, 'profit');
+          if( tableData ) return tableData;
 
-            const loadedMiles = isNaN(d.loadedMiles) ? d.loadedMiles.replace(",","") : d.loadedMiles;
-            const emptyMiles = isNaN(d.emptyMiles) ? d.emptyMiles.replace(",","") : d.emptyMiles;
+          let payment = this.numberFormat(d.payment)
+          const loadedMiles = this.numberFormat(d.loadedMiles);
+          const emptyMiles = this.numberFormat(d.emptyMiles);
 
-          let profit =
-            payment -
-            (((Number(loadedMiles) + Number(emptyMiles)) / Number(mpg)) *
-              Number(dieselppg) +
-              (Number(loadedMiles) + Number(emptyMiles)) *
-                this.props.driverPay +
-              Number(payment) * Number(dispatchPercent) +
-              Number(d.lumper) +
-              Number(d.detention) +
-              Number(d.detentionDriverPay) +
-              Number(d.lateFee) +
-              Number(d.toll) +
-              Number(d.roadMaintenance) +
-              Number(d.otherExpenses));
+          let totalExpenses =
+            ((loadedMiles + emptyMiles) / mpg * dieselppg) +
+            ((loadedMiles + emptyMiles) * driverPay) +
+            (payment * dispatchPercent) +
+            d.lumper + d.detention + d.detentionDriverPay + d.lateFee +
+            d.toll + d.roadMaintenance + d.otherExpenses;
 
+          let profit = payment - totalExpenses;
           profit = isNaN(profit) ? null : profit;
 
           return (
             <div
               dangerouslySetInnerHTML={{
-                __html: "$" + Number(Number(profit).toFixed(0)).toLocaleString()
+                __html: this.dollarFormat(profit, 0, "$")
               }}
             />
           );
