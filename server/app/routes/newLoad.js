@@ -26,8 +26,8 @@ router.post('/', (req, res, next) => {
     dropOffCityState: req.body.dropOffCityState,
     pickUpAddress: req.body.pickUpAddress,
     dropOffAddress: req.body.dropOffAddress,
-    payment: req.body.payment,
-    loadedMiles: req.body.loadedMiles,
+    payment: isNaN(req.body.payment) ? Number(req.body.payment.replace(",", "")) : req.body.payment,
+    loadedMiles: isNaN(req.body.loadedMiles) ? Number(req.body.loadedMiles).replace(",", "") : req.body.loadedMiles,
     emptyMiles: req.body.emptyMiles,
     mileage: req.body.mileage,
     dollarPerMile: req.body.dollarPerMile,
@@ -49,8 +49,8 @@ router.post('/', (req, res, next) => {
     trailer: req.body.trailer,
     confirmFilePath: req.body.confirmFilePath,
   }
-//if with new broker - first create broker with and id, then Load can be created
 
+//new load with new broker - first create broker with and id, then Load can be created
   if(!req.body.brokerId){
 
     Broker.create({
@@ -73,32 +73,39 @@ router.post('/', (req, res, next) => {
         return Load.create(loadObj)
       })
       .then( load => {
-        console.log('load1 ', load);
+        console.log('*** new load with NEW broker- load ', load);
         res.json( load )
       })
       .catch( (error) => res.status(400).send(error))
     })
 
-
+// new load with existing broker
   }else{
-
-    const updateBroker = {
-      bookedLoads: Number(load.broker.bookedLoads) + 1,
-      totalPayment: Number(load.broker.totalPayment) +
-        Number(loadObj.payment),
-      totalLoadedMiles: Number(load.broker.totalLoadedMiles) +
-        Number(loadObj.loadedMiles)
-    }
-
-    return broker.update(updateBroker)
-    .then( () => {
-      return Load.create(loadObj)
+    Broker.findOne({
+      where: { id: req.body.brokerId},
     })
-    .then( load => {
-      console.log('load2 ', load);
-      res.json( load )
+    .then( broker => {
+      const updateBroker = {
+        bookedLoads: Number(broker.bookedLoads) + 1,
+        totalPayment: Number(broker.totalPayment) +
+          loadObj.payment,
+        totalLoadedMiles: Number(broker.totalLoadedMiles) +
+          loadObj.loadedMiles
+      }
+      console.log('*** new load with EXISTING broker- updateBroker ', broker, updateBroker);
+
+      return broker.update(updateBroker)
+      .then( () => {
+        return Load.create(loadObj)
+      })
+      .then( load => {
+        console.log('*** new load with EXISTING broker- load ', load);
+        res.json( load )
+      })
+      .catch( (error) => res.status(400).send(error))
+
     })
-    .catch( (error) => res.status(400).send(error))
+
   }
 
 })

@@ -5,9 +5,11 @@ export const GET_LOAD = "GET LOAD";
 export const DELETE_LOAD = "DELETE LOAD";
 export const ADD_LOAD = "ADD LOAD"
 export const UPDATE_LOAD = "UPDATE LOAD";
+export const EDIT_LOAD = "EDIT LOAD";
 export const SAVE_NEW_LOAD = "SAVE LOAD";
 export const EDIT_EXISTING_LOAD = "SAVE EXISTING LOAD";
 export const GET_LOAD_DATE_RANGE = "GET LOAD DATE RANGE";
+export const DELETE_EMPTY_LOAD = "DELETE EMPTY LOAD";
 
 export function getLoad() {
 
@@ -56,28 +58,40 @@ export function addLoad(load) {
 }
 
 export function updateLoad(load) {
-  // console.log("load.actions.js addloads ", loads);
+  // console.log("load.actions.js addloads ", loads)
   return {
     type: UPDATE_LOAD,
+    payload: load
+  };
+}
+
+export function editLoad(load) {
+  // console.log("load.actions.js addloads ", loads)
+  return {
+    type: EDIT_LOAD,
     load
   };
 }
 
-export function deleteLoad(loadId) {
-  // console.log("load.actions.js delete loads ", index);
+export function deleteLoad(row) {
+  console.log("load.actions.js delete loads ", row);
+  const loadId = row.original.id;
+
+  if(!loadId) return {
+    type: DELETE_EMPTY_LOAD,
+    payload: row.index
+  }
+
 
   const deleteLoad = axios.delete(`/api/existingload/deleteload/${loadId}`);
 
   return dispatch =>
-  deleteLoad.then(response => {
-      if(response.data === 1)
-        return dispatch({
-          type: DELETE_LOAD,
-          payload: loadId
-        })
-      else alert("The delete was not processed")
-    }
-  );
+    deleteLoad.then(response =>
+      dispatch({
+        type: DELETE_LOAD,
+        payload: loadId
+      })
+    );
 
 }
 

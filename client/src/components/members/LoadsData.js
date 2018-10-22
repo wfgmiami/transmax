@@ -175,7 +175,7 @@ class LoadsData extends Component {
     }
 
     // for numbers stored as strings:
-    if( typeof(fieldValue) === 'string' && !isNaN(fieldValue)) {
+    if( typeof(fieldValue) === 'string' && !isNaN(fieldValue) && cellInfo.column.id !== 'loadNumber') {
       fieldValue = isNaN(Number(fieldValue)) ? fieldValue : Number(fieldValue).toLocaleString()
     }
 
@@ -198,8 +198,8 @@ class LoadsData extends Component {
             indexToUpdate: indexToUpdate
           }
 
-          console.log('updateInfo ', updateInfo, cellInfo, cellInfo.column)
-          this.props.updateLoad(updateInfo);
+          {/* console.log('updateInfo ', cellInfo, cellInfo.column) */}
+          this.props.editLoad(updateInfo);
         }}
         dangerouslySetInnerHTML={{
           __html:
@@ -220,17 +220,37 @@ class LoadsData extends Component {
     );
   }
 
+  createLoad(row){
+    let load = {};
+
+    Object.keys(row).forEach( key => {
+      if( typeof row[key] === "object" && key !== "_original" ){
+        load[key] = row[key].props.dangerouslySetInnerHTML.__html;
+      }else if(!key.includes('_') && !key.includes(".") && key !== 'edit') {
+        load[key] = row[key];
+      }
+    })
+
+    return load;
+  }
+
   editRow(row) {
-    // console.log("LoadsData.js editRow ", row, "row index: ", row.index);
+
     const alreadyEditable = this.state.editableRowIndex.find(
       editableRow => editableRow === row.index
     );
+
+    // console.log("LoadsData.js editRow ", row, "state: ", this.state);
+
     if (alreadyEditable || alreadyEditable === 0) {
       this.setState({
         editableRowIndex: this.state.editableRowIndex.filter(
           editableRow => editableRow !== row.index
         )
       });
+      let load = this.createLoad(row.row);
+      load.id = row.original.id ? row.original.id : 0;
+      this.props.updateLoad(load);
     } else {
       this.setState({
         editableRowIndex: [...this.state.editableRowIndex, row.index]
@@ -240,16 +260,9 @@ class LoadsData extends Component {
 
   deleteRow(row) {
     let result = window.confirm("Do you want to delete this row?")
-    // console.log('row.index ', row.index, ' ', row.original.id)
-    this.props.deleteLoad(row.original.id)
+    // console.log('result ', result)
+    if(result) this.props.deleteLoad(row)
   }
-
-  // getId(){
-  //   const loads = this.props.load;
-  //   const arrayIds = loads.filter( load => load.id )
-  //     .map(load => load.id)
-  //   return Math.max(...arrayIds) + 1;
-  // }
 
   saveRow(selectedRow) {
     let rowId = null;
@@ -298,13 +311,19 @@ class LoadsData extends Component {
           toSaveRow[key] = Number(loadItem)
         }
 
+        if (typeof loadItem === "string" && loadItem.substring(0, 1) === "$") {
+          loadItem = loadItem.slice(1);
+          loadItem = parseFloat(loadItem.replace(/,/g, ""));
+          toSaveRow[key] = loadItem;
+        }
+
       })
 
       const newRow = Object.assign(rowToUpdate, toSaveRow);
-
+      console.log("*** save row ",  newRow)
       if(selectedRow.original.id) this.props.editExistingLoad(newRow);
       else  this.props.saveNewLoad(newRow);
-
+      alert("The load was saved")
 
     }
 
@@ -368,7 +387,7 @@ class LoadsData extends Component {
   onColumnUpdate(index) {
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();
-    // console.log("onColumnUpdate index ", index, "...", columns[index]);
+    // console.log("onColumnUpdate index ", index, "...", this.state,columns[index]);
     this.setState(
       prevState => {
         const columns1 = [];
@@ -625,11 +644,19 @@ class LoadsData extends Component {
         className: "columnBorder",
         minWidth: 80,
         accessor: d => {
-          let fuelCost = null;
-          const findEditableRow = this.state.editableRowIndex.find(
-            row => row === d.id
-          );
+          // console.log('*** fuel cost ', this.props, this.state, d.id)
+          const editable = this.state.editableRowIndex;
+          let check = 0;
 
+          if (editable.length === 0) return d.fuelCost;
+          for(let index of editable){
+            check++;
+            if( this.props.load[index].id === d.id ) break;
+            if( this.props.load[index].id !== d.id && check === editable.length)
+              return d.fuelCost;
+          }
+
+          let fuelCost = null;
           const loadedMiles = isNaN(d.loadedMiles) ? d.loadedMiles.replace(",","") : d.loadedMiles;
           const emptyMiles = isNaN(d.emptyMiles) ? d.emptyMiles.replace(",","") : d.emptyMiles;
 
@@ -655,26 +682,33 @@ class LoadsData extends Component {
         className: "columnBorder",
         minWidth: 80,
         accessor: d => {
-          // if(this.state.editableRowIndex.length > 0){
+          const editable = this.state.editableRowIndex;
+          let check = 0;
 
-            const loadedMiles = isNaN(d.loadedMiles) ? d.loadedMiles.replace(",","") : d.loadedMiles;
-            const emptyMiles = isNaN(d.emptyMiles) ? d.emptyMiles.replace(",","") : d.emptyMiles;
+          if (editable.length === 0) return d.driverPay;
+          for(let index of editable){
+            check++;
+            if( this.props.load[index].id === d.id ) break;
+            if( this.props.load[index].id !== d.id && check === editable.length)
+              return d.driverPay;
+          }
 
-            let driverPay =
-              (Number(loadedMiles) + Number(emptyMiles)) *
-              this.props.driverPay;
-            driverPay = isNaN(driverPay) ? null : driverPay;
+          const loadedMiles = isNaN(d.loadedMiles) ? d.loadedMiles.replace(",","") : d.loadedMiles;
+          const emptyMiles = isNaN(d.emptyMiles) ? d.emptyMiles.replace(",","") : d.emptyMiles;
 
-            return (
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: "$" + Number(driverPay).toFixed(0)
-                }}
-              />
-            );
-          // } else {
-          //   d.driverPay
-          // }
+          let driverPay =
+            (Number(loadedMiles) + Number(emptyMiles)) *
+            this.props.driverPay;
+          driverPay = isNaN(driverPay) ? null : driverPay;
+
+          return (
+            <div
+              dangerouslySetInnerHTML={{
+                __html: "$" + Number(driverPay).toFixed(0)
+              }}
+            />
+          );
+
         }
       },
       {
@@ -685,6 +719,18 @@ class LoadsData extends Component {
         className: "columnBorder",
         minWidth: 80,
         accessor: d => {
+
+          const editable = this.state.editableRowIndex;
+          let check = 0;
+
+          if (editable.length === 0) return d.dispatchFee;
+          for(let index of editable){
+            check++;
+            if( this.props.load[index].id === d.id ) break;
+            if( this.props.load[index].id !== d.id && check === editable.length)
+              return d.dispatchFee;
+          }
+
           let payment = d.payment;
           if (typeof d.payment === "string")
             payment = parseFloat(d.payment.replace(/,/g, ""));
@@ -926,7 +972,7 @@ class LoadsData extends Component {
   render() {
 
     const { load, classes } = this.props;
-    console.log("*** render LoadsData this.props ", this.props);
+    console.log("*** render LoadsData this.props ", this.props, "state ", this.state);
 
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();
@@ -987,6 +1033,7 @@ function mapDispatchToProps(dispatch) {
       deleteLoad: freightActions.deleteLoad,
       addLoad: freightActions.addLoad,
       updateLoad: freightActions.updateLoad,
+      editLoad: freightActions.editLoad,
       saveNewLoad: freightActions.saveNewLoad,
       editExistingLoad: freightActions.editExistingLoad,
       getInputVariable: companyActions.getInputVariable

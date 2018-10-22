@@ -30,7 +30,7 @@ export function setVariableCost(variableCost) {
 }
 
 export function saveVariableCost(variableCost) {
-  console.log("variableCostaction.js variableCost ", variableCost);
+  // console.log("variableCostaction.js variableCost ", variableCost);
   let costToUpdate = {};
   let updatedState = [];
   updatedState.push({ id: 1, costName: "Driver Pay",
@@ -57,7 +57,7 @@ export function saveVariableCost(variableCost) {
   const postVariableCost = axios.post("/api/variablecost", [...updatedState ]);
   return dispatch =>
     postVariableCost.then(response =>{
-      console.log('response from variableCost axios post ', response)
+      // console.log('response from variableCost axios post ', response)
       dispatch({
         type: UPDATE_VARIABLE_COST,
         payload: response.data

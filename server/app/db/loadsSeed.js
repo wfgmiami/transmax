@@ -21,7 +21,7 @@ const LoadsData = [
     mileage: 0,
     dollarPerMile: 0,
     fuelCost: 0,
-    driverPay: 160.6,
+    driverPay: 0,
     dispatchFee: 0,
     lumper: 0,
     detention: 0,

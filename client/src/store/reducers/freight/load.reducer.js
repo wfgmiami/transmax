@@ -16,6 +16,12 @@ const loads = (state = initialState, action) => {
       return [...action.payload];
     }
 
+    case Actions.DELETE_EMPTY_LOAD: {
+      return [...state.slice(0, action.payload),
+        ...state.slice(action.payload + 1)
+      ]
+    }
+
     case Actions.DELETE_LOAD: {
       console.log('*** action load reducer delete load ', state, " ", action)
 
@@ -32,14 +38,14 @@ const loads = (state = initialState, action) => {
       return [...state,{...action.load}];
     }
 
-    case Actions.UPDATE_LOAD: {
-      // console.log('*** action load reducer update load ', state, " ", action)
+    case Actions.EDIT_LOAD: {
+      // console.log('*** action load reducer edit load ', state, " ", action)
 
       return [...state.map( (load, idx) => {
         if( idx === action.load.indexToUpdate ) {
 
           const newObj = { [action.load.keyToUpdate]: action.load.valueToUpdate }
-          // console.log('idx; action.load.indexToUpdate',idx, load, action.load.indexToUpdate, newObj)
+          // console.log('idx; action.load.indexToUpdate',newObj)
           return Object.assign({}, load, newObj)
         }
         else return load
@@ -47,6 +53,17 @@ const loads = (state = initialState, action) => {
 
     }
 
+    case Actions.UPDATE_LOAD: {
+      console.log('*** action load reducer update load ', state, " ", action)
+
+      return [...state.map( load => {
+        if( load.id === action.payload.id ) {
+          return action.payload
+        }
+        else return load
+      })]
+
+    }
 
     case Actions.SAVE_NEW_LOAD: {
       console.log('*** save new load reducer ', action, state)
