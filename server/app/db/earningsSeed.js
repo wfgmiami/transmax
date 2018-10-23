@@ -133,6 +133,51 @@ const EarningsSeed = [
       "/brokerConfirmations/090518_reliableSourceLogistics.pdf"
     )
   },
+  {
+    weekNumber: 7,
+    begWeekDate: "10/8/18",
+    endWeekDate: "10/12/18",
+    weekRange: "10/8/18-10/12/18",
+    revenue: 3300,
+    dispatchFee: 330,
+    milesPaid: 1541,
+    driverPay: 847.55,
+    fuelCost: 1578.09,
+    toll: 12.25,
+    lumper: 0,
+    detention: 0,
+    detentionDriverPay: 0,
+    lateFee: 0,
+    roadMaintenance: 0,
+    otherExpense: 0,
+    docFilePath: path.join(
+      __dirname,
+      "/brokerConfirmations/090518_reliableSourceLogistics.pdf"
+    )
+  },
+
+  {
+    weekNumber: 8,
+    begWeekDate: "10/12/18",
+    endWeekDate: "10/19/18",
+    weekRange: "10/12/18-10/19/18",
+    revenue: 4180,
+    dispatchFee: 418,
+    milesPaid: 2553,
+    driverPay: 1404.15,
+    fuelCost: 954.39,
+    toll: 0,
+    lumper: 0,
+    detention: 0,
+    detentionDriverPay: 0,
+    lateFee: 0,
+    roadMaintenance: 0,
+    otherExpense: 0,
+    docFilePath: path.join(
+      __dirname,
+      "/brokerConfirmations/090518_reliableSourceLogistics.pdf"
+    )
+  },
 
 ];
 

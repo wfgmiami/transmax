@@ -417,8 +417,11 @@ class LoadsData extends Component {
   }
 
   dollarFormat(strNum,dec,sign){
-    // "1200" => "$1,200.00" or "1,200"
-    return sign + Number(Number(strNum).toFixed(dec)).toLocaleString();
+    // 1200 => "$1,200"
+    // "1200" || "1,200" => "$1,200.00" or "1,200"
+    if(strNum === null || strNum === "") return strNum;
+    if(typeof strNum === 'number') return  sign + Number(strNum.toFixed(dec)).toLocaleString();
+    return sign + Number(Number(strNum.replace(",","")).toFixed(dec)).toLocaleString();
   }
 
   numberFormat(num){
@@ -429,17 +432,17 @@ class LoadsData extends Component {
     return parseFloat(num.replace(",",""));
   }
 
-  returnTableData(data, expense){
+  returnTableData(data, field){
     const editable = this.state.editableRowIndex;
     let check = 0;
-    let dec = (expense === "dollarPerMile") ? 2 : 0;
+    let dec = (field === "dollarPerMile") ? 2 : 0;
 
-    if (editable.length === 0) return this.dollarFormat(data[expense],dec,'$');
+    if (editable.length === 0) return this.dollarFormat(data[field],dec,'$');
     for(let index of editable){
       check++;
       if( this.props.load[index].id === data.id ) return null;
       if( this.props.load[index].id !== data.id && check === editable.length)
-        return this.dollarFormat(data[expense],dec,'$')
+        return this.dollarFormat(data[field],dec,'$')
     }
   }
 
@@ -858,8 +861,6 @@ class LoadsData extends Component {
             d.toll + d.roadMaintenance + d.otherExpenses;
 
           totalExpenses = isNaN(totalExpenses) ? null : totalExpenses;
-console.log('...............', totalExpenses, driverPay,loadedMiles, emptyMiles, mpg, dieselppg,
-payment * dispatchPercent, payment, dispatchPercent, d.lumpter, d.latefee)
           return (
             <div
               dangerouslySetInnerHTML={{

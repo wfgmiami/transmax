@@ -38,6 +38,7 @@ const loads = (state = initialState, action) => {
       return [...state,{...action.load}];
     }
 
+    // when putting numbers in edit mode
     case Actions.EDIT_LOAD: {
       // console.log('*** action load reducer edit load ', state, " ", action)
 
@@ -52,7 +53,7 @@ const loads = (state = initialState, action) => {
       })]
 
     }
-
+    // when closing edit mode
     case Actions.UPDATE_LOAD: {
       console.log('*** action load reducer update load ', state, " ", action)
 
