@@ -45,7 +45,8 @@ const loads = (state = initialState, action) => {
       return [...state.map( (load, idx) => {
         if( idx === action.load.indexToUpdate ) {
 
-          const newObj = { [action.load.keyToUpdate]: action.load.valueToUpdate }
+          const newObj = { [action.load.keyToUpdate]: action.load.valueToUpdate,
+              rowIndex:  action.load.indexToUpdate }
           // console.log('idx; action.load.indexToUpdate',newObj)
           return Object.assign({}, load, newObj)
         }
@@ -58,7 +59,7 @@ const loads = (state = initialState, action) => {
       console.log('*** action load reducer update load ', state, " ", action)
 
       return [...state.map( load => {
-        if( load.id === action.payload.id ) {
+        if( load.id === action.payload.id || load.rowIndex === action.payload.rowIndex ) {
           return action.payload
         }
         else return load

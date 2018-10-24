@@ -123,6 +123,7 @@ class LoadsData extends Component {
     return Math.min(maxWidth, max * spacing);
   }
 
+  // when entering data into editable fields of the table
   editTable(cellInfo) {
     // console.log(
     //   "cell info........",
@@ -220,6 +221,7 @@ class LoadsData extends Component {
     );
   }
 
+  // used in editRow to persist the calculated fields(ie fuel cost, expenses, etc)
   createLoad(row){
     let load = {};
 
@@ -235,6 +237,7 @@ class LoadsData extends Component {
     return load;
   }
 
+  // when activating/deactivating row edit mode
   editRow(row) {
 
     const alreadyEditable = this.state.editableRowIndex.find(
@@ -250,7 +253,12 @@ class LoadsData extends Component {
         )
       });
       let load = this.createLoad(row.row);
-      load.id = row.original.id ? row.original.id : 0;
+
+      if(row.original.id){
+        load.id = row.original;
+      }
+      else load.rowIndex = row.index;
+      console.log('row.............',load.rowIndex)
       this.props.updateLoad(load);
     } else {
       this.setState({
@@ -391,6 +399,7 @@ class LoadsData extends Component {
     return Number(Number(total).toFixed(0)).toLocaleString();
   }
 
+  // showing/hiding columns
   onColumnUpdate(index) {
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();
@@ -432,6 +441,7 @@ class LoadsData extends Component {
     return parseFloat(num.replace(",",""));
   }
 
+  // showing data from db when not in edit mode
   returnTableData(data, field){
     const editable = this.state.editableRowIndex;
     let check = 0;
@@ -633,7 +643,7 @@ class LoadsData extends Component {
           const loadedMiles = this.numberFormat(d.loadedMiles);
           const emptyMiles = this.numberFormat(d.emptyMiles);
           const totalMiles = loadedMiles + emptyMiles;
-         console.log('..............', loadedMiles, typeof loadedMiles, typeof emptyMiles, loadedMiles + emptyMiles)
+        //  console.log('..............', loadedMiles, typeof loadedMiles, typeof emptyMiles, loadedMiles + emptyMiles)
 
           return (
             <div
