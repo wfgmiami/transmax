@@ -12,5 +12,7 @@ export const candidateConfig =
     experience: "",
     dob: "",
     ssn: "",
+    formerEmployer: "",
+    formerEmployerPhone: "",
     applicationSuccess: ""
   }

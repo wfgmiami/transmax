@@ -24,8 +24,9 @@ const candidate = db.define('candidate', {
     city: DataTypes.STRING,
     state: DataTypes.STRING,
     zipCode: DataTypes.STRING,
-    dob: DataTypes.DATE
-
+    dob: DataTypes.DATE,
+    formerEmployer: DataTypes.STRING,
+    formerEmployerPhone: DataTypes.STRING,
 })
 
 module.exports = candidate;

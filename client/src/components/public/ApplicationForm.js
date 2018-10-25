@@ -96,6 +96,12 @@ class ApplicationForm extends Component {
         case "experience":
           field = "Experience";
           break;
+        case "formerEmployer":
+          field = "Former Employer";
+          break;
+        case "formerEmployerPhone":
+          field = "Former Employer Phone";
+          break;
         default:
           field = "";
       }
@@ -263,6 +269,30 @@ class ApplicationForm extends Component {
               ))}
             </Select>
           </FormControl>
+          <TextField
+            id="formerEmployer"
+            label="Former Employer Name"
+            className={classes.textField}
+            value={candidate.formeremployer}
+            onChange={this.handleChange("formerEmployer")}
+            margin="normal"
+          />
+          <InputMask
+            mask="(999) 999 9999"
+            maskChar="-"
+            value={candidate.formerEmployerPhone}
+            onChange={this.handleChange("formerEmployerPhone")}
+          >
+            {() => (
+              <TextField
+                id="formerEmployerPhone"
+                label="Former Employer Phone"
+                className={classes.textField}
+                margin="normal"
+                type="text"
+              />
+            )}
+          </InputMask>
           <div>&nbsp;</div>
         </form>
         <br />

@@ -258,7 +258,7 @@ class LoadsData extends Component {
         load.id = row.original;
       }
       else load.rowIndex = row.index;
-      console.log('row.............',load.rowIndex)
+      console.log('row.............',load.rowIndexst)
       this.props.updateLoad(load);
     } else {
       this.setState({

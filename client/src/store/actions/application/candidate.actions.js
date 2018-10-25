@@ -19,7 +19,11 @@ export function setCandidate(candidate){
                 type: SUCCESS_CANDIDATE_APPLICATION,
                 payload: response.data
             })
-        );
+        )
+        .catch( (err) => {
+            alert("An error occurred submitting the application. Please try again")
+            window.location.reload();
+        })
 }
 
 export function setCandidateAttributes(attribute){

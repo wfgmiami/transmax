@@ -27,6 +27,8 @@ router.post('/', (req,res,next)=>{
         Driver's License: ${req.body.driversLicense}<br/>
         DOB: ${req.body.dob}<br/>
         Experience: ${req.body.experience}<br/>
+        Former Employer: ${req.body.formerEmployer}<br/>
+        Former Employer Phone: ${req.body.formerEmployerPhone}<br/>
       </body>
     </html>`
 
@@ -62,13 +64,13 @@ router.post('/', (req,res,next)=>{
 
     res.send(candidates)
   })
-  .catch( err => console.log(err) )
+  .catch( err => res.status(404).end() )
 })
 
 // Make sure this is after all of
 // the registered routes!
-router.use(function (req, res) {
-  res.status(404).end();
-});
+// router.use(function (req, res) {
+//   res.status(404).end();
+// });
 
 module.exports = router;
