@@ -58,6 +58,25 @@ const DriversData = [
     earnings: 0,
     employedBy: ""
   },
+  {
+    driverId: 4,
+    firstName: "Joshua",
+    middleName: "Cain",
+    lastName: "Rhineheimer",
+    ssn: "xxx-xx-xxx",
+    driversLicense: "R556-4238-3134-08",
+    dob: "04/14/1983",
+    hireDate: "",
+    streetAddress: "N4910 County Road C",
+    city: "Ellsworth",
+    state: "WI",
+    zipCode: "54011",
+    phone: "xxx-xxx-xxxx",
+    email: "xxx@xxx.xxx",
+    currentRate: 0,
+    earnings: 0,
+    employedBy: ""
+  },
 
 
 ]

@@ -17,7 +17,7 @@ const EarningsSeed = [
     detentionDriverPay: 0,
     lateFee: 0,
     roadMaintenance: 0,
-    otherExpense: 0,
+    otherExpenses: 0,
     docFilePath: path.join(
       __dirname,
       "/brokerConfirmations/083118_Transplace.pdf"
@@ -39,7 +39,7 @@ const EarningsSeed = [
     detentionDriverPay: 0,
     lateFee: 0,
     roadMaintenance: 0,
-    otherExpense: 0,
+    otherExpenses: 0,
     docFilePath: path.join(
       __dirname,
       "/brokerConfirmations/090518_reliableSourceLogistics.pdf"
@@ -61,7 +61,7 @@ const EarningsSeed = [
     detentionDriverPay: 0,
     lateFee: 0,
     roadMaintenance: 0,
-    otherExpense: 0,
+    otherExpenses: 0,
     docFilePath: path.join(
       __dirname,
       "/brokerConfirmations/090518_reliableSourceLogistics.pdf"
@@ -83,7 +83,7 @@ const EarningsSeed = [
     detentionDriverPay: 10,
     lateFee: 0,
     roadMaintenance: 0,
-    otherExpense: 3,
+    otherExpenses: 3,
     docFilePath: path.join(
       __dirname,
       "/brokerConfirmations/090518_reliableSourceLogistics.pdf"
@@ -105,7 +105,7 @@ const EarningsSeed = [
     detentionDriverPay: 0,
     lateFee: 0,
     roadMaintenance: 0,
-    otherExpense: 0,
+    otherExpenses: 0,
     docFilePath: path.join(
       __dirname,
       "/brokerConfirmations/090518_reliableSourceLogistics.pdf"
@@ -127,7 +127,7 @@ const EarningsSeed = [
     detentionDriverPay: 0,
     lateFee: 0,
     roadMaintenance: 0,
-    otherExpense: 25,
+    otherExpenses: 25,
     docFilePath: path.join(
       __dirname,
       "/brokerConfirmations/090518_reliableSourceLogistics.pdf"
@@ -149,13 +149,12 @@ const EarningsSeed = [
     detentionDriverPay: 0,
     lateFee: 0,
     roadMaintenance: 0,
-    otherExpense: 0,
+    otherExpenses: 0,
     docFilePath: path.join(
       __dirname,
       "/brokerConfirmations/090518_reliableSourceLogistics.pdf"
     )
   },
-
   {
     weekNumber: 8,
     begWeekDate: "10/12/18",
@@ -172,7 +171,29 @@ const EarningsSeed = [
     detentionDriverPay: 0,
     lateFee: 0,
     roadMaintenance: 0,
-    otherExpense: 0,
+    otherExpenses: 0,
+    docFilePath: path.join(
+      __dirname,
+      "/brokerConfirmations/090518_reliableSourceLogistics.pdf"
+    )
+  },
+  {
+    weekNumber: 9,
+    begWeekDate: "10/19/18",
+    endWeekDate: "10/26/18",
+    weekRange: "10/19/18-10/26/18",
+    revenue: 2700,
+    dispatchFee: 270,
+    milesPaid: 364,
+    driverPay: 200,
+    fuelCost: 1182.12,
+    toll: 0,
+    lumper: 0,
+    detention: 0,
+    detentionDriverPay: 0,
+    lateFee: 0,
+    roadMaintenance: 0,
+    otherExpenses: 214.32,
     docFilePath: path.join(
       __dirname,
       "/brokerConfirmations/090518_reliableSourceLogistics.pdf"

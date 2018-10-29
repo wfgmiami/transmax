@@ -15,7 +15,7 @@ export const earningsConfig = [
       detentionDriverPay: 0,
       lateFee: 0,
       roadMaintenance: 0,
-      otherExpense: 0,
+      otherExpenses: 0,
       totalExpense: 0,
       profit:0,
       operatingMargin: 0,

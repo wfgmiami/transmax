@@ -49,10 +49,10 @@ const Earning = db.define('earning', {
     roadMaintenance: {
         type: DataTypes.DECIMAL,
     },
-    otherExpense: {
+    otherExpenses: {
       type: DataTypes.DECIMAL,
     },
-    totalExpense: {
+    totalExpenses: {
       type: DataTypes.DECIMAL,
     },
     profit: {

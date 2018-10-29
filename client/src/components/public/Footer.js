@@ -8,13 +8,14 @@ const styles = theme => ({
     left: 0,
     right: 0,
     bottom: 0,
-    fontSize: "16px",
+    fontSize: "14px",
     backgroundColor: theme.palette.primary.light,
-    padding: "15px",
-    textAlign: 'center'
+    padding: "5px",
+    textAlign: 'center',
+
   },
   social: {
-    paddingBottom: "20px",
+    // paddingBottom: "5px",
     '& img': {
       width: "30px"
     }

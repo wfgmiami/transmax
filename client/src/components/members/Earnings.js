@@ -265,7 +265,7 @@ class Earnings extends Component {
     const lateFee = isNaN(dataObj.lateFee) ? dataObj.lateFee.replace(",","") : dataObj.lateFee;
     const toll = isNaN(dataObj.toll) ? dataObj.toll.replace(",","") : dataObj.toll;
     const roadMaintenance = isNaN(dataObj.roadMaintenance) ? dataObj.roadMaintenance.replace(",","") : dataObj.roadMaintenance;
-    const otherExpense = isNaN(dataObj.otherExpense) ? dataObj.otherExpense.replace(",","") : dataObj.otherExpense;
+    const otherExpenses = isNaN(dataObj.otherExpenses) ? dataObj.otherExpenses.replace(",","") : dataObj.otherExpenses;
 
     let totalExpenses =
       Number(fuelCost) +
@@ -277,7 +277,7 @@ class Earnings extends Component {
       Number(lateFee) +
       Number(toll) +
       Number(roadMaintenance) +
-      Number(otherExpense);
+      Number(otherExpenses);
 
       return totalExpenses;
   }
@@ -415,7 +415,7 @@ class Earnings extends Component {
             lateFee: d.lateFee,
             toll: d.toll,
             roadMaintenance: d.roadMaintenance,
-            otherExpense: d.otherExpense
+            otherExpenses: d.otherExpenses
           }
 
           let totalExpenses = this.convertToNumber(dataObj)
@@ -452,7 +452,7 @@ class Earnings extends Component {
             lateFee: d.lateFee,
             toll: d.toll,
             roadMaintenance: d.roadMaintenance,
-            otherExpense: d.otherExpense
+            otherExpenses: d.otherExpenses
           }
 
           let totalExpenses = this.convertToNumber(dataObj)
@@ -491,7 +491,7 @@ class Earnings extends Component {
             lateFee: d.lateFee,
             toll: d.toll,
             roadMaintenance: d.roadMaintenance,
-            otherExpense: d.otherExpense
+            otherExpenses: d.otherExpenses
           }
 
           let totalExpenses = this.convertToNumber(dataObj);

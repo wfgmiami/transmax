@@ -6,8 +6,8 @@ import {withRouter} from 'react-router-dom';
 import ApplicationForm from "./ApplicationForm";
 import ApplicationSuccess from "./ApplicationSuccess";
 import Footer from "./Footer";
-// import ImageSection from "./ImageSection";
-import ImageSection2 from "./ImageSection2";
+import ImageSection from "./ImageSection";
+
 
 const styles = theme => ({
   root: {
@@ -73,7 +73,7 @@ class HomePage extends Component {
             )}
           </div>
         </div>
-        <ImageSection2 />
+        <ImageSection />
         <Footer />
       </div>
     );
