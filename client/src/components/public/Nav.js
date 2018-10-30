@@ -1,104 +1,125 @@
 import React, { Component } from "react";
+import classNames from 'classnames'
+import { List, ListItem, ListItemText, Icon } from "@material-ui/core";
+import { NavLink, withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
-
 import Navbar from "./Navbar";
+import { navigationConfig } from "../../configs/navigationConfig";
 
 const styles = theme => ({
   root: {
-    fontSize: "16px",
+    fontSize: "2vw",
     backgroundColor: theme.palette.primary.dark,
-    paddingBottom: "10px",
-    minHeight: "75px"
+    // padding: "10px",
+    // minHeight: "75px",
+    display: 'flex',
+    fontFamily: 'sans-serif',
+    color: 'white'
   },
-  navBar: {
-    listStyleType: "none",
-    display: "none",
-    flexDirection: "column"
+  // phone: {
+  //   marginTop: '10px',
+  //   marginLeft: '30px',
+  //   fontSize: '2.2vw'
+  // },
+  listItem: {
+    textAlign: "left",
+    margin: "5px auto",
+    maxHeight: '50px'
   },
-  navbarToggle: {
-    position: "absolute",
-    top: "10px",
-    right: "20px",
-    cursor: "pointer",
-    color: "rgba(255, 255, 255, 0.8)",
-    fontSize: "24px",
-    "&:hover": {
-      color: "rgba(255, 255, 255, 1)"
-    }
-  },
-  [theme.breakpoints.up("md")]: {
-    root: {
-      display: "flex",
-      justifyContent: "space-between",
-      paddingBottom: 0,
-      height: "70px",
-      // alignItems: "center"
-    },
-    navBar: {
-      display: "flex!important",
-      marginRight: "30px",
-      flexDirection: "row",
-      justifyContent: "flex-end"
-    },
-    navbarToggle: {
-      display: "none"
-    }
-  },
-  [theme.breakpoints.down("xs")]: {
-    imgClass: {
-      width: '85%'
-    }
-  }
+
 });
 
 class Nav extends Component {
+  // _isMounted = false;
 
-    state = {
-      style: {},
-      active: false
-    };
+  constructor(props){
+    super(props)
+    this.state = {
 
-    mobileMenuClick = e => {
+    }
+    this.classToggle.bind(this)
+  }
 
-      if (this.state.active) {
-        this.setState({ style: {}, active: false });
-      } else {
-        this.setState({
-          style: { display: "flex", flexDirection: "column" },
-          active: true
-        });
-      }
 
-    };
+  componentDidMount(prevProps){
+    // this._isMounted = true;
+      document.querySelector('.Navbar__Link-toggle')
+        .addEventListener('click', this.classToggle);
+  }
+
+
+
+  classToggle = () => {
+    const navs = document.querySelectorAll('.Navbar__Items')
+    navs.forEach(nav => nav.classList.toggle('Navbar__ToggleShow'));
+  }
+
 
   render() {
     const { classes } = this.props;
-    const mobileDisplay = this.state.style.display;
 
     return (
-      <nav className={classes.root}>
-        <span onClick={this.mobileMenuClick} className={classes.navbarToggle}>
-          <i className="fa fa-bars" />
-        </span>
+      <div className='Navbar'>
 
-        <img
-          style={{ maxWidth: '100%'}}
-          className={ classes.imgClass }
-          src="assets/images/logos/transmax.png"
-          alt="transmax"
-        />
+        <div style={{maxHeight:'70px'}} className="Navbar__Link Navbar__Link-brand">
+          <img
+            style={{ maxWidth: '100%'}}
+            src="assets/images/logos/transmax.png"
+            alt="transmax"
+          />
+        </div>
 
-        <ul
-          style={{ display: mobileDisplay }}
-          className={classes.navBar}
-        >
-          <Navbar mobileMenu={this.state} />
-        </ul>
-      </nav>
+        <div className="Navbar__Link Navbar__Link-toggle">
+          <i className="fas fa-bars"></i>
+        </div>
+
+        <nav className="Navbar__Items">
+          <div className="Navbar__Link">
+            <h4 className='phone' >
+              Call (513) 680-5334
+            </h4>
+          </div>
+        </nav>
+
+
+          {/* <div className="Navbar__Link">
+            Link
+          </div>
+          <div className="Navbar__Link">
+            Link
+          </div> */}
+
+          <nav className="Navbar__Items Navbar__Items--right">
+
+            {navigationConfig.map(item => (
+            <React.Fragment key={item.id}>
+
+              <ListItem
+                button
+                component={NavLink}
+                to={item.url}
+                className={classes.listItem}
+                onClick={this.navbarClick}
+              >
+                <Icon className="text-white">{item.icon}</Icon>
+                <ListItemText
+                  primary={item.title}
+                  classes={{ primary: "text-white" }}
+                />
+              </ListItem>
+
+            </React.Fragment>
+          ))}
+
+
+        </nav>
+
+      </div>
     );
   }
 }
 
-export default withStyles(styles, { withTheme: true })(Nav);
+// export default withStyles(styles, { withTheme: true })(Nav);
 
 
+export default withStyles(styles)(withRouter(Nav));

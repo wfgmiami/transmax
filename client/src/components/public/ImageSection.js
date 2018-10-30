@@ -7,6 +7,7 @@ import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from '@material-ui/icons/Info';
 import StarBorderIcon from "@material-ui/icons/StarBorder";
+import ListSubheader from '@material-ui/core/ListSubheader';
 import {tileData} from './tileData';
 import {smallImages, largeImages} from './imagesData';
 
@@ -15,25 +16,13 @@ const styles = theme => ({
     background: '#eff0f2',
     padding: '10px 0 0 0',
     overflow: "hidden",
-
     "& img": {
       width: '100%',
-      // maxWidth: "50vw",
-      // minHeight: "50vw",
-      // maxWidth: "50vw",
-      // minWidth: "50vw",
-      // padding: '3px',
     }
-
   },
   gridList: {
-    // width: 1600,
-    // height: 1000,
     flex: '1 1 auto',
     padding: '20px',
-    // overflow: "hidden",
-    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-    // transform: "translateZ(0)"
   },
   titleBar: {
     background:
@@ -45,6 +34,13 @@ const styles = theme => ({
   icon: {
     color: "white"
   },
+  subheader: {
+    color: '#000',
+    textAlign: 'center',
+    padding: '0.75em 1em',
+    fontWeight: '800',
+    backgroundColor: 'rgba(0,0,0,.3)',
+  },
   [theme.breakpoints.up("md")]: {
     root: {
       display: "flex",
@@ -55,11 +51,6 @@ const styles = theme => ({
 
       "& img": {
         width: '100%',
-        // maxWidth: "50vw",
-        // minHeight: "50vw",
-        // maxWidth: "50vw",
-        // minWidth: "50vw",
-        // padding: '3px',
       }
 
     }
@@ -69,6 +60,7 @@ const styles = theme => ({
 
 
 class ImageSection extends React.Component {
+  _isMounted = false;
 
   constructor(props){
     super(props)
@@ -79,12 +71,21 @@ class ImageSection extends React.Component {
   }
 
   componentDidMount(prevProps){
-    window.addEventListener("resize", this.resize.bind(this))
-    this.setState({ mobileView: window.innerWidth >= 600 })
+    this._isMounted = true;
+    if(this._isMounted){
+      window.addEventListener("resize", this.resize.bind(this))
+      this.setState({ mobileView: window.innerWidth >= 600 })
+    }
+
+  }
+
+  componentWillUnmount(){
+    this._isMounted = false;
   }
 
   resize(){
-    this.setState({ mobileView: window.innerWidth >= 600 })
+    if(this._isMounted)
+     this.setState({ mobileView: window.innerWidth >= 600 })
   }
 
 
@@ -97,7 +98,9 @@ class ImageSection extends React.Component {
     return (
       <div className={classes.root}>
         <GridList  cellHeight='auto' spacing={4} className={classes.gridList}>
-
+          <GridListTile key="Subheader" cols={2}>
+            <ListSubheader className={classes.subheader} component="div">WHAT TRANSMAX HAS TO OFFER</ListSubheader>
+          </GridListTile>
           {pics.map(tile => (
             <GridListTile
               key={tile.img}
