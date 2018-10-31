@@ -95,6 +95,7 @@ body {
   font-size: 20px;
 }
 .Navbar__Link-toggle {
+    margin-top: 10px;
     align-self: flex-end;
     display: initial;
     position: absolute;
