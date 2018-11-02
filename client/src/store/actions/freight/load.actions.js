@@ -66,7 +66,7 @@ export function updateLoad(load) {
 }
 
 export function editLoad(load) {
-  // console.log("load.actions.js addloads ", loads)
+  console.log("load.actions.js editLoad ", load)
   return {
     type: EDIT_LOAD,
     load

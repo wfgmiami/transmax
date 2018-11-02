@@ -228,7 +228,7 @@ class LoadsData extends Component {
     Object.keys(row).forEach( key => {
       if( typeof row[key] === "object" && key !== "_original" ){
         load[key] = row[key].props.dangerouslySetInnerHTML.__html;
-        if(load[key].substring(0,1) === '$') load[key] = load[key].slice(1);
+        if(load[key] && load[key].substring(0,1) === '$') load[key] = load[key].slice(1);
       }else if(!key.includes('_') && !key.includes(".") && key !== 'edit') {
         load[key] = row[key];
       }
@@ -255,10 +255,10 @@ class LoadsData extends Component {
       let load = this.createLoad(row.row);
 
       if(row.original.id){
-        load.id = row.original;
+        load.id = row.original.id;
       }
       else load.rowIndex = row.index;
-      console.log('row.............',load.rowIndexst)
+      // console.log('row.............',load.rowIndex)
       this.props.updateLoad(load);
     } else {
       this.setState({
@@ -867,10 +867,13 @@ class LoadsData extends Component {
             ((loadedMiles + emptyMiles) / mpg * dieselppg) +
             ((loadedMiles + emptyMiles) * driverPay) +
             (payment * dispatchPercent) +
-            d.lumper + d.detention + d.detentionDriverPay + d.lateFee +
-            d.toll + d.roadMaintenance + d.otherExpenses;
+            this.numberFormat(d.lumper) + this.numberFormat(d.detention) +
+            this.numberFormat(d.detentionDriverPay) + this.numberFormat(d.lateFee) +
+            this.numberFormat(d.toll) + this.numberFormat(d.roadMaintenance) +
+            this.numberFormat(d.otherExpenses);
 
           totalExpenses = isNaN(totalExpenses) ? null : totalExpenses;
+
           return (
             <div
               dangerouslySetInnerHTML={{
@@ -899,8 +902,10 @@ class LoadsData extends Component {
             ((loadedMiles + emptyMiles) / mpg * dieselppg) +
             ((loadedMiles + emptyMiles) * driverPay) +
             (payment * dispatchPercent) +
-            d.lumper + d.detention + d.detentionDriverPay + d.lateFee +
-            d.toll + d.roadMaintenance + d.otherExpenses;
+            this.numberFormat(d.lumper) + this.numberFormat(d.detention) +
+            this.numberFormat(d.detentionDriverPay) + this.numberFormat(d.lateFee) +
+            this.numberFormat(d.toll) + this.numberFormat(d.roadMaintenance) +
+            this.numberFormat(d.otherExpenses);
 
           let profit = payment - totalExpenses;
           profit = isNaN(profit) ? null : profit;
