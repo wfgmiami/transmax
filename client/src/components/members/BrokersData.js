@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import ReactTable from "react-table";
-import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import { connect } from "react-redux";
@@ -8,11 +7,9 @@ import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import "react-table/react-table.css";
 import { Datatable } from "./Datatable";
-import { brokerConfig } from "../../configs/brokerConfig";
 import ColumnChooser from "./ColumnChooser.js";
 import SideMenu from "./SideMenu";
 import ActionBtn from "./ActionBtn";
-import axios from "axios";
 
 import * as companyActions from "../../store/actions/company";
 
@@ -54,9 +51,6 @@ class BrokersData extends Component {
     let dollarSign;
     let fieldValue;
 
-    const findEditableRow = this.state.editableRowIndex.find(
-      row => row === cellInfo.index
-    );
     dollarSign = cellInfo.column.id === "totalPayment" ? "$" : "";
     fieldValue = this.props.broker[cellInfo.index][cellInfo.column.id];
     if( typeof(fieldValue) === 'string' && !isNaN(fieldValue)) {

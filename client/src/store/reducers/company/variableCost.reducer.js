@@ -38,11 +38,6 @@ const variableCost = (state = initialState, action) => {
       return [...action.variableCost.data];
     }
 
-    case Actions.SAVE_VARIABLE_COST: {
-
-
-    }
-
     default: {
       return state;
     }

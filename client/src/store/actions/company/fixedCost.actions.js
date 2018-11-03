@@ -1,5 +1,4 @@
 import axios from "axios";
-import { FixedCost } from "../../../components/members/Datatable";
 
 export const GET_FIXED_COST = "GET FIXED_COST";
 export const SET_FIXED_COST = "SET FIXED_COST";

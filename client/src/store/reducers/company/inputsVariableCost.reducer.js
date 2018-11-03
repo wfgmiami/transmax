@@ -1,5 +1,4 @@
 import * as Actions from "../../actions/index";
-import { inputsVariableCostConfig } from "../../../configs/inputsVariableCostConfig";
 
 const initialState = {};
 

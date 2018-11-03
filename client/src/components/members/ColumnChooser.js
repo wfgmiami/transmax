@@ -8,7 +8,6 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 import { withStyles } from "@material-ui/core/styles";
 //import 'font-awesome/css/font-awesome.min.css';
-import AlarmIcon from "@material-ui/icons/Reorder";
 
 export const popoverStyles = {
   root: {
@@ -121,7 +120,7 @@ class ColumnChooser extends React.Component {
           column.Header = "Empty Miles (req)";
           break;
         default:
-          column.Header;
+          column.Header = column.Header;
       }
     })
 

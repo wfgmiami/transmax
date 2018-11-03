@@ -1,5 +1,4 @@
 import axios from "axios";
-import { EarningsData } from "../../../components/members/Datatable";
 
 export const GET_EARNINGS = "GET EARNINGS";
 export const SET_EARNINGS = "SET EARNINGS";

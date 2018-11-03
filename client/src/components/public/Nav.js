@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import classNames from 'classnames'
-import { List, ListItem, ListItemText, Icon } from "@material-ui/core";
+import { ListItem, ListItemText, Icon } from "@material-ui/core";
 import { NavLink, withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
-import Navbar from "./Navbar";
 import { navigationConfig } from "../../configs/navigationConfig";
 
 const styles = theme => ({

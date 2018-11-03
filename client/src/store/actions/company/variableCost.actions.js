@@ -1,5 +1,4 @@
 import axios from "axios";
-import { VariableCost } from "../../../components/members/Datatable";
 
 export const GET_VARIABLE_COST = "GET VARIABLE_COST";
 export const SET_VARIABLE_COST = "SET VARIABLE_COST";
@@ -31,7 +30,6 @@ export function setVariableCost(variableCost) {
 
 export function saveVariableCost(variableCost) {
   // console.log("variableCostaction.js variableCost ", variableCost);
-  let costToUpdate = {};
   let updatedState = [];
   updatedState.push({ id: 1, costName: "Driver Pay",
                     dollarPerMile: Number(variableCost.driverpayDollarPerMile).toFixed(2) })

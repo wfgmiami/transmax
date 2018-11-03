@@ -11,7 +11,6 @@ import Financials from "@material-ui/icons/AccountBalance";
 import Logout from "@material-ui/icons/NetworkLocked";
 import Functions from "@material-ui/icons/Functions";
 import FixedCost from "@material-ui/icons/AccountBalanceWallet";
-import VariableCost from "@material-ui/icons/CompareArrows";
 
 export const viewItems = (
   <div>

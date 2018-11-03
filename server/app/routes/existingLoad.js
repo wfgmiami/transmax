@@ -163,6 +163,7 @@ router.post('/', (req, res, next) => {
       totalPayment: Number(loadObj.payment),
       totalLoadedMiles: Number(loadObj.loadedMiles)
     }
+
     console.log('** LOAD TO UPDATE ', load, "** UPDATED_BROKER", updateBroker)
     return Promise.all(
           [load.broker.updateAttributes(updateBroker),

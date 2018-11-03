@@ -1,6 +1,4 @@
 import * as Actions from "../../actions/index";
-import { loadsConfig } from "../../../configs/loadsConfig.js";
-// import { Datatable } from "../../../components/members/Datatable";
 
 const initialState = [];
 
@@ -26,9 +24,11 @@ const loads = (state = initialState, action) => {
       console.log('*** action load reducer delete load ', state, " ", action)
 
       return [...state.map(load => {
-              if(action.payload !== load.id)
-                 return load })
-              .filter( keepLoad => keepLoad)
+        if(action.payload !== load.id)
+            return load
+        else return null;
+        })
+        .filter( keepLoad => keepLoad)
       ]
 
     }

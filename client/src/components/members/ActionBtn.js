@@ -2,9 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
 // import DialogTitle from "@material-ui/core/DialogTitle";
 import AddCircle from '@material-ui/icons/AddCircle';
 import { bindActionCreators } from "redux";
@@ -48,7 +45,6 @@ class AddSaveBtn extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
 
     return (
       <div>

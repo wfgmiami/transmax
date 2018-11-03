@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import ReactTable from "react-table";
-import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Edit from '@material-ui/icons/Edit';

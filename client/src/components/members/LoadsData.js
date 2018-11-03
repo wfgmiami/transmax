@@ -187,19 +187,18 @@ class LoadsData extends Component {
         contentEditable
         suppressContentEditableWarning
         onBlur={e => {
-          {/* const data = [...this.props.load]; */}
-          {/* data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML; */}
+
           const keyToUpdate = cellInfo.column.id;
           const valueToUpdate = e.target.innerHTML;
           const indexToUpdate = cellInfo.index;
-        ``
+
           const updateInfo = {
             keyToUpdate: keyToUpdate,
             valueToUpdate: valueToUpdate,
             indexToUpdate: indexToUpdate
           }
 
-          {/* console.log('updateInfo ', cellInfo, cellInfo.column) */}
+          console.log('updateInfo on bluer', updateInfo)
           this.props.editLoad(updateInfo);
         }}
         dangerouslySetInnerHTML={{
@@ -274,7 +273,6 @@ class LoadsData extends Component {
   }
 
   saveRow(selectedRow) {
-    let rowId = null;
     let rowToUpdate = {};
     let toSaveRow = {};
 
@@ -284,15 +282,21 @@ class LoadsData extends Component {
 
     rowToUpdate = selectedRow.row;
 
-    console.log("*** selectedRow ",  selectedRow, " ", selectedRow.original.id)
+    // console.log("*** selectedRow ",  selectedRow, " ", selectedRow.original.id)
 
     let keys = Object.keys(rowToUpdate);
 
-    const emptyFields = keys.map( key => { if(!rowToUpdate[key]) return key })
+    const emptyFields = keys.map( key => {
+      if(!rowToUpdate[key])
+        return key
+      else return null
+    })
       .filter( loadItem => loadItem )
 
     const requiredFieldsCheck = emptyFields.map( loadItem => {
-      if(mandatoryItems.includes( loadItem )) return loadItem
+      if(mandatoryItems.includes( loadItem ))
+        return loadItem
+      else return null
     })
       .filter( result => result)
 

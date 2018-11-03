@@ -16,7 +16,7 @@ export function encode(data, columns) {
         headers.push(header);
       }
       csv.push(headers.join(","));
-  
+
       for (let i = 0; i < data.length; i++) {
         const obj = data[i];
         const row = [];
@@ -24,9 +24,9 @@ export function encode(data, columns) {
           const column = columns[j];
           const { accessor } = column;
           const { id } = column;
-  
+
           let cell = id ? obj[id] : obj[accessor];
-  
+
           if (typeof cell === "string") {
             cell = `"${cell
               .replace(/\\/g, "\\\\")
@@ -37,7 +37,7 @@ export function encode(data, columns) {
           } else if (typeof cell === "object") {
             cell = cell.props.dangerouslySetInnerHTML.__html;
           }
-  
+
           row.push(cell);
         }
         csv.push(row.join(","));
@@ -45,7 +45,7 @@ export function encode(data, columns) {
     }
     return csv.join("\n");
   }
-  
+
   export function downloadCsv(csv, filename) {
     // console.log("downloadCsv:", csv, filename);
     const csvFile = new Blob([csv], { type: "text/csv" });
@@ -56,7 +56,7 @@ export function encode(data, columns) {
     document.body.appendChild(downloadLink);
     downloadLink.click();
   }
-  
+
   export function downloadJSON(json, filename) {
     const jsonFile = new Blob([json], { type: "application/json" });
     const downloadLink = document.createElement("a");
@@ -68,41 +68,25 @@ export function encode(data, columns) {
   }
   export function encodeJson(data) {
     const jsonData = [];
-    const data_grid = [];
-    var obj = {};
-  
+
     var i;
     for (i = 0; i < data.length; i++) {
-      //var key_array=(Object.keys(data[0]._original));
-      //var objects_array =(Object.values(data[0]._original));
-  
       var a = data[i]._original;
-      var c = data.length - 1;
-    //   console.log(c);
-  
-      //var b =a.replace('"}','"},\n');
-  
       jsonData.push(a);
-  
-      //data_grid.push(jsonData);
-      //jsonData.push(Object.keys(data[i]._original));
     }
-    //console.log(key_array);
-    //console.log(objects_array);
-    // console.log(jsonData);
+
     return jsonData;
   }
   export function exportTableToJSON(data, filename) {
     const data_json = {
       data: encodeJson(data)
     };
-  
+
     downloadJSON(JSON.stringify(data_json), filename);
   }
-  
+
   export function exportTableToCSV(data, columns, filename) {
     // console.log("downloadCsv: ", data, columns, filename);
     const csv = encode(data, columns);
     downloadCsv(csv, filename);
   }
-  
