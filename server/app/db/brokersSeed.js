@@ -5,31 +5,31 @@ const BrokersData = [
     address: "",
     phone: "",
     email: "",
-    bookedLoads: 1,
-    totalPayment: 600,
-    totalLoadedMiles: 85,
+    bookedLoads: 0,
+    totalPayment: 0,
+    totalLoadedMiles: 0,
     avgDollarPerMile: 0
   },
   {
     brokerId: 2,
-    name: "TransportationOne",
-    address: "",
-    phone: "",
-    email: "",
-    bookedLoads: 1,
-    totalPayment: 1200,
-    totalLoadedMiles: 842,
-    avgDollarPerMile: 0
-  },
-  {
-    brokerId: 3,
     name: "Reliable Source Logistics",
     address: "",
     phone: "",
     email: "",
-    bookedLoads: 1,
-    totalPayment: 2700,
-    totalLoadedMiles: 970,
+    bookedLoads: 0,
+    totalPayment: 0,
+    totalLoadedMiles: 0,
+    avgDollarPerMile: 0
+  },
+  {
+    brokerId: 3,
+    name: "TransportationOne",
+    address: "",
+    phone: "",
+    email: "",
+    bookedLoads: 0,
+    totalPayment: 0,
+    totalLoadedMiles: 0,
     avgDollarPerMile: 0
   },
   {
@@ -38,9 +38,9 @@ const BrokersData = [
     address: "",
     phone: "",
     email: "",
-    bookedLoads: 1,
-    totalPayment: 750,
-    totalLoadedMiles: 357,
+    bookedLoads: 0,
+    totalPayment: 0,
+    totalLoadedMiles: 0,
     avgDollarPerMile: 0
   },
   {
@@ -49,9 +49,9 @@ const BrokersData = [
     address: "",
     phone: "",
     email: "",
-    bookedLoads: 1,
-    totalPayment: 2050,
-    totalLoadedMiles: 737,
+    bookedLoads: 0,
+    totalPayment: 0,
+    totalLoadedMiles: 0,
     avgDollarPerMile: 0
   },
   {
@@ -60,9 +60,9 @@ const BrokersData = [
     address: "",
     phone: "",
     email: "",
-    bookedLoads: 1,
-    totalPayment: 1000,
-    totalLoadedMiles: 391,
+    bookedLoads: 0,
+    totalPayment: 0,
+    totalLoadedMiles: 0,
     avgDollarPerMile: 0
   },
   {
@@ -71,9 +71,9 @@ const BrokersData = [
     address: "",
     phone: "",
     email: "",
-    bookedLoads: 1,
-    totalPayment: 1050,
-    totalLoadedMiles: 375,
+    bookedLoads: 0,
+    totalPayment: 0,
+    totalLoadedMiles: 0,
     avgDollarPerMile: 0
   },
   {
@@ -82,9 +82,9 @@ const BrokersData = [
     address: "",
     phone: "",
     email: "",
-    bookedLoads: 1,
-    totalPayment: 940,
-    totalLoadedMiles: 468,
+    bookedLoads: 0,
+    totalPayment: 0,
+    totalLoadedMiles: 0,
     avgDollarPerMile: 0
   },
   {
@@ -93,9 +93,9 @@ const BrokersData = [
     address: "",
     phone: "",
     email: "",
-    bookedLoads: 1,
-    totalPayment: 1150,
-    totalLoadedMiles: 375,
+    bookedLoads: 0,
+    totalPayment: 0,
+    totalLoadedMiles: 0,
     avgDollarPerMile: 0
   },
   {
@@ -104,9 +104,9 @@ const BrokersData = [
     address: "",
     phone: "",
     email: "",
-    bookedLoads: 1,
-    totalPayment: 2350,
-    totalLoadedMiles: 820,
+    bookedLoads: 0,
+    totalPayment: 0,
+    totalLoadedMiles: 0,
     avgDollarPerMile: 0
   },
   {
@@ -115,9 +115,9 @@ const BrokersData = [
     address: "",
     phone: "",
     email: "",
-    bookedLoads: 1,
-    totalPayment: 1250,
-    totalLoadedMiles: 800,
+    bookedLoads: 0,
+    totalPayment: 0,
+    totalLoadedMiles: 0,
     avgDollarPerMile: 0
   },
   {
@@ -126,9 +126,9 @@ const BrokersData = [
     address: "",
     phone: "",
     email: "",
-    bookedLoads: 1,
-    totalPayment: 2450,
-    totalLoadedMiles: 610,
+    bookedLoads: 0,
+    totalPayment: 0,
+    totalLoadedMiles: 0,
     avgDollarPerMile: 0
   },
   {
@@ -137,9 +137,9 @@ const BrokersData = [
     address: "",
     phone: "",
     email: "",
-    bookedLoads: 2,
-    totalPayment: 3325,
-    totalLoadedMiles: 1307,
+    bookedLoads: 0,
+    totalPayment: 0,
+    totalLoadedMiles: 0,
     avgDollarPerMile: 0
   },
   {
@@ -148,9 +148,9 @@ const BrokersData = [
     address: "",
     phone: "",
     email: "",
-    bookedLoads: 1,
-    totalPayment: 900,
-    totalLoadedMiles: 546,
+    bookedLoads: 0,
+    totalPayment: 0,
+    totalLoadedMiles: 0,
     avgDollarPerMile: 0
   },
   {
@@ -159,9 +159,9 @@ const BrokersData = [
     address: "",
     phone: "",
     email: "",
-    bookedLoads: 1,
-    totalPayment: 2150,
-    totalLoadedMiles: 546,
+    bookedLoads: 0,
+    totalPayment: 0,
+    totalLoadedMiles: 0,
     avgDollarPerMile: 0
   },
   {
@@ -170,9 +170,9 @@ const BrokersData = [
     address: "",
     phone: "",
     email: "",
-    bookedLoads: 1,
-    totalPayment: 1500,
-    totalLoadedMiles: 1128,
+    bookedLoads: 0,
+    totalPayment: 0,
+    totalLoadedMiles: 0,
     avgDollarPerMile: 0
   },
   {
@@ -181,9 +181,9 @@ const BrokersData = [
     address: "",
     phone: "",
     email: "",
-    bookedLoads: 1,
-    totalPayment: 530,
-    totalLoadedMiles: 122,
+    bookedLoads: 0,
+    totalPayment: 0,
+    totalLoadedMiles: 0,
     avgDollarPerMile: 0
   },
   {
@@ -192,12 +192,14 @@ const BrokersData = [
     address: "",
     phone: "",
     email: "",
-    bookedLoads: 1,
-    totalPayment: 2700,
-    totalLoadedMiles: 1085,
+    bookedLoads: 0,
+    totalPayment: 0,
+    totalLoadedMiles: 0,
     avgDollarPerMile: 0
   },
 ];
 
 
 module.exports = BrokersData;
+
+

@@ -90,18 +90,18 @@ class ApplicationForm extends Component {
         case "dob":
           field = "Date of birth";
           break;
-        case "ssn":
-          field = "Social Security Number";
-          break;
+        // case "ssn":
+        //   field = "Social Security Number";
+        //   break;
         case "experience":
           field = "Experience";
           break;
-        case "formerEmployer":
-          field = "Former Employer";
-          break;
-        case "formerEmployerPhone":
-          field = "Former Employer Phone";
-          break;
+        // case "formerEmployer":
+        //   field = "Former Employer";
+        //   break;
+        // case "formerEmployerPhone":
+        //   field = "Former Employer Phone";
+        //   break;
         default:
           field = "";
       }
@@ -236,7 +236,7 @@ class ApplicationForm extends Component {
               />
             )}
           </InputMask>
-          <InputMask
+          {/* <InputMask
             mask="999-99-9999"
             maskChar="_"
             value={candidate.ssn}
@@ -251,7 +251,7 @@ class ApplicationForm extends Component {
                 type="text"
               />
             )}
-          </InputMask>
+          </InputMask> */}
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="experience-simple">Experience</InputLabel>
             <Select
@@ -277,7 +277,7 @@ class ApplicationForm extends Component {
             onChange={this.handleChange("formerEmployer")}
             margin="normal"
           />
-          <InputMask
+          {/* <InputMask
             mask="(999) 999 9999"
             maskChar="-"
             value={candidate.formerEmployerPhone}
@@ -292,7 +292,7 @@ class ApplicationForm extends Component {
                 type="text"
               />
             )}
-          </InputMask>
+          </InputMask> */}
           <div>&nbsp;</div>
         </form>
         <br />

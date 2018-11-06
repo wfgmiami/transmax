@@ -243,7 +243,7 @@ class LoadsData extends Component {
       editableRow => editableRow === row.index
     );
 
-    // console.log("LoadsData.js editRow ", row, "state: ", this.state);
+    // console.log("LoadsData.js editRow ", row, "state: ", this.state, " ",alreadyEditable);
 
     if (alreadyEditable || alreadyEditable === 0) {
       this.setState({
@@ -257,7 +257,7 @@ class LoadsData extends Component {
         load.id = row.original.id;
       }
       else load.rowIndex = row.index;
-      // console.log('row.............',load.rowIndex)
+      // console.log('row.............',load)
       this.props.updateLoad(load);
     } else {
       this.setState({
@@ -333,7 +333,7 @@ class LoadsData extends Component {
       })
 
       const newRow = Object.assign(rowToUpdate, toSaveRow);
-      console.log("*** save row ",  newRow)
+      // console.log("*** save row ",  newRow)
       if(selectedRow.original.id) this.props.editExistingLoad(newRow);
       else  this.props.saveNewLoad(newRow);
       alert("The load was saved")
@@ -405,11 +405,10 @@ class LoadsData extends Component {
 
   // showing/hiding columns
   onColumnUpdate(index) {
-    const columns =
-      this.state.columns.length > 0 ? this.state.columns : this.createColumns();
-    // console.log("onColumnUpdate index ", index, "...", this.state,columns[index]);
-    this.setState(
-      prevState => {
+
+    const columns = this.state.columns.length > 0 ? this.state.columns : this.createColumns();
+    // console.log("onColumnUpdate index ", index, "...", this.state);
+    this.setState( prevState => {
         const columns1 = [];
         columns1.push(...columns);
         columns1[index].show = !columns1[index].show;
@@ -418,13 +417,12 @@ class LoadsData extends Component {
             item.show = !item.show;
           });
         }
-
         return {
           columns: columns1
         };
       },
       () => {
-        // console.log('onColumnUpdate columns: ', this.state.columns)
+        console.log('onColumnUpdate columns: ', this.state.columns)
       }
     );
   }
@@ -432,6 +430,7 @@ class LoadsData extends Component {
   dollarFormat(strNum,dec,sign){
     // 1200 => "$1,200"
     // "1200" || "1,200" => "$1,200.00" or "1,200"
+    // console.log('strNum ', strNum, dec, sign)
     if(strNum === null || strNum === "") return strNum;
     if(typeof strNum === 'number') return  sign + Number(strNum.toFixed(dec)).toLocaleString();
     return sign + Number(Number(strNum.replace(",","")).toFixed(dec)).toLocaleString();
@@ -450,8 +449,9 @@ class LoadsData extends Component {
     const editable = this.state.editableRowIndex;
     let check = 0;
     let dec = (field === "dollarPerMile") ? 2 : 0;
+    let dollar = field === "mileage" ? '' : '$';
 
-    if (editable.length === 0) return this.dollarFormat(data[field],dec,'$');
+    if (editable.length === 0) return this.dollarFormat(data[field],dec,dollar);
     for(let index of editable){
       check++;
       if( this.props.load[index].id === data.id ) return null;
@@ -468,7 +468,7 @@ class LoadsData extends Component {
     dieselppg = Number(dieselppg);
     driverPay = Number(driverPay);
 
-    return [
+    let columns = [
       {
         Header: "Date",
         Footer: this.calculateTotal,
@@ -733,13 +733,11 @@ class LoadsData extends Component {
         className: "columnBorder",
         minWidth: 80,
         accessor: d => {
-
           const tableData = this.returnTableData(d, 'driverPay');
           if( tableData ) return tableData;
 
           const loadedMiles = this.numberFormat(d.loadedMiles);
           const emptyMiles = this.numberFormat(d.emptyMiles);
-// console.log('..............', loadedMiles, typeof loadedMiles, typeof emptyMiles, loadedMiles+ emptyMiles)
           let totalDriverPay = (loadedMiles + emptyMiles) * driverPay
           totalDriverPay = isNaN(totalDriverPay) ? null : totalDriverPay;
 
@@ -989,6 +987,13 @@ class LoadsData extends Component {
         }
       }
     ];
+
+    if(this.state.columns.length > 0){
+      this.state.columns.forEach( (col, idx) => {
+        columns[idx].show = col.show;
+      })
+    }
+    return columns;
   }
 
   render() {
@@ -996,8 +1001,8 @@ class LoadsData extends Component {
     const { load, classes } = this.props;
     console.log("*** render LoadsData this.props ", this.props, "state ", this.state);
 
-    const columns =
-      this.state.columns.length > 0 ? this.state.columns : this.createColumns();
+    const columns = this.createColumns()
+      // this.state.columns.length > 0 ? this.state.columns : this.createColumns();
 
     return (
       <div className={classes.root}>

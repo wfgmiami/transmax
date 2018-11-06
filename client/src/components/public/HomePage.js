@@ -52,15 +52,24 @@ class HomePage extends Component {
               </p>
             <br/><br/>
             <h2 className="py-16">START AT $0.55 CENTS PER MILE OR MORE</h2><br/>
-              <p className={classes.mainText}>
-                  The company is co-founded by a truck driver that knows what is takes to be a trucker.<br/>
-                  Do not spend days on the road without being adequately compensated for your hard work - contact us today!<br/>
-                  We want our drivers to earn the most money in the industry!<br/>
-                  You can just call us at 513-680-5334 or fill in the application form and we will be in touch with you.<br/>
-                  All you need is a CDL and a minimum of 2 years experience!<br/>
-                  We are constantly adding new trucks to our fleet so you can choose the truck you want to drive.<br/>
-                  Apply today and start earning one of the highest rates on the market!<br/><br/>
-              </p>
+              <h3>What you can expect:</h3>&nbsp;
+                <ul style={{ marginLeft: '25px' }} className={classes.mainText}>
+                  <li>Flexible home time - choose to be at home for the weekends or to stay on the road</li>
+                  <li>Drivers who have proven to be safe and dependable will qualify for $0.60 cpm</li>
+                  <li>Detention paid $20 per hour</li>
+                  <li>Get paid every week - flexible pay methods</li>
+                  <li>Drive on paper log or ELD</li>
+                  <li>Accidental insurance provided</li>
+                  <li>1099 only</li><br/>
+                </ul>
+
+              <h3>What you need to have:</h3>&nbsp;
+                <ul style={{ marginLeft: '25px' }} className={classes.mainText}>
+                  <li>Class A CDL</li>
+                  <li>Minimum 2 year experience</li>
+                  <li>Clean MVR report</li><br/>
+                </ul>
+                <p style={{ fontWeight:'700', fontSize:'16px' }}> To apply - call us at 513-680-5334 or fill in the application form.</p>
           </div>
 
           <div className={classes.flexSection}>

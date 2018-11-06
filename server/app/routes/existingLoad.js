@@ -81,6 +81,9 @@ router.delete('/deleteload/:loadId', (req, res, next) => {
     })
     .then( (d) => {
 
+      console.log('loadPlus broker ', brokerId, ".......", bookedLoads, "...........", totalPayment,
+      "..............", d, "..............", loadPlusBroker)
+
       if (bookedLoads > 1) {
 
         const updateBroker = {
@@ -92,14 +95,13 @@ router.delete('/deleteload/:loadId', (req, res, next) => {
         .then( broker => broker.update(updateBroker))
 
       } else {
-        Broker.destroy({
-          where: {
-            id: brokerId
-          }
-        })
+        Broker.destroy({ where: { id: brokerId } })
       }
     })
-    .then( () => res.status(204).end())
+    .then( (d) => {
+      console.log('broker destroyed ', d)
+      res.status(204).end()}
+    )
     .catch( (error) => res.status(400).send(error))
   })
 
@@ -159,9 +161,31 @@ router.post('/', (req, res, next) => {
         message: "Load Not Found"
       })
     }
-    const updateBroker = {
-      totalPayment: Number(loadObj.payment),
-      totalLoadedMiles: Number(loadObj.loadedMiles)
+
+    let bookedLoads = Number(load.broker.dataValues.bookedLoads);
+    let updateBroker = {};
+
+    // if( bookedLoads >= 1 ){
+    if( bookedLoads > 1 ){
+// console.log('..................', loadObj.payment, '...........', load,'........' ,load.payment)
+      const paymentChange = loadObj.payment - load.payment;
+      const loadedMilesChange = loadObj.loadedMiles - load.loadedMiles;
+
+      updateBroker = {
+        // bookedLoads: bookedLoads + 1,
+        totalPayment: Number(load.broker.dataValues.totalPayment) +
+          // loadObj.payment,
+          paymentChange,
+        totalLoadedMiles: Number(load.broker.dataValues.totalLoadedMiles) +
+          // loadObj.loadedMiles
+          loadedMilesChange
+      }
+    } else {
+      updateBroker = {
+        // bookedLoads: 1,
+        totalPayment: Number(loadObj.payment),
+        totalLoadedMiles: Number(loadObj.loadedMiles)
+      }
     }
 
     console.log('** LOAD TO UPDATE ', load, "** UPDATED_BROKER", updateBroker)

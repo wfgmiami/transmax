@@ -10,7 +10,6 @@ const DATABASE_URI = require(path.join(__dirname, '../../env')).DATABASE_URI;
 
 
 // create the database instance
-
 if(!DATABASE_HOST){
 	console.log(chalk.yellow('Opening connection to PostgreSQL:', DATABASE_URI))
 	module.exports = new Sequelize(DATABASE_URI, {
