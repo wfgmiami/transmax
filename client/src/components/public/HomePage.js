@@ -43,12 +43,12 @@ class HomePage extends Component {
       <div>
         <div className={classNames(classes.root, classes.flexContainer)}>
           <div className={classes.flexSection}>
-            <h2 className="py-16">TRUSTED HIGH QUALITY TRANSPORTATION SERVICE</h2><br/>
+            <h2 className="py-16">ABOUT OUR COMPANY</h2><br/>
               <p className={classes.mainText}>
                 Transmax is a commerical truck fleet operation company based in Cincinnati Ohio.
-                We provide dependable transportation equipment to motor carriers. We partner with AIK Transport LLC to form integrated trucking services that help our customers deliver their cargo safely and on time every day.
+                We provide dependable transportation services that help our customers deliver their cargo safely and on time every day.
                 Our team of drivers and support staff work hard to make sure the company is ready to provide round-the-clock service.
-                The company goal is to provide superior transportation solutions to wide range of customers. We are looking to add new trucks to our fleet and hire more safe and reliable drivers.
+                The company goal is to provide continuous transportation solutions to wide range of customers. We are looking to add new trucks to our fleet and hire more safe and reliable drivers.
               </p>
             <br/><br/>
             <h2 className="py-16">START AT $0.55 CENTS PER MILE OR MORE</h2><br/>
@@ -56,12 +56,12 @@ class HomePage extends Component {
                 <ul style={{ marginLeft: '25px' }} className={classes.mainText}>
                   <li>Flexible home time - choose to be at home for the weekends or to stay on the road</li>
                   <li>Drivers who have proven to be safe and dependable will qualify for $0.60 cpm</li>
-                  <li>Detention paid $20 per hour</li>
                   <li>Get paid every week - flexible pay methods</li>
+                  <li>Paid insurance</li>
                   <li>Drive on paper log or ELD</li>
-                  <li>Accidental insurance provided</li>
-                  <li>1099 only</li><br/>
-                </ul>
+                  <li>Paid vacation</li>
+                  <li>Detention paid $20 per hour</li>
+                </ul>&nbsp;
 
               <h3>What you need to have:</h3>&nbsp;
                 <ul style={{ marginLeft: '25px' }} className={classes.mainText}>
