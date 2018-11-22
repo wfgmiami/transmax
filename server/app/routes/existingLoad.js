@@ -165,24 +165,32 @@ router.post('/', (req, res, next) => {
     let bookedLoads = Number(load.broker.dataValues.bookedLoads);
     let updateBroker = {};
 
-    // if( bookedLoads >= 1 ){
-    if( bookedLoads > 1 ){
+    // first seed code
+    if( bookedLoads >= 1 ){
+    // normal code
+    // if( bookedLoads > 1 ){
 // console.log('..................', loadObj.payment, '...........', load,'........' ,load.payment)
       const paymentChange = loadObj.payment - load.payment;
       const loadedMilesChange = loadObj.loadedMiles - load.loadedMiles;
 
       updateBroker = {
-        // bookedLoads: bookedLoads + 1,
+         // first seed code
+        bookedLoads: bookedLoads + 1,
         totalPayment: Number(load.broker.dataValues.totalPayment) +
-          // loadObj.payment,
-          paymentChange,
+          // first seed code
+          loadObj.payment,
+          // normal code
+          // paymentChange,
         totalLoadedMiles: Number(load.broker.dataValues.totalLoadedMiles) +
-          // loadObj.loadedMiles
-          loadedMilesChange
+          // first seed code
+          loadObj.loadedMiles
+          // normal code
+          // loadedMilesChange
       }
     } else {
       updateBroker = {
-        // bookedLoads: 1,
+        // first seed code
+        bookedLoads: 1,
         totalPayment: Number(loadObj.payment),
         totalLoadedMiles: Number(loadObj.loadedMiles)
       }

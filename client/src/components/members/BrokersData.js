@@ -271,7 +271,7 @@ class BrokersData extends Component {
   }
 
   createColumns() {
-    console.log("BrokersData.js createColumns this.props: ", this.props);
+    // console.log("BrokersData.js createColumns this.props: ", this.props);
 
     return [
       {
@@ -396,7 +396,7 @@ class BrokersData extends Component {
     // const { data } = this.state;
     const { broker, classes } = this.props;
 
-    console.log("BrokersData.js broker ", broker);
+    // console.log("BrokersData.js broker ", broker);
 
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();

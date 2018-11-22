@@ -424,7 +424,7 @@ class LoadsData extends Component {
         };
       },
       () => {
-        console.log('onColumnUpdate columns: ', this.state.columns)
+        // console.log('onColumnUpdate columns: ', this.state.columns)
       }
     );
   }
@@ -1001,7 +1001,7 @@ class LoadsData extends Component {
   render() {
 
     const { load, classes } = this.props;
-    console.log("*** render LoadsData this.props ", this.props, "state ", this.state);
+    // console.log("*** render LoadsData this.props ", this.props, "state ", this.state);
 
     const columns = this.createColumns()
       // this.state.columns.length > 0 ? this.state.columns : this.createColumns();
