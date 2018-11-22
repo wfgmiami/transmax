@@ -5,6 +5,7 @@ export const GET_BROKER = "GET BROKER";
 export const SET_BROKER = "SET BROKER";
 export const UPDATE_BROKER = "UPDATE BROKER";
 export const SAVE_BROKER = "SAVE BROKER";
+export const EDIT_BROKER = "EDIT BROKER";
 
 export function getBroker() {
   // return dispatch =>
@@ -31,6 +32,14 @@ export function setBroker(broker) {
   };
 }
 
+export function editBroker(broker) {
+  console.log("broker.actions.js editBroker ", broker)
+  return {
+    type: EDIT_BROKER,
+    broker
+  };
+}
+
 export function saveBroker(broker) {
   // console.log("broker.actions.js saveBroker ", broker);
   const postBroker = axios.post("/api/broker", { ...broker });
@@ -47,6 +56,6 @@ export function updateBroker(broker) {
   // console.log("trip.actions.js updateTrip trips ", trips);
   return {
     type: UPDATE_BROKER,
-    broker
+    payload: broker
   };
 }

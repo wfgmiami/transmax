@@ -228,6 +228,13 @@ class DriversData extends Component {
 
     return [
       {
+        Header: "Id",
+        accessor: "id",
+        show: false,
+        className: "columnBorder",
+        Cell: this.editTable
+      },
+      {
         Header: "First Name",
         Footer: this.calculateTotal,
         accessor: "firstName",

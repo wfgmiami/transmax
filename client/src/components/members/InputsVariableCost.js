@@ -61,6 +61,10 @@ class InputsVariableCost extends React.Component {
     this.props.saveVariableCost(this.props.inputsVariableCost);
   };
 
+  handleClose = () => {
+    this.setState({ open: false })
+  }
+
   render() {
     const { classes, inputsVariableCost } = this.props;
     // console.log('this props', this.props)
@@ -84,8 +88,8 @@ class InputsVariableCost extends React.Component {
 
         <div>
           <Dialog
-            disableBackdropClick
-            disableEscapeKeyDown
+            /* disableBackdropClick
+            disableEscapeKeyDown */
             open={this.state.open}
             onClose={this.handleClose}
           >

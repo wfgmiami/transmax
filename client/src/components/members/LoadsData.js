@@ -136,27 +136,22 @@ class LoadsData extends Component {
 
     let dollarSign;
     let fieldValue;
+    let fieldToReturn;
+
     const findEditableRow = this.state.editableRowIndex.find(
       row => row === cellInfo.index
     );
 
-    if( cellInfo.column.id === 'truck.company.name'){
-      fieldValue = this.props.load[cellInfo.index][
-       'truck'] ? this.props.load[cellInfo.index][
-        'truck']['company'].name : '';
-
+    if(cellInfo.column.id === 'truck.company.name'){
+      fieldValue = this.props.load[cellInfo.index]['truck'] ?
+      this.props.load[cellInfo.index]['truck']['company'].name : '';
     } else {
-      fieldValue = this.props.load[cellInfo.index][
-        cellInfo.column.id
-      ]
+      fieldValue = this.props.load[cellInfo.index][cellInfo.column.id]
     }
 
-    if( cellInfo.column.id === 'pickupDate' && this.props.load[cellInfo.index][
-      cellInfo.column.id
-    ] !== ''){
-      fieldValue = new Date(this.props.load[cellInfo.index][
-        cellInfo.column.id
-      ]).toLocaleDateString();
+    if(cellInfo.column.id === 'pickupDate' &&
+      this.props.load[cellInfo.index][cellInfo.column.id] !== ''){
+      fieldValue = new Date(this.props.load[cellInfo.index][cellInfo.column.id]).toLocaleDateString();
     }
 
     switch (cellInfo.column.id) {
@@ -180,6 +175,10 @@ class LoadsData extends Component {
       fieldValue = isNaN(Number(fieldValue)) ? fieldValue : Number(fieldValue).toLocaleString()
     }
 
+    fieldToReturn = ( cellInfo.value === '' || cellInfo.value === 0 || fieldValue === '' || fieldValue === '0' )  ? '' :
+      (findEditableRow || findEditableRow === 0) ? fieldValue.toLocaleString() :
+      dollarSign + fieldValue.toLocaleString()
+    // console.log('field to return ', fieldToReturn)
     // if edit is enabled- first case, if it is not- second case
     return findEditableRow || findEditableRow === 0 ? (
       <div
@@ -202,9 +201,9 @@ class LoadsData extends Component {
           this.props.editLoad(updateInfo);
         }}
         dangerouslySetInnerHTML={{
-          __html:
+          __html:fieldToReturn
             // dollarSign +
-            fieldValue.toLocaleString()
+            //fieldValue.toLocaleString()
         }}
       />
     ) : (
@@ -212,9 +211,9 @@ class LoadsData extends Component {
         style={{ backgroundColor: "#fafafa" }}
         suppressContentEditableWarning
         dangerouslySetInnerHTML={{
-          __html:
-            dollarSign +
-            fieldValue.toLocaleString()
+          __html: fieldToReturn
+          //  dollarSign +
+          //  fieldValue.toLocaleString()
         }}
       />
     );
@@ -257,7 +256,7 @@ class LoadsData extends Component {
         load.id = row.original.id;
       }
       else load.rowIndex = row.index;
-      // console.log('row.............',load)
+      console.log('*** editRow ',load)
       this.props.updateLoad(load);
     } else {
       this.setState({
@@ -273,6 +272,9 @@ class LoadsData extends Component {
   }
 
   saveRow(selectedRow) {
+    let result = window.confirm("Do you want to save this row");
+    if(!result) return null;
+
     let rowToUpdate = {};
     let toSaveRow = {};
 
@@ -282,7 +284,7 @@ class LoadsData extends Component {
 
     rowToUpdate = selectedRow.row;
 
-    // console.log("*** selectedRow ",  selectedRow, " ", selectedRow.original.id)
+    // console.log("*** selectedRow ",  selectedRow)
 
     let keys = Object.keys(rowToUpdate);
 
@@ -291,14 +293,14 @@ class LoadsData extends Component {
         return key
       else return null
     })
-      .filter( loadItem => loadItem )
+      .filter(loadItem => loadItem)
 
     const requiredFieldsCheck = emptyFields.map( loadItem => {
       if(mandatoryItems.includes( loadItem ))
         return loadItem
       else return null
     })
-      .filter( result => result)
+      .filter(result => result)
 
 
 
@@ -332,7 +334,7 @@ class LoadsData extends Component {
 
       })
 
-      const newRow = Object.assign(rowToUpdate, toSaveRow);
+      const newRow = Object.assign(rowToUpdate, toSaveRow, {rowIndex: selectedRow.index });
       // console.log("*** save row ",  newRow)
       if(selectedRow.original.id) this.props.editExistingLoad(newRow);
       else  this.props.saveNewLoad(newRow);
@@ -521,7 +523,7 @@ class LoadsData extends Component {
       {
         Header: "Broker",
         accessor: "brokerName",
-        show: false,
+        show: true,
         className: "columnBorder",
         minWidth: this.getColumnWidth("brokerName"),
         Cell: this.editTable

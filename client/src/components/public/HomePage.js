@@ -61,6 +61,7 @@ class HomePage extends Component {
                   <li>Drive on paper log or ELD</li>
                   <li>Paid vacation</li>
                   <li>Detention paid $20 per hour</li>
+                  <li>Extra stop paid at $25 for each additional stop</li>
                 </ul>&nbsp;
 
               <h3>What you need to have:</h3>&nbsp;

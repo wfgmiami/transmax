@@ -56,11 +56,12 @@ const loads = (state = initialState, action) => {
     }
     // when closing edit mode
     case Actions.UPDATE_LOAD: {
-      // console.log('*** action load reducer update load ', state, " ", action)
+      console.log('*** action load reducer update load ', state, " ", action)
 
       return [...state.map( load => {
 
-        if( load.id === action.payload.id || (load.rowIndex && load.rowIndex === action.payload.rowIndex )) {
+        if( (load.id && load.id === action.payload.id) || (load.rowIndex && load.rowIndex === action.payload.rowIndex )) {
+
           return action.payload
         }
         else return load
@@ -72,7 +73,7 @@ const loads = (state = initialState, action) => {
       console.log('*** save new load reducer ', action, state)
 
       return [...state.map( (load, idx) => {
-        if( !load.id ) {
+        if(load.rowIndex === action.payload.rowIndex) {
           return action.payload;
         }
         else return load

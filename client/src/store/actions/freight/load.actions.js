@@ -32,7 +32,7 @@ export function saveNewLoad(load) {
     postLoad.then(response =>
       dispatch({
         type: SAVE_NEW_LOAD,
-        payload: response.data
+        payload: Object.assign(response.data, {rowIndex: load.rowIndex})
       })
     );
 }
@@ -58,7 +58,7 @@ export function addLoad(load) {
 }
 
 export function updateLoad(load) {
-  // console.log("load.actions.js addloads ", loads)
+  // console.log("load.actions.js updateLoad ", loads)
   return {
     type: UPDATE_LOAD,
     payload: load

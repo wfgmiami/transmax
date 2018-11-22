@@ -10,6 +10,10 @@ import { Datatable } from "./Datatable";
 import ColumnChooser from "./ColumnChooser.js";
 import SideMenu from "./SideMenu";
 import ActionBtn from "./ActionBtn";
+import Edit from '@material-ui/icons/Edit';
+import Save from '@material-ui/icons/Save';
+import Input from '@material-ui/icons/Input';
+import IconButton from '@material-ui/core/IconButton';
 
 import * as companyActions from "../../store/actions/company";
 
@@ -38,38 +42,83 @@ class BrokersData extends Component {
   }
 
   componentDidMount() {
-    this.props.getBroker();
+    if(this.props.broker.length === 0){
+      this.props.getBroker();
+    }
   }
 
   editTable(cellInfo) {
     // console.log(
     //   "cell info........",
     //   cellInfo,
-    //   "id: ",
+    //   "cellInfo.column.id ",
+    //   cellInfo.column.id,
+    //   'cellInfo.row[cellInfo.column.id]:',
     //   cellInfo.row[cellInfo.column.id]
     // );
+
     let dollarSign;
     let fieldValue;
+    let fieldToReturn;
 
-    dollarSign = cellInfo.column.id === "totalPayment" ? "$" : "";
-    fieldValue = this.props.broker[cellInfo.index][cellInfo.column.id];
-    if( typeof(fieldValue) === 'string' && !isNaN(fieldValue)) {
+    const findEditableRow = this.state.editableRowIndex.find(
+      row => row === cellInfo.index
+    );
+    fieldValue = this.props.broker[cellInfo.index][cellInfo.column.id]
+
+    switch (cellInfo.column.id) {
+      case "payment":
+      case "dieselPrice":
+        dollarSign = "$";
+        break;
+      default:
+        dollarSign = "";
+    }
+
+    // for numbers stored as strings:
+    if( typeof(fieldValue) === 'string' && !isNaN(fieldValue) && cellInfo.column.id !== 'loadNumber') {
       fieldValue = isNaN(Number(fieldValue)) ? fieldValue : Number(fieldValue).toLocaleString()
     }
 
-    return  (
+    fieldToReturn = ( cellInfo.value === '' || cellInfo.value === 0 || fieldValue === '' || fieldValue === '0' )  ? '' :
+      (findEditableRow || findEditableRow === 0) ? fieldValue.toLocaleString() :
+      dollarSign + fieldValue.toLocaleString()
+    // console.log('field to return ', fieldToReturn)
+    // if edit is enabled- first case, if it is not- second case
+    return findEditableRow || findEditableRow === 0 ? (
+      <div
+        style={{ backgroundColor: "#fafafa" }}
+        contentEditable
+        suppressContentEditableWarning
+        onBlur={e => {
+
+          const keyToUpdate = cellInfo.column.id;
+          const valueToUpdate = e.target.innerHTML;
+          const indexToUpdate = cellInfo.index;
+
+          const updateInfo = {
+            keyToUpdate: keyToUpdate,
+            valueToUpdate: valueToUpdate,
+            indexToUpdate: indexToUpdate
+          }
+
+          {/* console.log('updateInfo on bluer', updateInfo) */}
+          this.props.editBroker(updateInfo);
+        }}
+        dangerouslySetInnerHTML={{
+          __html:fieldToReturn
+            // dollarSign +
+            //fieldValue.toLocaleString()
+        }}
+      />
+    ) : (
       <div
         style={{ backgroundColor: "#fafafa" }}
         suppressContentEditableWarning
-        onBlur={e => {
-          const data = [...this.props.broker];
-          data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
-          this.props.updateBroker({ data });
-        }}
         dangerouslySetInnerHTML={{
-          __html:
-            dollarSign +
-            fieldValue.toLocaleString()
+          __html: fieldToReturn
+          //  dollarSign +
+          //  fieldValue.toLocaleString()
         }}
       />
     );
@@ -106,7 +155,7 @@ class BrokersData extends Component {
         return "$" + Number((total / brokersCount).toFixed(2)).toLocaleString();
       }
       return "$" + Number(total.toFixed(0)).toLocaleString();
-    } else if (column.id === "brokerId") {
+    } else if (column.id === "name") {
       return `Brokers: ${brokersCount}`;
     }
 
@@ -139,19 +188,101 @@ class BrokersData extends Component {
     );
   }
 
+  createBroker(row){
+    let broker = {};
+
+    Object.keys(row).forEach( key => {
+      if( typeof row[key] === "object" && key !== "_original" ){
+        broker[key] = row[key].props.dangerouslySetInnerHTML.__html;
+        if(broker[key] && broker[key].substring(0,1) === '$') broker[key] = broker[key].slice(1);
+      }else if(!key.includes('_') && !key.includes(".") && key !== 'edit') {
+        broker[key] = row[key];
+      }
+    })
+
+    return broker;
+  }
+
+  editRow = (row) => {
+    // console.log('.....',row)
+
+    const alreadyEditable = this.state.editableRowIndex.find(
+      editableRow => editableRow === row.index
+    );
+
+    // console.log("LoadsData.js editRow ", row, "state: ", this.state, " ",alreadyEditable);
+
+    if (alreadyEditable || alreadyEditable === 0) {
+      this.setState({
+        editableRowIndex: this.state.editableRowIndex.filter(
+          editableRow => editableRow !== row.index
+        )
+      });
+      let broker = this.createBroker(row.row);
+
+      console.log('*** editRow before updateBroker ', broker)
+      this.props.updateBroker(broker);
+    } else {
+      this.setState({
+        editableRowIndex: [...this.state.editableRowIndex, row.index]
+      });
+    }
+  }
+
+  saveRow = (selectedRow) => {
+    let result = window.confirm("Do you want to save this row");
+    if(!result) return null;
+
+    let rowToUpdate = {};
+    let toSaveRow = {};
+
+    rowToUpdate = selectedRow.row;
+
+    let keys = Object.keys(rowToUpdate);
+
+    keys.forEach( key => {
+      let loadItem = rowToUpdate[key];
+      if(typeof(loadItem) === 'object' && key !== '_original'){
+
+        let value = loadItem.props.dangerouslySetInnerHTML.__html;
+        if (typeof value === "string" && value.substring(0, 1) === "$") {
+          value = value.slice(1);
+          value = parseFloat(value.replace(/,/g, ""));
+        }
+        toSaveRow[key] = value;
+      }
+
+      if(!isNaN(loadItem) && typeof loadItem === 'string'){
+        toSaveRow[key] = Number(loadItem)
+      }
+
+      if (typeof loadItem === "string" && loadItem.substring(0, 1) === "$") {
+        loadItem = loadItem.slice(1);
+        loadItem = parseFloat(loadItem.replace(/,/g, ""));
+        toSaveRow[key] = loadItem;
+      }
+
+    })
+
+    const newRow = Object.assign(rowToUpdate, toSaveRow);
+    console.log("*** BrokersData save row ",  newRow)
+    this.props.saveBroker(newRow);
+    alert("The broker was saved")
+  }
+
   createColumns() {
-    // console.log("BrokersData.js createColumns this.props: ", this.props);
+    console.log("BrokersData.js createColumns this.props: ", this.props);
 
     return [
       {
         Header: "Broker Id",
-        Footer: this.calculateTotal,
         accessor: "id",
         show: false,
         className: "columnBorder",
       },
       {
         Header: "Name",
+        Footer: this.calculateTotal,
         accessor: "name",
         show: true,
         minWidth: 170,
@@ -162,18 +293,21 @@ class BrokersData extends Component {
         accessor: "address",
         show: false,
         className: "columnBorder",
+        Cell: this.editTable
       },
       {
         Header: "Phone",
         accessor: "phone",
         show: false,
         className: "columnBorder",
+        Cell: this.editTable
       },
       {
         Header: "Email",
         accessor: "email",
         show: false,
         className: "columnBorder",
+        Cell: this.editTable
       },
       {
         Header: "Booked Loads",
@@ -188,7 +322,6 @@ class BrokersData extends Component {
         accessor: "totalPayment",
         show: true,
         className: "columnBorder",
-        Cell: this.editTable
       },
       {
         Header: "Total Loaded Miles",
@@ -196,7 +329,6 @@ class BrokersData extends Component {
         accessor: "totalLoadedMiles",
         show: true,
         className: "columnBorder",
-        Cell: this.editTable
       },
       {
         Header: "$/Mile",
@@ -216,6 +348,46 @@ class BrokersData extends Component {
         );
         }
       },
+      {
+        Header: "Edit",
+        id: "edit",
+        accessor: "edit",
+        minWidth: 200,
+        show: true,
+        className: "columnBorder",
+        Cell: row => {
+          const editableRow = this.state.editableRowIndex.filter(
+            editableRow => editableRow === row.index
+          );
+          let editBtnColor = "secondary";
+          let editIcon = <Edit />;
+
+          if (editableRow.length > 0) {
+            editBtnColor = "primary";
+            editIcon = <Input />;
+          }
+
+          return (
+            <div>
+              <IconButton
+                variant="contained"
+                color={editBtnColor}
+                onClick={() => this.editRow(row)}
+              >
+                {editIcon}
+              </IconButton>&nbsp;
+
+              <IconButton
+                variant="contained"
+                color="secondary"
+                onClick={() => this.saveRow(row)}
+              >
+                <Save/>
+              </IconButton>
+            </div>
+          );
+        }
+      }
 
     ];
   }
@@ -224,7 +396,7 @@ class BrokersData extends Component {
     // const { data } = this.state;
     const { broker, classes } = this.props;
 
-    // console.log("TripsData.js this.state ", this.state);
+    console.log("BrokersData.js broker ", broker);
 
     const columns =
       this.state.columns.length > 0 ? this.state.columns : this.createColumns();
@@ -232,7 +404,7 @@ class BrokersData extends Component {
       <div className={classes.root}>
         <Toolbar className={classes.toolbar}>
           <SideMenu />
-          <ActionBtn saveRow={this.saveRow} addEmptyRow={this.addEmptyRow} />
+          <ActionBtn addEmptyRow={this.addEmptyRow} />
           &nbsp;
           <ColumnChooser
             columns={columns}
@@ -267,6 +439,9 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
       getBroker: companyActions.getBroker,
+      updateBroker: companyActions.updateBroker,
+      editBroker: companyActions.editBroker,
+      saveBroker: companyActions.saveBroker
     },
     dispatch
   );
