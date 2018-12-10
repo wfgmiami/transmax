@@ -407,26 +407,44 @@ class LoadsData extends Component {
 
   // showing/hiding columns
   onColumnUpdate(index) {
-
     const columns = this.state.columns.length > 0 ? this.state.columns : this.createColumns();
-    // console.log("onColumnUpdate index ", index, "...", this.state);
-    this.setState( prevState => {
-        const columns1 = [];
-        columns1.push(...columns);
-        columns1[index].show = !columns1[index].show;
-        if (columns1[index].columns) {
-          columns1[index].columns.forEach(item => {
-            item.show = !item.show;
-          });
+    let columns1 = [];
+    columns1.push(...columns);
+
+    if ( Array.isArray( index ) ){
+      columns1 = columns1.map( col => { col.show = false; return col } );
+      index.forEach( async ( idx ) => {
+        await this.setState( () => {
+          columns1[idx].show = true;
+          if (columns1[idx].columns) {
+            columns1[idx].columns.forEach(item => {
+              item.show = true;
+            });
+          }
+          return {
+            columns: columns1
+          };
+        });
+      })
+    } else {
+
+      // console.log("onColumnUpdate index ", index, "...", this.state);
+      this.setState( () => {
+          columns1[index].show = !columns1[index].show;
+          if (columns1[index].columns) {
+            columns1[index].columns.forEach(item => {
+              item.show = !item.show;
+            });
+          }
+          return {
+            columns: columns1
+          };
+        },
+        () => {
+          // console.log('onColumnUpdate columns: ', this.state.columns)
         }
-        return {
-          columns: columns1
-        };
-      },
-      () => {
-        // console.log('onColumnUpdate columns: ', this.state.columns)
-      }
-    );
+      );
+    }
   }
 
   dollarFormat(strNum,dec,sign){
@@ -472,7 +490,7 @@ class LoadsData extends Component {
 
     let columns = [
       {
-        Header: "Date",
+        Header: "Pickup Date",
         Footer: this.calculateTotal,
         accessor: "pickupDate",
         show: true,
@@ -1007,8 +1025,8 @@ class LoadsData extends Component {
       // this.state.columns.length > 0 ? this.state.columns : this.createColumns();
 
     return (
-      <div className={classes.root}>
-        <Toolbar className={classes.toolbar}>
+      <div className = { classes.root }>
+        <Toolbar className = { classes.toolbar }>
           <SideMenu />
           &nbsp;
           <DateFilter />
@@ -1016,8 +1034,8 @@ class LoadsData extends Component {
           <InputsVariableCost />
           &nbsp;
           <ColumnChooser
-            columns={columns}
-            onColumnUpdate={this.onColumnUpdate}
+            columns = { columns }
+            onColumnUpdate = { this.onColumnUpdate }
           />
           &nbsp;
           <ActionBtn addEmptyRow={this.addEmptyRow} />

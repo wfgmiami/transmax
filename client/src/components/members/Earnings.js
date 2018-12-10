@@ -52,6 +52,23 @@ class Earnings extends Component {
     this.props.getEarnings();
   }
 
+  dollarFormat(strNum,dec,sign){
+    // 1200 => "$1,200"
+    // "1200" || "1,200" => "$1,200.00" or "1,200"
+    // console.log('strNum ', strNum, dec, sign)
+    if(strNum === null || strNum === "") return strNum;
+    if(typeof strNum === 'number') return  sign + Number(strNum.toFixed(dec)).toLocaleString();
+    return sign + Number(Number(strNum.replace(",","")).toFixed(dec)).toLocaleString();
+  }
+
+  numberFormat(num){
+    // '$1,200' || '1200' => 1200
+
+    if (typeof num === 'number') return num;
+    num = num.includes("$") ? num.slice(1,0) : num;
+    return parseFloat(num.replace(",",""));
+  }
+
   getConfirmDoc(docLink) {
     // console.log("TripsData docLink ", docLink);
     axios
@@ -97,11 +114,9 @@ class Earnings extends Component {
         dollarSign = "";
     }
 
-    fieldValue = this.props.earnings[cellInfo.index][
-      cellInfo.column.id
-    ]
+    fieldValue = this.props.earnings[cellInfo.index][cellInfo.column.id];
 
- // for numbers stored as strings:
+    // for numbers stored as strings:
     if( typeof(fieldValue) === 'string' && !isNaN(fieldValue)) {
       fieldValue = isNaN(Number(fieldValue)) ? fieldValue : Number(fieldValue).toLocaleString()
     }
@@ -160,19 +175,66 @@ class Earnings extends Component {
 
   deleteRow(row) {
     let result = window.confirm("Do you want to delete this row?")
-    if(result){
-      this.props.updateEarnings({
-        data: [
-          ...this.props.earnings.slice(0, row.index),
-          ...this.props.earnings.slice(row.index + 1)
-        ]
-      });
-    }
+    // console.log('result ', result)
+    if(result) this.props.deleteEarnings(row)
+
+    // if(result){
+    //   this.props.updateEarnings({
+    //     data: [
+    //       ...this.props.earnings.slice(0, row.index),
+    //       ...this.props.earnings.slice(row.index + 1)
+    //     ]
+    //   });
+    // }
+
   }
 
-  saveRow() {
-    // console.log("SarningssData.js saveRow this.props", this.props);
-    this.props.saveEarnings(this.props.earnings);
+  saveRow(selectedRow) {
+    let result = window.confirm("Do you want to save this row");
+    if(!result) return null;
+
+    let rowToUpdate = {};
+    let toSaveRow = {};
+
+    rowToUpdate = selectedRow.row;
+
+     console.log("*** selectedRow ",  selectedRow)
+
+    let keys = Object.keys(rowToUpdate);
+
+    keys.forEach( key => {
+      let loadItem = rowToUpdate[key];
+      if(typeof(loadItem) === 'object' && key !== '_original'){
+
+        let value = loadItem.props.dangerouslySetInnerHTML.__html;
+        if (typeof value === "string" && value.substring(0, 1) === "$") {
+          value = value.slice(1);
+          value = parseFloat(value.replace(/,/g, ""));
+        }
+        toSaveRow[key] = value;
+      }
+
+      if(!isNaN(loadItem) && typeof loadItem === 'string'){
+        toSaveRow[key] = Number(loadItem)
+      }
+
+      if (typeof loadItem === "string" && loadItem.substring(0, 1) === "$") {
+        loadItem = loadItem.slice(1);
+        loadItem = parseFloat(loadItem.replace(/,/g, ""));
+        toSaveRow[key] = loadItem;
+      }
+
+    })
+    const dashPos = rowToUpdate.weekRange.indexOf('-');
+    const begWeekDate = rowToUpdate.weekRange.substring(0, dashPos);
+    const endWeekDate = rowToUpdate.weekRange.substring(dashPos + 1);
+
+    const newRow = Object.assign(rowToUpdate, toSaveRow, {rowIndex: selectedRow.index,
+    begWeekDate: begWeekDate, endWeekDate: endWeekDate });
+    // console.log("*** save row ",  newRow)
+    if(selectedRow.original.id) this.props.editExistingLoad(newRow);
+    else  this.props.saveEarnings(newRow);
+    alert("The earnings was saved")
   }
 
   addEmptyRow() {
@@ -185,48 +247,104 @@ class Earnings extends Component {
   }
 
   calculateTotal({ data, column }) {
-    // console.log("....data",data, "column", column);
+    // console.log("*** LoadsData calculateTotal data", data, "column ", column);
+    const loadsCount = data.length;
     let dollarSign = false;
-    const weekCount = data.length;
     let value;
 
-    const total = data.reduce((memo, earnings) => {
-      // console.log("calculateTotal ", weekCount, earnings,column,column.id, earnings[column.id]);
-      if (typeof earnings[column.id] === "object") {
-        value = earnings[column.id].props.dangerouslySetInnerHTML.__html;
+    const total = data.reduce((memo, load) => {
+
+      let payment = load[column.id];
+
+      if (typeof payment === "object") {
+        value = payment.props.dangerouslySetInnerHTML.__html;
+
         if (typeof value === "string" && value.substring(0, 1) === "$") {
           dollarSign = true;
           value = value.slice(1);
           value = parseFloat(value.replace(/,/g, ""));
-        } else if (value.substring(value.length - 1) === "%") {
-          value = value.slice(0, value.length - 1);
+
+        // mileage that might have , in the number (shows as string)
+        } else if (typeof value === "string") {
+          value = parseFloat(value.replace(",",""));
         }
         memo += Number(value);
+
       } else {
-        let amount = earnings[column.id];
-        if (amount === "") amount = 0;
-        if (typeof amount === "string") {
-          amount = parseFloat(earnings[column.id].replace(/,/g, ""));
+        if (payment === "") payment = 0;
+        // formula values(eg fuel cost) from db are not objects but strings with $
+        if (typeof payment === "string" && payment.substring(0,1) === '$') {
+          dollarSign = true;
+          payment = payment.slice(1);
+          payment = parseFloat(payment.replace(",",""));
+        // parseFload will convert to number the string, ok if no "," is found
+        }else if(typeof payment === "string"){
+          payment = parseFloat(payment.replace(",",""));
         }
-        memo += amount;
+
+        memo += payment;
       }
+
       return memo;
     }, 0);
 
-    if (
-      dollarSign ||
-      (column.id !== "milesPaid" && column.id !== "weekNumber")
-    ) {
-      if (column.id === "margin") {
-        return Number((total / weekCount).toFixed(2)).toLocaleString() + "%";
+    if (dollarSign || column.id === "payment" || column.id === "toll") {
+      if (column.id === "dollarPerMile") {
+        return "$" + Number((total / loadsCount).toFixed(2)).toLocaleString();
       }
       return "$" + Number(total.toFixed(0)).toLocaleString();
-    } else if (column.id === "weekNumber") {
-      return `Weeks: ${weekCount}`;
+    } else if (column.id === "dieselPrice") {
+      return "$" + Number((total / loadsCount).toFixed(2)).toLocaleString();
+    } else if (column.id === "pickupDate") {
+      return `Total Loads: ${loadsCount}`;
     }
 
     return Number(Number(total).toFixed(0)).toLocaleString();
   }
+
+  // calculateTotal({ data, column }) {
+  //   // console.log("....data",data, "column", column);
+  //   let dollarSign = false;
+  //   const weekCount = data.length;
+  //   let value;
+
+  //   const total = data.reduce((memo, earnings) => {
+  //     // console.log("calculateTotal ", weekCount, earnings,column,column.id, earnings[column.id]);
+  //     if (typeof earnings[column.id] === "object") {
+  //       value = earnings[column.id].props.dangerouslySetInnerHTML.__html;
+  //       if (typeof value === "string" && value.substring(0, 1) === "$") {
+  //         dollarSign = true;
+  //         value = value.slice(1);
+  //         value = parseFloat(value.replace(/,/g, ""));
+  //       } else if (value.substring(value.length - 1) === "%") {
+  //         value = value.slice(0, value.length - 1);
+  //       }
+  //       memo += Number(value);
+  //     } else {
+  //       let amount = earnings[column.id];
+  //       if (amount === "") amount = 0;
+  //       if (typeof amount === "string") {
+  //         amount = parseFloat(earnings[column.id].replace(/,/g, ""));
+  //       }
+  //       memo += amount;
+  //     }
+  //     return memo;
+  //   }, 0);
+
+  //   if (
+  //     dollarSign ||
+  //     (column.id !== "milesPaid" && column.id !== "weekNumber")
+  //   ) {
+  //     if (column.id === "margin") {
+  //       return Number((total / weekCount).toFixed(2)).toLocaleString() + "%";
+  //     }
+  //     return "$" + Number(total.toFixed(0)).toLocaleString();
+  //   } else if (column.id === "weekNumber") {
+  //     return `Weeks: ${weekCount}`;
+  //   }
+
+  //   return Number(Number(total).toFixed(0)).toLocaleString();
+  // }
 
   onColumnUpdate(index) {
     const columns =
@@ -252,7 +370,7 @@ class Earnings extends Component {
       }
     );
   }
-
+  // REMOVE
   convertToNumber(dataObj){
 
     const fuelCost = isNaN(dataObj.fuelCost) ? dataObj.fuelCost.replace(",","") : dataObj.fuelCost;
@@ -437,33 +555,21 @@ class Earnings extends Component {
         show: true,
         className: "columnBorder",
         accessor: d => {
-          let revenue = d.revenue;
-          if (typeof d.revenue === "string")
-            revenue = parseFloat(revenue.replace(/,/g, ""));
+          let payment = this.numberFormat(d.revenue)
+          let totalExpenses =
+          this.numberFormat(d.fuelCost) + this.numberFormat(d.driverPay) +
+          this.numberFormat(d.dispatchFee) +this.numberFormat(d.lumper) +
+          this.numberFormat(d.detention) +this.numberFormat(d.detentionDriverPay) +
+          this.numberFormat(d.lateFee) + this.numberFormat(d.toll) +
+          this.numberFormat(d.roadMaintenance) + this.numberFormat(d.otherExpenses);
 
-          const dataObj = {
-            fuelCost: d.fuelCost,
-            driverPay: d.driverPay,
-            dispatchFee:d.dispatchFee,
-            lumper: d.lumper,
-            detention: d.detention,
-            detentionDriverPay:  d.detentionDriverPay,
-            lateFee: d.lateFee,
-            toll: d.toll,
-            roadMaintenance: d.roadMaintenance,
-            otherExpenses: d.otherExpenses
-          }
-
-          let totalExpenses = this.convertToNumber(dataObj)
-
-          let profit = revenue - totalExpenses;
-
+          let profit = payment - totalExpenses;
           profit = isNaN(profit) ? null : profit;
 
           return (
             <div
               dangerouslySetInnerHTML={{
-                __html: "$" + Number(Number(profit).toFixed(0)).toLocaleString()
+                __html: this.dollarFormat(profit, 0, "$")
               }}
             />
           );
@@ -608,7 +714,8 @@ function mapDispatchToProps(dispatch) {
       getEarnings: companyActions.getEarnings,
       setEarnings: companyActions.setEarnings,
       updateEarnings: companyActions.updateEarnings,
-      saveEarnings: companyActions.saveEarnings
+      saveEarnings: companyActions.saveEarnings,
+      deleteEarnings: companyActions.deleteEarnings,
     },
     dispatch
   );

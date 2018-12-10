@@ -1,5 +1,4 @@
 import * as Actions from "../../actions/index";
-import { brokerConfig } from "../../../configs/brokerConfig.js";
 
 const initialState = [];
 

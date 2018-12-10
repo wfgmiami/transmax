@@ -102,7 +102,6 @@ class BrokersData extends Component {
             indexToUpdate: indexToUpdate
           }
 
-          {/* console.log('updateInfo on bluer', updateInfo) */}
           this.props.editBroker(updateInfo);
         }}
         dangerouslySetInnerHTML={{

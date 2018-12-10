@@ -19,6 +19,19 @@ const earnings = (state = initialState, action) => {
       return [...action.earnings.data];
     }
 
+    case Actions.DELETE_LOAD: {
+      console.log('*** action earnings reducer delete earnings ', state, " ", action)
+
+      return [...state.map(earnings => {
+        if(action.payload !== earnings.id)
+            return earnings
+        else return null;
+        })
+        .filter( keepEarnings => keepEarnings)
+      ]
+
+    }
+
     case Actions.SAVE_EARNINGS: {
       return [...state];
     }

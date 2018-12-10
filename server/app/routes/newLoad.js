@@ -57,7 +57,7 @@ router.post('/', (req, res, next) => {
       name: req.body.brokerName,
     })
     .then( broker => {
-      console.log('broker ', broker, " Brokerid ", broker.dataValues.id)
+      console.log('broker ', broker, " Brokerid ", broker.dataValues.id, 'LOAD-OBJ: ', loadObj);
       loadObj.brokerId = broker.dataValues.id;
 
       return broker.update({
@@ -92,7 +92,7 @@ router.post('/', (req, res, next) => {
         totalLoadedMiles: Number(broker.totalLoadedMiles) +
           loadObj.loadedMiles
       }
-      console.log('*** new load with EXISTING broker- updateBroker ', broker, updateBroker);
+      console.log('*** new load with EXISTING broker: BROKER ', broker, 'UPDATEBROKER: ', updateBroker, 'LOADOBJ ', loadObj);
 
       return broker.update(updateBroker)
       .then( () => {

@@ -4,6 +4,7 @@ export const GET_EARNINGS = "GET EARNINGS";
 export const SET_EARNINGS = "SET EARNINGS";
 export const UPDATE_EARNINGS = "UPDATE EARNINGS";
 export const SAVE_EARNINGS = "SAVE EARNINGS";
+export const DELETE_EARNINGS = "DELETE EARNINGS";
 
 export function getEarnings() {
   // return dispatch =>
@@ -41,6 +42,29 @@ export function saveEarnings(earnings) {
       })
     );
 }
+
+export function deleteEarnings(row) {
+  console.log("earnings.actions.js delete earnings ", row);
+  const earningsId = row.original.id;
+
+  // if(!earningsId) return {
+  //   type: DELETE_EMPTY_LOAD,
+  //   payload: row.index
+  // }
+
+
+  const deleteEarnings = axios.delete(`/api/earnings/deleteearnings/${earningsId}`);
+
+  return dispatch =>
+    deleteEarnings.then(response =>
+      dispatch({
+        type: DELETE_EARNINGS,
+        payload: earningsId
+      })
+    );
+
+}
+
 
 export function updateEarnings(earnings) {
   // console.log("earnings.actions.js earningsTrip trips ", earnings);

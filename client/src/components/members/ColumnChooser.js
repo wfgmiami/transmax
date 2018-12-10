@@ -9,7 +9,7 @@ import ViewColumn from "@material-ui/icons/ViewColumn";
 import { withStyles } from "@material-ui/core/styles";
 //import 'font-awesome/css/font-awesome.min.css';
 
-export const popoverStyles = {
+const Styles = (theme) => ({
   root: {
     display: "inline-block"
   },
@@ -26,6 +26,12 @@ export const popoverStyles = {
     width: "12px",
     height: "12px"
   },
+  buttonWrap: {
+    display: "inline-block",
+  },
+  button: {
+    margin: theme.spacing.unit
+  },
   // checkboxColor: {
   //     "&$checked": {
   //         color: "#027cb5",
@@ -38,14 +44,16 @@ export const popoverStyles = {
     color: "green",
     fontFamily: "seriff"
   }
-};
+});
 
 class ColumnChooser extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      open: false
+      open: false,
+      chosenColumns: []
+
     };
   }
 
@@ -69,11 +77,129 @@ class ColumnChooser extends React.Component {
     this.props.onColumnUpdate(index);
   };
 
+  selectColumns = ( button ) => {
+
+    let selectedColumns = this.props.columns.map( col => Object.assign({}, col) );
+    let chosenColumns = [];
+    let chosenColumnsIndexes = [];
+
+    if ( button === "inputs" ) {
+      chosenColumns = selectedColumns.map( ( col, idx ) => {
+        if ( typeof col.accessor === 'function' ) {
+          switch( col.id ){
+            case 'mileage':
+            case 'dollarPerMile':
+            case 'fuelCost':
+            case 'driverPay':
+            case 'totalExpenses':
+            case 'profit':
+              col.show = true;
+              chosenColumnsIndexes.push( idx );
+              break;
+            default:
+              return col;
+          }
+          return col;
+        }
+
+        switch( col.accessor ){
+          case 'pickupDate':
+          case 'truckId':
+          case 'driverName':
+          case 'driverId':
+          case 'truck.company.name':
+          case 'loadNumber':
+          case 'brokerName':
+          case 'brokerId':
+          case 'shipper':
+          case 'consignee':
+          case 'pickUpCityState':
+          case 'dropOffCityState':
+          case 'pickUpAddress':
+          case 'dropOffAddress':
+          case 'payment':
+          case 'loadedMiles':
+          case 'emptyMiles':
+          case 'commodity':
+          case 'weight':
+          case 'trailer':
+          case 'confirmFilePath':
+          case 'edit':
+            col.show = true;
+            chosenColumnsIndexes.push( idx );
+            break;
+          default:
+            col.show = false;
+            return col;
+        }
+        return col;
+      })
+      this.handleColChange( chosenColumnsIndexes );
+      this.setState( { chosenColumns })
+      // console.log(selectedColumns)
+    } else if ( button === "all") {
+
+      chosenColumns = selectedColumns.map( ( col, idx ) => {
+        col.show = true;
+        chosenColumnsIndexes.push( idx );
+        return col;
+      })
+
+      this.handleColChange( chosenColumnsIndexes );
+      this.setState( { chosenColumns })
+
+    } else if ( button === "default") {
+
+      chosenColumns = selectedColumns.map( ( col, idx ) => {
+
+        if ( typeof col.accessor === 'function' ) {
+          switch( col.id ){
+            case 'mileage':
+            case 'dollarPerMile':
+            case 'fuelCost':
+            case 'driverPay':
+            case 'totalExpenses':
+            case 'profit':
+              col.show = true;
+              chosenColumnsIndexes.push( idx );
+              break;
+            default:
+              col.show = false;
+              return col;
+          }
+          return col;
+        }
+
+        switch( col.accessor ){
+          case 'pickupDate':
+          case 'brokerName':
+          case 'pickUpCityState':
+          case 'dropOffCityState':
+          case 'payment':
+          case 'loadedMiles':
+          case 'emptyMiles':
+          case 'confirmFilePath':
+          case 'edit':
+            col.show = true;
+            chosenColumnsIndexes.push( idx );
+            break;
+          default:
+            col.show = false;
+            return col;
+        }
+        return col;
+      })
+      this.handleColChange( chosenColumnsIndexes );
+      this.setState( { chosenColumns })
+    }
+  }
+
   render() {
     let { classes, columns } = this.props;
     // console.log("columnChooser this props: ", this.props);
-    const cols = columns.map( col => Object.assign({}, col) );
-
+    const cols = this.state.chosenColumns.length > 0 ?
+      this.state.chosenColumns : columns.map( col => Object.assign({}, col) );
+      // console.log("columnChooser this props: ", cols);
     cols.forEach( column => {
 
       switch(column.Header){
@@ -151,6 +277,26 @@ class ColumnChooser extends React.Component {
           animation={PopoverAnimationVertical}
         >
           <FormControl component={"fieldset"} className={classes.boxElementPad}>
+            <div className={classes.buttonWrap}>
+              <Button
+                onClick={() => this.selectColumns("inputs")}
+                variant="outlined"
+                size="small"
+                className={classes.Button}>Inputs
+              </Button>
+              <Button
+                onClick={() => this.selectColumns("all")}
+                variant="outlined"
+                size="small"
+                className={classes.Button}>All
+              </Button>
+              <Button
+                onClick={() => this.selectColumns("default")}
+                variant="outlined"
+                size="small"
+                className={classes.Button}>Default
+              </Button>
+            </div>
             <FormGroup className={classes.formGroup}>
               {cols.map((column, index) => {
                 return (
@@ -180,4 +326,4 @@ class ColumnChooser extends React.Component {
   }
 }
 
-export default withStyles(popoverStyles)(ColumnChooser);
+export default withStyles(Styles)(ColumnChooser);
