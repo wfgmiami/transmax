@@ -232,7 +232,7 @@ class Earnings extends Component {
     const newRow = Object.assign(rowToUpdate, toSaveRow, {rowIndex: selectedRow.index,
     begWeekDate: begWeekDate, endWeekDate: endWeekDate });
     // console.log("*** save row ",  newRow)
-    if(selectedRow.original.id) this.props.editExistingLoad(newRow);
+    if(selectedRow.original.id) this.props.editExistingEarnings(newRow);
     else  this.props.saveEarnings(newRow);
     alert("The earnings was saved")
   }
@@ -247,11 +247,11 @@ class Earnings extends Component {
   }
 
   calculateTotal({ data, column }) {
-    // console.log("*** LoadsData calculateTotal data", data, "column ", column);
-    const loadsCount = data.length;
+
+    const depositsCount = data.length;
     let dollarSign = false;
     let value;
-
+    console.log("*** Earnings calculateTotal data", data, "column ", column);
     const total = data.reduce((memo, load) => {
 
       let payment = load[column.id];
@@ -288,63 +288,19 @@ class Earnings extends Component {
       return memo;
     }, 0);
 
-    if (dollarSign || column.id === "payment" || column.id === "toll") {
-      if (column.id === "dollarPerMile") {
-        return "$" + Number((total / loadsCount).toFixed(2)).toLocaleString();
+    if ( dollarSign ||  (column.id !== "milesPaid" && column.id !== "weekRange")
+    ) {
+      if (column.id === "margin") {
+        return Number((total / depositsCount).toFixed(2)).toLocaleString() + "%";
       }
       return "$" + Number(total.toFixed(0)).toLocaleString();
-    } else if (column.id === "dieselPrice") {
-      return "$" + Number((total / loadsCount).toFixed(2)).toLocaleString();
-    } else if (column.id === "pickupDate") {
-      return `Total Loads: ${loadsCount}`;
+    } else if (column.id === "weekRange") {
+      return `Weeks: ${depositsCount}`;
     }
 
     return Number(Number(total).toFixed(0)).toLocaleString();
   }
 
-  // calculateTotal({ data, column }) {
-  //   // console.log("....data",data, "column", column);
-  //   let dollarSign = false;
-  //   const weekCount = data.length;
-  //   let value;
-
-  //   const total = data.reduce((memo, earnings) => {
-  //     // console.log("calculateTotal ", weekCount, earnings,column,column.id, earnings[column.id]);
-  //     if (typeof earnings[column.id] === "object") {
-  //       value = earnings[column.id].props.dangerouslySetInnerHTML.__html;
-  //       if (typeof value === "string" && value.substring(0, 1) === "$") {
-  //         dollarSign = true;
-  //         value = value.slice(1);
-  //         value = parseFloat(value.replace(/,/g, ""));
-  //       } else if (value.substring(value.length - 1) === "%") {
-  //         value = value.slice(0, value.length - 1);
-  //       }
-  //       memo += Number(value);
-  //     } else {
-  //       let amount = earnings[column.id];
-  //       if (amount === "") amount = 0;
-  //       if (typeof amount === "string") {
-  //         amount = parseFloat(earnings[column.id].replace(/,/g, ""));
-  //       }
-  //       memo += amount;
-  //     }
-  //     return memo;
-  //   }, 0);
-
-  //   if (
-  //     dollarSign ||
-  //     (column.id !== "milesPaid" && column.id !== "weekNumber")
-  //   ) {
-  //     if (column.id === "margin") {
-  //       return Number((total / weekCount).toFixed(2)).toLocaleString() + "%";
-  //     }
-  //     return "$" + Number(total.toFixed(0)).toLocaleString();
-  //   } else if (column.id === "weekNumber") {
-  //     return `Weeks: ${weekCount}`;
-  //   }
-
-  //   return Number(Number(total).toFixed(0)).toLocaleString();
-  // }
 
   onColumnUpdate(index) {
     const columns =
@@ -370,49 +326,14 @@ class Earnings extends Component {
       }
     );
   }
-  // REMOVE
-  convertToNumber(dataObj){
-
-    const fuelCost = isNaN(dataObj.fuelCost) ? dataObj.fuelCost.replace(",","") : dataObj.fuelCost;
-    const driverPay = isNaN(dataObj.driverPay) ? dataObj.driverPay.replace(",","") : dataObj.driverPay;
-    const dispatchFee = isNaN(dataObj.dispatchFee) ? dataObj.dispatchFee.replace(",","") : dataObj.dispatchFee;
-    const lumper = isNaN(dataObj.lumper) ? dataObj.lumper.replace(",","") : dataObj.lumper;
-    const detention = isNaN(dataObj.detention) ? dataObj.detention.replace(",","") : dataObj.detention;
-    const detentionDriverPay = isNaN(dataObj.detentionDriverPay) ? dataObj.detentionDriverPay.replace(",","") : dataObj.detentionDriverPay;
-    const lateFee = isNaN(dataObj.lateFee) ? dataObj.lateFee.replace(",","") : dataObj.lateFee;
-    const toll = isNaN(dataObj.toll) ? dataObj.toll.replace(",","") : dataObj.toll;
-    const roadMaintenance = isNaN(dataObj.roadMaintenance) ? dataObj.roadMaintenance.replace(",","") : dataObj.roadMaintenance;
-    const otherExpenses = isNaN(dataObj.otherExpenses) ? dataObj.otherExpenses.replace(",","") : dataObj.otherExpenses;
-
-    let totalExpenses =
-      Number(fuelCost) +
-      Number(driverPay) +
-      Number(dispatchFee) +
-      Number(lumper) +
-      Number(detention) +
-      Number(detentionDriverPay) +
-      Number(lateFee) +
-      Number(toll) +
-      Number(roadMaintenance) +
-      Number(otherExpenses);
-
-      return totalExpenses;
-  }
 
   createColumns() {
     // console.log("EarningsData.js createColumns this.props: ", this.props);
 
     return [
       {
-        Header: "Week",
-        Footer: this.calculateTotal,
-        accessor: "weekNumber",
-        show: true,
-        className: "columnBorder",
-        Cell: this.editTable
-      },
-      {
         Header: "Week Dates",
+        Footer: this.calculateTotal,
         accessor: "weekRange",
         show: true,
         className: "columnBorder",
@@ -522,27 +443,20 @@ class Earnings extends Component {
         className: "columnBorder",
         accessor: d => {
 
-          const dataObj = {
-            fuelCost: d.fuelCost,
-            driverPay: d.driverPay,
-            dispatchFee:d.dispatchFee,
-            lumper: d.lumper,
-            detention: d.detention,
-            detentionDriverPay:  d.detentionDriverPay,
-            lateFee: d.lateFee,
-            toll: d.toll,
-            roadMaintenance: d.roadMaintenance,
-            otherExpenses: d.otherExpenses
-          }
+          let totalExpenses =
+          this.numberFormat(d.fuelCost) + this.numberFormat(d.driverPay) +
+          this.numberFormat(d.dispatchFee) + this.numberFormat(d.lumper) +
+          this.numberFormat(d.detention) + this.numberFormat(d.detentionDriverPay) +
+          this.numberFormat(d.lateFee) + this.numberFormat(d.toll) +
+          this.numberFormat(d.roadMaintenance) + this.numberFormat(d.otherExpenses);
 
-          let totalExpenses = this.convertToNumber(dataObj)
 
           totalExpenses = isNaN(totalExpenses) ? null : totalExpenses;
 
           return (
             <div
               dangerouslySetInnerHTML={{
-                __html: "$" + Number(Number(totalExpenses).toFixed(0)).toLocaleString()
+                __html: this.dollarFormat(totalExpenses, 0, "$")
               }}
             />
           );
@@ -558,8 +472,8 @@ class Earnings extends Component {
           let payment = this.numberFormat(d.revenue)
           let totalExpenses =
           this.numberFormat(d.fuelCost) + this.numberFormat(d.driverPay) +
-          this.numberFormat(d.dispatchFee) +this.numberFormat(d.lumper) +
-          this.numberFormat(d.detention) +this.numberFormat(d.detentionDriverPay) +
+          this.numberFormat(d.dispatchFee) + this.numberFormat(d.lumper) +
+          this.numberFormat(d.detention) + this.numberFormat(d.detentionDriverPay) +
           this.numberFormat(d.lateFee) + this.numberFormat(d.toll) +
           this.numberFormat(d.roadMaintenance) + this.numberFormat(d.otherExpenses);
 
@@ -586,20 +500,13 @@ class Earnings extends Component {
           if (typeof d.revenue === "string")
             revenue = parseFloat(revenue.replace(/,/g, ""));
 
-          const dataObj = {
-            fuelCost: d.fuelCost,
-            driverPay: d.driverPay,
-            dispatchFee:d.dispatchFee,
-            lumper: d.lumper,
-            detention: d.detention,
-            detentionDriverPay:  d.detentionDriverPay,
-            lateFee: d.lateFee,
-            toll: d.toll,
-            roadMaintenance: d.roadMaintenance,
-            otherExpenses: d.otherExpenses
-          }
+          let totalExpenses =
+            this.numberFormat(d.fuelCost) + this.numberFormat(d.driverPay) +
+            this.numberFormat(d.dispatchFee) + this.numberFormat(d.lumper) +
+            this.numberFormat(d.detention) + this.numberFormat(d.detentionDriverPay) +
+            this.numberFormat(d.lateFee) + this.numberFormat(d.toll) +
+            this.numberFormat(d.roadMaintenance) + this.numberFormat(d.otherExpenses);
 
-          let totalExpenses = this.convertToNumber(dataObj);
           let profit = revenue - totalExpenses;
 
           profit = isNaN(profit) ? null : profit;
@@ -716,6 +623,7 @@ function mapDispatchToProps(dispatch) {
       updateEarnings: companyActions.updateEarnings,
       saveEarnings: companyActions.saveEarnings,
       deleteEarnings: companyActions.deleteEarnings,
+      editExistingEarnings: companyActions.editExistingEarnings
     },
     dispatch
   );

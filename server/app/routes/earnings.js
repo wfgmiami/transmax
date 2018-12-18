@@ -3,14 +3,12 @@
 const express = require('express');
 const router = new express.Router();
 const Earning = require('../db/models').Earning;
-// const Truck = require('../db/models').Truck;
-// const Company = require('../db/models').Company;
-// const Driver = require('../db/models').Driver;
 
 router.get('/', (req, res, next) => {
+
   Earning.findAll({
     order:
-    [['weekNumber', 'ASC']]
+    [['begWeekDate', 'ASC']]
   })
     .then( earnings => res.json( earnings ))
     .catch( next )
@@ -20,11 +18,10 @@ router.post('/', (req, res, next) => {
   console.log('*** post earnings: ', req.body)
 
     const earningsObj = {
-      weekNumber: req.body.weekNumber,
       begWeekDate: req.body.begWeekDate,
       endWeekDate: req.body.endWeekDate,
       weekRange: req.body.weekRange,
-      revenue: req.body.revenue,
+      revenue: isNaN(req.body.revenue) ? Number(req.body.revenue.replace(",", "")) : req.body.revenue,
       fuelCost: req.body.fuelCost,
       milesPaid: req.body.milesPaid,
       driverPay: req.body.driverPay,
@@ -38,7 +35,7 @@ router.post('/', (req, res, next) => {
       otherExpenses: req.body.otherExpenses,
       totalExpense: req.body.totalExpense,
       profit: req.body.profit,
-      operatingMargin: req.body.operatingMargin,
+      operatingMargin: isNaN(req.body.margin) ? Number(req.body.margin.replace("%", "")) : req.body.margin,
       docFilePath: req.body.docFilePath
     }
 

@@ -4,9 +4,7 @@ const db = require('../db');
 const DataTypes = db.Sequelize;
 
 const Earning = db.define('earning', {
-    weekNumber: {
-      type: DataTypes.STRING,
-    },
+
     begWeekDate: {
         type: DataTypes.DATE,
     },

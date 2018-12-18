@@ -45,7 +45,7 @@ router.post('/', (req, res, next) => {
     totalExpenses: req.body.totalExpenses,
     profit: req.body.profit,
     commodity: req.body.commodity,
-    weight: req.body.weight,
+    weight:  isNaN(req.body.weight) ? Number(req.body.weight.replace(",", "")) : req.body.weight,
     trailer: req.body.trailer,
     confirmFilePath: req.body.confirmFilePath,
   }

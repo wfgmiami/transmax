@@ -5,6 +5,7 @@ export const SET_EARNINGS = "SET EARNINGS";
 export const UPDATE_EARNINGS = "UPDATE EARNINGS";
 export const SAVE_EARNINGS = "SAVE EARNINGS";
 export const DELETE_EARNINGS = "DELETE EARNINGS";
+export const EDIT_EXISTING_EARNINGS = "EDIT EXISTING EARNINGS";
 
 export function getEarnings() {
   // return dispatch =>
@@ -38,6 +39,19 @@ export function saveEarnings(earnings) {
     postEarnings.then(response =>
       dispatch({
         type: SAVE_EARNINGS,
+        payload: response.data
+      })
+    );
+}
+
+
+export function editExistingEarnings(earnings) {
+  // console.log("earnings.actions.js existing ", earnings);
+  const postLoad = axios.post("/api/existingearnings", { ...earnings });
+  return dispatch =>
+    postLoad.then(response =>
+      dispatch({
+        type: EDIT_EXISTING_EARNINGS,
         payload: response.data
       })
     );

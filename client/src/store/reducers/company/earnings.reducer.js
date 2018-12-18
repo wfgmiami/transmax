@@ -36,6 +36,15 @@ const earnings = (state = initialState, action) => {
       return [...state];
     }
 
+    case Actions.EDIT_EXISTING_EARNINGS: {
+      console.log('*** edit existing earnings reducer ', action, state)
+
+      return [...state.map(earning => {
+        if(action.payload.id === earning.id) return action.payload
+        else return earning
+      })]
+    }
+
     default: {
       return state;
     }
