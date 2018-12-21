@@ -27,7 +27,7 @@ router.post('/', (req, res, next) => {
     lateFee: req.body.lateFee,
     roadMaintenance: req.body.roadMaintenance,
     otherExpenses: req.body.otherExpenses,
-    totalExpense: req.body.totalExpense,
+    totalExpenses: req.body.totalExpenses,
     profit: req.body.profit,
     operatingMargin: isNaN(req.body.margin) ? Number(req.body.margin.replace("%", "")) : req.body.margin,
     docFilePath: req.body.docFilePath
