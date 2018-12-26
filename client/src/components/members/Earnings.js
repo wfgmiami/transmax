@@ -97,6 +97,7 @@ class Earnings extends Component {
     // );
     let dollarSign;
     let fieldValue;
+    let fieldToReturn;
 
     const findEditableRow = this.state.editableRowIndex.find(
       row => row === cellInfo.index
@@ -116,11 +117,16 @@ class Earnings extends Component {
 
     fieldValue = this.props.earnings[cellInfo.index][cellInfo.column.id];
 
-    // for numbers stored as strings:
+    // for numbers stored as strings eg "100", excludes "$100" and "1,000":
     if( typeof(fieldValue) === 'string' && !isNaN(fieldValue)) {
-      fieldValue = isNaN(Number(fieldValue)) ? fieldValue : Number(fieldValue).toLocaleString()
+      fieldValue = Number(fieldValue).toLocaleString()
     }
 
+    fieldToReturn = ( cellInfo.value === '' || cellInfo.value === 0 || fieldValue === '' || fieldValue === '0' )  ? '' :
+    (findEditableRow || findEditableRow === 0) ? fieldValue.toLocaleString() :
+    dollarSign + fieldValue.toLocaleString()
+
+    // if edit is enabled- first case, if it is not- second case
     return findEditableRow || findEditableRow === 0 ? (
       <div
         style={{ backgroundColor: "#fafafa" }}
@@ -131,25 +137,16 @@ class Earnings extends Component {
           data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
           this.props.updateEarnings({ data });
         }}
-        dangerouslySetInnerHTML={{
-          __html:
-            // dollarSign +
-            fieldValue.toLocaleString()
+          dangerouslySetInnerHTML={{
+          __html:fieldToReturn
         }}
       />
     ) : (
       <div
         style={{ backgroundColor: "#fafafa" }}
         suppressContentEditableWarning
-        onBlur={e => {
-          const data = [...this.props.earnings];
-          data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
-          this.props.updateEarnings({ data });
-        }}
         dangerouslySetInnerHTML={{
-          __html:
-            dollarSign +
-            fieldValue.toLocaleString()
+          __html: fieldToReturn
         }}
       />
     );
@@ -178,14 +175,14 @@ class Earnings extends Component {
     // console.log('result ', result)
     if(result) this.props.deleteEarnings(row)
 
-    // if(result){
-    //   this.props.updateEarnings({
-    //     data: [
-    //       ...this.props.earnings.slice(0, row.index),
-    //       ...this.props.earnings.slice(row.index + 1)
-    //     ]
-    //   });
-    // }
+    if(result){
+      this.props.updateEarnings({
+        data: [
+          ...this.props.earnings.slice(0, row.index),
+          ...this.props.earnings.slice(row.index + 1)
+        ]
+      });
+    }
 
   }
 
@@ -198,12 +195,14 @@ class Earnings extends Component {
 
     rowToUpdate = selectedRow.row;
 
-     console.log("*** selectedRow ",  selectedRow)
+    // console.log("*** selectedRow ",  selectedRow)
 
     let keys = Object.keys(rowToUpdate);
 
     keys.forEach( key => {
       let loadItem = rowToUpdate[key];
+    //   console.log("1 load item ", loadItem + "\n===Object: ", typeof(loadItem) === 'object'
+    // ,"\n!isNaN: ", !isNaN(loadItem), "\n===string ", typeof(loadItem) === 'string')
       if(typeof(loadItem) === 'object' && key !== '_original'){
 
         let value = loadItem.props.dangerouslySetInnerHTML.__html;
@@ -214,8 +213,13 @@ class Earnings extends Component {
         toSaveRow[key] = value;
       }
 
-      if(!isNaN(loadItem) && typeof loadItem === 'string'){
-        toSaveRow[key] = Number(loadItem)
+      if(typeof(loadItem) === 'string'){
+        //when loadItem is number as string "100.5"
+        if(!isNaN(loadItem))
+          toSaveRow[key] = Number(loadItem)
+          //when loadItem is number as string with comma "1,000.5"
+        if(loadItem.includes(","))
+          toSaveRow[key] = parseFloat(loadItem.replace(/,/g, ""));
       }
 
       if (typeof loadItem === "string" && loadItem.substring(0, 1) === "$") {
@@ -251,7 +255,7 @@ class Earnings extends Component {
     const depositsCount = data.length;
     let dollarSign = false;
     let value;
-    console.log("*** Earnings calculateTotal data", data, "column ", column);
+    // console.log("*** Earnings calculateTotal data", data, "column ", column);
     const total = data.reduce((memo, load) => {
 
       let payment = load[column.id];

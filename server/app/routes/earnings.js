@@ -21,7 +21,7 @@ router.post('/', (req, res, next) => {
       begWeekDate: req.body.begWeekDate,
       endWeekDate: req.body.endWeekDate,
       weekRange: req.body.weekRange,
-      revenue: isNaN(req.body.revenue) ? Number(req.body.revenue.replace(",", "")) : req.body.revenue,
+      revenue: req.body.revenue,
       fuelCost: req.body.fuelCost,
       milesPaid: req.body.milesPaid,
       driverPay: req.body.driverPay,
@@ -35,7 +35,7 @@ router.post('/', (req, res, next) => {
       otherExpenses: req.body.otherExpenses,
       totalExpenses: req.body.totalExpenses,
       profit: req.body.profit,
-      operatingMargin: isNaN(req.body.margin) ? Number(req.body.margin.replace("%", "")) : req.body.margin,
+      operatingMargin: Number(req.body.margin.replace("%", "")),
       docFilePath: req.body.docFilePath
     }
 
