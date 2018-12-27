@@ -322,10 +322,6 @@ class LoadsData extends Component {
           toSaveRow[key] = value;
         }
 
-        if(!isNaN(loadItem) && typeof loadItem === 'string'){
-          toSaveRow[key] = Number(loadItem)
-        }
-
         if (typeof loadItem === "string" && loadItem.substring(0, 1) === "$") {
           loadItem = loadItem.slice(1);
           loadItem = parseFloat(loadItem.replace(/,/g, ""));
