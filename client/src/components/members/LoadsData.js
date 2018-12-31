@@ -331,7 +331,7 @@ class LoadsData extends Component {
       })
 
       const newRow = Object.assign(rowToUpdate, toSaveRow, {rowIndex: selectedRow.index });
-      // console.log("*** save row ",  newRow)
+      console.log("*** save row ",  newRow)
       if(selectedRow.original.id) this.props.editExistingLoad(newRow);
       else  this.props.saveNewLoad(newRow);
       alert("The load was saved")
