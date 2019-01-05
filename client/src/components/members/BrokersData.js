@@ -281,7 +281,6 @@ class BrokersData extends Component {
       },
       {
         Header: "Name",
-        Footer: this.calculateTotal,
         accessor: "name",
         show: true,
         minWidth: 170,

@@ -328,6 +328,13 @@ class LoadsData extends Component {
           toSaveRow[key] = loadItem;
         }
 
+        if ( typeof loadItem === "string" && loadItem.includes("&") ) {
+          let ampPos = loadItem.indexOf("&");
+          loadItem = loadItem.substring(0, ampPos).concat("&").concat(loadItem.substring(ampPos + 5));
+          toSaveRow[key] = loadItem;
+          console.log("loadItem: ", loadItem)
+        }
+
       })
 
       const newRow = Object.assign(rowToUpdate, toSaveRow, {rowIndex: selectedRow.index });

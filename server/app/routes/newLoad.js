@@ -54,7 +54,7 @@ router.post('/', (req, res, next) => {
   if(!loadObj.brokerId){
 
     Broker.create({
-      name: req.body.brokerName,
+      name: loadObj.brokerName,
     })
     .then( broker => {
       console.log('broker ', broker, " Brokerid ", broker.dataValues.id, 'LOAD-OBJ: ', loadObj);
