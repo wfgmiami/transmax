@@ -1,5 +1,6 @@
 export const driverConfig = [
   {
+    id:"",
     firstName: "",
     lastName: "",
     ssn: "",
@@ -12,8 +13,10 @@ export const driverConfig = [
     zipCode: "",
     phone: "",
     email: "",
+    employedBy: "",
     currentRate: 0,
-    earnings: 0
+    earnings: 0,
   }
 ];
+
 

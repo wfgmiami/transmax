@@ -13,4 +13,51 @@ router.get('/', (req, res, next) => {
     .catch( next )
 })
 
+
+router.post('/', (req, res, next) => {
+  console.log('*** post driver: ', req.body)
+
+    const driverObj = {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      ssn: req.body.ssn,
+      driversLicense: req.body.driversLicense,
+      dob: req.body.dob,
+      hireDate: req.body.hireDate,
+      streetAddress: req.body.streetAddress,
+      city: req.body.city,
+      state: req.body.state,
+      zipCode: req.body.zipCode,
+      phone: req.body.phone,
+      email: req.body.email,
+      employedBy: req.body.employedBy,
+      currentRate: req.body.currentRate,
+      earnings: req.body.earnings,
+    }
+    console.log("DRIVER OBJ: ", driverObj)
+    Driver.create( driverObj )
+    .then( driver => {
+      console.log('*** Driver posted to db ', driver);
+      res.json( driver )
+    })
+    .catch( (error) => res.status(400).send(error))
+})
+
+router.delete('/deletedriver/:driverId', (req, res, next) => {
+  console.log('*** delete driver ', req.params)
+  Driver.destroy({
+    where: {
+      id: req.params.driverId
+    }
+  })
+
+  .then( (d) => {
+    console.log('driver destroyed ', d)
+    res.status(204).end()}
+  )
+  .catch( (error) => res.status(400).send(error))
+
+})
+
+
 module.exports = router;

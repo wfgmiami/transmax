@@ -32,7 +32,7 @@ export function setDriver(driver) {
 }
 
 export function saveDriver(driver) {
-  // console.log("driver.actions.js saveDriver ", driver);
+  console.log("driver.actions.js saveDriver ", driver);
   const postDriver = axios.post("/api/driver", { ...driver });
   return dispatch =>
     postDriver.then(response =>

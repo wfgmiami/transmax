@@ -152,9 +152,56 @@ class DriversData extends Component {
     }
   }
 
-  saveRow() {
-    // console.log("DriversData.js saveRow this.props", this.props);
-    this.props.saveDriver(this.props.driver);
+  saveRow(selectedRow) {
+    let result = window.confirm("Do you want to save this row");
+    if(!result) return null;
+
+    let rowToUpdate = {};
+    let toSaveRow = {};
+
+    rowToUpdate = selectedRow.row;
+
+    // console.log("*** selectedRow ",  selectedRow)
+
+    let keys = Object.keys(rowToUpdate);
+
+    keys.forEach( key => {
+      let loadItem = rowToUpdate[key];
+    //   console.log("1 load item ", loadItem + "\n===Object: ", typeof(loadItem) === 'object'
+    // ,"\n!isNaN: ", !isNaN(loadItem), "\n===string ", typeof(loadItem) === 'string')
+      if(typeof(loadItem) === 'object' && key !== '_original'){
+
+        let value = loadItem.props.dangerouslySetInnerHTML.__html;
+        if (typeof value === "string" && value.substring(0, 1) === "$") {
+          value = value.slice(1);
+          value = parseFloat(value.replace(/,/g, ""));
+        }
+        toSaveRow[key] = value;
+      }
+
+      if(typeof(loadItem) === 'string'){
+        //when loadItem is number as string "100.5"
+        if(!isNaN(loadItem))
+          toSaveRow[key] = Number(loadItem)
+          //when loadItem is number as string with comma "1,000.5"
+        if(loadItem.includes(","))
+          toSaveRow[key] = parseFloat(loadItem.replace(/,/g, ""));
+      }
+
+      if (typeof loadItem === "string" && loadItem.substring(0, 1) === "$") {
+        loadItem = loadItem.slice(1);
+        loadItem = parseFloat(loadItem.replace(/,/g, ""));
+        toSaveRow[key] = loadItem;
+      }
+
+    })
+
+    // const newRow = Object.assign(rowToUpdate, toSaveRow, {rowIndex: selectedRow.index,
+    // begWeekDate: begWeekDate, endWeekDate: endWeekDate });
+    console.log("*** save row ",  rowToUpdate)
+    if(selectedRow.original.id) this.props.updateDriver(rowToUpdate);
+    else  this.props.saveDriver(rowToUpdate);
+    alert("The driver was saved")
   }
 
   addEmptyRow() {
@@ -250,13 +297,6 @@ class DriversData extends Component {
         Cell: this.editTable
       },
       {
-        Header: "Hire Date",
-        accessor: "hireDate",
-        show: true,
-        className: "columnBorder",
-        Cell: this.editTable
-      },
-      {
         Header: "SSN",
         accessor: "ssn",
         show: true,
@@ -271,8 +311,43 @@ class DriversData extends Component {
         Cell: this.editTable
       },
       {
+        Header: "DOB",
+        accessor: "dob",
+        show: true,
+        className: "columnBorder",
+        Cell: this.editTable
+      },
+      {
+        Header: "Hire Date",
+        accessor: "hireDate",
+        show: true,
+        className: "columnBorder",
+        Cell: this.editTable
+      },
+      {
         Header: "Address",
-        accessor: "address",
+        accessor: "streetAddress",
+        show: false,
+        className: "columnBorder",
+        Cell: this.editTable
+      },
+      {
+        Header: "City",
+        accessor: "city",
+        show: false,
+        className: "columnBorder",
+        Cell: this.editTable
+      },
+      {
+        Header: "State",
+        accessor: "state",
+        show: false,
+        className: "columnBorder",
+        Cell: this.editTable
+      },
+      {
+        Header: "Zip Code",
+        accessor: "zipCode",
         show: false,
         className: "columnBorder",
         Cell: this.editTable
@@ -292,6 +367,13 @@ class DriversData extends Component {
         Cell: this.editTable
       },
       {
+        Header: "Employed By",
+        show: false,
+        className: "columnBorder",
+        accessor: "employedBy",
+        Cell: this.editTable
+      },
+      {
         Header: "Current Rate",
         accessor: "currentRate",
         show: false,
@@ -304,13 +386,6 @@ class DriversData extends Component {
         show: true,
         className: "columnBorder",
         accessor: "earnings",
-        Cell: this.editTable
-      },
-      {
-        Header: "Employed By",
-        show: false,
-        className: "columnBorder",
-        accessor: "employedBy",
         Cell: this.editTable
       },
       {
