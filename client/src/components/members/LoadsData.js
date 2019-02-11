@@ -21,7 +21,7 @@ import ActionBtn from "./ActionBtn";
 import DateFilter from "./DateFilter";
 import CustomPagination from "./CustomPagination.js";
 import InputsVariableCost from './InputsVariableCost';
-
+import moment from 'moment';
 import * as freightActions from "../../store/actions/freight";
 import * as companyActions from "../../store/actions/company";
 
@@ -151,7 +151,9 @@ class LoadsData extends Component {
 
     if(cellInfo.column.id === 'pickupDate' &&
       this.props.load[cellInfo.index][cellInfo.column.id] !== ''){
-      fieldValue = new Date(this.props.load[cellInfo.index][cellInfo.column.id]).toLocaleDateString();
+      // let fieldValue2 = new Date(this.props.load[cellInfo.index][cellInfo.column.id]).toLocaleDateString();
+      let dt = new Date(this.props.load[cellInfo.index][cellInfo.column.id]).toISOString().slice(0,10);
+      fieldValue = moment(dt).format("MM/DD/YYYY");
     }
 
     switch (cellInfo.column.id) {
