@@ -13,6 +13,41 @@ router.get('/', (req, res, next) => {
     .catch( next )
 })
 
+router.post('/existingdriver', (req, res, next) => {
+  console.log('*** routers existingdriver req.body: ', req.body)
+  const driverId = req.body.id;
+
+    const driverObj = {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      ssn: req.body.ssn,
+      driversLicense: req.body.driversLicense,
+      dob: req.body.dob,
+      hireDate: req.body.hireDate,
+      streetAddress: req.body.streetAddress,
+      city: req.body.city,
+      state: req.body.state,
+      zipCode: req.body.zipCode,
+      phone: req.body.phone,
+      email: req.body.email,
+      employedBy: req.body.employedBy,
+      currentRate: req.body.currentRate,
+      earnings: req.body.earnings,
+    }
+
+    Driver.findOne({
+      where: { id: driverId }
+    })
+    .then( driver => {
+      if(!driver){
+        return res.status(404).send({
+          message: "Driver Not Found"
+        })
+      }
+      driver.update(driverObj)
+    })
+    .catch( (error) => res.status(400).send(error))
+})
 
 router.post('/', (req, res, next) => {
   console.log('*** post driver: ', req.body)

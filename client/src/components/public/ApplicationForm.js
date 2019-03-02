@@ -22,6 +22,22 @@ const styles = theme => ({
     marginRight: theme.spacing.unit,
     width: "45%"
   },
+  textFieldBox: {
+    width: "5%",
+    marginLeft: theme.spacing.unit,
+  },
+  violationQuestions: {
+    paddingTop: "3em",
+    float: "right",
+    width: "50%",
+    background: 'green'
+  },
+  boxName: {
+    background: 'yellow'
+  },
+  numField: {
+
+  },
   formControl: {
     margin: theme.spacing.unit,
     width: "45%"
@@ -96,12 +112,12 @@ class ApplicationForm extends Component {
         case "experience":
           field = "Experience";
           break;
-        // case "formerEmployer":
-        //   field = "Former Employer";
-        //   break;
-        // case "formerEmployerPhone":
-        //   field = "Former Employer Phone";
-        //   break;
+        case "formerEmployer":
+          field = "Former Employer";
+          break;
+        case "formerEmployerPhone":
+          field = "Former Employer Phone";
+          break;
         default:
           field = "";
       }
@@ -277,7 +293,7 @@ class ApplicationForm extends Component {
             onChange={this.handleChange("formerEmployer")}
             margin="normal"
           />
-          {/* <InputMask
+          <InputMask
             mask="(999) 999 9999"
             maskChar="-"
             value={candidate.formerEmployerPhone}
@@ -292,7 +308,65 @@ class ApplicationForm extends Component {
                 type="text"
               />
             )}
-          </InputMask> */}
+          </InputMask>
+          <TextField
+            id="movingViolation"
+            label="Number of Moving Violations in the Last 3 Years:"
+            placeholder=""
+            className={classes.textField}
+
+            margin="normal"
+          />
+          <TextField
+            id="preventableAccident"
+            label="Number of Preventable Accidents in the Last 3 Years:"
+            placeholder=""
+            className={classes.textField}
+
+            margin="normal"
+          />
+          <TextField
+            id="dui"
+            label="Number of DUI/DWI in the Last 5 Years:"
+            placeholder=""
+            className={classes.textField}
+
+            margin="normal"
+          />
+          {/* <div className={classes.violationQuestions}>
+          <div className={classes.boxName}>
+            Number of Moving Violations in the Last 3 Years:
+
+              <TextField
+                id="movingViolation"
+                className={classes.textFieldBox}
+                defaultValue=""
+                variant="filled"
+              />
+</div>
+
+<div>
+              Number of Preventable Accidents in the Last 3 Years:
+                <TextField
+                  id="preventableAccident"
+                  className={classes.textFieldBox}
+                  defaultValue=""
+                  variant="filled"
+                />
+</div>
+<div>
+              Number of DUI/DWI in the Last 5 Years:
+
+                <TextField
+                  id="dui"
+                  className={classes.textFieldBox}
+                  defaultValue=""
+                  variant="filled"
+                />
+</div>
+
+          </div> */}
+
           <div>&nbsp;</div>
         </form>
         <br />

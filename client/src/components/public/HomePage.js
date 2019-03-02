@@ -51,7 +51,7 @@ class HomePage extends Component {
                 The company goal is to provide continuous transportation solutions to wide range of customers. We are looking to add new trucks to our fleet and hire more safe and reliable drivers.
               </p>
             <br/><br/>
-            <h2 className="py-16">START AT $0.55 CENTS PER MILE OR MORE</h2><br/>
+            <h2 className="py-16">$0.60 CENTS PER MILE</h2><br/>
               <h3>What you can expect:</h3>&nbsp;
                 <ul style={{ marginLeft: '25px' }} className={classes.mainText}>
                   <li>Flexible home time - choose to be at home for the weekends or to stay on the road</li>
@@ -62,14 +62,16 @@ class HomePage extends Component {
                   <li>Paid vacation</li>
                   <li>Detention paid $20 per hour</li>
                   <li>Extra stop paid at $25 for each additional stop</li>
-                </ul>&nbsp;
+                </ul>&nbsp;&nbsp;
 
-              <h3>What you need to have:</h3>&nbsp;
+              <h3>To qualifiy you must meet the following:</h3>&nbsp;
                 <ul style={{ marginLeft: '25px' }} className={classes.mainText}>
                   <li>Class A CDL</li>
                   <li>Minimum 2 year experience</li>
-                  <li>Clean MVR report</li><br/>
-                </ul>
+                  <li>No DUI within 10 years</li>
+                  <li>No more than 2 moving violations in the past 3 years.</li>
+                  <li>No more than 1 preventable accident in the past 2 years, no major accident within 5 years.</li>
+                </ul><br/>
                 <p style={{ fontWeight:'700', fontSize:'16px' }}> To apply - call us at 513-680-5334 or fill in the application form.</p>
           </div>
 

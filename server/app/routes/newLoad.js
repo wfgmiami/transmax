@@ -10,7 +10,7 @@ const Company = require('../db/models').Company;
 
 router.post('/', (req, res, next) => {
 
-  console.log('*** post new loads: ', req.body)
+  console.log('*** routes newLoad req.body: ', req.body)
 
   const loadObj = {
     pickupDate: req.body.pickupDate,

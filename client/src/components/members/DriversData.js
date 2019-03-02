@@ -73,17 +73,16 @@ class DriversData extends Component {
 
   editTable(cellInfo) {
     // console.log(
-    //   "cell info........",
-    //   cellInfo,
-    //   "id: ",
-    //   cellInfo.row[cellInfo.column.id]
+    //   "*** DriversData.js cellInfo: ",
+    //   cellInfo
     // );
     let dollarSign;
     const findEditableRow = this.state.editableRowIndex.find(
       row => row === cellInfo.index
     );
-    dollarSign = cellInfo.column.id === "earnings" ? "$" : "";
 
+    dollarSign = cellInfo.column.id === "earnings" ? "$" : "";
+    // when the row is open to edit or enter data then findEditableRow will not be undefined
     return findEditableRow || findEditableRow === 0 ? (
       <div
         style={{ backgroundColor: "#fafafa" }}
@@ -96,7 +95,6 @@ class DriversData extends Component {
         }}
         dangerouslySetInnerHTML={{
           __html:
-            // dollarSign +
             this.props.driver[cellInfo.index][
               cellInfo.column.id
             ].toLocaleString()
@@ -106,11 +104,6 @@ class DriversData extends Component {
       <div
         style={{ backgroundColor: "#fafafa" }}
         suppressContentEditableWarning
-        onBlur={e => {
-          const data = [...this.props.driver];
-          data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
-          this.props.updateDriver({ data });
-        }}
         dangerouslySetInnerHTML={{
           __html:
             dollarSign +
@@ -123,7 +116,7 @@ class DriversData extends Component {
   }
 
   editRow(row) {
-    // console.log("TripsData.js editRow ", row, "row index: ", row.index);
+    // console.log("*** DriversData editRow row ", row, " row index: ", row.index);
     const alreadyEditable = this.state.editableRowIndex.find(
       editableRow => editableRow === row.index
     );
@@ -142,33 +135,22 @@ class DriversData extends Component {
 
   deleteRow(row) {
     let result = window.confirm("Do you want to delete this row?")
-    if(result){
-      this.props.updateDriver({
-        data: [
-          ...this.props.driver.slice(0, row.index),
-          ...this.props.driver.slice(row.index + 1)
-        ]
-      });
-    }
+    if(result) this.props.deleteDriver(row)
   }
 
   saveRow(selectedRow) {
     let result = window.confirm("Do you want to save this row");
     if(!result) return null;
 
-    let rowToUpdate = {};
+    let rowToUpdate = selectedRow.row;
     let toSaveRow = {};
 
-    rowToUpdate = selectedRow.row;
-
-    // console.log("*** selectedRow ",  selectedRow)
+    // console.log("*** selectedRow ",  selectedRow, " *** this.props ", this.props)
 
     let keys = Object.keys(rowToUpdate);
 
     keys.forEach( key => {
       let loadItem = rowToUpdate[key];
-    //   console.log("1 load item ", loadItem + "\n===Object: ", typeof(loadItem) === 'object'
-    // ,"\n!isNaN: ", !isNaN(loadItem), "\n===string ", typeof(loadItem) === 'string')
       if(typeof(loadItem) === 'object' && key !== '_original'){
 
         let value = loadItem.props.dangerouslySetInnerHTML.__html;
@@ -195,11 +177,8 @@ class DriversData extends Component {
       }
 
     })
-
-    // const newRow = Object.assign(rowToUpdate, toSaveRow, {rowIndex: selectedRow.index,
-    // begWeekDate: begWeekDate, endWeekDate: endWeekDate });
-    console.log("*** save row ",  rowToUpdate)
-    if(selectedRow.original.id) this.props.updateDriver(rowToUpdate);
+    console.log("*** DriversData saveRow rowToSave ", rowToUpdate, " selectedRow.original.id ", selectedRow.original.id)
+    if(selectedRow.original.id) this.props.editDriver(rowToUpdate);
     else  this.props.saveDriver(rowToUpdate);
     alert("The driver was saved")
   }
@@ -486,9 +465,10 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
       getDriver: companyActions.getDriver,
-      setDriver: companyActions.setDriver,
+      editDriver: companyActions.editDriver,
       updateDriver: companyActions.updateDriver,
-      saveDriver: companyActions.saveDriver
+      saveDriver: companyActions.saveDriver,
+      deleteDriver: companyActions.deleteDriver
     },
     dispatch
   );
