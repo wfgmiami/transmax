@@ -286,7 +286,7 @@ class LoadsData extends Component {
 
     rowToUpdate = selectedRow.row;
 
-    // console.log("*** selectedRow ",  selectedRow)
+    console.log("*** selectedRow ",  selectedRow)
 
     let keys = Object.keys(rowToUpdate);
 
@@ -397,8 +397,10 @@ class LoadsData extends Component {
     }, 0);
 
     if (dollarSign || column.id === "payment" || column.id === "toll") {
-      if (column.id === "dollarPerMile") {
+      if (column.id === "dollarPerMile" ) {
         return "$" + Number((total / loadsCount).toFixed(2)).toLocaleString();
+      } else if( column.id === 'dispatchFee'){
+        return "$" + Number(total.toFixed(2)).toLocaleString();
       }
       return "$" + Number(total.toFixed(0)).toLocaleString();
     } else if (column.id === "dieselPrice") {
@@ -415,6 +417,9 @@ class LoadsData extends Component {
     const columns = this.state.columns.length > 0 ? this.state.columns : this.createColumns();
     let columns1 = [];
     columns1.push(...columns);
+
+    // console.log("*** LoadsData onColumnUpdate index: ", index, " columns1: ", columns1,
+    // " isArray(index): ",  Array.isArray( index ));
 
     if ( Array.isArray( index ) ){
       columns1 = columns1.map( col => { col.show = false; return col } );
@@ -433,7 +438,6 @@ class LoadsData extends Component {
       })
     } else {
 
-      // console.log("onColumnUpdate index ", index, "...", this.state);
       this.setState( () => {
           columns1[index].show = !columns1[index].show;
           if (columns1[index].columns) {
@@ -473,7 +477,7 @@ class LoadsData extends Component {
   returnTableData(data, field){
     const editable = this.state.editableRowIndex;
     let check = 0;
-    let dec = (field === "dollarPerMile") ? 2 : 0;
+    let dec = (field === "dollarPerMile" || field === 'dispatchFee') ? 2 : 0;
     let dollar = field === "mileage" ? '' : '$';
 
     if (editable.length === 0) return this.dollarFormat(data[field],dec,dollar);
@@ -792,11 +796,10 @@ class LoadsData extends Component {
           let dispatchFee = payment * dispatchPercent;
 
           dispatchFee = isNaN(dispatchFee) ? null : dispatchFee;
-
           return (
             <div
               dangerouslySetInnerHTML={{
-                __html: this.dollarFormat(dispatchFee, 0, "$")
+                __html: this.dollarFormat(dispatchFee, 2, "$")
               }}
             />
           );
@@ -1055,7 +1058,7 @@ class LoadsData extends Component {
           handleDownload={this.handleDownload}
           PaginationComponent={CustomPagination}
           columns={columns}
-          defaultPageSize={20}
+          defaultPageSize={50}
           style={
             {
               height: "800px"

@@ -225,28 +225,45 @@ class DriversData extends Component {
   }
 
   onColumnUpdate(index) {
-    const columns =
-      this.state.columns.length > 0 ? this.state.columns : this.createColumns();
-    // console.log("onColumnUpdate index ", index, "...", columns[index]);
-    this.setState(
-      prevState => {
-        const columns1 = [];
-        columns1.push(...columns);
-        columns1[index].show = !columns1[index].show;
-        if (columns1[index].columns) {
-          columns1[index].columns.forEach(item => {
-            item.show = !item.show;
-          });
-        }
 
-        return {
-          columns: columns1
-        };
-      },
-      () => {
-        // console.log('onColumnUpdate columns: ', this.state.columns)
-      }
-    );
+    const columns = this.state.columns.length > 0 ? this.state.columns : this.createColumns();
+    let columns1 = [];
+    columns1.push(...columns);
+
+    if ( Array.isArray( index ) ){
+      columns1 = columns1.map( col => { col.show = false; return col } );
+      index.forEach( async ( idx ) => {
+        await this.setState( () => {
+          columns1[idx].show = true;
+          if (columns1[idx].columns) {
+            columns1[idx].columns.forEach(item => {
+              item.show = true;
+            });
+          }
+          return {
+            columns: columns1
+          };
+        });
+      })
+    } else {
+
+      // console.log("onColumnUpdate index ", index, "...", this.state);
+      this.setState( () => {
+          columns1[index].show = !columns1[index].show;
+          if (columns1[index].columns) {
+            columns1[index].columns.forEach(item => {
+              item.show = !item.show;
+            });
+          }
+          return {
+            columns: columns1
+          };
+        },
+        () => {
+          // console.log('onColumnUpdate columns: ', this.state.columns)
+        }
+      );
+    }
   }
 
   createColumns() {

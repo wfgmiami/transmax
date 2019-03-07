@@ -52,7 +52,7 @@ class ColumnChooser extends React.Component {
 
     this.state = {
       open: false,
-      chosenColumns: []
+      chosenColumns: [],
 
     };
   }
@@ -196,10 +196,12 @@ class ColumnChooser extends React.Component {
 
   render() {
     let { classes, columns } = this.props;
-    // console.log("columnChooser this props: ", this.props);
-    const cols = this.state.chosenColumns.length > 0 ?
-      this.state.chosenColumns : columns.map( col => Object.assign({}, col) );
-      // console.log("columnChooser this props: ", cols);
+    const stateColumns = this.state.chosenColumns.length;
+
+    // const cols = stateColumns > 0 ?
+    //   this.state.chosenColumns : columns.map( col => Object.assign({}, col) );
+    const cols =  columns.map( col => Object.assign({}, col) );
+
     cols.forEach( column => {
 
       switch(column.Header){
@@ -309,7 +311,9 @@ class ColumnChooser extends React.Component {
                     control={
                       <Checkbox
                         className={classes.checkbox}
-                        onChange={() => this.handleColChange(index)}
+                        onChange={() => {
+                          console.log('click checkbox')
+                          this.handleColChange(index)}}
                         checked={column.show}
                         value={column.id}
                       />
