@@ -21,6 +21,7 @@ export const loadsConfig =  [{
   driverPay: 0,
   dispatchFee: 0,
   lumper: 0,
+  cancelFeeIncome: 0,
   detention: 0,
   detentionDriverPay: 0,
   secondStopDriverPay: 0,
@@ -35,3 +36,50 @@ export const loadsConfig =  [{
   trailer: "",
   confirmFilePath: ""
 }]
+
+export const loadsTextFields = [
+  "pickupDate",
+  "driverName",
+  "loadNumber",
+  "brokerName",
+  "shipper",
+  "consignee",
+  "pickUpCityState",
+  "dropOffCityState",
+  "pickUpAddress",
+  "dropOffAddress",
+  "commodity",
+  "trailer",
+  "confirmFilePath"
+]
+
+export const loadsNumberFields = [
+  "weight",
+  "payment",
+  "loadedMiles",
+  "emptyMiles",
+  "mileage",
+  "dollarPerMile",
+  "fuelCost",
+  "driverPay",
+  "dispatchFee",
+  "lumper",
+  "detention",
+  "detentionDriverPay",
+  "secondStopDriverPay",
+  "lateFee",
+  "toll",
+  "roadMaintenance",
+  "cancelFeeIncome",
+  "otherExpenses",
+  "totalExpenses",
+  "profit",
+]
+
+export const loadsMandatoryFields = ['pickupDate', 'truckId', 'driverName', 'driverId','loadNumber', 'brokerName',
+'brokerId','pickUpCityState', 'dropOffCityState', 'pickUpAddress', 'dropOffAddress', 'payment',
+'mileage', 'fuelCost', 'driverPay', 'totalExpenses']
+
+
+
+

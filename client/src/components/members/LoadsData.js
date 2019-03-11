@@ -15,6 +15,9 @@ import IconButton from '@material-ui/core/IconButton';
 import { exportTableToCSV } from "./export.js";
 import { exportTableToJSON } from "./export.js";
 import { loadsConfig } from "../../configs/loadsConfig";
+import { loadsTextFields } from "../../configs/loadsConfig";
+import { loadsNumberFields } from "../../configs/loadsConfig";
+import { loadsMandatoryFields } from "../../configs/loadsConfig";
 import ColumnChooser from "./ColumnChooser.js";
 import SideMenu from "./SideMenu";
 import ActionBtn from "./ActionBtn";
@@ -34,6 +37,9 @@ const styles = theme => ({
   },
   toolbar: {
     background: "#7D818C"
+  },
+  reactTable: {
+    height: '800px'
   }
 });
 
@@ -46,7 +52,7 @@ class LoadsData extends Component {
     };
 
     this.editTable = this.editTable.bind(this);
-    this.editRow = this.editRow.bind(this);
+    this.updateFullRowState = this.updateFullRowState.bind(this);
     this.saveRow = this.saveRow.bind(this);
     this.deleteRow = this.deleteRow.bind(this);
     this.addEmptyRow = this.addEmptyRow.bind(this);
@@ -123,8 +129,30 @@ class LoadsData extends Component {
     return Math.min(maxWidth, max * spacing);
   }
 
-  // when entering data into editable fields of the table
+  toFormatNumber(strNum, dec, sign){
+    // 1200 => "$1,200"
+    // "1200" || "1,200" => "$1,200" or "1,200"
+    // console.log('strNum ', strNum, dec, sign)
+    if(strNum === null || strNum === "") return strNum;
+
+    if(typeof strNum === 'number') return  sign + Number(strNum.toFixed(dec)).toLocaleString();
+    return sign + Number(Number(strNum.replace(",","")).toFixed(dec)).toLocaleString();
+  }
+
+  toNumber(num){
+    // "$1,200" || "1,200" => 1200 OR "$600" || "600" => 600
+    // console.log('*** toNumber num: ', num, ' type of ', typeof num === 'number')
+
+    if (typeof num === 'number') return num;
+    num = num.includes("$") ? num.slice(1) : num;
+    return parseFloat(num.replace(",",""));
+  }
+
   editTable(cellInfo) {
+    // when entering data into editable fields of the table
+    // will update only the editable fields in the state(payment, loaded miles, etc)
+    // calculated fields (eg dispatch cost) will be changed by updateFullRowState
+
     // console.log(
     //   "cell info........",
     //   cellInfo,
@@ -134,63 +162,64 @@ class LoadsData extends Component {
     //   cellInfo.row[cellInfo.column.id]
     // );
 
-    let dollarSign;
+    //cellInfo.column.id is the column name (eg. pickupDate)
+    //cellInfo.row[cellInfo.column.id] is the cell value for that column
+
     let fieldValue;
-    let fieldToReturn;
+    // let fieldToReturn;
 
     const findEditableRow = this.state.editableRowIndex.find(
       row => row === cellInfo.index
     );
 
-    if(cellInfo.column.id === 'truck.company.name'){
-      fieldValue = this.props.load[cellInfo.index]['truck'] ?
-      this.props.load[cellInfo.index]['truck']['company'].name : '';
-    } else {
-      fieldValue = this.props.load[cellInfo.index][cellInfo.column.id]
+    switch (cellInfo.column.id) {
+      case loadsNumberFields[1]:
+      case loadsNumberFields[9]:
+      case loadsNumberFields[10]:
+      case loadsNumberFields[11]:
+      case loadsNumberFields[12]:
+      case loadsNumberFields[13]:
+      case loadsNumberFields[14]:
+      case loadsNumberFields[15]:
+      case loadsNumberFields[16]:
+        fieldValue = cellInfo.value ? this.toFormatNumber(cellInfo.value, 2 , '$') : null
+        break;
+      case loadsNumberFields[0]:
+      case loadsNumberFields[2]:
+      case loadsNumberFields[3]:
+        fieldValue = cellInfo.value ? this.toFormatNumber(cellInfo.value, 0 , '') : null
+        break;
+      default:
+        fieldValue = cellInfo.value;
     }
 
     if(cellInfo.column.id === 'pickupDate' &&
-      this.props.load[cellInfo.index][cellInfo.column.id] !== ''){
-      // let fieldValue2 = new Date(this.props.load[cellInfo.index][cellInfo.column.id]).toLocaleDateString();
-      let dt = new Date(this.props.load[cellInfo.index][cellInfo.column.id]).toISOString().slice(0,10);
-      fieldValue = moment(dt).format("MM/DD/YYYY");
-    }
+    cellInfo.value !== ''){
+    let dt = new Date(cellInfo.value).toISOString().slice(0,10);
+    fieldValue = moment(dt).format("MM/DD/YYYY");
+  }
 
-    switch (cellInfo.column.id) {
-      case "payment":
-      case "dieselPrice":
-      case "lumper":
-      case "detention":
-      case "detentionDriverPay":
-      case "lateFee":
-      case "toll":
-      case "roadMaintenance":
-      case "otherExpenses":
-        dollarSign = "$";
-        break;
-      default:
-        dollarSign = "";
-    }
+  //give the company name associated with the truck
+  if(cellInfo.column.id === 'truck.company.name'){
+    fieldValue = this.props.load[cellInfo.index]['truck'] ?
+    this.props.load[cellInfo.index]['truck']['company'].name : '';
+  }
 
-    // for numbers stored as strings:
-    if( typeof(fieldValue) === 'string' && !isNaN(fieldValue) && cellInfo.column.id !== 'loadNumber') {
-      fieldValue = isNaN(Number(fieldValue)) ? fieldValue : Number(fieldValue).toLocaleString()
-    }
+  // fieldToReturn = ( cellInfo.value === '' || cellInfo.value === 0 || fieldValue === '' || fieldValue === '0' )  ? '' :
+  // fieldValue
 
-    fieldToReturn = ( cellInfo.value === '' || cellInfo.value === 0 || fieldValue === '' || fieldValue === '0' )  ? '' :
-      (findEditableRow || findEditableRow === 0) ? fieldValue.toLocaleString() :
-      dollarSign + fieldValue.toLocaleString()
-    // console.log('field to return ', fieldToReturn)
     // if edit is enabled- first case, if it is not- second case
     return findEditableRow || findEditableRow === 0 ? (
       <div
         style={{ backgroundColor: "#fafafa" }}
         contentEditable
-        suppressContentEditableWarning
-        onBlur={e => {
-
+        // suppressContentEditableWarning
+        onBlur = { e => {
           const keyToUpdate = cellInfo.column.id;
-          const valueToUpdate = e.target.innerHTML;
+          let valueToUpdate = e.target.innerHTML;
+          if (loadsTextFields.indexOf(keyToUpdate) == -1 && keyToUpdate !== 'truck.company.name')
+            valueToUpdate = this.toNumber(e.target.innerHTML);
+
           const indexToUpdate = cellInfo.index;
 
           const updateInfo = {
@@ -199,67 +228,87 @@ class LoadsData extends Component {
             indexToUpdate: indexToUpdate
           }
 
-          console.log('updateInfo on bluer', updateInfo)
+          console.log('updateInfo on blur', updateInfo)
           this.props.editLoad(updateInfo);
         }}
+
         dangerouslySetInnerHTML={{
-          __html:fieldToReturn
-            // dollarSign +
-            //fieldValue.toLocaleString()
+          __html:fieldValue
         }}
       />
     ) : (
       <div
         style={{ backgroundColor: "#fafafa" }}
-        suppressContentEditableWarning
         dangerouslySetInnerHTML={{
-          __html: fieldToReturn
-          //  dollarSign +
-          //  fieldValue.toLocaleString()
+          __html: fieldValue
         }}
       />
     );
   }
 
-  // used in editRow to persist the calculated fields(ie fuel cost, expenses, etc)
   createLoad(row){
+    // used in updateFullRowState to persist the calculated fields(ie fuel cost, expenses, etc)
     let load = {};
+    let rowToSave = {}
 
-    Object.keys(row).forEach( key => {
-      if( typeof row[key] === "object" && key !== "_original" ){
-        load[key] = row[key].props.dangerouslySetInnerHTML.__html;
-        if(load[key] && load[key].substring(0,1) === '$') load[key] = load[key].slice(1);
-      }else if(!key.includes('_') && !key.includes(".") && key !== 'edit') {
-        load[key] = row[key];
+    let keys = Object.keys(row);
+
+    keys.forEach( key => {
+
+      let loadItem = row[key];
+      if(typeof(loadItem) === 'object' && key !== '_original'){
+        let value = loadItem.props.dangerouslySetInnerHTML.__html;
+
+        value = this.toNumber(value);
+        console.log('object != _original value2: ', value)
+        rowToSave[key] = value;
+      } else if (!key.includes('_') && !key.includes(".") && key !== 'edit') {
+        console.log('!key.incuded(_ .) ', row[key], ' key: ', key, 'load item: ', loadItem)
+        rowToSave[key] = loadItem;
       }
+
+      if ( typeof loadItem === "string" && loadItem.includes("&") ) {
+        let ampPos = loadItem.indexOf("&");
+        // console.log("ampPos ", loadItem.substring(0, ampPos).concat("&").concat(loadItem.substring(ampPos + 1)))
+
+        loadItem = loadItem.substring(0, ampPos).concat("&").concat(loadItem.substring(ampPos + 1));
+        rowToSave[key] = loadItem;
+
+      }
+
     })
 
-    return load;
+    return rowToSave;
+
   }
 
-  // when activating/deactivating row edit mode
-  editRow(row) {
-
+  updateFullRowState(row) {
+    // when activating/deactivating row edit mode
+    // needed so that the changes to the formula fields(eg dispatch cost) are
+    // updated in the state
     const alreadyEditable = this.state.editableRowIndex.find(
       editableRow => editableRow === row.index
     );
 
-    // console.log("LoadsData.js editRow ", row, "state: ", this.state, " ",alreadyEditable);
-
+    // console.log("LoadsData.js updateFullRowState ", row, "state: ", this.state, " ",alreadyEditable);
+    // first condition triggers when button is clicked second time(to close edit mode)
     if (alreadyEditable || alreadyEditable === 0) {
       this.setState({
         editableRowIndex: this.state.editableRowIndex.filter(
           editableRow => editableRow !== row.index
         )
       });
+
       let load = this.createLoad(row.row);
 
       if(row.original.id){
         load.id = row.original.id;
       }
       else load.rowIndex = row.index;
-      console.log('*** editRow ',load)
+      console.log('*** updateFullRowState ', load)
       this.props.updateLoad(load);
+
+    //this condition triggers when button is clicked first time(to open edit mode)
     } else {
       this.setState({
         editableRowIndex: [...this.state.editableRowIndex, row.index]
@@ -277,72 +326,41 @@ class LoadsData extends Component {
     let result = window.confirm("Do you want to save this row");
     if(!result) return null;
 
-    let rowToUpdate = {};
-    let toSaveRow = {};
-
-    const mandatoryItems = ['pickupDate', 'truckId', 'driverName', 'driverId','loadNumber', 'brokerName',
-      'brokerId','pickUpCityState', 'dropOffCityState', 'pickUpAddress', 'dropOffAddress', 'payment',
-      'mileage', 'fuelCost', 'driverPay', 'totalExpenses']
-
-    rowToUpdate = selectedRow.row;
-
     console.log("*** selectedRow ",  selectedRow)
-
+    let rowToUpdate = selectedRow.row;
     let keys = Object.keys(rowToUpdate);
 
     const emptyFields = keys.map( key => {
-      if(!rowToUpdate[key])
+      if(!rowToUpdate[key] && rowToUpdate[key] !== 0)
         return key
       else return null
     })
       .filter(loadItem => loadItem)
 
     const requiredFieldsCheck = emptyFields.map( loadItem => {
-      if(mandatoryItems.includes( loadItem ))
+      if(loadsMandatoryFields.includes( loadItem ))
         return loadItem
       else return null
     })
       .filter(result => result)
 
-
-
     if(requiredFieldsCheck.length > 0) {
       const msgString = requiredFieldsCheck.join(", ");
       alert("Required fields: \n" +  msgString)
 
-    }else{
+    } else {
+      let loadToSave = {};
+      const origId = selectedRow.original.id ? selectedRow.original.id : null;
+      const rowIndex = selectedRow.index ? selectedRow.index : null;
 
-      keys.forEach( key => {
-        let loadItem = rowToUpdate[key];
-        if(typeof(loadItem) === 'object' && key !== '_original'){
+      if (origId) {
+        loadToSave = this.props.load.filter( load => load.id === origId )[0]
+        this.props.saveExistingLoad(loadToSave);
+      } else {
+        loadToSave = this.props.load.filter( load => load.rowIndex === rowIndex )[0]
+        this.props.saveNewLoad(loadToSave);
+      }
 
-          let value = loadItem.props.dangerouslySetInnerHTML.__html;
-          if (typeof value === "string" && value.substring(0, 1) === "$") {
-            value = value.slice(1);
-            value = parseFloat(value.replace(/,/g, ""));
-          }
-          toSaveRow[key] = value;
-        }
-
-        if (typeof loadItem === "string" && loadItem.substring(0, 1) === "$") {
-          loadItem = loadItem.slice(1);
-          loadItem = parseFloat(loadItem.replace(/,/g, ""));
-          toSaveRow[key] = loadItem;
-        }
-
-        if ( typeof loadItem === "string" && loadItem.includes("&") ) {
-          let ampPos = loadItem.indexOf("&");
-          loadItem = loadItem.substring(0, ampPos).concat("&").concat(loadItem.substring(ampPos + 5));
-          toSaveRow[key] = loadItem;
-          console.log("loadItem: ", loadItem)
-        }
-
-      })
-
-      const newRow = Object.assign(rowToUpdate, toSaveRow, {rowIndex: selectedRow.index });
-      console.log("*** save row ",  newRow)
-      if(selectedRow.original.id) this.props.editExistingLoad(newRow);
-      else  this.props.saveNewLoad(newRow);
       alert("The load was saved")
 
     }
@@ -456,23 +474,6 @@ class LoadsData extends Component {
     }
   }
 
-  dollarFormat(strNum,dec,sign){
-    // 1200 => "$1,200"
-    // "1200" || "1,200" => "$1,200.00" or "1,200"
-    // console.log('strNum ', strNum, dec, sign)
-    if(strNum === null || strNum === "") return strNum;
-    if(typeof strNum === 'number') return  sign + Number(strNum.toFixed(dec)).toLocaleString();
-    return sign + Number(Number(strNum.replace(",","")).toFixed(dec)).toLocaleString();
-  }
-
-  numberFormat(num){
-    // '$1,200' || '1200' => 1200
-
-    if (typeof num === 'number') return num;
-    num = num.includes("$") ? num.slice(1,0) : num;
-    return parseFloat(num.replace(",",""));
-  }
-
   // showing data from db when not in edit mode
   returnTableData(data, field){
     const editable = this.state.editableRowIndex;
@@ -480,12 +481,12 @@ class LoadsData extends Component {
     let dec = (field === "dollarPerMile" || field === 'dispatchFee') ? 2 : 0;
     let dollar = field === "mileage" ? '' : '$';
 
-    if (editable.length === 0) return this.dollarFormat(data[field],dec,dollar);
+    if (editable.length === 0) return this.toFormatNumber(data[field],dec,dollar);
     for(let index of editable){
       check++;
       if( this.props.load[index].id === data.id ) return null;
       if( this.props.load[index].id !== data.id && check === editable.length)
-        return this.dollarFormat(data[field],dec,'$')
+        return this.toFormatNumber(data[field],dec,'$')
     }
   }
 
@@ -673,15 +674,15 @@ class LoadsData extends Component {
           const tableData = this.returnTableData(d, 'mileage');
           if( tableData ) return tableData;
 
-          const loadedMiles = this.numberFormat(d.loadedMiles);
-          const emptyMiles = this.numberFormat(d.emptyMiles);
+          const loadedMiles = d.loadedMiles ? this.toNumber(d.loadedMiles) : 0;
+          const emptyMiles = d.emptyMiles ? this.toNumber(d.emptyMiles) : 0;
           const totalMiles = loadedMiles + emptyMiles;
         //  console.log('..............', loadedMiles, typeof loadedMiles, typeof emptyMiles, loadedMiles + emptyMiles)
 
           return (
             <div
               dangerouslySetInnerHTML={{
-                __html: this.dollarFormat(totalMiles,0,'')
+                __html: this.toFormatNumber(totalMiles,0,'')
               }}
             />
           );
@@ -700,9 +701,9 @@ class LoadsData extends Component {
 
           if( tableData ) return tableData;
 
-          let payment = this.numberFormat(d.payment);
-          let loadedMiles = this.numberFormat(d.loadedMiles);
-          let emptyMiles = this.numberFormat(d.emptyMiles);
+          let payment = this.toNumber(d.payment);
+          let loadedMiles = this.toNumber(d.loadedMiles);
+          let emptyMiles = this.toNumber(d.emptyMiles);
 
           let dollarPerMile =
             payment / (loadedMiles + emptyMiles)
@@ -711,21 +712,12 @@ class LoadsData extends Component {
           return (
             <div
               dangerouslySetInnerHTML={{
-                __html: this.dollarFormat(dollarPerMile,2,'$')
+                __html: this.toFormatNumber(dollarPerMile,2,'$')
               }}
             />
           );
         }
       },
-      // {
-      //   Header: "Diesel Price",
-      //   id: 'dieselPrice',
-      //   Footer: this.calculateTotal,
-      //   show: true,
-      //   accessor: d => dieselppg,
-      //   className: "columnBorder",
-      //   Cell: this.editTable
-      // },
       {
         Header: "Fuel Cost",
         Footer: this.calculateTotal,
@@ -739,8 +731,8 @@ class LoadsData extends Component {
           if( tableData ) return tableData;
 
           let fuelCost = null;
-          const loadedMiles = this.numberFormat(d.loadedMiles);
-          const emptyMiles = this.numberFormat(d.emptyMiles);
+          const loadedMiles = this.toNumber(d.loadedMiles);
+          const emptyMiles = this.toNumber(d.emptyMiles);
 
           fuelCost = (loadedMiles + emptyMiles) / mpg * dieselppg;
           fuelCost = isNaN(fuelCost) ? null : fuelCost;
@@ -748,7 +740,7 @@ class LoadsData extends Component {
           return (
             <div
               dangerouslySetInnerHTML={{
-                __html: this.dollarFormat(fuelCost,0,"$")
+                __html: this.toFormatNumber(fuelCost,0,"$")
               }}
             />
           );
@@ -765,15 +757,15 @@ class LoadsData extends Component {
           const tableData = this.returnTableData(d, 'driverPay');
           if( tableData ) return tableData;
 
-          const loadedMiles = this.numberFormat(d.loadedMiles);
-          const emptyMiles = this.numberFormat(d.emptyMiles);
+          const loadedMiles = this.toNumber(d.loadedMiles);
+          const emptyMiles = this.toNumber(d.emptyMiles);
           let totalDriverPay = (loadedMiles + emptyMiles) * driverPay
           totalDriverPay = isNaN(totalDriverPay) ? null : totalDriverPay;
 
           return (
             <div
               dangerouslySetInnerHTML={{
-                __html: this.dollarFormat(totalDriverPay, 0, "$")
+                __html: this.toFormatNumber(totalDriverPay, 0, "$")
               }}
             />
           );
@@ -792,14 +784,14 @@ class LoadsData extends Component {
           const tableData = this.returnTableData(d, 'dispatchFee');
           if( tableData ) return tableData;
 
-          let payment = this.numberFormat(d.payment)
+          let payment = this.toNumber(d.payment)  + this.toNumber(d.detention) + this.toNumber(d.cancelFeeIncome) ;
           let dispatchFee = payment * dispatchPercent;
 
           dispatchFee = isNaN(dispatchFee) ? null : dispatchFee;
           return (
             <div
               dangerouslySetInnerHTML={{
-                __html: this.dollarFormat(dispatchFee, 2, "$")
+                __html: this.toFormatNumber(dispatchFee, 2, "$")
               }}
             />
           );
@@ -809,6 +801,15 @@ class LoadsData extends Component {
         Header: "Lumper",
         Footer: this.calculateTotal,
         accessor: "lumper",
+        show: false,
+        className: "columnBorder",
+        minWidth: 80,
+        Cell: this.editTable
+      },
+      {
+        Header: "Cancel Fee Income",
+        Footer: this.calculateTotal,
+        accessor: "cancelFeeIncome",
         show: false,
         className: "columnBorder",
         minWidth: 80,
@@ -889,25 +890,25 @@ class LoadsData extends Component {
           const tableData = this.returnTableData(d, 'totalExpenses');
           if( tableData ) return tableData;
 
-          let payment = this.numberFormat(d.payment)
-          const loadedMiles = this.numberFormat(d.loadedMiles);
-          const emptyMiles = this.numberFormat(d.emptyMiles);
+          let payment = this.toNumber(d.payment) + this.toNumber(d.detention) + this.toNumber(d.cancelFeeIncome)
+          const loadedMiles = this.toNumber(d.loadedMiles);
+          const emptyMiles = this.toNumber(d.emptyMiles);
 
           let totalExpenses =
             ((loadedMiles + emptyMiles) / mpg * dieselppg) +
             ((loadedMiles + emptyMiles) * driverPay) +
             (payment * dispatchPercent) +
-            this.numberFormat(d.lumper) + this.numberFormat(d.detention) +
-            this.numberFormat(d.detentionDriverPay) + this.numberFormat(d.lateFee) +
-            this.numberFormat(d.toll) + this.numberFormat(d.roadMaintenance) +
-            this.numberFormat(d.otherExpenses);
+            this.toNumber(d.lumper) +
+            this.toNumber(d.detentionDriverPay) + this.toNumber(d.lateFee) +
+            this.toNumber(d.toll) + this.toNumber(d.roadMaintenance) +
+            this.toNumber(d.otherExpenses);
 
           totalExpenses = isNaN(totalExpenses) ? null : totalExpenses;
 
           return (
             <div
               dangerouslySetInnerHTML={{
-                __html: this.dollarFormat(totalExpenses, 0, "$")
+                __html: this.toFormatNumber(totalExpenses, 0, "$")
               }}
             />
           );
@@ -924,26 +925,26 @@ class LoadsData extends Component {
           const tableData = this.returnTableData(d, 'profit');
           if( tableData ) return tableData;
 
-          let payment = this.numberFormat(d.payment)
-          const loadedMiles = this.numberFormat(d.loadedMiles);
-          const emptyMiles = this.numberFormat(d.emptyMiles);
+          let payment = this.toNumber(d.payment) + this.toNumber(d.detention) + this.toNumber(d.cancelFeeIncome)
+          const loadedMiles = this.toNumber(d.loadedMiles);
+          const emptyMiles = this.toNumber(d.emptyMiles);
 
           let totalExpenses =
             ((loadedMiles + emptyMiles) / mpg * dieselppg) +
             ((loadedMiles + emptyMiles) * driverPay) +
             (payment * dispatchPercent) +
-            this.numberFormat(d.lumper) + this.numberFormat(d.detention) +
-            this.numberFormat(d.detentionDriverPay) + this.numberFormat(d.lateFee) +
-            this.numberFormat(d.toll) + this.numberFormat(d.roadMaintenance) +
-            this.numberFormat(d.otherExpenses);
+            this.toNumber(d.lumper) +
+            this.toNumber(d.detentionDriverPay) + this.toNumber(d.lateFee) +
+            this.toNumber(d.toll) + this.toNumber(d.roadMaintenance) +
+            this.toNumber(d.otherExpenses);
 
-          let profit = payment - totalExpenses;
+          let profit = payment  - totalExpenses;
           profit = isNaN(profit) ? null : profit;
 
           return (
             <div
               dangerouslySetInnerHTML={{
-                __html: this.dollarFormat(profit, 0, "$")
+                __html: this.toFormatNumber(profit, 0, "$")
               }}
             />
           );
@@ -990,7 +991,7 @@ class LoadsData extends Component {
               <IconButton
                 variant="contained"
                 color={editBtnColor}
-                onClick={() => this.editRow(row)}
+                onClick={() => this.updateFullRowState(row)}
               >
                 {editIcon}
               </IconButton>&nbsp;
@@ -1059,12 +1060,7 @@ class LoadsData extends Component {
           PaginationComponent={CustomPagination}
           columns={columns}
           defaultPageSize={50}
-          style={
-            {
-              height: "800px"
-            }
-          }
-          className="-sloaded -highlight"
+          className={classes.reactTable}
         />
       </div>
     );
@@ -1090,7 +1086,7 @@ function mapDispatchToProps(dispatch) {
       updateLoad: freightActions.updateLoad,
       editLoad: freightActions.editLoad,
       saveNewLoad: freightActions.saveNewLoad,
-      editExistingLoad: freightActions.editExistingLoad,
+      saveExistingLoad: freightActions.saveExistingLoad,
       getInputVariable: companyActions.getInputVariable
     },
     dispatch

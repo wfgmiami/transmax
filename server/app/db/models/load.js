@@ -73,6 +73,9 @@ const Load = db.define('load', {
     lumper: {
         type: DataTypes.DECIMAL,
     },
+    cancelFeeIncome: {
+        type: DataTypes.DECIMAL,
+    },
     detention: {
         type: DataTypes.DECIMAL,
     },
