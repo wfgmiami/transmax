@@ -305,30 +305,47 @@ class Earnings extends Component {
     return Number(Number(total).toFixed(0)).toLocaleString();
   }
 
-
   onColumnUpdate(index) {
-    const columns =
-      this.state.columns.length > 0 ? this.state.columns : this.createColumns();
-    // console.log("onColumnUpdate index ", index, "...", columns[index]);
-    this.setState(
-      prevState => {
-        const columns1 = [];
-        columns1.push(...columns);
-        columns1[index].show = !columns1[index].show;
-        if (columns1[index].columns) {
-          columns1[index].columns.forEach(item => {
-            item.show = !item.show;
-          });
-        }
+    const columns = this.state.columns.length > 0 ? this.state.columns : this.createColumns();
+    let columns1 = [];
+    columns1.push(...columns);
 
-        return {
-          columns: columns1
-        };
-      },
-      () => {
-        // console.log('onColumnUpdate columns: ', this.state.columns)
-      }
-    );
+    // console.log("*** LoadsData onColumnUpdate index: ", index, " columns1: ", columns1,
+    // " isArray(index): ",  Array.isArray( index ));
+
+    if ( Array.isArray( index ) ){
+      columns1 = columns1.map( col => { col.show = false; return col } );
+      index.forEach( async ( idx ) => {
+        await this.setState( () => {
+          columns1[idx].show = true;
+          if (columns1[idx].columns) {
+            columns1[idx].columns.forEach(item => {
+              item.show = true;
+            });
+          }
+          return {
+            columns: columns1
+          };
+        });
+      })
+    } else {
+
+      this.setState( () => {
+          columns1[index].show = !columns1[index].show;
+          if (columns1[index].columns) {
+            columns1[index].columns.forEach(item => {
+              item.show = !item.show;
+            });
+          }
+          return {
+            columns: columns1
+          };
+        },
+        () => {
+          // console.log('onColumnUpdate columns: ', this.state.columns)
+        }
+      );
+    }
   }
 
   createColumns() {
@@ -348,6 +365,14 @@ class Earnings extends Component {
         Footer: this.calculateTotal,
         accessor: "revenue",
         show: true,
+        className: "columnBorder",
+        Cell: this.editTable
+      },
+      {
+        Header: "Cancel Fee Income",
+        Footer: this.calculateTotal,
+        accessor: "cancelFeeIncome",
+        show: false,
         className: "columnBorder",
         Cell: this.editTable
       },
@@ -411,6 +436,14 @@ class Earnings extends Component {
         Header: "Detention Driver Pay",
         Footer: this.calculateTotal,
         accessor: "detentionDriverPay",
+        show: false,
+        className: "columnBorder",
+        Cell: this.editTable
+      },
+      {
+        Header: "Second Stop Pay",
+        Footer: this.calculateTotal,
+        accessor: "secondStopPay",
         show: false,
         className: "columnBorder",
         Cell: this.editTable

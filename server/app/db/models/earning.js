@@ -17,6 +17,9 @@ const Earning = db.define('earning', {
     revenue: {
       type: DataTypes.DECIMAL,
     },
+    cancelFeeIncome: {
+        type: DataTypes.DECIMAL,
+      },
     fuelCost: {
         type: DataTypes.DECIMAL,
     },
@@ -39,6 +42,9 @@ const Earning = db.define('earning', {
         type: DataTypes.DECIMAL,
     },
     detentionDriverPay: {
+        type: DataTypes.DECIMAL,
+    },
+    secondStopPay: {
         type: DataTypes.DECIMAL,
     },
     lateFee: {
