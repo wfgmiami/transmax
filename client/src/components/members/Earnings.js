@@ -255,7 +255,7 @@ class Earnings extends Component {
     const depositsCount = data.length;
     let dollarSign = false;
     let value;
-    console.log("*** Earnings calculateTotal data", data, "column ", column);
+    // console.log("*** Earnings calculateTotal data", data, "column ", column);
     const total = data.reduce((memo, load) => {
 
       let payment = load[column.id];
@@ -310,8 +310,8 @@ class Earnings extends Component {
     let columns1 = [];
     columns1.push(...columns);
 
-    console.log("*** Earnings onColumnUpdate index: ", index, " columns1: ", columns1,
-    " isArray(index): ",  Array.isArray( index ));
+    // console.log("*** Earnings onColumnUpdate index: ", index, " columns1: ", columns1,
+    // " isArray(index): ",  Array.isArray( index ));
 
     if ( Array.isArray( index ) ){
       columns1 = columns1.map( col => { col.show = false; return col } );
@@ -484,7 +484,7 @@ class Earnings extends Component {
           this.numberFormat(d.fuelCost) + this.numberFormat(d.driverPay) +
           this.numberFormat(d.dispatchFee) + this.numberFormat(d.lumper) +
           this.numberFormat(d.detention) + this.numberFormat(d.detentionDriverPay) +
-          this.numberFormat(d.lateFee) + this.numberFormat(d.toll) +
+          this.numberFormat(d.lateFee) + this.numberFormat(d.toll) + this.numberFormat(d.secondStopPay) +
           this.numberFormat(d.roadMaintenance) + this.numberFormat(d.otherExpenses);
 
 
@@ -506,12 +506,12 @@ class Earnings extends Component {
         show: true,
         className: "columnBorder",
         accessor: d => {
-          let payment = this.numberFormat(d.revenue)
+          let payment = this.numberFormat(d.revenue) + this.numberFormat(d.cancelFeeIncome)
           let totalExpenses =
           this.numberFormat(d.fuelCost) + this.numberFormat(d.driverPay) +
           this.numberFormat(d.dispatchFee) + this.numberFormat(d.lumper) +
           this.numberFormat(d.detention) + this.numberFormat(d.detentionDriverPay) +
-          this.numberFormat(d.lateFee) + this.numberFormat(d.toll) +
+          this.numberFormat(d.lateFee) + this.numberFormat(d.toll) + this.numberFormat(d.secondStopPay) +
           this.numberFormat(d.roadMaintenance) + this.numberFormat(d.otherExpenses);
 
           let profit = payment - totalExpenses;
@@ -534,14 +534,16 @@ class Earnings extends Component {
         className: "columnBorder",
         accessor: d => {
           let revenue = d.revenue;
+
           if (typeof d.revenue === "string")
             revenue = parseFloat(revenue.replace(/,/g, ""));
+            revenue = revenue + this.numberFormat(d.cancelFeeIncome);
 
           let totalExpenses =
             this.numberFormat(d.fuelCost) + this.numberFormat(d.driverPay) +
             this.numberFormat(d.dispatchFee) + this.numberFormat(d.lumper) +
             this.numberFormat(d.detention) + this.numberFormat(d.detentionDriverPay) +
-            this.numberFormat(d.lateFee) + this.numberFormat(d.toll) +
+            this.numberFormat(d.lateFee) + this.numberFormat(d.toll) + this.numberFormat(d.secondStopPay) +
             this.numberFormat(d.roadMaintenance) + this.numberFormat(d.otherExpenses);
 
           let profit = revenue - totalExpenses;
