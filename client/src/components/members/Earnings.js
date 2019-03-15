@@ -255,7 +255,7 @@ class Earnings extends Component {
     const depositsCount = data.length;
     let dollarSign = false;
     let value;
-    // console.log("*** Earnings calculateTotal data", data, "column ", column);
+    console.log("*** Earnings calculateTotal data", data, "column ", column);
     const total = data.reduce((memo, load) => {
 
       let payment = load[column.id];
@@ -310,8 +310,8 @@ class Earnings extends Component {
     let columns1 = [];
     columns1.push(...columns);
 
-    // console.log("*** LoadsData onColumnUpdate index: ", index, " columns1: ", columns1,
-    // " isArray(index): ",  Array.isArray( index ));
+    console.log("*** Earnings onColumnUpdate index: ", index, " columns1: ", columns1,
+    " isArray(index): ",  Array.isArray( index ));
 
     if ( Array.isArray( index ) ){
       columns1 = columns1.map( col => { col.show = false; return col } );
