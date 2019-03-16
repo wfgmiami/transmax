@@ -14,8 +14,12 @@ const validateCandidate = values => {
     // "ssn",
     "experience",
     "formerEmployer",
-    "formerEmployerPhone"
+    "formerEmployerPhone",
+    "movingViolation",
+    "preventableAccident",
+    "dui"
   ];
+
   const phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
   const dob = /^(0[1-9]|1[012])[/](0[1-9]|[12][0-9]|3[01])[/](19|20)\d\d$/;
 

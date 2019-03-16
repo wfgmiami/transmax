@@ -13,7 +13,7 @@ const DATABASE_URI = require(path.join(__dirname, '../../env')).DATABASE_URI;
 if(!DATABASE_HOST){
 	console.log(chalk.yellow('Opening connection to PostgreSQL:', DATABASE_URI))
 	module.exports = new Sequelize(DATABASE_URI, {
-		logging: true, // set to console.log to see the raw SQL queries
+		logging: false, // set to console.log to see the raw SQL queries
 		// native: true // lets Sequelize know we can use pg-native for ~30% more speed
 	});
 

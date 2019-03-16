@@ -27,6 +27,9 @@ const candidate = db.define('candidate', {
     dob: DataTypes.DATE,
     formerEmployer: DataTypes.STRING,
     formerEmployerPhone: DataTypes.STRING,
+    movingViolation: DataTypes.INTEGER,
+    preventableAccident: DataTypes.INTEGER,
+    dui: DataTypes.INTEGER,
 })
 
 module.exports = candidate;

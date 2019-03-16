@@ -118,6 +118,15 @@ class ApplicationForm extends Component {
         case "formerEmployerPhone":
           field = "Former Employer Phone";
           break;
+        case "movingViolation":
+          field = "Number of moving violations";
+          break;
+        case "preventableAccident":
+          field = "Number of preventable accidents";
+          break;
+        case "dui":
+          field = "Number of DUI/DWI";
+          break;
         default:
           field = "";
       }
@@ -311,61 +320,28 @@ class ApplicationForm extends Component {
           </InputMask>
           <TextField
             id="movingViolation"
-            label="Number of Moving Violations in the Last 3 Years:"
+            label="Moving Violations Last 3 Years:"
             placeholder=""
             className={classes.textField}
-
+            onChange={this.handleChange("movingViolation")}
             margin="normal"
           />
           <TextField
             id="preventableAccident"
-            label="Number of Preventable Accidents in the Last 3 Years:"
+            label="Preventable Accidents Last 3 Years:"
             placeholder=""
             className={classes.textField}
-
+            onChange={this.handleChange("preventableAccident")}
             margin="normal"
           />
           <TextField
             id="dui"
-            label="Number of DUI/DWI in the Last 5 Years:"
+            label="DUI/DWI Last 5 Years:"
             placeholder=""
             className={classes.textField}
-
+            onChange={this.handleChange("dui")}
             margin="normal"
           />
-          {/* <div className={classes.violationQuestions}>
-          <div className={classes.boxName}>
-            Number of Moving Violations in the Last 3 Years:
-
-              <TextField
-                id="movingViolation"
-                className={classes.textFieldBox}
-                defaultValue=""
-                variant="filled"
-              />
-</div>
-
-<div>
-              Number of Preventable Accidents in the Last 3 Years:
-                <TextField
-                  id="preventableAccident"
-                  className={classes.textFieldBox}
-                  defaultValue=""
-                  variant="filled"
-                />
-</div>
-<div>
-              Number of DUI/DWI in the Last 5 Years:
-
-                <TextField
-                  id="dui"
-                  className={classes.textFieldBox}
-                  defaultValue=""
-                  variant="filled"
-                />
-</div>
-
-          </div> */}
 
           <div>&nbsp;</div>
         </form>

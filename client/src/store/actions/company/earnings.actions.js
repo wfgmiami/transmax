@@ -47,7 +47,7 @@ export function saveEarnings(earnings) {
 
 export function editExistingEarnings(earnings) {
   // console.log("earnings.actions.js existing ", earnings);
-  const postLoad = axios.post("/api/existingearnings", { ...earnings });
+  const postLoad = axios.post("/api/earnings/existingearnings", { ...earnings });
   return dispatch =>
     postLoad.then(response =>
       dispatch({

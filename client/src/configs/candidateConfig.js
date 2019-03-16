@@ -14,5 +14,8 @@ export const candidateConfig =
     ssn: "",
     formerEmployer: "",
     formerEmployerPhone: "",
+    movingViolation:"",
+    preventableAccident:"",
+    dui:"",
     applicationSuccess: ""
   }

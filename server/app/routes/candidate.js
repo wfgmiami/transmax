@@ -28,6 +28,10 @@ router.post('/', (req,res,next)=>{
         DOB: ${req.body.dob}<br/>
         Experience: ${req.body.experience}<br/>
         Former Employer: ${req.body.formerEmployer}<br/>
+        Former Employer Phone: ${req.body.formerEmployerPhone}<br/>
+        Moving Violations: ${req.body.movingViolation}<br/>
+        Preventable Accidents: ${req.body.preventableAccident}<br/>
+        DUI/DWI: ${req.body.dui}<br/>
       </body>
     </html>`
 
